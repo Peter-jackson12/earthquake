@@ -1,0 +1,9 @@
+{
+  "source_csv_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+  "dictionary_sha256": "c7fb37a9c963eb21b391e981e55e05d2b2f696c9634de9a59d1d6ba4b8fefffe",
+  "dictionary_columns_match_csv_in_order": true,
+  "csv_encoding": "utf-8-sig",
+  "column_count": 40,
+  "feature_count": 38,
+  "holdout_used_for_eda_or_scoring": false
+}

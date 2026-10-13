@@ -91,7 +91,11 @@ LR 무가중치                  LR balanced
 수업 요구사항 정리는 [프로젝트 가이드](../docs/PROJECT_GUIDE_KO.md), 실행 명령은 [실행 안내](../docs/RUNBOOK.md),
 단계별 상태는 [계획](../docs/PLAN.md)을 봅니다. 현재 80/20·5-Fold는 유지한 작업 기준이며 팀의 공식 합의가 완료됐다는 뜻은 아닙니다.
 
-남은 핵심: 팀 문제 정의·분할 합의, 개발 데이터 EDA, 다른 필수 모델의 가중치 비교, Random Under Sampling·SMOTENC의 fold 내부 비교,
+개발 데이터 EDA는 이후 개인 1차 해석과 독립 재집계를 완료했습니다. [EDA 보고서](EDA_FINDINGS_20261013.md)와 [후속 작업 보고서](FOLLOWUP_REPORT_20261013.md)를 봅니다.
+이 보고서의 8개 설정·40회 기준선 숫자는 과거 실행 기록으로 보존하며, 후속 결과를 소급해서 덮어쓰지 않습니다.
+
+아래 목록은 기준선 작성 시점의 남은 범위입니다. 최신 완료 상태는 후속 보고서와 PLAN을 우선합니다.
+남은 핵심: 팀 문제 정의·분할 합의, 다른 필수 모델의 가중치 비교, Random Under Sampling·SMOTENC의 fold 내부 비교,
 체계적인 제한된 CV 튜닝, 최종 후보 확정, 최종 holdout 평가, Streamlit 대시보드, README·팀 Notion·개인 수행 기록.
 후보 변수 수 비교는 1회 변경 실험이지 GridSearchCV/RandomizedSearchCV를 마친 것으로 세지 않습니다.
 지역 그룹 CV와 SHAP은 필수 항목 이후 선택 심화입니다. 저장소 계획 문서가 예약 실행이나 응답 후 지속 실행을 설정하지는 않습니다.

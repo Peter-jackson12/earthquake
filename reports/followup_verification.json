@@ -1,0 +1,53 @@
+{
+  "eda_status": "PASS",
+  "oof_status": "PASS",
+  "data_contract": {
+    "preprocessing_version": "1.0.1",
+    "source_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+    "expected_rows": 208480,
+    "n_folds": 5,
+    "seed": 42,
+    "files": {
+      "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+      "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+    }
+  },
+  "rows": 208480,
+  "source_sha_verified": true,
+  "models_checked": 4,
+  "holdout_opened": false,
+  "sources": [
+    {
+      "experiment": "class_weights_v1",
+      "model": "dt",
+      "oof_sha256": "b472d89520f99aae2185ba8bf95f386ad5263a3d7722dad938fe4352188494f7",
+      "metrics_sha256": "4de95745e5270a88ff0a31d41bbc065a5b478e4a3acca36221bec03752256b0a",
+      "metadata_sha256": "5dd682aa0aa7f60b988fc07d80819ed1cd06f8ef8fc57e70146434fd47505597"
+    },
+    {
+      "experiment": "class_weights_v1",
+      "model": "rf",
+      "oof_sha256": "198a0343a4976200f6311000fb9951c1402ad5ec7217159a987269bd24cfd03f",
+      "metrics_sha256": "f306b6dab2e0b45b2a62b1c3ac548578432d3109aeb3b6b9245f174a4b471e99",
+      "metadata_sha256": "5dd682aa0aa7f60b988fc07d80819ed1cd06f8ef8fc57e70146434fd47505597"
+    },
+    {
+      "experiment": "class_weights_v1",
+      "model": "gbc",
+      "oof_sha256": "0ec87c3fcc544620a80690404afffd553ab4b80725593414a507125941be4878",
+      "metrics_sha256": "6d3e232b2167d517e095252a00c7b1213ca671bbf5916f03a06a2d8670d7060c",
+      "metadata_sha256": "5dd682aa0aa7f60b988fc07d80819ed1cd06f8ef8fc57e70146434fd47505597"
+    },
+    {
+      "experiment": "lr_rus_v1",
+      "model": "lr",
+      "oof_sha256": "9ade1b29f0d289dbc1ae973f42f9d42de3d23b159120dcf3b4311b566dfae7bc",
+      "metrics_sha256": "8da501b48dcc3d35c8e6ed86d10a9aa85957fdbd124289e83e4894ae858456cb",
+      "metadata_sha256": "93b32c5b199f476cc69683d77c674bd53952b0b429bb0158bcd0d68bf413b3cb"
+    }
+  ],
+  "audit_code_sha256": "b5987ace6f93290d5808efb91dcdf53d79a83416033b01ade4346eb936541435",
+  "limitations": [
+    "Does not independently refit models or recover absent historical OOF."
+  ]
+}

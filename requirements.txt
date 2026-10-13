@@ -5,3 +5,5 @@ scipy==1.17.0
 scikit-learn==1.8.0
 joblib==1.5.3
 threadpoolctl==3.6.0
+# peter follow-up: fold-local random under-sampling.
+imbalanced-learn==0.14.1

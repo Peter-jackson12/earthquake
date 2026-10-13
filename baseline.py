@@ -5,6 +5,7 @@ import gc
 import hashlib
 import json
 import platform
+import subprocess
 import time
 import warnings
 from datetime import datetime, timezone
@@ -23,6 +24,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, f1_score
 from sklearn.model_selection import PredefinedSplit, train_test_split
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.utils.class_weight import compute_sample_weight
 from threadpoolctl import threadpool_limits
 
 from preprocess import (CATEGORICAL, ID, TARGET, load_development,
@@ -43,7 +46,54 @@ def build_pipeline(name: str, config: dict, jobs: int = 2):
     params = dict(config['models'][name])
     if name == 'rf':
         params['n_jobs'] = jobs
-    return make_model_pipeline(constructors[name](**params), scale_numeric=name == 'lr')
+    pipeline = make_model_pipeline(constructors[name](**params), scale_numeric=name == 'lr')
+    sampling = config.get('sampling', {}).get(name)
+    if sampling is not None:
+        if name != 'lr' or sampling != 'random_under':
+            raise ValueError('Only LR random_under is supported in this single-factor experiment.')
+        if params.get('class_weight') is not None or name in config.get('sample_weight', {}):
+            raise ValueError('Do not combine sampling and weighting in a single-factor run.')
+        from imblearn.pipeline import Pipeline as SamplingPipeline
+        from imblearn.under_sampling import RandomUnderSampler
+        # Flatten the unchanged preprocessor: imblearn disallows a nested Pipeline
+        # as an intermediate step. Encoding/scaling fit on the original train fold.
+        pipeline = SamplingPipeline([
+            *pipeline['preprocess'].steps,
+            ('sampler', RandomUnderSampler(random_state=config['seed'])),
+            ('model', pipeline['model']),
+        ])
+    return pipeline
+
+
+def fitted_preprocessor(pipeline):
+    if 'preprocess' in pipeline.named_steps:
+        return pipeline['preprocess']
+    return Pipeline([(key, pipeline[key]) for key in ('schema', 'columns')])
+
+
+def training_parameters(name, config, y_train):
+    """Derive weights only from the supplied training labels, never validation."""
+    policy = config.get('sample_weight', {}).get(name)
+    if policy is None:
+        return {}
+    if name != 'gbc' or policy != 'balanced' or config.get('sampling', {}).get(name):
+        raise ValueError('Only GBC balanced sample_weight is supported.')
+    return {'model__sample_weight': compute_sample_weight('balanced', y_train)}
+
+
+def class_counts(y):
+    return {str(c): int(np.sum(np.asarray(y) == c)) for c in LABELS}
+
+
+def git_provenance():
+    try:
+        head = subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'],
+                                       stderr=subprocess.DEVNULL, text=True).strip()
+        dirty = bool(subprocess.check_output(['git', '-C', str(ROOT), 'status', '--porcelain'],
+                                            stderr=subprocess.DEVNULL, text=True).strip())
+        return {'head': head, 'dirty': dirty}
+    except (OSError, subprocess.CalledProcessError):
+        return {'head': None, 'dirty': None, 'note': 'No Git checkout; use source file SHA-256.'}
 
 
 def select_positions(y: pd.Series, folds: np.ndarray, rows: int, seed: int) -> np.ndarray:
@@ -99,10 +149,11 @@ def evaluate_model(name, X, y, ids, folds, config, output, jobs=2):
         if np.intersect1d(ids.iloc[train], ids.iloc[valid]).size:
             raise AssertionError('Training and validation IDs overlap.')
         pipeline = build_pipeline(name, config, jobs)
+        fit_params = training_parameters(name, config, y.iloc[train])
         start = time.perf_counter()
         with warnings.catch_warnings(record=True) as caught, threadpool_limits(limits=1):
             warnings.simplefilter('always')
-            pipeline.fit(X.iloc[train], y.iloc[train])
+            pipeline.fit(X.iloc[train], y.iloc[train], **fit_params)
         fit_seconds = time.perf_counter() - start
         warning_rows = [{'category': w.category.__name__, 'message': str(w.message)} for w in caught]
         convergence_ok = not any(issubclass(w.category, ConvergenceWarning) for w in caught)
@@ -114,7 +165,7 @@ def evaluate_model(name, X, y, ids, folds, config, output, jobs=2):
         prediction_seconds = time.perf_counter() - start
         predictions[valid], probabilities[valid] = pred, proba
         coverage[valid] += 1
-        pre = pipeline.named_steps['preprocess']
+        pre = fitted_preprocessor(pipeline)
         transformed = pre.transform(X.iloc[valid[:8]])
         if not sparse.issparse(transformed):
             raise AssertionError('Sparse preprocessing required.')
@@ -122,6 +173,23 @@ def evaluate_model(name, X, y, ids, folds, config, output, jobs=2):
         for col, learned in zip(CATEGORICAL, vocabulary):
             if set(learned) != set(X.iloc[train][col]):
                 raise AssertionError('Encoder vocabulary is not training-fold-only.')
+        train_after = y.iloc[train]
+        sampling_record = None
+        if 'sampler' in pipeline.named_steps:
+            kept = pipeline['sampler'].sample_indices_
+            if len(np.unique(kept)) != len(kept):
+                raise AssertionError('RUS without replacement must not duplicate rows.')
+            train_after = y.iloc[train].iloc[kept]
+            sampling_record = dict(method='random_under',
+                                   order='schema -> encoding/scaling -> RUS -> LR',
+                                   before=class_counts(y.iloc[train]), after=class_counts(train_after),
+                                   retained_train_ids_sha256=hashlib.sha256(
+                                       np.asarray(ids.iloc[train].iloc[kept], dtype='<i8').tobytes()).hexdigest())
+        weights = fit_params.get('model__sample_weight')
+        if weights is None and config['models'][name].get('class_weight') == 'balanced':
+            weights = compute_sample_weight('balanced', y.iloc[train])
+        weight_record = None if weights is None else {
+            str(c): float(weights[np.asarray(y.iloc[train]) == c][0]) for c in LABELS}
         restored = False
         if fold == 0:
             # Trusted locally generated model only; model files are never published.
@@ -137,7 +205,11 @@ def evaluate_model(name, X, y, ids, folds, config, output, jobs=2):
                    prediction_seconds=prediction_seconds, train_macro_f1=metrics(y.iloc[train], train_pred)['macro_f1'],
                    validation=metrics(y.iloc[valid], pred), warnings=warning_rows,
                    convergence_ok=convergence_ok, train_only_vocabulary=True,
-                   reload_prediction_checked=restored)
+                   reload_prediction_checked=restored,
+                   training_class_counts=class_counts(y.iloc[train]),
+                   post_sampling_class_counts=class_counts(train_after),
+                   class_weights=weight_record, sampling=sampling_record,
+                   prediction_seconds_definition='validation predict + predict_proba + full train predict')
         if hasattr(pipeline['model'], 'n_iter_'):
             row['n_iter'] = np.asarray(pipeline['model'].n_iter_).tolist()
         fold_results.append(row)
@@ -161,7 +233,8 @@ def evaluate_model(name, X, y, ids, folds, config, output, jobs=2):
     oof = pd.DataFrame({ID: np.asarray(ids), 'fold': folds, 'y_true': np.asarray(y),
                         'y_pred': predictions, 'p_grade_1': probabilities[:, 0],
                         'p_grade_2': probabilities[:, 1], 'p_grade_3': probabilities[:, 2]})
-    oof.to_csv(output / 'oof_predictions.csv.gz', index=False, compression='gzip')
+    oof.to_csv(output / 'oof_predictions.csv.gz', index=False, compression={'method': 'gzip', 'mtime': 0})
+    result['oof_sha256'] = sha256_file(output / 'oof_predictions.csv.gz')
     write_json(output / 'metrics.json', result)
     return result
 
@@ -195,11 +268,14 @@ def run(data_dir, output_dir, config_path, rows=0, models=None, jobs=2):
                     rows=len(X), feature_count=X.shape[1], models=models, jobs=jobs,
                     config=config, data_contract=contract, holdout_scored=False,
                     source_code_sha256={p: sha256_file(ROOT / p) for p in ['preprocess.py', 'baseline.py']},
-                    config_sha256=sha256_file(config_path),
+                    config_sha256=sha256_file(config_path), git=git_provenance(),
                     sample_ids_sha256=hashlib.sha256(np.asarray(ids, dtype='<i8').tobytes()).hexdigest(),
                     environment=dict(python=platform.python_version(), numpy=np.__version__,
                                      pandas=pd.__version__, scipy=scipy.__version__, sklearn=sklearn.__version__),
                     status='running')
+    if config.get('sampling'):
+        import imblearn
+        metadata['environment']['imbalanced_learn'] = imblearn.__version__
     write_json(output / 'run_metadata.json', metadata)
     pd.DataFrame({ID: ids, 'cv_fold': folds}).to_csv(output / 'run_manifest.csv', index=False)
     results = []
