@@ -1,0 +1,11 @@
+{
+  "preprocessing_version": "1.0.1",
+  "source_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+  "expected_rows": 208480,
+  "n_folds": 5,
+  "seed": 42,
+  "files": {
+    "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+    "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+  }
+}
