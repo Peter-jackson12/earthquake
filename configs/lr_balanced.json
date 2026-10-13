@@ -1,0 +1,38 @@
+{
+  "name": "lr_balanced_v1",
+  "seed": 42,
+  "metric": "macro_f1",
+  "note": "Single-factor imbalance experiment: only LR class_weight=None -> balanced. Same data, folds, encoding, C, solver and iterations. No holdout access.",
+  "models": {
+    "dummy": {
+      "strategy": "most_frequent"
+    },
+    "lr": {
+      "solver": "lbfgs",
+      "C": 1.0,
+      "max_iter": 1500,
+      "tol": 0.0001,
+      "random_state": 42,
+      "class_weight": "balanced"
+    },
+    "dt": {
+      "max_depth": 12,
+      "min_samples_leaf": 5,
+      "random_state": 42
+    },
+    "rf": {
+      "n_estimators": 100,
+      "max_depth": 20,
+      "min_samples_leaf": 2,
+      "max_features": "sqrt",
+      "random_state": 42
+    },
+    "gbc": {
+      "n_estimators": 100,
+      "learning_rate": 0.1,
+      "max_depth": 3,
+      "max_features": "sqrt",
+      "random_state": 42
+    }
+  }
+}
