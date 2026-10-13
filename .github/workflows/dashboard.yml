@@ -1,0 +1,25 @@
+name: Dashboard aggregate and UI tests
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  dashboard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dashboard.txt
+      - run: python -m pip install -r requirements-dashboard.txt
+      - name: Public aggregates and all Streamlit views (no private data)
+        env:
+          OPENBLAS_NUM_THREADS: '1'
+          OMP_NUM_THREADS: '1'
+        run: python -m unittest discover -s tests -p test_dashboard.py -v

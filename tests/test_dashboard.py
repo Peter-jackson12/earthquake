@@ -1,0 +1,103 @@
+"""Public aggregate integrity and Streamlit AppTest. No private data required."""
+import copy
+import builtins
+import importlib.util
+from pathlib import Path
+import sys
+import unittest
+from unittest.mock import patch
+import numpy as np
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
+from dashboard_data import load_bundle,validate_bundle,model_table,error_stats,region_table
+
+class AggregateTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls): cls.bundle=load_bundle()
+    def test_public_bundle_and_metrics(self):
+        table=model_table(self.bundle)
+        self.assertEqual(len(table),len(self.bundle['models']))
+        self.assertTrue(table.cv_macro_f1.between(0,1).all())
+        self.assertIsNone(self.bundle['holdout_result'])
+    def test_cv_and_pooled_metrics_are_distinct(self):
+        lr=next(x for x in self.bundle['models'] if x['experiment']=='baseline_v1' and x['model']=='lr')
+        self.assertNotEqual(lr['cv_mean'],error_stats(lr)['oof_macro_f1'])
+        self.assertAlmostEqual(error_stats(lr)['rate_3_to_1'],467/69774)
+    def test_mean_corruption_rejected(self):
+        bad=copy.deepcopy(self.bundle);bad['models'][0]['cv_mean']+=.01
+        with self.assertRaises(ValueError): validate_bundle(bad)
+    def test_confusion_corruption_rejected(self):
+        bad=copy.deepcopy(self.bundle);bad['models'][0]['matrix'][0][0]+=1
+        with self.assertRaises(ValueError): validate_bundle(bad)
+    def test_duplicate_identity_rejected(self):
+        bad=copy.deepcopy(self.bundle);bad['models'].append(bad['models'][0])
+        with self.assertRaises(ValueError): validate_bundle(bad)
+    def test_no_legacy_regions_fabricated(self):
+        self.assertTrue(region_table(self.bundle,'baseline_v1','lr').empty)
+    def test_region_denominators_reconcile(self):
+        t=region_table(self.bundle,'class_weights_v1','rf')
+        self.assertEqual(len(t),31);self.assertEqual(t.grade3_count.sum(),69774)
+        r=t.loc[t.region.eq('26')].iloc[0]
+        self.assertAlmostEqual(r.rate_3_to_1,591/1532)
+    def test_zero_severe_support_is_missing_not_zero(self):
+        b=copy.deepcopy(self.bundle)
+        r=next(x for x in b['regions'] if x['experiment']=='class_weights_v1' and x['model']=='rf')
+        r.update(grade3_count=0,error_3_to_1=0,error_3_to_2=0)
+        row=region_table(b,'class_weights_v1','rf').set_index('region').loc[r['region']]
+        self.assertTrue(np.isnan(row.rate_3_to_1));self.assertTrue(np.isnan(row.grade3_recall))
+    def test_eda_rate_corruption_rejected(self):
+        b=copy.deepcopy(self.bundle);b['eda'][0]['grade3_rate']+=.1
+        with self.assertRaises(ValueError):validate_bundle(b)
+    def test_loader_only_opens_public_bundle(self):
+        opened=[]; original=Path.open; original_csv=__import__('pandas').read_csv
+        def traced(path,*args,**kwargs):
+            opened.append(Path(path).name);return original(path,*args,**kwargs)
+        def traced_csv(path,*args,**kwargs):
+            opened.append(Path(path).name);return original_csv(path,*args,**kwargs)
+        with patch.object(Path,'open',traced), patch('dashboard_data.pd.read_csv',traced_csv): load_bundle()
+        self.assertEqual(set(opened),{'dashboard_context.json','dashboard_models.json','dashboard_regions.json','eda_summary.csv'})
+
+    def test_final_results_cannot_silently_appear(self):
+        b=copy.deepcopy(self.bundle);b['holdout_result']={'f1':.7}
+        with self.assertRaises(ValueError):validate_bundle(b)
+
+@unittest.skipUnless(importlib.util.find_spec('streamlit'),'Install requirements-dashboard.txt for UI tests.')
+class AppTests(unittest.TestCase):
+    def app(self):
+        from streamlit.testing.v1 import AppTest
+        at=AppTest.from_file(str(ROOT/'app.py'),default_timeout=30).run()
+        self.assertEqual(len(at.exception),0)
+        return at
+    def test_all_views_render(self):
+        at=self.app()
+        for view in ['실험 비교','개발 데이터 EDA','오류 분석','검증·진행 상태']:
+            at.sidebar.radio[0].set_value(view).run()
+            self.assertEqual(len(at.exception),0,view)
+    def test_empty_model_filter(self):
+        at=self.app();at.multiselect(key='families').set_value([]).run()
+        self.assertEqual(len(at.exception),0)
+        self.assertIn('선택',at.info[0].value)
+    def test_age_boundaries_display(self):
+        at=self.app();at.sidebar.radio[0].set_value('개발 데이터 EDA').run()
+        at.selectbox(key='eda_feature').set_value('age_group').run()
+        self.assertEqual(len(at.exception),0)
+        self.assertEqual(len(at.dataframe[0].value),8)
+        self.assertEqual(at.dataframe[0].value.n.sum(),208480)
+    def test_legacy_error_caveat(self):
+        at=self.app();at.sidebar.radio[0].set_value('오류 분석').run()
+        at.selectbox(key='error_model').set_value('LR 기본 · C=1').run()
+        self.assertIn('과거',at.warning[0].value)
+        at.checkbox(key='normalize_cm').check().run()
+        self.assertEqual(len(at.exception),0)
+    def test_verified_regions(self):
+        at=self.app();at.sidebar.radio[0].set_value('오류 분석').run()
+        at.selectbox(key='error_model').set_value('RF balanced · 0.1 / leaf=2').run()
+        self.assertEqual(len(at.exception),0)
+        self.assertEqual(len(at.dataframe[-1].value),31)
+        self.assertEqual(at.metric[0].value,'1,862건')
+    def test_holdout_pending(self):
+        at=self.app();at.sidebar.radio[0].set_value('검증·진행 상태').run()
+        self.assertEqual(at.metric[0].value,'미실행')
+        self.assertEqual(len(at.exception),0)
+
+if __name__=='__main__': unittest.main()

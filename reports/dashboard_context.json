@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "development_rows": 208480,
+  "holdout_rows": 52121,
+  "class_support": [
+    20099,
+    118607,
+    69774
+  ],
+  "holdout_result": null,
+  "smotenc_pilot": {
+    "synthetic_rows": 4239,
+    "counts": {
+      "nonfinite_numeric_rows": 0,
+      "fractional_numeric_rows": 4126,
+      "fractional_count_floors_pre_eq": 343,
+      "fractional_age": 3393,
+      "fractional_area_percentage": 3354,
+      "fractional_height_percentage": 1920,
+      "fractional_count_families": 122,
+      "out_of_training_numeric_range_rows": 0,
+      "unseen_marginal_category_rows": 0,
+      "invalid_binary_rows": 0,
+      "unobserved_geo_triple_rows": 2816,
+      "geo_level_2_id_parent_conflict_rows": 1233,
+      "geo_level_2_id_ambiguous_parent_ids_in_training": 0,
+      "geo_level_3_id_parent_conflict_rows": 2536,
+      "geo_level_3_id_ambiguous_parent_ids_in_training": 0,
+      "age_between_regular_max_and_995_rows": 5,
+      "reference_max_age_excluding_995": 200.0
+    },
+    "full_experiment_allowed": false,
+    "blocking_reasons": [
+      "Synthetic continuous values violate the unchanged original integer schema; no rounding policy approved.",
+      "Individual valid region codes recombine into geographic tuples unobserved in fold training data.",
+      "Unresolved age=995 code participates in interpolation beyond observed ordinary-age range."
+    ],
+    "scope": "fold0_training_only_safety_pilot_no_model_fit",
+    "status": "BLOCKED_FULL_EXPERIMENT",
+    "data_contract": {
+      "preprocessing_version": "1.0.1",
+      "source_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+      "expected_rows": 208480,
+      "n_folds": 5,
+      "seed": 42,
+      "files": {
+        "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+        "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+      }
+    },
+    "train_rows_available": 166784,
+    "pilot_rows": 6000,
+    "fold": 0,
+    "k_neighbors": 5,
+    "seed": 42,
+    "class_counts_before": {
+      "1": 579,
+      "2": 3413,
+      "3": 2008
+    },
+    "class_counts_after": {
+      "1": 3413,
+      "2": 3413,
+      "3": 3413
+    },
+    "sampler_seconds": 3.4118649829999868,
+    "process_peak_rss_mib": 1076.69921875,
+    "imbalanced_learn_version": "0.14.1",
+    "numeric_columns": [
+      "count_floors_pre_eq",
+      "age",
+      "area_percentage",
+      "height_percentage",
+      "count_families"
+    ],
+    "categorical_columns": [
+      "geo_level_1_id",
+      "geo_level_2_id",
+      "geo_level_3_id",
+      "land_surface_condition",
+      "foundation_type",
+      "roof_type",
+      "ground_floor_type",
+      "other_floor_type",
+      "position",
+      "plan_configuration",
+      "legal_ownership_status",
+      "has_superstructure_adobe_mud",
+      "has_superstructure_mud_mortar_stone",
+      "has_superstructure_stone_flag",
+      "has_superstructure_cement_mortar_stone",
+      "has_superstructure_mud_mortar_brick",
+      "has_superstructure_cement_mortar_brick",
+      "has_superstructure_timber",
+      "has_superstructure_bamboo",
+      "has_superstructure_rc_non_engineered",
+      "has_superstructure_rc_engineered",
+      "has_superstructure_other",
+      "has_secondary_use",
+      "has_secondary_use_agriculture",
+      "has_secondary_use_hotel",
+      "has_secondary_use_rental",
+      "has_secondary_use_institution",
+      "has_secondary_use_school",
+      "has_secondary_use_industry",
+      "has_secondary_use_health_post",
+      "has_secondary_use_gov_office",
+      "has_secondary_use_use_police",
+      "has_secondary_use_other"
+    ],
+    "original_schema_unchanged": true,
+    "validation_resampled": false,
+    "holdout_opened": false,
+    "model_fitted": false,
+    "code_sha256": "08b2f3bf3730c9568177a17e685683b406b8be31dea1ed4e1352cebb948845b9",
+    "input_ids_sha256": "3ed1ac1425d6646a389282e3979537e161ec1c3b594f3c5c4d985068cbbdd45d",
+    "limitations": [
+      "No predictive metric is estimated by this safety-only pilot.",
+      "Observed joint-category consistency is not proof of engineering validity.",
+      "Process peak RSS is not incremental sampler memory; another fit may run concurrently."
+    ]
+  },
+  "status": [
+    {
+      "항목": "공통 분할 합의",
+      "상태": "팀 미확정 · 현재 결과는 잠정 기준"
+    },
+    {
+      "항목": "기준선·초기 개선",
+      "상태": "8개 설정 · 집계 검증, 과거 행별 OOF 미확인"
+    },
+    {
+      "항목": "가중치·RUS",
+      "상태": "4개 설정 · 행별 OOF 검증"
+    },
+    {
+      "항목": "제한 튜닝",
+      "상태": "3/5개 후보 완료 · 행별 OOF 검증"
+    },
+    {
+      "항목": "SMOTENC",
+      "상태": "안전성 파일럿 완료 · 전체 성능 비교 보류"
+    },
+    {
+      "항목": "최종 후보·홀드아웃 평가",
+      "상태": "승인 대기 · 평가 미실행"
+    },
+    {
+      "항목": "main·팀 제출 통합",
+      "상태": "승인 대기 · 개인 작업을 팀원 수행으로 대체하지 않음"
+    }
+  ],
+  "provenance": {
+    "modeling_base_commit": "2d1bba40a778b48fef8a41ef36c32802aefae794",
+    "scope_commit": "607d5dc992ef442517cbbb727464dc5e57e51713",
+    "data_contract": {
+      "preprocessing_version": "1.0.1",
+      "source_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+      "expected_rows": 208480,
+      "n_folds": 5,
+      "seed": 42,
+      "files": {
+        "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+        "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+      }
+    },
+    "aggregate_sources": {
+      "model_summary.csv": "f1502c77d52eb77a09f7ef70c520ba55d86e9a72f8a5c025a82660d8cd7b50b9",
+      "fold_summary.csv": "b321794b06c48d43d9424eb0a36e2807a3bfe246b02911dfd18231d7226078cd",
+      "followup_model_summary.csv": "196b727eae84cee1e272d6eb65da93ba362f5bdc926b8ef551e2f15174fc5873",
+      "eda_summary.csv": "937539112c6bd98bdd34f0caab71765f096fb03bf0256530e50d41bde8fb2d1a"
+    },
+    "collector_sha256": "287f967e3619addfd1f2b5ab4222cc772837019583a579e0c710c48cb01ae8e4",
+    "row_oof_validation_sha256": "ce16654aeda9244e025cdf319b5c2ca45a6d94766588da444c4b8c4b13321514",
+    "legacy_limitation": "Eight historical raw OOF files unavailable; only aggregate counts were rechecked.",
+    "timing_limitation": "Observed execution time includes concurrent work; not a controlled hardware benchmark."
+  }
+}
