@@ -1,0 +1,15 @@
+{
+  "name": "tuning_v1_lr_c10",
+  "seed": 42,
+  "metric": "macro_f1",
+  "note": "Predeclared limited search. Same frozen folds and preprocessor; RF class_weight fixed balanced. No holdout.",
+  "models": {
+    "lr": {
+      "solver": "lbfgs",
+      "C": 10.0,
+      "max_iter": 1500,
+      "tol": 0.0001,
+      "random_state": 42
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "tuning_v1_rf_bal_mf02_leaf1",
+  "seed": 42,
+  "metric": "macro_f1",
+  "note": "Predeclared limited search. Same frozen folds and preprocessor; RF class_weight fixed balanced. No holdout.",
+  "models": {
+    "rf": {
+      "n_estimators": 100,
+      "max_depth": 20,
+      "min_samples_leaf": 1,
+      "max_features": 0.2,
+      "random_state": 42,
+      "class_weight": "balanced"
+    }
+  }
+}

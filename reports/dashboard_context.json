@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "development_rows": 208480,
   "holdout_rows": 52121,
   "class_support": [
@@ -122,32 +122,36 @@
   },
   "status": [
     {
-      "항목": "공통 분할 합의",
-      "상태": "팀 미확정 · 현재 결과는 잠정 기준"
+      "항목": "개인 처리 정책",
+      "상태": "사전 동결 · 제약형 SMOTE/복제 비교 완료"
     },
     {
-      "항목": "기준선·초기 개선",
-      "상태": "8개 설정 · 집계 검증, 과거 행별 OOF 미확인"
+      "항목": "기준선·개선·가중치·RUS·튜닝",
+      "상태": "19개 고유 설정 · CV 기록 95개"
     },
     {
-      "항목": "가중치·RUS",
-      "상태": "4개 설정 · 행별 OOF 검증"
+      "항목": "기준선 근거 복구",
+      "상태": "별도 재현 5 Fold · 새 OOF 검증, 원래 파일 복구 아님"
     },
     {
-      "항목": "제한 튜닝",
-      "상태": "3/5개 후보 완료 · 행별 OOF 검증"
+      "항목": "개인 최종 모델",
+      "상태": "무가중치 LR C=1 · 합성 미사용"
     },
     {
-      "항목": "SMOTENC",
-      "상태": "안전성 파일럿 완료 · 전체 성능 비교 보류"
+      "항목": "개인 홀드아웃",
+      "상태": "선택 동결 후 1회 완료 · 재튜닝 없음"
     },
     {
-      "항목": "최종 후보·홀드아웃 평가",
-      "상태": "승인 대기 · 평가 미실행"
+      "항목": "기존 원래 OOF",
+      "상태": "8개 원래 파일 미확보 · 개인 재현과 구분"
     },
     {
-      "항목": "main·팀 제출 통합",
-      "상태": "승인 대기 · 개인 작업을 팀원 수행으로 대체하지 않음"
+      "항목": "팀 상태",
+      "상태": "main 통합·팀 선정 별도, 개인 수행을 팀원 수행으로 대체하지 않음"
+    },
+    {
+      "항목": "공통 홀드아웃",
+      "상태": "개인 평가 후 이미 노출됨 · 팀 반복 선택에 재사용 금지"
     }
   ],
   "provenance": {
@@ -171,8 +175,38 @@
       "eda_summary.csv": "937539112c6bd98bdd34f0caab71765f096fb03bf0256530e50d41bde8fb2d1a"
     },
     "collector_sha256": "287f967e3619addfd1f2b5ab4222cc772837019583a579e0c710c48cb01ae8e4",
-    "row_oof_validation_sha256": "ce16654aeda9244e025cdf319b5c2ca45a6d94766588da444c4b8c4b13321514",
+    "row_oof_validation_sha256": "5f9608a53a875c49c013523a22f20933edeb441d2c84d899f16358bff85998e4",
     "legacy_limitation": "Eight historical raw OOF files unavailable; only aggregate counts were rechecked.",
-    "timing_limitation": "Observed execution time includes concurrent work; not a controlled hardware benchmark."
-  }
+    "timing_limitation": "Observed execution time includes concurrent work; not a controlled hardware benchmark.",
+    "personal_policy_commit": "53966920c250178eb738df3856a9fd058033bac1",
+    "personal_selection_sha256": "79921f42056df591927f89377aaad369d27fa318dc328c509452f95a6e2169db"
+  },
+  "personal_selection_sha256": "79921f42056df591927f89377aaad369d27fa318dc328c509452f95a6e2169db",
+  "personal_final_sha256": "3973ac2b4652b116a46bc24369e29941ad9d43c850a270b7a167fa74ef48372e",
+  "personal_sampling": [
+    {
+      "label": "LR 제약형 SMOTE + 복제",
+      "cv_mean": 0.6632064390613277,
+      "cv_std": 0.001460805320125874,
+      "error_3_to_1": 2491,
+      "error_3_to_2": 15554,
+      "new_configuration": true
+    },
+    {
+      "label": "LR C=1 재현 점검",
+      "cv_mean": 0.6836769858025985,
+      "cv_std": 0.0010708459189680733,
+      "error_3_to_1": 467,
+      "error_3_to_2": 24761,
+      "new_configuration": false
+    },
+    {
+      "label": "LR RandomOverSampler",
+      "cv_mean": 0.6633687842735632,
+      "cv_std": 0.001729803984144098,
+      "error_3_to_1": 2493,
+      "error_3_to_2": 15538,
+      "new_configuration": true
+    }
+  ]
 }

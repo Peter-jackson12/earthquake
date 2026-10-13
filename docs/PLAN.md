@@ -1,36 +1,28 @@
-# 실행 계획과 현재 상태 — 2026-10-13 후속 반영
+# 개인 분석 완료 상태 — 2026-10-13
 
-목표: v1.0.1 기반 기준선 → 불균형·튜닝 비교 → 오류 해석 → 최종 평가·Streamlit 제출물.
-공식 요구사항은 [PROJECT_GUIDE_KO.md](PROJECT_GUIDE_KO.md), 이전 기준선은 [BASELINE_REPORT.md](../reports/BASELINE_REPORT.md)를 본다.
-최신 개인 결과는 [후속 보고서](../reports/FOLLOWUP_REPORT_20261013.md), 실행은 [후속 Runbook](FOLLOWUP_RUNBOOK_20261013.md)을 우선한다.
+이 브랜치는 Peter 개인 분석 완결본이다. [개인 실행 안내](../README_PERSONAL.md), [최종 보고서](../reports/PERSONAL_FINAL_REPORT_20261013.md), [선택 동결](PERSONAL_MODEL_SELECTION_20261013.md)을 우선한다. 팀 공통 main과 팀원 수행 완료를 대신하지 않는다.
 
-> 완료 기록은 peter 개인의 선행 작업이며 팀 전체 완료나 팀원 모두의 수행을 뜻하지 않는다.
-
-| 단계 | 상태 | 근거 / 다음 조건 |
+| 단계 | 개인 상태 | 근거 |
 |---|---|---|
-| 기존 전처리 인계 | 보존·재검증 완료 | v1.0.1 및 기존 data/Manifest 해시 불변 |
-| 이전 기준선·후보 변수 수·LR balanced | 8개 설정·40 Fold 기존 기록 보존 | 기존 summary CSV; 새로 재학습하지 않음 |
-| 개발 데이터 EDA | 개인 1차 해석·재현 코드 완료 | scripts/audit_eda_oof.py, eda_summary.csv 55개 집계 |
-| 과거 행별 OOF 독립 재검증 | 일부 미완료 | 과거 8개 원시 OOF 없음. 전역 집계만 산술 확인 |
-| 신규 가중치·RUS 비교 | 4개 설정·20 Fold 완료 | DT/RF balanced, GBC sample_weight, LR RUS |
-| 신규 OOF·지역 오류 | 행별 재검증 완료 | 4개×208,480 예측; followup_verification.json |
-| 테스트 | 실제 data 53 통과 | data 없음: 31 통과 / 22 skip; 원격 CI는 별도 확인 |
-| 팀 문제 정의·공통 분할 합의 | 미확정 | 80/20·seed42·5-Fold를 팀 확정으로 취급하지 않음 |
-| SMOTE 계열 비교 | 설계 검토만, 실행 미완료 | 원본 정수 계약·명목형·특수값·지역 조합 안전성 파일럿 필요 |
-| 제한 CV 튜닝 | 미실행 | NEXT_EXPERIMENTS에서 중복된 C=1/RF 조합 제외 |
-| 최종 모델·홀드아웃 평가 | 미실행 | 후보와 평가 계획 확정 후 최종 평가 |
-| Streamlit·README·팀 Notion·제출 | 진행 필요 | 실제 집계 사용, main 채택·개인 수행 기록 별도 |
+| 원본·전처리·분할 | 보존 및 검증 완료 | v1.0.1, 38개 입력, 개발/Manifest SHA 불변 |
+| 개발 EDA | 55개 집계와 재현 코드 완료 | eda_summary.csv, audit_eda_oof.py |
+| 필수 네 모델·가중치·RUS | 비교 완료 | 기존 12개 설정·60 Fold 기록 보존 |
+| 제한 튜닝 | 5개 후보·25 Fold 완료 | configs/tuning, dashboard_models.json |
+| 일반 SMOTENC | 안전성 파일럿 불채택 | 지역 조합·특수 연령·원본 정수 계약 문제; 전체 CV 실행 아님 |
+| 제약형 SMOTE·복제 대조 | 2개 후보·10 Fold 완료 | personal_sampling_summary.csv, 개인 사전 정책 |
+| 기존 LR 근거 복구 | 5 Fold 재현 완료 | 이전 점수/혼동행렬 일치, 새로운 OOF; 원래 파일 복구 아님 |
+| 개인 최종 후보 | 무가중치 LR C=1 | 19개 고유 설정의 개발 CV 최고 평균 0.683677 |
+| 개인 홀드아웃 | 동결 후 1회 평가 완료 | Macro F1 0.686771, Accuracy 74.24%, 재튜닝 없음 |
+| Streamlit·예측 CLI | 구현 완료 | 집계 전용 5개 화면, 해시 검사 모델 추론 |
+| 실제 데이터 로컬 검사 | 110개 중 103 통과·UI 7 skip | UI는 별도 원격 CI로 검사, 결과는 해당 commit Actions에서 확인 |
+| 과거 원래 OOF 8개 | 미확보 | 새 재현/후속 12개 OOF 검증과 구분 |
 
-## 다음 우선순위
+전체 고유 비교는 19개 설정·95 Fold 기록이며, 근거 복구 5회까지 실제 CV fit은 100회다. 별도로 최종 개발 전체 fit 1회가 있다. 합성 단위 테스트는 학습 실험 수에 합산하지 않는다.
 
-팀 기준 합의 및 과거 OOF 확보 → 기존 결과 재사용 → 제한 튜닝·SMOTENC 파일럿 → 최종 후보와 평가 → 대시보드·제출물 통합.
-무가중치 LR은 현재 CV 최고 후보이나 최종 모델이 아니다. 가중치 RF는 Macro F1과 3→1 악화를 함께 비교한다.
-[미완료 실험](NEXT_EXPERIMENTS_20261013.md)에 완료/미완료와 중복 제외 기준을 남겼다.
-[논문 설명 보완](PAPER_BENCHMARK_CORRECTIONS_KO.md)은 기존 문헌 메모와 함께 읽는다.
+## 남은 팀·외부 범위
 
-## 변경·공유 규칙
+main 통합, 팀 최종 선정과 평가 정책, 팀원별 전체 과정 수행, Notion/LMS 제출 및 외부 서비스 배포는 별도다. 자체 제약형 SMOTE를 stock SMOTENC 전체 실행이라고 표시하지 않는다. 지진 강도·지반 조건을 포함한 새 지역/미래 지진의 일반화는 검증하지 않았다.
 
-팀원마다 전체 분석·모델링 과정을 수행한다. 개인 결과를 팀 전체 수행으로 대체하지 않는다.
-main에는 팀이 검토·재현해 채택한 변경만 최신 main에서 별도 PR로 반영한다. peter 전체를 무조건 병합하지 않는다.
-전처리·분할·과거 결과를 덮어쓰지 않는다. 원본·행별 예측·모델·비밀 값은 공개하지 않는다.
-최종 평가 전 승인, 공유·권한 경계는 AGENTS.md를 따른다. 예약·무인 지속 실행을 시작하지 않는다.
+개인 평가로 공통 홀드아웃 결과는 이미 노출됐다. 이를 보면서 다른 팀 후보를 반복 선택한 뒤 같은 자료를 새로운 독립 테스트라고 부르지 않는다. 이미 완료된 개인 모델은 홀드아웃 결과에 따라 재튜닝하지 않는다.
+
+이전 진행 문서는 [원래 계획 보관본](PLAN_BEFORE_PERSONAL_COMPLETION.md)에 보존했다. 팀 README 초안은 저장소 루트의 README_TEAM_DRAFT_ARCHIVE.md에 바이트 그대로 보존했다. 이 완료 상태 변경은 main에는 적용하지 않았다.

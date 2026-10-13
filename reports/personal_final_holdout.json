@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "scope": "personal_final_not_team",
+  "status": "COMPLETE",
+  "selected_experiment": "baseline_v1",
+  "model": "lr",
+  "mode": "none",
+  "development_rows": 208480,
+  "holdout_rows": 52121,
+  "evaluation_count": 1,
+  "frozen_at_utc": "2026-10-13T06:39:32.170508+00:00",
+  "model_fitted_at_utc": "2026-10-13T06:40:59.204470+00:00",
+  "holdout_opened_at_utc": "2026-10-13T06:40:59.228893+00:00",
+  "completed_at_utc": "2026-10-13T06:41:01.418873+00:00",
+  "selection_sha256": "79921f42056df591927f89377aaad369d27fa318dc328c509452f95a6e2169db",
+  "policy_commit": "53966920c250178eb738df3856a9fd058033bac1",
+  "model_sha256": "fcc969c15e39085a68e26f482566188df39a6cc2c81c527985898f6ab7d4ef94",
+  "predictions_sha256": "11f88d2bc935109dc1c6580a2d1a11db09b630c8e277b70fa94509914e43b455",
+  "source_sha256": {
+    "preprocess.py": "b88a5c4040f82378b6ac5db5b629a1657934f948eb508296ab35f263a1649c06",
+    "personal_sampling.py": "f4b78a38b1d3266e9559553d09c545c1f798983bd2c5a7e229c5f9d828889b31",
+    "scripts/run_personal_sampling.py": "ba24125e793e633b774260391236f16df16af30962c87c9ff529873304d2dda9",
+    "scripts/finalize_personal.py": "2420184f71fdde02ac002948cfc3ec14d237b0f254e4e05aafb08b06a07171e4",
+    "requirements.txt": "aa15279522498493adc4963954b2cfee7f586d5f54a2348f26ae1a5fa5309e90",
+    "configs/baseline.json": "bde1339f833e5e81afecd94aa3dcad050afc8541721d526b5f9ff2235313f214"
+  },
+  "data_contract": {
+    "preprocessing_version": "1.0.1",
+    "source_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+    "expected_rows": 208480,
+    "n_folds": 5,
+    "seed": 42,
+    "files": {
+      "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+      "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+    }
+  },
+  "holdout_sha256": {
+    "final_holdout/features.csv": "c854183dbdfbac9c17c84458b61cefb22e0e35b6de48f195253a6a45ec2eb911",
+    "final_holdout/labels_DO_NOT_USE_FOR_TUNING.csv": "5e198fb0802218bd68246d5ca2890488dd1c4f7d761dd2bbab4d29a3e0c14453"
+  },
+  "metrics": {
+    "macro_f1": 0.6867713036658166,
+    "accuracy": 0.7423687189424608,
+    "severe_as_minor_rate": 0.006592524650309562,
+    "per_class": {
+      "1": {
+        "precision": 0.6678028316727844,
+        "recall": 0.5068656716417911,
+        "f1-score": 0.5763095372779726,
+        "support": 5025.0
+      },
+      "2": {
+        "precision": 0.7462749087427443,
+        "recall": 0.8411574261432618,
+        "f1-score": 0.7908805530012366,
+        "support": 29652.0
+      },
+      "3": {
+        "precision": 0.7527040644944575,
+        "recall": 0.6422838798440724,
+        "f1-score": 0.6931238207182406,
+        "support": 17444.0
+      },
+      "accuracy": 0.7423687189424608,
+      "macro avg": {
+        "precision": 0.7222606016366621,
+        "recall": 0.6634356592097085,
+        "f1-score": 0.6867713036658166,
+        "support": 52121.0
+      },
+      "weighted avg": {
+        "precision": 0.7408611217021338,
+        "recall": 0.7423687189424608,
+        "f1-score": 0.7374762094170002,
+        "support": 52121.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        2547,
+        2355,
+        123
+      ],
+      [
+        1152,
+        24942,
+        3558
+      ],
+      [
+        115,
+        6125,
+        11204
+      ]
+    ]
+  },
+  "independent_confusion_recalculation": {
+    "n": 52121,
+    "macro_f1": 0.6867713036658166,
+    "accuracy": 0.7423687189424608,
+    "grade3_count": 17444,
+    "error_3_to_1": 115,
+    "error_3_to_2": 6125,
+    "matrix": [
+      [
+        2547,
+        2355,
+        123
+      ],
+      [
+        1152,
+        24942,
+        3558
+      ],
+      [
+        115,
+        6125,
+        11204
+      ]
+    ],
+    "grade1_precision": 0.6678028316727844,
+    "grade1_recall": 0.5068656716417911,
+    "grade1_f1": 0.5763095372779726,
+    "grade2_precision": 0.7462749087427443,
+    "grade2_recall": 0.8411574261432618,
+    "grade2_f1": 0.7908805530012366,
+    "grade3_precision": 0.7527040644944575,
+    "grade3_recall": 0.6422838798440724,
+    "grade3_f1": 0.6931238207182406,
+    "rate_3_to_1": 0.006592524650309562,
+    "rate_3_to_2": 0.351123595505618
+  },
+  "fit_seconds": 32.50704605300007,
+  "n_iter": [
+    592
+  ],
+  "warnings": [],
+  "reload_checked_rows": 128,
+  "post_holdout_tuning": false,
+  "limitation": "One personal random holdout within the same earthquake; not new-region/future-earthquake validation. This shared holdout is now exposed and must not be reused to choose a team model."
+}

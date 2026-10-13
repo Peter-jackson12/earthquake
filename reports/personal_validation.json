@@ -1,0 +1,106 @@
+{
+  "status": "PASS",
+  "data_contract": {
+    "preprocessing_version": "1.0.1",
+    "source_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+    "expected_rows": 208480,
+    "n_folds": 5,
+    "seed": 42,
+    "files": {
+      "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+      "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+    }
+  },
+  "available_oof_runs_checked": 12,
+  "available_oof_rows_checked": 2501760,
+  "sources": [
+    {
+      "path": "outputs/class_weights_v1/dt/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "b472d89520f99aae2185ba8bf95f386ad5263a3d7722dad938fe4352188494f7",
+      "metrics_sha256": "4de95745e5270a88ff0a31d41bbc065a5b478e4a3acca36221bec03752256b0a",
+      "status": "PASS"
+    },
+    {
+      "path": "outputs/class_weights_v1/gbc/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "0ec87c3fcc544620a80690404afffd553ab4b80725593414a507125941be4878",
+      "metrics_sha256": "6d3e232b2167d517e095252a00c7b1213ca671bbf5916f03a06a2d8670d7060c",
+      "status": "PASS"
+    },
+    {
+      "path": "outputs/class_weights_v1/rf/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "198a0343a4976200f6311000fb9951c1402ad5ec7217159a987269bd24cfd03f",
+      "metrics_sha256": "f306b6dab2e0b45b2a62b1c3ac548578432d3109aeb3b6b9245f174a4b471e99",
+      "status": "PASS"
+    },
+    {
+      "path": "outputs/lr_rus_v1/lr/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "9ade1b29f0d289dbc1ae973f42f9d42de3d23b159120dcf3b4311b566dfae7bc",
+      "metrics_sha256": "8da501b48dcc3d35c8e6ed86d10a9aa85957fdbd124289e83e4894ae858456cb",
+      "status": "PASS"
+    },
+    {
+      "path": "outputs/personal_context_smote_v1/lr/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "f4ada07f72be70b23a2fc12c505a1124e694bac375a65056fb3ebb02971ee241",
+      "metrics_sha256": "54f8e745a717b55efb2234f224b562a0b27f9101c5e543a56d2f6f1d46c56448",
+      "status": "PASS"
+    },
+    {
+      "path": "outputs/personal_none_v1/lr/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "e8dbaa962fe4b2e2fdad160d25f72cbfd0816d73aafbc0419149c53b8a3de221",
+      "metrics_sha256": "62b0738149ff593713fe613132833180ff0cc47267a59595402463772f8ffc59",
+      "status": "PASS"
+    },
+    {
+      "path": "outputs/personal_random_over_v1/lr/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "3fdfcc16664295ca428b044e8f2beb27166a4888c84e4b1f27eed961d6b062ad",
+      "metrics_sha256": "9b9bb65abbe6eb5a97f49ac78fedc352bc87982a97b90ae36773f90242385df5",
+      "status": "PASS"
+    },
+    {
+      "path": "outputs/tuning_v1/lr_c01/lr/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "5cdbb5051eccf1cf1c2d88341bf18e17d32f398ade595b010a9d8d2f8bfb6b04",
+      "metrics_sha256": "a9b4fb9b207e96beafe25fe3507d91d92cf61644b32529b8f214f14bac8d174f",
+      "status": "PASS"
+    },
+    {
+      "path": "outputs/tuning_v1/lr_c10/lr/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "f51446298e7f0b3bd35ce398745d7a85f5c983701d0fe776f4c2150d1b51f931",
+      "metrics_sha256": "fb510e4f0aaef3820a83788c111a80a78523ea6daa628aa33982d3ffecd408b9",
+      "status": "PASS"
+    },
+    {
+      "path": "outputs/tuning_v1/rf_bal_mf01_leaf1/rf/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "1474b3f1a9945358d7f99fc3176ebc0c8add7e11596abd9e59a3825f7c22af8b",
+      "metrics_sha256": "483d50b0ddcd246d8ce6a7c4d80696a1c31ff9c2fb9f02e24b3c664bf5054f98",
+      "status": "PASS"
+    },
+    {
+      "path": "outputs/tuning_v1/rf_bal_mf02_leaf1/rf/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "15ec9740456719148da9dac57d0099f24460c1e4b1663383efabc6219ff0251c",
+      "metrics_sha256": "c5259c7150d09e02e29a8173f55f1e16057861c88c713f716c1af1cb45ad2815",
+      "status": "PASS"
+    },
+    {
+      "path": "outputs/tuning_v1/rf_bal_mf02_leaf2/rf/oof_predictions.csv.gz",
+      "rows": 208480,
+      "oof_sha256": "5888c673e36a90561690e457aefaf94dcb77a995ab9998aaea20a9f0fab67937",
+      "metrics_sha256": "e55f8bbc836b18fbbda97ccc3f4e81a3e0fb5a81c6d2b1e14a54ac5dca9f38cd",
+      "status": "PASS"
+    }
+  ],
+  "final_prediction_arithmetic_recheck": "PASS",
+  "final_model_scored_once": true,
+  "reference_reproduction_distinct_from_original_oof": true,
+  "original_eight_raw_oof_files_available": false
+}

@@ -13,8 +13,8 @@ except (OSError,ValueError,KeyError) as exc:
     st.stop()
 models=model_table(bundle)
 st.title('네팔 지진 피해 등급 · 분석과 검증')
-st.caption('Peter 개인 실험 | 개발 데이터 208,480건 | 잠정 80/20 · 고정 층화 5-Fold | 최종 모델 미확정')
-page=st.sidebar.radio('보기',['실험 비교','개발 데이터 EDA','오류 분석','검증·진행 상태'],key='view')
+st.caption('Peter 개인 분석 | 개발 208,480건 · 홀드아웃 52,121건 | 고정 층화 5-Fold | ' + ('개인 최종 평가 완료 · 팀 선정 별도' if bundle.get('holdout_result') else '최종 평가 미실행'))
+page=st.sidebar.radio('보기',['실험 비교','개발 데이터 EDA','오류 분석','개인 최종 평가','검증·진행 상태'],key='view')
 st.sidebar.caption('집계 전용 화면입니다. 원본·행별 예측·모델·홀드아웃 파일을 읽지 않습니다.')
 
 if page=='실험 비교':
@@ -29,7 +29,7 @@ if page=='실험 비교':
         if len(eligible):
             best=eligible.iloc[0]
             a.metric('선택 범위의 최고 CV Macro F1',f'{best.cv_macro_f1:.6f}')
-            a.caption(best.label+' · 최종 선정 아님')
+            a.caption(best.label+' · 최종 선택 근거는 개인 최종 평가 화면 참고')
         else: a.metric('수렴 완료 후보','없음')
         b.metric('비교 설정',len(selected))
         c.metric('설정별 검증 건물',f'{bundle["development_rows"]:,}')
@@ -102,16 +102,44 @@ elif page=='오류 분석':
                                 'error_3_to_2','rate_3_to_2','grade3_recall']],hide_index=True,width='stretch')
     st.caption('지역 코드는 좌표가 아닙니다. 같은 지진의 무작위 Fold 결과이며 미관측 지역의 일반화 성능이 아닙니다.')
 
+elif page=='개인 최종 평가':
+    final=bundle.get('holdout_result')
+    if final is None:
+        st.info('개인 최종 평가가 아직 실행되지 않았습니다.')
+    else:
+        stats=error_stats({'matrix':final['metrics']['confusion_matrix']})
+        st.subheader('선택을 끝낸 뒤 한 번만 평가한 결과')
+        st.write('최종 모델: 무가중치 Logistic Regression · C=1 · 기존 v1.0.1 전처리')
+        a,b,c=st.columns(3)
+        a.metric('홀드아웃 Macro F1',f'{final["metrics"]["macro_f1"]:.6f}')
+        b.metric('홀드아웃 Accuracy',f'{final["metrics"]["accuracy"]:.2%}')
+        c.metric('최종 평가 건물',f'{final["holdout_rows"]:,}')
+        st.caption('개발 CV에서 후보를 먼저 고정하고 개발 전체로 학습한 모델입니다. 최종 평가 이후 모델·파라미터·임계값을 바꾸지 않았습니다.')
+        per_class=pd.DataFrame({'등급':['1','2','3'],'Precision':stats['precision'],
+            'Recall':stats['recall'],'F1':stats['f1'],'표본 수':stats['support']})
+        st.dataframe(per_class,hide_index=True,width='stretch')
+        st.subheader('최종 혼동행렬 · 행은 실제, 열은 예측')
+        st.table(pd.DataFrame(stats['matrix'],index=['실제 1','실제 2','실제 3'],columns=['예측 1','예측 2','예측 3']))
+        st.write(f'실제 3등급 {stats["grade3_count"]:,}건 중 3→1은 {stats["error_3_to_1"]:,}건({stats["rate_3_to_1"]:.2%}), 3→2는 {stats["error_3_to_2"]:,}건({stats["rate_3_to_2"]:.2%})입니다.')
+        st.warning('개인 분석의 최종 평가입니다. 같은 지진의 무작위 홀드아웃이며 새 지역·미래 지진의 안전성 검증이 아닙니다. 이 결과를 보면서 팀 모델을 다시 고른 뒤 같은 홀드아웃을 독립 테스트라고 부르면 안 됩니다.')
+        with st.expander('선택 동결과 실행 근거'):
+            st.json({key:final[key] for key in ['selected_experiment','evaluation_count','frozen_at_utc',
+                'model_fitted_at_utc','holdout_opened_at_utc','selection_sha256','model_sha256','post_holdout_tuning']})
+
 else:
-    st.subheader('검증 범위와 다음 승인 지점')
+    st.subheader('개인 완료 상태와 팀의 남은 결정')
     st.dataframe(pd.DataFrame(bundle['status']),hide_index=True,width='stretch')
-    st.metric('최종 홀드아웃 평가','미실행')
-    st.info('팀 공통 분할 확정 · 최종 후보 선정 · 홀드아웃 평가 · main 통합은 승인 전입니다.')
+    st.metric('개인 홀드아웃 평가','완료' if bundle.get('holdout_result') else '미실행')
+    st.info('팀 공통 기준·팀 최종 선정·main 통합은 별도입니다. 개인 평가에 사용한 홀드아웃을 팀의 반복 선택에 재사용하지 않습니다.')
     pilot=bundle['smotenc_pilot']
-    st.subheader('SMOTENC 안전성 파일럿')
+    st.subheader('초기 일반 SMOTENC 파일럿 · 불채택 기록')
     st.write(f'Fold 0 학습 구간 {pilot["pilot_rows"]:,}건 → 합성 {pilot["synthetic_rows"]:,}건. 모델 학습·성능 평가는 하지 않았습니다.')
     st.warning('전체 실험 확대 보류: '+ ' / '.join(pilot['blocking_reasons']))
     st.dataframe(pd.DataFrame([{'검사':k,'값':v} for k,v in pilot['counts'].items()]),hide_index=True,width='stretch')
+    if bundle.get('personal_sampling'):
+        st.subheader('개인 처리 대안 · 제약형 SMOTE와 복제 비교')
+        st.dataframe(pd.DataFrame(bundle['personal_sampling']),hide_index=True,width='stretch')
+        st.caption('표준 SMOTENC가 아닌 자체 제약형 SMOTE 보간입니다. 실제 범주 조합과 특수값을 보존해도 실재 건물의 물리적 타당성이 입증되지는 않습니다. 최종 모델은 CV 비교 후 합성 미사용 LR로 선택했습니다.')
     with st.expander('출처·계산 정의'):
         st.json(bundle['provenance'])
         st.write('CV: Fold Macro F1의 산술 평균. OOF: 전체 혼동행렬에서 계산한 Macro F1. 표준편차는 ddof=1입니다.')

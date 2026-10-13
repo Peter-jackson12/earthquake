@@ -5,6 +5,8 @@ or holdout labels. Rates and class metrics are recalculated from integer counts.
 """
 from __future__ import annotations
 import json
+import hashlib
+from datetime import datetime
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -30,9 +32,52 @@ def error_stats(record: dict) -> dict:
             'rate_3_to_2':float(cm[2,1]/severe) if severe else None}
 
 
+def validate_personal_final(bundle):
+    final=bundle.get('holdout_result')
+    selection=bundle.get('personal_selection')
+    if not isinstance(final,dict) or not isinstance(selection,dict):
+        raise ValueError('Verified personal result and frozen selection required')
+    if (final.get('scope')!='personal_final_not_team' or final.get('status')!='COMPLETE'
+            or final.get('evaluation_count')!=1 or final.get('post_holdout_tuning') is not False):
+        raise ValueError('Invalid personal evaluation scope')
+    if selection.get('status')!='FROZEN_BEFORE_HOLDOUT' or selection.get('evaluation_limit')!=1:
+        raise ValueError('Frozen selection required')
+    if final.get('selection_sha256')!=bundle.get('personal_selection_sha256'):
+        raise ValueError('Final result/selection digest mismatch')
+    if (final.get('selected_experiment')!=selection['selected']['experiment']
+            or final.get('mode')!=selection['selected']['mode']):
+        raise ValueError('Final model differs from frozen choice')
+    if final.get('holdout_rows')!=bundle['holdout_rows'] or final.get('development_rows')!=bundle['development_rows']:
+        raise ValueError('Incorrect final population')
+    times=[datetime.fromisoformat(final[x]) for x in
+           ['frozen_at_utc','model_fitted_at_utc','holdout_opened_at_utc','completed_at_utc']]
+    if times!=sorted(times) or final['frozen_at_utc']!=selection['frozen_at_utc']:
+        raise ValueError('Selection must precede final fit and holdout opening')
+    cm=np.asarray(final['metrics']['confusion_matrix'])
+    if cm.shape!=(3,3) or not np.isfinite(cm).all() or (cm<0).any() or (cm!=np.floor(cm)).any():
+        raise ValueError('Bad final confusion counts')
+    if cm.sum()!=bundle['holdout_rows']:
+        raise ValueError('Final confusion population mismatch')
+    stats=error_stats({'matrix':cm})
+    if not np.isclose(stats['oof_macro_f1'],final['metrics']['macro_f1'],rtol=0,atol=1e-12):
+        raise ValueError('Final Macro F1 mismatch')
+    if not np.isclose(stats['accuracy'],final['metrics']['accuracy'],rtol=0,atol=1e-12):
+        raise ValueError('Final Accuracy mismatch')
+    for c in range(3):
+        row=final['metrics']['per_class'][str(c+1)]
+        for key,values in [('precision',stats['precision']),('recall',stats['recall']),('f1-score',stats['f1']),('support',stats['support'])]:
+            if not np.isclose(row[key],values[c],rtol=0,atol=1e-12):
+                raise ValueError('Final class metric mismatch')
+
+
 def validate_bundle(bundle: dict) -> dict:
-    if bundle.get('schema_version') != 1 or bundle.get('holdout_result') is not None:
-        raise ValueError('Expected aggregate schema 1; final holdout result must remain absent.')
+    version = bundle.get('schema_version')
+    if version not in (1, 2):
+        raise ValueError('Unknown aggregate schema')
+    if version == 1 and bundle.get('holdout_result') is not None:
+        raise ValueError('Legacy snapshot cannot contain final results')
+    if version == 2:
+        validate_personal_final(bundle)
     n=bundle['development_rows']; support=np.asarray(bundle['class_support'])
     if n!=208480 or support.tolist()!=[20099,118607,69774] or support.sum()!=n:
         raise ValueError('Development population differs from the frozen contract.')
@@ -87,6 +132,14 @@ def load_bundle(directory: Path = REPORTS) -> dict:
         with (directory/name).open(encoding='utf-8') as f:
             return json.load(f)
     bundle=read('dashboard_context.json')
+    if bundle.get('schema_version')==2:
+        for filename,key in [('personal_selection.json','personal_selection_sha256'),
+                             ('personal_final_holdout.json','personal_final_sha256')]:
+            with (directory/filename).open('rb') as handle:
+                data=handle.read()
+            if hashlib.sha256(data).hexdigest()!=bundle.get(key):
+                raise ValueError('Public final provenance checksum mismatch: '+filename)
+            bundle['personal_selection' if filename=='personal_selection.json' else 'holdout_result']=json.loads(data)
     bundle['models']=read('dashboard_models.json')
     packed=read('dashboard_regions.json')
     bundle['regions']=[]

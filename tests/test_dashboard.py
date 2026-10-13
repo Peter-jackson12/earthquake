@@ -18,7 +18,10 @@ class AggregateTests(unittest.TestCase):
         table=model_table(self.bundle)
         self.assertEqual(len(table),len(self.bundle['models']))
         self.assertTrue(table.cv_macro_f1.between(0,1).all())
-        self.assertIsNone(self.bundle['holdout_result'])
+        if self.bundle['schema_version']==1:
+            self.assertIsNone(self.bundle['holdout_result'])
+        else:
+            self.assertEqual(self.bundle['holdout_result']['scope'],'personal_final_not_team')
     def test_cv_and_pooled_metrics_are_distinct(self):
         lr=next(x for x in self.bundle['models'] if x['experiment']=='baseline_v1' and x['model']=='lr')
         self.assertNotEqual(lr['cv_mean'],error_stats(lr)['oof_macro_f1'])
@@ -55,10 +58,37 @@ class AggregateTests(unittest.TestCase):
         def traced_csv(path,*args,**kwargs):
             opened.append(Path(path).name);return original_csv(path,*args,**kwargs)
         with patch.object(Path,'open',traced), patch('dashboard_data.pd.read_csv',traced_csv): load_bundle()
-        self.assertEqual(set(opened),{'dashboard_context.json','dashboard_models.json','dashboard_regions.json','eda_summary.csv'})
+        expected={'dashboard_context.json','dashboard_models.json','dashboard_regions.json','eda_summary.csv'}
+        if self.bundle['schema_version']==2:expected|={'personal_selection.json','personal_final_holdout.json'}
+        self.assertEqual(set(opened),expected)
 
     def test_final_results_cannot_silently_appear(self):
         b=copy.deepcopy(self.bundle);b['holdout_result']={'f1':.7}
+        with self.assertRaises(ValueError):validate_bundle(b)
+
+class PersonalFinalAggregateTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls): cls.bundle=load_bundle()
+    def test_actual_final_metrics_and_scope(self):
+        f=self.bundle['holdout_result']
+        self.assertEqual(f['scope'],'personal_final_not_team')
+        self.assertEqual(f['holdout_rows'],52121)
+        self.assertAlmostEqual(f['metrics']['macro_f1'],0.6867713036658166,places=12)
+    def test_final_count_metric_and_scope_corruption_rejected(self):
+        for key,value in [('scope','team_final'),('evaluation_count',2),('post_holdout_tuning',True)]:
+            with self.subTest(key=key):
+                b=copy.deepcopy(self.bundle);b['holdout_result'][key]=value
+                with self.assertRaises(ValueError):validate_bundle(b)
+        b=copy.deepcopy(self.bundle);b['holdout_result']['metrics']['macro_f1']+=.01
+        with self.assertRaises(ValueError):validate_bundle(b)
+    def test_post_holdout_selection_rejected(self):
+        b=copy.deepcopy(self.bundle)
+        b['holdout_result']['frozen_at_utc']='2026-10-14T00:00:00+00:00'
+        with self.assertRaises(ValueError):validate_bundle(b)
+    def test_selected_model_and_hash_mismatch_rejected(self):
+        b=copy.deepcopy(self.bundle);b['holdout_result']['mode']='context_smote'
+        with self.assertRaises(ValueError):validate_bundle(b)
+        b=copy.deepcopy(self.bundle);b['personal_selection_sha256']='bad'
         with self.assertRaises(ValueError):validate_bundle(b)
 
 @unittest.skipUnless(importlib.util.find_spec('streamlit'),'Install requirements-dashboard.txt for UI tests.')
@@ -70,7 +100,7 @@ class AppTests(unittest.TestCase):
         return at
     def test_all_views_render(self):
         at=self.app()
-        for view in ['실험 비교','개발 데이터 EDA','오류 분석','검증·진행 상태']:
+        for view in ['실험 비교','개발 데이터 EDA','오류 분석','개인 최종 평가','검증·진행 상태']:
             at.sidebar.radio[0].set_value(view).run()
             self.assertEqual(len(at.exception),0,view)
     def test_empty_model_filter(self):
@@ -95,9 +125,15 @@ class AppTests(unittest.TestCase):
         self.assertEqual(len(at.exception),0)
         self.assertEqual(len(at.dataframe[-1].value),31)
         self.assertEqual(at.metric[0].value,'1,862건')
-    def test_holdout_pending(self):
+    def test_final_metrics_are_actual_and_personal(self):
+        at=self.app();at.sidebar.radio[0].set_value('개인 최종 평가').run()
+        self.assertEqual(len(at.exception),0)
+        self.assertEqual(at.metric[0].value,'0.686771')
+        self.assertEqual(at.metric[2].value,'52,121')
+    def test_holdout_status_is_explicit(self):
         at=self.app();at.sidebar.radio[0].set_value('검증·진행 상태').run()
-        self.assertEqual(at.metric[0].value,'미실행')
+        expected='완료' if load_bundle().get('holdout_result') else '미실행'
+        self.assertEqual(at.metric[0].value,expected)
         self.assertEqual(len(at.exception),0)
 
 if __name__=='__main__': unittest.main()
