@@ -1,0 +1,267 @@
+{
+ "study_id": "T11_geo_te_group_inner_v1",
+ "branch": "peter-exp/geo-te-group-inner-v1",
+ "base_commit": "7956901",
+ "single_factor": "splitter used to produce the inner-OOF encodings of TRAINING rows mimics the outer split (StratifiedGroupKFold with groups = outer scheme group) instead of T10's random StratifiedKFold; everything else identical to T10",
+ "geo_columns": [
+  "geo_level_1_id",
+  "geo_level_2_id",
+  "geo_level_3_id"
+ ],
+ "text_categorical_columns": [
+  "land_surface_condition",
+  "foundation_type",
+  "roof_type",
+  "ground_floor_type",
+  "other_floor_type",
+  "position",
+  "plan_configuration",
+  "legal_ownership_status"
+ ],
+ "te": {
+  "feature_names": [
+   "te1_geo1",
+   "te3_geo1",
+   "cnt_geo1",
+   "te1_geo2",
+   "te3_geo2",
+   "cnt_geo2",
+   "te1_geo3",
+   "te3_geo3",
+   "cnt_geo3"
+  ],
+  "smoothing_m": 20.0,
+  "formula": "te_L = (n_L * rate_L + m * parent_L) / (n_L + m); parent_geo1 = training global class rate; parent_geo2 = smoothed geo1 value; parent_geo3 = smoothed geo2 value; cnt_L = log1p(n_L)",
+  "keys": "composite: geo1, (geo1,geo2), (geo1,geo2,geo3)",
+  "unseen": "n=0 -> te equals the parent value, cnt = 0",
+  "classes_encoded": [
+   1,
+   3
+  ],
+  "inner_oof": {
+   "splitter": "StratifiedGroupKFold",
+   "n_splits": 5,
+   "shuffle": true,
+   "random_state": 42,
+   "groups": {
+    "geo2": "composite (geo1, geo2) = outer geo2 Group-CV group",
+    "geo1": "geo1 = outer geo1 Group-CV group"
+   },
+   "on": "outer training-fold labels only; statistics, global prior and counts from the inner-training part only; stop (no n_splits change) if five non-empty group-disjoint inner folds cannot be formed"
+  },
+  "validation_encoding": "statistics from the full outer training fold (identical to T10)",
+  "raw_geo_ids_in_matrix": false,
+  "dtype": "float32 (computed in float64)"
+ },
+ "arms": {
+  "LR_TE_G": "T10 LR_TE with GroupInnerTargetEncoder (group_level = scheme)",
+  "LGBM_TE_G": "T10 LGBM_TE with GroupInnerTargetEncoder (group_level = scheme)"
+ },
+ "lr_params": {
+  "solver": "lbfgs",
+  "C": 1.0,
+  "max_iter": 1500,
+  "tol": 0.0001,
+  "random_state": 42
+ },
+ "lr_threadpool_limit": 1,
+ "lgbm_params": {
+  "objective": "multiclass",
+  "num_class": 3,
+  "n_estimators": 300,
+  "learning_rate": 0.05,
+  "num_leaves": 31,
+  "max_depth": -1,
+  "min_child_samples": 20,
+  "min_child_weight": 0.001,
+  "min_split_gain": 0.0,
+  "subsample": 1.0,
+  "subsample_freq": 0,
+  "colsample_bytree": 1.0,
+  "reg_alpha": 0.0,
+  "reg_lambda": 0.0,
+  "max_bin": 255,
+  "boosting_type": "gbdt",
+  "device_type": "cpu",
+  "deterministic": true,
+  "force_col_wise": true,
+  "zero_as_missing": false,
+  "random_state": 42,
+  "n_jobs": 2,
+  "verbosity": 1
+ },
+ "lgbm_threadpool_limit": 2,
+ "outer_parallel_jobs": 1,
+ "early_stopping": false,
+ "class_weight": null,
+ "sampling": null,
+ "threshold_or_decision_rule_change": false,
+ "tuning": false,
+ "decision_rule": "argmax of predicted probabilities, labels 1/2/3",
+ "schemes": [
+  "stratified",
+  "geo2",
+  "geo1"
+ ],
+ "fit_schemes": [
+  "geo2",
+  "geo1"
+ ],
+ "group_level_of_scheme": {
+  "geo2": "geo2",
+  "geo1": "geo1"
+ },
+ "stratified_policy": "not refit: its inner split (random StratifiedKFold) equals T10 by construction, so the T10 stratified OOF/metrics of LR_TE and LGBM_TE are reused and labelled as reused",
+ "n_folds": 5,
+ "study_fits": {
+  "LR_TE_G": [
+   "geo2",
+   "geo1"
+  ],
+  "LGBM_TE_G": [
+   "geo2",
+   "geo1"
+  ]
+ },
+ "max_new_study_fits": 20,
+ "automatic_retries": 0,
+ "stop_on_lr_nonconvergence": true,
+ "environment": {
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "scipy": "1.17.0",
+  "scikit-learn": "1.8.0",
+  "lightgbm": "4.6.0",
+  "joblib": "1.5.3",
+  "threadpoolctl": "3.6.0"
+ },
+ "manifest_sha256": {
+  "stratified": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721",
+  "geo2": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64",
+  "geo1": "1b4616ff7d5e052ac76707e58de48e3d0b23fb7a49e350c14d6704cc1ee488f5"
+ },
+ "baselines": {
+  "LR_C": {
+   "oof_sha256": {
+    "stratified": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc",
+    "geo2": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4",
+    "geo1": "453608352590cf27ddb1460926b7578d50832baa9127431422d0dd69b8f42951"
+   },
+   "refit_in_this_study": false
+  },
+  "LGBM_O": {
+   "oof_sha256": {
+    "stratified": "0bc63eb5122afb479c41826918a9fbb43a3475351a934d847833656eec6930cf",
+    "geo2": "ba282656c482264c045865de32db32d56a0b7c6c872670972c480a90abaa211c",
+    "geo1": "f4f3f9c9b966394c8d1ef0d7e6b1b5fd1367390b832bdd7f49ea8b2340b3d9f1"
+   },
+   "anchors": {
+    "stratified": "T4 LGBM_C_v1 (reports/model_families_v1/verification.json oof_sha256)",
+    "geo2": "T8 run/geo2/O/metrics.json oof_sha256 (audited PASS)",
+    "geo1": "T8 run/geo1/O/metrics.json oof_sha256 (audited PASS)"
+   },
+   "refit_in_this_study": false
+  }
+ },
+ "t10": {
+  "design_sha256": "415ddd1782b7f77f56af3baae9d04ba43423dbe8f02aea4555b6a54c13b2d360",
+  "code_commit": "2827c0332a728887e9b6fd04cea904bf078dcc4b",
+  "public_json": "reports/geo_hier_te_20261014.json",
+  "arm_oof_sha256": {
+   "LR_TE": {
+    "stratified": "bb0b6910a4403e257cc65d5f0554534b253e158e5426a68d1692d8d6e959743b",
+    "geo2": "874541edda73e951cf0a309780a891cb5ec99680c9b6cabf8eb8c218a071bfcb",
+    "geo1": "945940053df90b6cd79e8e0d2f3082d705e93952374f1f8c5bff5278157e0304"
+   },
+   "LGBM_TE": {
+    "stratified": "3c0d2cd8b3d40acc42817fe029c70335f4f5233562cfd857836d6275bd0eb859",
+    "geo2": "9d9e874984330e75264477099a5bd4bf4b3ba3f754c1cbbcba29d0762afe9a95",
+    "geo1": "d2de7510e79f41d897066cd5e65bd981b51918cd919e7f85764b73f6a73741ab"
+   }
+  },
+  "refit_in_this_study": false,
+  "fold_mean_tolerance_vs_public_json": 1e-12
+ },
+ "lr_c_reference": {
+  "stratified_mean": 0.688687,
+  "geo2_mean": 0.565146,
+  "geo2_pooled_grade3_recall": 0.5211,
+  "tolerance_mean": 5e-07,
+  "tolerance_recall": 5e-05
+ },
+ "control_check": {
+  "kind": "encoder checks on the real development folds (encoding only; no classifier fit) + synthetic tiny cases; counted_as_study_fit false",
+  "checks": [
+   "a_inner_groups_disjoint_and_five_nonempty_folds",
+   "b_training_rows_unseen_at_outer_group_level_100pct",
+   "c_validation_encodings_byte_identical_to_T10",
+   "d_self_label_and_validation_label_independence",
+   "e_fresh_process_load_of_saved_encoder"
+  ],
+  "counted_as_study_fit": false,
+  "must_pass_before_prepare": true
+ },
+ "checkpoint": {
+  "model_reload_probability_atol_lgbm": 1e-12,
+  "lr_reload": "exact",
+  "csv_float_format": "%.17g",
+  "csv_read": "float_precision='round_trip' exact",
+  "backup_dir": "backup",
+  "resume_skips_completed": true
+ },
+ "labels": [
+  1,
+  2,
+  3
+ ],
+ "primary_metric": "unweighted mean of five fold Macro F1 (labels 1,2,3)",
+ "std_ddof": 1,
+ "error_rate_denominator": "actual_grade3_support",
+ "profiles": {
+  "age995_group": "raw age == 995",
+  "geo1_regions": [
+   26,
+   20,
+   13
+  ]
+ },
+ "rules": {
+  "distribution_repair": {
+   "per_family": {
+    "LR": "LR_TE_G vs LR_C",
+    "LGBM": "LGBM_TE_G vs LGBM_O"
+   },
+   "schemes": [
+    "geo2",
+    "geo1"
+   ],
+   "abs_accuracy_diff_max": 0.02,
+   "pooled_prediction_agreement_min": 0.8,
+   "label": "distribution repair (descriptive gate)"
+  },
+  "generalization_candidate": {
+   "requires": "distribution_repair",
+   "geo2_mean_delta_min": 0.01,
+   "geo2_fold_wins_min": 4,
+   "geo2_pooled_grade3_recall_delta_min": -0.01,
+   "stratified_mean_delta_min": -0.01,
+   "stratified_source": "reused T10 values (LGBM_TE 0.6882 vs O 0.6698; LR_TE 0.6672 vs LR-C 0.6887)",
+   "fold_win": "fold Macro F1 strictly greater than the family's own baseline on the same fold"
+  },
+  "baseline_challenger": {
+   "vs": "LR_C",
+   "stratified_mean_gt": 0.688687,
+   "stratified_fold_wins_vs_LR_C_min": 4,
+   "geo2_mean_ge": 0.565146,
+   "geo2_fold_wins_vs_LR_C_min": 4,
+   "geo2_pooled_grade3_recall_ge": 0.5211,
+   "note": "stratified uses reused T10 values, so neither family can pass the stratified part (stated in advance); reported anyway",
+   "label": "baseline challenger candidate (needs separate pre-registered confirmation; no holdout, no final-model change)"
+  },
+  "geo1_scheme": "enters distribution repair; otherwise descriptive",
+  "claims": "same folds as T10 and baselines -> optimistic if selecting; no significance claims, no causal claims"
+ },
+ "holdout_access": false,
+ "automatic_model_replacement": false
+}

@@ -44,3 +44,9 @@ main 통합, 팀 최종 선정과 평가 정책, 팀원별 전체 과정 수행,
 - 실험 ID `T10_geo_hier_te_v1`, 브랜치 `peter-exp/geo-hier-te-v1`. [사전 등록 계획](T10_GEO_HIER_TE_PLAN.md).
 - 단일 요인: 지역 3열의 one-hot 블록을 학습 Fold 안에서만 만든 계층적 TE 9개 특성(te1/te3/cnt × geo1/2/3, m=20, 내부 5-Fold OOF)으로 교체. LR_TE(vs LR-C)와 LGBM_TE(vs one-hot LGBM O) × stratified/geo2/geo1 × 5 Fold = 신규 fit 30회 예정. 기준선 재학습 없음, 재표집·튜닝 없음, 홀드아웃 미사용.
 - 상태: 30/30 학습 완료, 독립 감사 PASS. 사전 등록 규칙 4개 모두 미충족(LR-C 기준선 유지). Group CV는 학습·검증 TE 분포 차이로 예측이 쏠려 해석 제한. [결과 보고서](../reports/GEO_HIER_TE_20261014.md).
+
+## T11 그룹 인지 내부 Fold 지역 Target Encoding — 2026-10-14 (사전 등록 완료, 실행 중)
+
+- 실험 ID `T11_geo_te_group_inner_v1`, 브랜치 `peter-exp/geo-te-group-inner-v1`(기준 `7956901`). [사전 등록 계획](T11_GEO_TE_GROUP_INNER_PLAN.md).
+- 단일 요인: T10에서 학습 행을 인코딩하는 내부 OOF 분할기를 바깥 분할을 모사하는 `StratifiedGroupKFold`(geo2: (geo1,geo2) 그룹, geo1: geo1 그룹)로 교체. LR_TE_G/LGBM_TE_G × geo2/geo1 × 5 Fold = 신규 fit 20회 예정. stratified는 내부 분할이 T10과 같아 T10 OOF 재사용. 기준선 재학습 없음, 홀드아웃 미사용.
+- 상태: 계획·코드 단계. 학습 결과는 아직 없다.
