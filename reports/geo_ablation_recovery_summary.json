@@ -1,0 +1,365 @@
+{
+  "study_id": "T6_geo_ablation_v1",
+  "recovery_id": "T6_recovery_20261014",
+  "status": "BLOCKED_T6_PRIVATE_EVIDENCE_MISSING",
+  "complete_study": false,
+  "repository": "Peter-jackson12/earthquake",
+  "branch": "peter-exp/geo-ablation-v1",
+  "T5_base_commit": "acd5ecdeefeff619c2fae9639f1627638de59383",
+  "continuation_base_commit": "20e5011cf2cf942e90b7802a51e5ae8096515277",
+  "original_T6_training_commit": "87b8a1d5d0e7918794f75bbd7e9a5e8418295574",
+  "current_continuation_classifier_fits": 0,
+  "historical_T6_fits_independently_verified": null,
+  "historical_T6_attempts_independently_verified": null,
+  "historical_documented_prefix": {
+    "attempts": 43,
+    "completed": 42,
+    "interrupted": 1,
+    "unattempted": 2,
+    "source": "experiments/geo_ablation/EXECUTION_DEVIATION.md",
+    "reverified_in_this_continuation": false
+  },
+  "supplement_plan_not_execution_proof": {
+    "additional_attempts": 2,
+    "conditional_total_completed": 44,
+    "missing_fold": "stratified/R12/fold2",
+    "reverified_in_this_continuation": false
+  },
+  "features": {
+    "raw_input_columns_preserved": 38,
+    "age_policy": "C: fold-local non995 median replacement + age_is_995",
+    "geo_columns_kept": {
+      "C": [
+        1,
+        2,
+        3
+      ],
+      "R12": [
+        1,
+        2
+      ],
+      "R1": [
+        1
+      ],
+      "R0": []
+    }
+  },
+  "lr": {
+    "C": 1.0,
+    "solver": "lbfgs",
+    "max_iter": 1500,
+    "tol": 0.0001,
+    "random_state": 42,
+    "class_weight": null
+  },
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "sklearn": "1.8.0",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.6.0"
+  },
+  "data_sha256": {
+    "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+    "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+  },
+  "manifest_sha256": {
+    "stratified": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721",
+    "geo2": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64",
+    "geo1": "1b4616ff7d5e052ac76707e58de48e3d0b23fb7a49e350c14d6704cc1ee488f5"
+  },
+  "C_oof_sha256": {
+    "stratified": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc",
+    "geo2": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4",
+    "geo1": "453608352590cf27ddb1460926b7578d50832baa9127431422d0dd69b8f42951"
+  },
+  "continuation_source_sha256": {
+    "experiments/geo_ablation/recovery.py": "ddc773b1275e4660aca1f959bed8dcad13362c158ebc984446de511f868b3e22",
+    "tests/test_geo_ablation_recovery.py": "96404a8bf71d872183a673caf07944a58e1580e1d13576a481653c182b5432b5"
+  },
+  "baseline_evidence": {
+    "status": "PASS_C_BASELINE_REAUDIT_ONLY",
+    "unique_development_buildings": 208480,
+    "OOF_rows_checked": 625440,
+    "fold_metric_records_checked": 15,
+    "saved_C_models_reloaded": 10,
+    "full_validation_rows_repredicted": 416960,
+    "historical_stratified_C_model_binaries_unavailable": 5,
+    "new_classifier_fits": 0,
+    "source_and_evidence_unchanged": true
+  },
+  "local_tests": {
+    "discovered": 32,
+    "passed": 32,
+    "failed": 0,
+    "skipped": 0,
+    "synthetic_preprocessor_only_fits": 4,
+    "synthetic_classifier_fits": 0,
+    "full_repository_suite": "Not executed in the private-data local snapshot; remote data-free CI checked separately."
+  },
+  "privacy": {
+    "holdout_feature_or_label_members_opened_or_extracted": false,
+    "holdout_evaluated": false,
+    "raw_full_CSV_read": false,
+    "T4_modified_or_trained": false,
+    "original_T6_outputs_overwritten": false,
+    "deployment_changed": false
+  },
+  "T6_recovery": {
+    "status": "BLOCKED_T6_PRIVATE_EVIDENCE_MISSING",
+    "missing": [
+      "outputs/geo_ablation_v1/design.json",
+      "outputs/geo_ablation_v1/design_seal.json",
+      "outputs/geo_ablation_v1/audit_available/audit.json",
+      "outputs/geo_ablation_unattempted_v1/audit.json"
+    ],
+    "model_files_present": 0,
+    "t6_completed_fits_verified": null,
+    "t6_attempts_verified": null,
+    "complete_study": false,
+    "training_allowed": false,
+    "reason": "Do not treat missing artifacts as unattempted fits. Recover original and supplement evidence first."
+  },
+  "baseline_comparisons": {
+    "stratified": {
+      "cv_mean": 0.688687372978548,
+      "cv_std_ddof1": 0.0015080810709856124,
+      "pooled": {
+        "n": 208480,
+        "macro_f1": 0.6886949550758837,
+        "accuracy": 0.7418313507290867,
+        "precision": [
+          0.6705905055962949,
+          0.7457821310628355,
+          0.7515952521255997
+        ],
+        "recall": [
+          0.5186825215184835,
+          0.8396721947271241,
+          0.6397941926792214
+        ],
+        "f1": [
+          0.5849347734605134,
+          0.789947094143869,
+          0.6912029976232688
+        ],
+        "support": [
+          20099,
+          118607,
+          69774
+        ],
+        "confusion": [
+          [
+            10425,
+            9267,
+            407
+          ],
+          [
+            4669,
+            99591,
+            14347
+          ],
+          [
+            452,
+            24681,
+            44641
+          ]
+        ],
+        "normalized_confusion": [
+          [
+            0.5186825215184835,
+            0.4610677148116822,
+            0.02024976366983432
+          ],
+          [
+            0.039365298844081714,
+            0.8396721947271241,
+            0.12096250642879425
+          ],
+          [
+            0.006478057729240118,
+            0.3537277495915384,
+            0.6397941926792214
+          ]
+        ],
+        "error31": 452,
+        "error32": 24681,
+        "rate31": 0.006478057729240118,
+        "rate32": 0.3537277495915384
+      },
+      "fold_macro_f1": [
+        0.6887377328530965,
+        0.688483521652834,
+        0.6899250714596196,
+        0.6900071895229427,
+        0.6862833494042468
+      ]
+    },
+    "geo2": {
+      "cv_mean": 0.5651464270615694,
+      "cv_std_ddof1": 0.020001930726245665,
+      "pooled": {
+        "n": 208480,
+        "macro_f1": 0.5678489520070067,
+        "accuracy": 0.6612528779739064,
+        "precision": [
+          0.6019666086243982,
+          0.6701403732540945,
+          0.6489487023881769
+        ],
+        "recall": [
+          0.29240260709488036,
+          0.8062171709932803,
+          0.5210823515922837
+        ],
+        "f1": [
+          0.3936106088004822,
+          0.7319076303683917,
+          0.5780286168521462
+        ],
+        "support": [
+          20099,
+          118607,
+          69774
+        ],
+        "confusion": [
+          [
+            5877,
+            13838,
+            384
+          ],
+          [
+            3700,
+            95623,
+            19284
+          ],
+          [
+            186,
+            33230,
+            36358
+          ]
+        ],
+        "normalized_confusion": [
+          [
+            0.29240260709488036,
+            0.6884919647743669,
+            0.019105428130752774
+          ],
+          [
+            0.031195460638916758,
+            0.8062171709932803,
+            0.1625873683678029
+          ],
+          [
+            0.002665749419554562,
+            0.4762518989881618,
+            0.5210823515922837
+          ]
+        ],
+        "error31": 186,
+        "error32": 33230,
+        "rate31": 0.002665749419554562,
+        "rate32": 0.4762518989881618
+      },
+      "fold_macro_f1": [
+        0.598390733802678,
+        0.5593572536402227,
+        0.5467170329685441,
+        0.5670067795759871,
+        0.5542603353204146
+      ]
+    },
+    "geo1": {
+      "cv_mean": 0.3656501200841088,
+      "cv_std_ddof1": 0.04818746834121623,
+      "pooled": {
+        "n": 208480,
+        "macro_f1": 0.36283541311636597,
+        "accuracy": 0.5769953952417498,
+        "precision": [
+          0.6021595680863827,
+          0.5769893629315499,
+          0.3914590747330961
+        ],
+        "recall": [
+          0.2497139161152296,
+          0.9681806301483049,
+          0.006306073895720469
+        ],
+        "f1": [
+          0.35302806499261447,
+          0.7230659765511857,
+          0.012412197805297752
+        ],
+        "support": [
+          20099,
+          118607,
+          69774
+        ],
+        "confusion": [
+          [
+            5019,
+            15024,
+            56
+          ],
+          [
+            3146,
+            114833,
+            628
+          ],
+          [
+            170,
+            69164,
+            440
+          ]
+        ],
+        "normalized_confusion": [
+          [
+            0.2497139161152296,
+            0.7474998756157023,
+            0.002786208269068113
+          ],
+          [
+            0.02652457274865733,
+            0.9681806301483049,
+            0.005294797103037764
+          ],
+          [
+            0.002436437641528363,
+            0.9912574884627512,
+            0.006306073895720469
+          ]
+        ],
+        "error31": 170,
+        "error32": 69164,
+        "rate31": 0.002436437641528363,
+        "rate32": 0.9912574884627512
+      },
+      "fold_macro_f1": [
+        0.30570083346500876,
+        0.42652563677950545,
+        0.34669825677593,
+        0.4017438162270823,
+        0.3475820571730175
+      ]
+    }
+  },
+  "R12_R1_R0_results": null,
+  "recommendation": "Retain C only as the research baseline. No ablation ranking or model replacement without recovered T6 evidence.",
+  "result_reaudit_sha256": {
+    "C_stratified.json": "e215e1a6d0fea786c504823dce38c8b66e0dc07d17cae09c5bec08e85dfa7535",
+    "C_geo2.json": "c5de82ec2e5779466a19ed45eccd04873743802135e355e54139740acb29838f",
+    "C_geo1.json": "eb8702bdfe74aeadcac9602e630faa63f18328e1c32ccf71f10c5162b3a3575a"
+  },
+  "tests_log_sha256": "138667bee495ff1d6ccc04a9caa231c11d2fa6988eeff8bd4a8f3f5b785d53fb",
+  "limitations": [
+    "This is a recovery audit, not completed T6 research.",
+    "No recovered original T6 design, audit, OOF or models; historical fit counts remain unverified.",
+    "Do not infer unattempted folds from absent files or restart fit-all.",
+    "Library search/listing and current runtime did not yield T6 artifacts; this is not proof every external storage lacks them.",
+    "Original Stratified C model files unavailable; OOF/metadata verified, no classifier refit.",
+    "No holdout/external earthquake/causal leakage validation."
+  ]
+}
