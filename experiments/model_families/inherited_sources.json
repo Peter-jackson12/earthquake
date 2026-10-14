@@ -1,0 +1,18 @@
+{
+  "base_commit": "a4fc5c82a1907d8fc975f0971deaed8d26a4461f",
+  "verification": "GitHub blob SHA equals locally recovered source bytes; no successful clone.",
+  "sha256": {
+    "preprocess.py": "b88a5c4040f82378b6ac5db5b629a1657934f948eb508296ab35f263a1649c06",
+    "baseline.py": "ba08e5180414f5cfccf4e7a8ef8f7873834597f185811153d331773c517e3cce",
+    "scripts/audit_eda_oof.py": "b5987ace6f93290d5808efb91dcdf53d79a83416033b01ade4346eb936541435",
+    "experiments/age995/run.py": "f88da1f71e6ad62853f7f375ddd68965203505105f81d4ccbb845b998c68127c",
+    "configs/data_contract.json": "ab93a0d46a4a9b80984506db980ac6ec2a5566a74b07e66098a969d9d0d29e1f"
+  },
+  "git_blob_sha": {
+    "preprocess.py": "e131f70df9c017888f2af5727366c71fe64ea697",
+    "baseline.py": "b002728ab0227093ffd90ce553ab0efd4003774d",
+    "scripts/audit_eda_oof.py": "05e2e15211dcd6b0cc85d907ffa826627be5429e",
+    "experiments/age995/run.py": "6cd5db52344bc5bd89b70901795561f91cb029cc",
+    "configs/data_contract.json": "472ce59a4825d849b425d2d93c8830fcfc0ac46f"
+  }
+}
