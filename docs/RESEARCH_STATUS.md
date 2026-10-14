@@ -1,7 +1,7 @@
 # Earthquake 개인 연구 현황 (Research Status)
 
-- 기준 확인일: **2026-10-14 (KST)**, 저장소 `Peter-jackson12/earthquake`, 개인 실험 브랜치 `peter-exp/age995-outlier-treatment`
-- 이 문서 작성 직전 확인한 원격 HEAD: `86a854de22c8522b47987831a60b6500f6457e58`. **현재 HEAD의 값은 매번 다시 조회**한다.
+- 기준 확인일: **2026-10-14 (KST)**, 저장소 `Peter-jackson12/earthquake`, T4 전용 브랜치 `peter-exp/model-family-comparison-v1` (base: `peter-exp/age995-outlier-treatment`) 
+- T4 실행 코드 HEAD: `bc624f84ce2f1f188af16cb155dfe6965c94b88f`; base: `a4fc5c82a1907d8fc975f0971deaed8d26a4461f`. **현재 HEAD의 값은 매번 다시 조회**한다.
 - 목적: 세션·모델 간 연구 인계의 시작점. **결정 근거는 연결된 실제 코드·보고서·OOF/검증 산출물**이며 이 문서만으로 검증을 생략하지 않는다.
 - 팀 공용 `main`, 기존 개인 `peter`, 이 개인 실험 브랜치를 혼동하지 않는다. 이 문서는 팀 최종 선택이나 배포 승인 문서가 아니다.
 
@@ -23,8 +23,8 @@
 | T0 기존 개인 모델 | v1.0.1 + 무가중치 LR C=1, 개인 최종 평가/대시보드 | **과거 완료**, 이번 새 개발 연구의 독립 홀드아웃은 아님 | [개인 선택](PERSONAL_MODEL_SELECTION_20261013.md), [개인 최종 보고](../reports/PERSONAL_FINAL_REPORT_20261013.md) |
 | T1 `age=995` 전처리 | LR 고정 A/B/C, D/E1/E2/E3/F1/F2 | **9개 설정 CV 비교·감사 완료** | [A/B/C](../reports/AGE995_EXPERIMENT_20261013.md), [D/E/F](../reports/AGE995_FOLLOWUP_20261013.md) |
 | T2 오류 진단 | C와 E2 예측 비교, 비995·지역·구조·연령 오류 | **OOF 사후 진단·감사 완료** | [오류 진단](../reports/AGE995_DIAGNOSTICS_20261014.md), [연구 후보](../experiments/age995/RESEARCH_CANDIDATE.json) |
-| T3 특성 조합 실험 | C 기반 G1~G5(연령 구간, 지역×구조, 지역×연령, 구조×연령) | **사전 계획·실행기·합성/감사 테스트 코드 확인**. **실데이터 25 Fold 학습/성능 완료는 이 HEAD에서 확인되지 않음**. 다른 세션 진행 중. | [G 계획](../experiments/age995/interactions/PLAN.md), [설정](../experiments/age995/interactions/config.json), [코드](../experiments/age995/interactions/run.py) |
-| T4 모델 계열 비교 | LR 대비 XGBoost/LightGBM, A와 C 비교 | **별도 시작용 인계문만 작성. 실제 신규 모델 학습 미실행** | [모델 계열 연구 인계](HANDOFF_MODEL_FAMILY_COMPARISON_20261014.md) |
+| T3 특성 조합 실험 | C 기반 G1~G5(연령 구간, 지역×구조, 지역×연령, 구조×연령) | **별도 세션 결과 추가 커밋 `a4fc5c8` 확인**. T4 세션에서는 G1~G5 OOF를 재감사하거나 결과를 비교 후보로 사용하지 않음. | [G 계획](../experiments/age995/interactions/PLAN.md), [설정](../experiments/age995/interactions/config.json), [코드](../experiments/age995/interactions/run.py) |
+| T4 모델 계열 비교 | LR 대비 XGBoost/LightGBM, A와 C 비교 | **실데이터 20 fit·독립 OOF 감사·20개 모델 재추론 완료**. 기존 LR A/C 재사용. 이번 고정 OHE 설정은 LR을 넘지 못함. | [완료 보고](../reports/MODEL_FAMILY_COMPARISON_20261014.md), [실행·검증 요약](../reports/model_families_v1/execution_summary.json) |
 
 **경고:** T3는 다른 세션이 계속 작업할 수 있다. 위 상태는 작성 당시 원격 확인의 스냅샷이며 완료 판정이 아니다. 다음 세션은 **최신 HEAD, 새 보고서/커밋, 실제 OOF·테스트**를 읽어 상태를 업데이트한다. 동시 세션의 변경을 덮어쓰지 않는다.
 
@@ -37,6 +37,16 @@
 - C와 E2의 전체 OOF 예측 일치율 **99.6522%**. **C는 후속 LR 연구 기준이며 다른 모델 계열의 최적 전처리나 기존 최종/배포 모델로 확정된 것이 아님.**
 - C의 3→1 오류 452건 중 **447건**은 비995. 지역 코드 26/20/13에 **292건(64.60%)** 집중. 사후 개발 OOF 패턴이며 독립 재현이나 원인 확정이 아님.
 - 다른 세션 T3는 이러한 오류를 다루기 위해 **기존 LR + C의 특성 조합**을 탐색한다. T4는 별도 모델 계열을 탐색하며 **T3의 결과를 미리 가정하지 않는다.**
+
+## T4 검증된 결과와 인계
+
+- 신규 XGB A/C: CV Macro F1 **0.637946 / 0.638558**; LGBM A/C: **0.669830 / 0.669847**. LR A/C **0.683677 / 0.688687**는 기존 OOF 검증 후 재사용했다.
+- 4설정×5Fold=20회 실학습 완료. 6설정 OOF **1,250,880행**, 저장20모델의 검증 예측 **833,920행** 재추론 일치. 별도 산식 감사 및 sklearn 집계 재검증 PASS.
+- 전체 3→1은 줄었지만 3→2가 늘고 3등급 Recall은 낮아졌다. XGB-C는 지역13/20에서 실제3등급 Recall **0%**. 새 모델을 안전성 개선 또는 최종 모델로 채택하지 않는다.
+- XGB C−A의 CV 평균은 +0.000612지만 995 집단 F1은 하락했다. LGBM C−A 평균은 +0.000017에 불과하며 995 Recall3은 하락했다. **LR에서 선택한 C를 트리에 자동 채택하지 않는다.**
+- 원핫/수치 표준화 CSR 표현, 300 rounds 고정 설정에 한정한 결과다. 라이브러리 전체의 우열을 확정하지 않는다. Optuna·native categorical·추가 E2·G 조합·홀드아웃 재평가는 미실행.
+- 다음 후보는 **범주형 직접 처리(native categorical)의 별도 표현 비교 실험**이다. 기존 v1 결과는 유지하고 새 ID/사전 계획으로 분리한다. 아직 실행하지 않았다.
+- 원본·이전 코드/결과·LR C 연구 후보·앱·main/peter·기존 age995 브랜치를 변경하지 않았다. 이 문서의 갱신은 T4 전용 브랜치에만 반영한다.
 
 ## 병렬 작업 및 인계 규칙
 
