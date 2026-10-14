@@ -38,3 +38,9 @@ main 통합, 팀 최종 선정과 평가 정책, 팀원별 전체 과정 수행,
 - 실험 ID `T8_lgbm_native_cat_v1`, 브랜치 `peter-exp/lgbm-native-cat-v1`. [사전 등록 계획](T8_LGBM_NATIVE_CAT_PLAN.md).
 - T4 `LGBM_C_v1`(one-hot, O)과 같은 파라미터·C 연령 정책에서 범주형 11열만 학습 Fold 어휘의 native categorical(N)로 바꾼 단일 요인 비교. stratified/geo2/geo1 × 5 Fold, 신규 fit N 15 + O 10 = 25회. O stratified는 T4 고정 OOF 재사용, 홀드아웃 미사용.
 - 상태: 25/25 학습 완료, 독립 감사 PASS. 주 판정(N>O 표현 효과) 충족, 보조 판정(기준선 도전) 미충족(geo2 하락). LR-C 기준선 유지. [결과 보고서](../reports/LGBM_NATIVE_CAT_20261014.md).
+
+## T9 LightGBM 부분 native categorical — 2026-10-14 (사전 등록, 진행 중)
+
+- 실험 ID `T9_lgbm_partial_native_v1`, 브랜치 `peter-exp/lgbm-partial-native-v1`(기준 `b54b129`). [사전 등록 계획](T9_LGBM_PARTIAL_NATIVE_PLAN.md).
+- T8 O와 같은 조건에서 geo 3열은 one-hot을 유지하고 텍스트 범주 8열만 학습 Fold 어휘 native categorical로 바꾼 P(CSR 유지). stratified/geo2/geo1 × 5 Fold = 신규 fit 15회. O·N·LR-C는 기존 OOF 재사용, 홀드아웃 미사용.
+- 상태: 계획·코드 커밋 후 소표본 확인 → 봉인 → 학습 예정. 결과·감사 전에는 완료로 표시하지 않는다.
