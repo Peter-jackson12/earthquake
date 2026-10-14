@@ -1,0 +1,118 @@
+{
+  "status": "PASS",
+  "method": "independent bincount/direct P/R/F1, independent age/combination rules",
+  "predictions_checked": 1250880,
+  "new_models": 5,
+  "new_fit_folds": 25,
+  "historical_C_refit": false,
+  "matrices_checked": 108,
+  "profile_rows": 264,
+  "private_models_repredicted": 25,
+  "holdout_scored": false,
+  "candidate_for_review": "C",
+  "existing_candidate_replaced": false,
+  "sources": [
+    {
+      "variant": "C",
+      "code_commit": "historical_source_sha_bound",
+      "oof_sha256": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc",
+      "metadata_sha256": "b4bbdbd9ea7b6471d9ce4c93454856d6b090461d2495ffa508644eb33f2e0a97"
+    },
+    {
+      "variant": "G1",
+      "code_commit": "109abd61e3ebf732e6f3be12b2544f7008f57c6c",
+      "oof_sha256": "788e324011691746f52ad74cb25cbea0a8e7f66560e71f0fb6c6455ca9e2dd59",
+      "metadata_sha256": "0f0d202535d1dbbef979a0b2d878e3eab374adbd5fae5d10bf95af725d2293f2"
+    },
+    {
+      "variant": "G2",
+      "code_commit": "109abd61e3ebf732e6f3be12b2544f7008f57c6c",
+      "oof_sha256": "49a9e0badd8efdac04d7a9c5bd65edccf8cd3e4952ad9050ffc4d1e612a7fb9e",
+      "metadata_sha256": "fcddeddc38248d8c7702d9bcf080f6ba4e4dc846a59f336efc8c2df5e9555f2e"
+    },
+    {
+      "variant": "G3",
+      "code_commit": "109abd61e3ebf732e6f3be12b2544f7008f57c6c",
+      "oof_sha256": "f802a85dd4f994f11c77d0d2ff0abc32e3516880d977faa41ac0359c06f7e784",
+      "metadata_sha256": "da2e0a814c031e33455af63225dcdb6657fb2ddfcd7c22d11cf5850a386f3716"
+    },
+    {
+      "variant": "G4",
+      "code_commit": "109abd61e3ebf732e6f3be12b2544f7008f57c6c",
+      "oof_sha256": "c7598288b6857fad11e37890369f676b96355a889905c3fa7f13a5e2617e6587",
+      "metadata_sha256": "4c6098cf4e2090218e0800151952ef1e2c370c9f6ebc49377585228d0e0eeb12"
+    },
+    {
+      "variant": "G5",
+      "code_commit": "109abd61e3ebf732e6f3be12b2544f7008f57c6c",
+      "oof_sha256": "a529c598df1baaa317dce8b07681a765e87d9e035b49d4b2b126bf3c424fb77e",
+      "metadata_sha256": "33c03e87d719910ace79ff0f476da83dad3b96c03f2b377b335a9d62b024d16d"
+    }
+  ],
+  "code_sha256": "52f8aac3699ef39476057efc4ea19f77257d08cdb1c1587290cc63031325cf03",
+  "data_contract": {
+    "preprocessing_version": "1.0.1",
+    "source_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+    "expected_rows": 208480,
+    "n_folds": 5,
+    "seed": 42,
+    "files": {
+      "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+      "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+    }
+  },
+  "limitations": [
+    "No independent re-training; development CV is reused and exploratory.",
+    "Train F1 is logged, not independently recalculated from persisted training predictions.",
+    "Optional model reload checks do not independently prove the training procedure."
+  ],
+  "ci_code": {
+    "commit": "86a854de22c8522b47987831a60b6500f6457e58",
+    "synthetic_run": 38497133009,
+    "synthetic_job": 115635361462,
+    "dashboard_run": 38497133038,
+    "both_success": true,
+    "discovered": 235,
+    "passed": 206,
+    "skipped": 29,
+    "failed": 0,
+    "skip_reasons": "19 private preprocessing, 3 private development integration, 7 UI (covered separately)",
+    "checked_log_tail": "Ran 235 tests in 42.753s; OK (skipped=29)"
+  },
+  "local_tests": {
+    "new": 35,
+    "total_unique_targeted": 140,
+    "passed": 140,
+    "failed": 0,
+    "skipped": 0,
+    "real_record_mutations_rejected": 7
+  },
+  "cv_best": "G2",
+  "train_commit": "109abd61e3ebf732e6f3be12b2544f7008f57c6c",
+  "audit_commit": "86a854de22c8522b47987831a60b6500f6457e58",
+  "new_fit_seconds": 510.7488817399996,
+  "publication": "Git contains bounded model/fold/pooled groups/matrices/selected diagnostic regions/error turnover and receipt. Complete profiles/coverage/fold groups/matrices in evidence ZIP and reproducible audit output. No raw OOF or models in Git.",
+  "full_audit_output_sha256": {
+    "profiles.csv": "b38cb6726362264190d4a36ea76a4f70479057620bd219fd7c0d7e63b3978e99",
+    "coverage.csv": "ac961c531491d9f33f94960223101856f592e72b3027480392f7e162ed26ffc3",
+    "folds.csv": "0cd584cb3a80c7e4fdf7fee1f74316ef29a9ab28308f3f3121011cb9dbe9fa76",
+    "paired.csv": "545313d80312ac583d8b040048c677fb919a57cac43f8cf05d030f8d4e1febf6",
+    "models.csv": "34b473b52fad285289d9f1c1ab75cac5f60dd16d0c5b491572c20d2db02afaff",
+    "matrices.json": "ad9bde5b9cb5e2f3f2a9cb3dfe8ee03e4e3b87d93f6e5018c99da1a98391a1fd",
+    "groups.csv": "10b4c50ddee78901ee3e9a3d8ac1b7980cb0b470c18cbcab78a36839d719972f"
+  },
+  "public_files_sha256": {
+    "error_turnover.csv": "92ad02022995308f88ac56bfbe4d4cd160a910fe90646c2b22d6a788d978c0dd",
+    "diagnostic_regions.csv": "cc6dd526a7cc889565cf089f013c0ee21acc759c3fd6f32dd56b71d436acd020",
+    "pooled_matrices.jsonl": "77db7bb5eff8ca75b1fd16e8bdf2f8d8e4899fe605d73aed6109ff4589c8ea97",
+    "folds.csv": "0cd584cb3a80c7e4fdf7fee1f74316ef29a9ab28308f3f3121011cb9dbe9fa76",
+    "pooled_groups.csv": "14cab135fe762973b897c647b9502375ffc2bb1895f84b9cfe95811d7a876c0a",
+    "models.csv": "34b473b52fad285289d9f1c1ab75cac5f60dd16d0c5b491572c20d2db02afaff"
+  },
+  "preservation": {
+    "protected_files": 83,
+    "mismatch": [],
+    "holdout_feature_or_label_files_present": false,
+    "C_oof_sha256": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc"
+  }
+}
