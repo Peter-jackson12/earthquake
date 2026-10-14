@@ -1,0 +1,329 @@
+{
+  "study_id": "T6_geo_ablation_v1",
+  "recovery_id": "T6_local_retrieval_20261014",
+  "recorded_at_utc": "2026-10-14T05:38:40.908354+00:00",
+  "status": "BLOCKED_T6_PRIVATE_EVIDENCE_MISSING",
+  "complete_study": false,
+  "repository": "Peter-jackson12/earthquake",
+  "branch": "peter-exp/geo-ablation-v1",
+  "continuation_start_head": "bb0e652947ebf6ab8f8420f819a9f69d81b18265",
+  "original_training_commit": "87b8a1d5d0e7918794f75bbd7e9a5e8418295574",
+  "supplement_code_commit": "20e5011cf2cf942e90b7802a51e5ae8096515277",
+  "remote_heads_at_start": {
+    "main": "f58e1200ccd7132c5f8da788217bda70b9b70dd2",
+    "peter": "29ccab8af428fd074e7642a1524db6d5974b3f4e",
+    "peter-exp/age995-outlier-treatment": "a4fc5c82a1907d8fc975f0971deaed8d26a4461f",
+    "peter-exp/geo-group-cv-v1": "acd5ecdeefeff619c2fae9639f1627638de59383",
+    "peter-exp/model-family-comparison-v1": "a5d9ed563fc2c1cfdfd7e9db527a119d976b4231",
+    "peter-exp/geo-ablation-v1": "bb0e652947ebf6ab8f8420f819a9f69d81b18265"
+  },
+  "existing_local_checkout": {
+    "head": "4377767d51e195045e824d681610495c024ece7d",
+    "branch": "peter-exp/geo-ablation-v1",
+    "working_tree_clean_at_inspection": true,
+    "changed_by_this_continuation": false
+  },
+  "historical_documented_prefix": {
+    "attempted": 43,
+    "completed": 42,
+    "interrupted": 1,
+    "unattempted": 2,
+    "source": "experiments/geo_ablation/EXECUTION_DEVIATION.md",
+    "independently_verified_in_this_continuation": false
+  },
+  "supplement_execution": {
+    "verified": false,
+    "attempted": null,
+    "completed": null,
+    "planned_folds": [
+      3,
+      4
+    ],
+    "never_retry_fold": 2,
+    "conditional_success_total": {
+      "attempted": 45,
+      "completed": 44,
+      "interrupted": 1,
+      "unattempted": 0
+    }
+  },
+  "historical_attempts_verified": null,
+  "historical_completed_fits_verified": null,
+  "new_development_classifier_fits": 0,
+  "T6_models_reloaded": 0,
+  "T6_oof_rows_verified": 0,
+  "baseline_models_reloaded_in_this_continuation": 0,
+  "baseline_metrics_recalculated_in_this_continuation": false,
+  "training_allowed_from_absence": false,
+  "code_byte_checks": {
+    "preprocess.py": {
+      "sha256": "b88a5c4040f82378b6ac5db5b629a1657934f948eb508296ab35f263a1649c06",
+      "comparison_commit": "87b8a1d5d0e7918794f75bbd7e9a5e8418295574",
+      "matches_git_blob_bytes": true
+    },
+    "configs/data_contract.json": {
+      "sha256": "ab93a0d46a4a9b80984506db980ac6ec2a5566a74b07e66098a969d9d0d29e1f",
+      "comparison_commit": "87b8a1d5d0e7918794f75bbd7e9a5e8418295574",
+      "matches_git_blob_bytes": true
+    },
+    "experiments/age995/run.py": {
+      "sha256": "f88da1f71e6ad62853f7f375ddd68965203505105f81d4ccbb845b998c68127c",
+      "comparison_commit": "87b8a1d5d0e7918794f75bbd7e9a5e8418295574",
+      "matches_git_blob_bytes": true
+    },
+    "experiments/age995/interactions/run.py": {
+      "sha256": "ab4eda7c815f75ae4f7a1d938de0567a71991485d60ba02132e914871962640c",
+      "comparison_commit": "87b8a1d5d0e7918794f75bbd7e9a5e8418295574",
+      "matches_git_blob_bytes": true
+    },
+    "experiments/geo_group_cv/run.py": {
+      "sha256": "f1bc8ae55aeb874804c31f0d8ca4392ce33413431471858425b6656b7e3c80fc",
+      "comparison_commit": "87b8a1d5d0e7918794f75bbd7e9a5e8418295574",
+      "matches_git_blob_bytes": true
+    },
+    "experiments/geo_group_cv/audit.py": {
+      "sha256": "0a5f71e1a95b61438ece1b5686a2a9837c57a4080b160bb2179ea32f30576f2f",
+      "comparison_commit": "87b8a1d5d0e7918794f75bbd7e9a5e8418295574",
+      "matches_git_blob_bytes": true
+    },
+    "experiments/geo_ablation/run.py": {
+      "sha256": "1e1ae894960c34d8626a496e58637cb1f08b4bd7675dadc5d5f530814e8e4e3c",
+      "comparison_commit": "87b8a1d5d0e7918794f75bbd7e9a5e8418295574",
+      "matches_git_blob_bytes": true
+    },
+    "experiments/geo_ablation/audit.py": {
+      "sha256": "2c6090fab4c02ab0fc89a3b88ecfb921dbf45e6f388c7b17eb4a93e70e4c7b9e",
+      "comparison_commit": "87b8a1d5d0e7918794f75bbd7e9a5e8418295574",
+      "matches_git_blob_bytes": true
+    },
+    "experiments/geo_ablation/config.json": {
+      "sha256": "bca868c15fc41707bafd6347eec77ef525b579940391d05b3f980c931cf0d0bd",
+      "comparison_commit": "87b8a1d5d0e7918794f75bbd7e9a5e8418295574",
+      "matches_git_blob_bytes": true
+    },
+    "experiments/geo_ablation/audit_available.py": {
+      "sha256": "ebb3897811ad06614fea8fba4c06554dbe46be49d60a46c4debc4314ebbccb10",
+      "comparison_commit": "20e5011cf2cf942e90b7802a51e5ae8096515277",
+      "matches_git_blob_bytes": true
+    },
+    "experiments/geo_ablation/complete_unattempted.py": {
+      "sha256": "d809f16218de7132c6e51a69538194bcab978fecdc95e13098faaaafc2c04bc9",
+      "comparison_commit": "20e5011cf2cf942e90b7802a51e5ae8096515277",
+      "matches_git_blob_bytes": true
+    },
+    "experiments/geo_ablation/recovery.py": {
+      "sha256": "ddc773b1275e4660aca1f959bed8dcad13362c158ebc984446de511f868b3e22",
+      "comparison_commit": "bb0e652947ebf6ab8f8420f819a9f69d81b18265",
+      "matches_git_blob_bytes": true
+    }
+  },
+  "local_development_file_sha256_verified": {
+    "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+    "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+  },
+  "group_manifest_sha256_verified_in_this_continuation": false,
+  "original_design_seal_verified": false,
+  "supplement_design_seal_verified": false,
+  "tests": {
+    "total": 331,
+    "passed": 302,
+    "skipped": 29,
+    "failed": 0,
+    "errors": 0,
+    "private_data_in_checkout": false,
+    "log_sha256": "4ac01ed86e194aebdd7ac6fb9eff2b78e77b9efb6de9533817902d17018c81e1",
+    "note": "Existing suite, synthetic/private-data-free checkout. Not proof of historical T6 execution."
+  },
+  "search_scope": [
+    {
+      "source": "Referenced original ChatGPT conversation: 지역 변수 제거 연구",
+      "observation": "read_thread returned user turns and no attachments; browser showed recovery ZIP links, not original T6 result ZIP."
+    },
+    {
+      "source": "Other chat with the same title: 지역 변수 제거 연구",
+      "observation": "read_thread returned handoff text and no attachments/results."
+    },
+    {
+      "source": "Local agent chat: 재현 실험과 독립 검증",
+      "observation": "Separate T1-T4 reproduction and checkout transition evidence; no recovered T6 outputs."
+    },
+    {
+      "source": "Local filenames: C:/Projects, Documents, Downloads, OneDrive, PycharmProjects, .codex/attachments, .claude/projects, AppData/Local/Temp",
+      "observation": "No original/supplement T6 result artifact located in the searched scope. Filename search is not proof of universal absence."
+    },
+    {
+      "source": "G:/ mounted drive, targeted filename search",
+      "observation": "No earthquake/ablation/design_seal/execution_interruption/supplement_seal match returned. Not a server-side Drive inventory."
+    },
+    {
+      "source": "ChatGPT Library/Space browser search ablation",
+      "visible_results": [
+        "GEO_ABLATION_RECOVERY_20261014.md"
+      ]
+    },
+    {
+      "source": "ChatGPT Library/Space browser search T6",
+      "relevant_visible_results": [
+        "T6_RECOVERY_DELIVERY_20261014.json",
+        "earthquake_T6_recovery_code_evidence_20261014.zip"
+      ]
+    },
+    {
+      "source": "ChatGPT Library/Space browser search unattempted",
+      "visible_results": []
+    },
+    {
+      "source": "ChatGPT Library recent file list",
+      "observation": "C baseline recovery and T5 private/code ZIPs visible. Names alone do not verify contents or SHA."
+    }
+  ],
+  "download_access": {
+    "recovery_code_zip_download_verified": false,
+    "reason": "Download completion event timed out; no completed named ZIP located. Browser security policy blocks edge://downloads; no workaround attempted.",
+    "private_archive_sha256_verified": false
+  },
+  "missing_required_evidence": [
+    "outputs/geo_ablation_v1/design.json",
+    "outputs/geo_ablation_v1/design_seal.json",
+    "outputs/geo_ablation_v1/execution_interruption.json",
+    "outputs/geo_ablation_v1/<scheme>/<variant>/metadata.json, folds.json, OOF, fold_*.joblib",
+    "outputs/geo_ablation_v1/audit_available/audit.json and aggregate/hash evidence",
+    "outputs/geo_ablation_unattempted_v1/supplement_design.json, supplement_seal.json, progress.json, folds.json, partial_oof.csv.gz, fold_3.joblib, fold_4.joblib, audit.json",
+    "Original execution logs/attempt ledger establishing whether supplement was attempted"
+  ],
+  "comparisons": [
+    {
+      "scheme": "stratified",
+      "variant": "R12",
+      "status": "UNVERIFIED_PRIVATE_EVIDENCE_MISSING",
+      "cv_macro_f1_mean": null,
+      "cv_macro_f1_sd_ddof1": null,
+      "pooled_macro_f1": null,
+      "grade3_recall": null,
+      "error31": null,
+      "error32": null,
+      "delta_vs_C": null,
+      "age995_difference": null,
+      "regional_difference": null
+    },
+    {
+      "scheme": "stratified",
+      "variant": "R1",
+      "status": "UNVERIFIED_PRIVATE_EVIDENCE_MISSING",
+      "cv_macro_f1_mean": null,
+      "cv_macro_f1_sd_ddof1": null,
+      "pooled_macro_f1": null,
+      "grade3_recall": null,
+      "error31": null,
+      "error32": null,
+      "delta_vs_C": null,
+      "age995_difference": null,
+      "regional_difference": null
+    },
+    {
+      "scheme": "stratified",
+      "variant": "R0",
+      "status": "UNVERIFIED_PRIVATE_EVIDENCE_MISSING",
+      "cv_macro_f1_mean": null,
+      "cv_macro_f1_sd_ddof1": null,
+      "pooled_macro_f1": null,
+      "grade3_recall": null,
+      "error31": null,
+      "error32": null,
+      "delta_vs_C": null,
+      "age995_difference": null,
+      "regional_difference": null
+    },
+    {
+      "scheme": "geo2",
+      "variant": "R12",
+      "status": "UNVERIFIED_PRIVATE_EVIDENCE_MISSING",
+      "cv_macro_f1_mean": null,
+      "cv_macro_f1_sd_ddof1": null,
+      "pooled_macro_f1": null,
+      "grade3_recall": null,
+      "error31": null,
+      "error32": null,
+      "delta_vs_C": null,
+      "age995_difference": null,
+      "regional_difference": null
+    },
+    {
+      "scheme": "geo2",
+      "variant": "R1",
+      "status": "UNVERIFIED_PRIVATE_EVIDENCE_MISSING",
+      "cv_macro_f1_mean": null,
+      "cv_macro_f1_sd_ddof1": null,
+      "pooled_macro_f1": null,
+      "grade3_recall": null,
+      "error31": null,
+      "error32": null,
+      "delta_vs_C": null,
+      "age995_difference": null,
+      "regional_difference": null
+    },
+    {
+      "scheme": "geo2",
+      "variant": "R0",
+      "status": "UNVERIFIED_PRIVATE_EVIDENCE_MISSING",
+      "cv_macro_f1_mean": null,
+      "cv_macro_f1_sd_ddof1": null,
+      "pooled_macro_f1": null,
+      "grade3_recall": null,
+      "error31": null,
+      "error32": null,
+      "delta_vs_C": null,
+      "age995_difference": null,
+      "regional_difference": null
+    },
+    {
+      "scheme": "geo1",
+      "variant": "R12",
+      "status": "UNVERIFIED_PRIVATE_EVIDENCE_MISSING",
+      "cv_macro_f1_mean": null,
+      "cv_macro_f1_sd_ddof1": null,
+      "pooled_macro_f1": null,
+      "grade3_recall": null,
+      "error31": null,
+      "error32": null,
+      "delta_vs_C": null,
+      "age995_difference": null,
+      "regional_difference": null
+    },
+    {
+      "scheme": "geo1",
+      "variant": "R1",
+      "status": "UNVERIFIED_PRIVATE_EVIDENCE_MISSING",
+      "cv_macro_f1_mean": null,
+      "cv_macro_f1_sd_ddof1": null,
+      "pooled_macro_f1": null,
+      "grade3_recall": null,
+      "error31": null,
+      "error32": null,
+      "delta_vs_C": null,
+      "age995_difference": null,
+      "regional_difference": null
+    },
+    {
+      "scheme": "geo1",
+      "variant": "R0",
+      "status": "UNVERIFIED_PRIVATE_EVIDENCE_MISSING",
+      "cv_macro_f1_mean": null,
+      "cv_macro_f1_sd_ddof1": null,
+      "pooled_macro_f1": null,
+      "grade3_recall": null,
+      "error31": null,
+      "error32": null,
+      "delta_vs_C": null,
+      "age995_difference": null,
+      "regional_difference": null
+    }
+  ],
+  "preservation": {
+    "holdout_content_accessed": false,
+    "T1_T5_models_retrained_or_reevaluated": false,
+    "existing_training_and_audit_code_modified": false,
+    "private_artifacts_added_to_git": false
+  },
+  "next_step": "Recover original/supplement private evidence and attempt ledger; verify hashes and frozen source before read-only audits. Do not run fit-all or complete_unattempted from file absence."
+}

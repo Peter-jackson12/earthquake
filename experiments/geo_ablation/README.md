@@ -3,6 +3,8 @@
 **현재 상태: `BLOCKED_T6_PRIVATE_EVIDENCE_MISSING` (2026-10-14 KST).**
 코드·기존 C 기준선 재검증은 완료했지만, 이전 T6의 비공개 실행 증거를 현재 세션에서 회수하지 못했다. T6 성능 비교 완료나 45회 학습 완료를 뜻하지 않는다.
 
+후속 Windows 회수 점검에서도 원래/보완 T6 결과는 확보되지 않았다. [회수 범위와 차단 지점](../../reports/GEO_ABLATION_RETRIEVAL_20261014.md), [이번 집계](../../reports/geo_ablation_retrieval_20261014.json), [회수 후 감사 인계](RECOVERY_HANDOFF_20261014.md)를 확인한다. 이번 후속 작업의 실데이터 분류기 학습은 0회이며 기존 C PASS는 이전 검증 기록이다.
+
 1. [복구 보고서](../../reports/GEO_ABLATION_RECOVERY_20261014.md)와 [기계 판독 요약](../../reports/geo_ablation_recovery_summary.json)을 먼저 읽는다.
 2. 원래 [PLAN](PLAN.md), [실행 중단 기록](EXECUTION_DEVIATION.md), [미시도 Fold 보완 계획](RESUME_UNATTEMPTED.md)을 보존한다. 보완 계획의 존재는 보완 학습 성공의 증거가 아니다.
 3. **`outputs/geo_ablation_v1/` 전체와 `outputs/geo_ablation_unattempted_v1/`의 실행 여부·증거를 회수한다.** 원래 design/seal, metadata, folds, OOF, joblib, audit_available 및 보완 audit가 필요하다. 이전 `/mnt/data`가 유지된다고 가정하지 않는다.
