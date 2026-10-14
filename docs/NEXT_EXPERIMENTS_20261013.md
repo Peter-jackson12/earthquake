@@ -3,6 +3,24 @@
 2026-10-13 후속 실행 반영. [현재 결과](../reports/FOLLOWUP_REPORT_20261013.md)와 [재현 명령](FOLLOWUP_RUNBOOK_20261013.md)을 먼저 확인한다.
 개인 선행 작업이며 팀 합의·팀원별 전체 과정 수행을 대신하지 않는다. 기존 80/20, seed 42, 고정 5-Fold는 팀 최종 합의 전 잠정 기준이다.
 
+## 2026-10-14 별도 개인 연구 인계 — 중복 실행 방지 (최신 확인 스냅샷)
+
+> **새 세션 우선 확인:** 이 `peter` 브랜치의 기존 개인 최종 모델과, 이후 `peter-exp/age995-outlier-treatment`에서 수행한 *새 개발 CV 연구*는 별개다. 아래 표는 **2026-10-14 KST에 확인한 근거 커밋** 기준이며, 최신 진행 상태는 작업 전 각 브랜치 HEAD와 결과 보고서를 다시 확인한다. 최종 모델·앱·팀 `main`은 이번 연구 결과로 교체하지 않았다.
+
+| 연구 트랙 | 재실행 판단용 현재 상태 | 결론·검증 근거 |
+|---|---|---|
+| T0 — `peter` 기존 개인 완결 | **완료; 최종 홀드아웃 재평가 금지** | [개인 최종 보고](../reports/PERSONAL_FINAL_REPORT_20261013.md), [개인 완료 상태](PLAN.md). 무가중치 LR `C=1`의 기존 개발 CV 0.683677, **이미 1회 사용한** 개인 홀드아웃 Macro F1 0.686771. 여기서 `C=1`은 LR 규제 하이퍼파라미터이며, 다음 T1의 *전처리 정책 C*와 다름. |
+| T1 — `age=995` LR 처리 | **9개 정책 A/B/C/D/E1/E2/E3/F1/F2 비교 및 감사 완료; 동일 조건 중복 학습 불필요** | [A/B/C](https://github.com/Peter-jackson12/earthquake/blob/a4fc5c82a1907d8fc975f0971deaed8d26a4461f/reports/AGE995_EXPERIMENT_20261013.md), [D/E/F](https://github.com/Peter-jackson12/earthquake/blob/a4fc5c82a1907d8fc975f0971deaed8d26a4461f/reports/AGE995_FOLLOWUP_20261013.md). 정책 C(학습 Fold 비995 연령 중앙값 15로 995만 대체 + 원본995 표시) CV Macro F1 **0.688687**; E2(상한90 + 표시) **0.688664**. 삭제 정책 D/F1/F2는 995 건물 1,125개를 전부 3등급으로 분류하는 문제가 발생. |
+| T2 — C/E2 및 비995 오류 분석 | **재학습 없이 OOF 감사 완료; 동일 오류 집계 반복 불필요** | [독립 진단](https://github.com/Peter-jackson12/earthquake/blob/a4fc5c82a1907d8fc975f0971deaed8d26a4461f/reports/AGE995_DIAGNOSTICS_20261014.md). C의 전체 3→1 오류 **452건 중 447건은 비995**, 지역 코드 26/20/13에서 292건(64.60%); 지역·연령·구조는 *관찰된 오류 분포*이지 인과 원인 확정 아님. |
+| T3 — C 기반 G1~G5 추가 특성 | **5설정 × 5Fold = 신규 25회 실학습·OOF 감사 완료** | [고정 계획](https://github.com/Peter-jackson12/earthquake/blob/a4fc5c82a1907d8fc975f0971deaed8d26a4461f/experiments/age995/interactions/PLAN.md), [실제 결과](https://github.com/Peter-jackson12/earthquake/blob/a4fc5c82a1907d8fc975f0971deaed8d26a4461f/reports/AGE995_INTERACTIONS_20261014.md). 최고 점수 G2(연령 구간 + 지역×기초구조) CV Macro F1 **0.690993**. 단, 전체 3→1 오류 **C 452→G2 478**, 원본995 그룹 성능 저하. **사전 보수적 선택 조건을 통과하지 못해 LR 후속 연구 기준 C 유지; G2는 점수 개선 후보만 보존.** |
+| T4 — XGBoost/LightGBM 계열 비교 | **다른 세션 진행 중; 완료 수치 아직 이 인계에서 검증하지 않음** | [별도 작업 브랜치](https://github.com/Peter-jackson12/earthquake/tree/peter-exp/model-family-comparison-v1)의 사전 계획 커밋 `e0dd14630b9d20aa116fee57aa6555102c15c01c` 확인. 해당 세션의 최신 코드·OOF·보고서를 확인하기 전 학습을 중복 실행하거나 완료로 표시하지 말 것. [시작 인계](https://github.com/Peter-jackson12/earthquake/blob/a4fc5c82a1907d8fc975f0971deaed8d26a4461f/docs/HANDOFF_MODEL_FAMILY_COMPARISON_20261014.md). |
+
+**반드시 구분:** T1~T3 점수는 개발 **208,480행·기존 Stratified 5Fold·seed42**의 탐색적 CV다. `peter`에서 **이미 사용된 홀드아웃 52,121행을 다시 열거나 모델 선택·튜닝·검증에 사용하지 않는다.** 새 독립 최종성능, 다른 지진에서의 일반화, 실제 안전성 입증으로 쓰지 않는다. 원시 데이터·행별 OOF·모델 바이너리는 공개 Git에 올리지 않는다.
+
+**새 세션 최소 절차:** (1) `peter` 및 각 연구 브랜치의 최신 HEAD 확인 → (2) [실험 브랜치의 연구 현황](https://github.com/Peter-jackson12/earthquake/blob/a4fc5c82a1907d8fc975f0971deaed8d26a4461f/docs/RESEARCH_STATUS.md)과 위 **최신 T3 보고서** 대조(해당 상태 문서에는 예전 'T3 진행 중' 스냅샷이 남아 있을 수 있음) → (3) 동일 데이터 SHA·Fold·설정·OOF/감사 근거 확인 → (4) **완료된 실험은 재학습하지 않고 기존 집계·감사 결과 재사용**, 새로운 가설만 새 ID·브랜치·출력 경로에서 실행.
+
+**아래 「다음 1~3」은 2026-10-13 작성 당시의 계획이므로 최신 할 일 목록이 아니다.** `peter`에서 제한 튜닝·제약형 SMOTE/복제 비교·개인 최종 홀드아웃 평가까지 이미 완료된 범위는 [개인 완료 상태](PLAN.md)와 [개인 최종 보고](../reports/PERSONAL_FINAL_REPORT_20261013.md)를 우선한다. 팀 모델 합의·제출·외부 배포는 별도이며, T4 결과는 해당 세션의 최신 근거로 갱신해야 한다.
+
 ## 중복 실행하지 않을 완료 항목
 
 | 항목 | 상태 | 근거 |
