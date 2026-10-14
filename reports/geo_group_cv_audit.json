@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "study_id": "T5_geo_group_cv_v1",
+  "audited_at_utc": "2026-10-14T02:57:26.522983+00:00",
+  "development_rows": 208480,
+  "new_models": 20,
+  "new_oof_rows": 833920,
+  "reused_oof_rows": 416960,
+  "independent_retraining": 0,
+  "holdout_accessed": false,
+  "all_new_models_converged": true,
+  "design_sha256": "a95ff1b375f6e053ae41797095e733f8311b1cd688805e42a1564ed03b78bdf7",
+  "audit_code_sha256": "0a5f71e1a95b61438ece1b5686a2a9837c57a4080b160bb2179ea32f30576f2f",
+  "data_sha256": {
+    "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+    "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+  },
+  "scopes": {
+    "split_reconstructed": 2,
+    "fold_metrics_checked": 30,
+    "new_models_full_validation_reloaded": 20,
+    "paired_C_base_block_equal": 10,
+    "group_profiles": 204,
+    "category_records": 240
+  },
+  "output_sha256": {
+    "unknown_categories.json": "7a23979ff734683b51d42f3dfa3d014159e05927fb07f5c01ef54e8152ced375",
+    "folds.json": "b78400d305df0da5ea7aa49f709e49db2bc3529ee8214b64b87f9f050258f987",
+    "unknown_categories.csv": "21e76a48fa825a9ece6aa2be7f53dfd261add4997fea5d8f17785211ab343ed9",
+    "models.json": "133595a54302301fe0fec48fd55569ec409b1ebad230cb8b8a2a76924e27b03e",
+    "folds.csv": "1d2a8cc816fd8894ccace918e7b93ad60c4e58b1e17d10b83d17790054658f18",
+    "profiles.csv": "5b83ac8f05f76313ad1b1fa4f7fbdfaeae0f51af2d893b7f7962fc4fb54274a4",
+    "paired.csv": "634f7d3b90d16bbda16eb14379c57b449affaef62a6930bda26b4d6b13f3a70c",
+    "profiles.json": "a843ae9ff04a34649e724ba197e473cffbfa80b475ea3db8187220fdfe28644a",
+    "models.csv": "148b1daf04e4c7109f88b87bbaa239e6b9ec7dc2901c02e5ef72252fe499fddf",
+    "split_folds.csv": "fc1f75cb43b30624aa140197f104b77844675c6c7aa8d41c7b4ed2c7e1127aa2",
+    "paired.json": "0c64c900e461828686525a6c4e22543789d53202159ada0696015be85d351b86",
+    "split_folds.json": "5f2296e1b3ebfa65567e4a55256e29137abfa30d04d85753ebee88df9cbb58db"
+  },
+  "limitations": [
+    "Model reload and learned-statistics checks do not independently re-train or prove every training action.",
+    "Development CV remains exploratory; no new holdout, external earthquake or operational safety validation.",
+    "Fold variability is descriptive, not a confidence interval or a significance test."
+  ]
+}
