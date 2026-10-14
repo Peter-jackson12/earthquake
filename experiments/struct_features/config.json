@@ -1,0 +1,253 @@
+{
+ "study_id": "T12_struct_features_v1",
+ "branch": "peter-exp/struct-features-v1",
+ "base_commit": "7956901",
+ "single_factor": "appending region-free structure-derived features (bundle S, D or SD) to each family's existing matrix; original 38 inputs and C age policy unchanged",
+ "bundles": {
+  "S": {
+   "features": [
+    "n_super",
+    "n_weak",
+    "n_strong",
+    "n_use"
+   ],
+   "formulas": {
+    "n_super": "sum of the 11 has_superstructure_* flags",
+    "n_weak": "adobe_mud+mud_mortar_stone+stone_flag+mud_mortar_brick+timber+bamboo",
+    "n_strong": "cement_mortar_stone+cement_mortar_brick+rc_non_engineered+rc_engineered",
+    "n_use": "sum of the 10 specific has_secondary_use_* flags (agriculture, hotel, rental, institution, school, industry, health_post, gov_office, use_police, other); EXCLUDES the aggregate has_secondary_use"
+   }
+  },
+  "D": {
+   "features": [
+    "height_per_floor",
+    "area_x_floors",
+    "families_per_floor"
+   ],
+   "formulas": {
+    "height_per_floor": "height_percentage / max(count_floors_pre_eq, 1)",
+    "area_x_floors": "area_percentage * count_floors_pre_eq",
+    "families_per_floor": "count_families / max(count_floors_pre_eq, 1)"
+   }
+  },
+  "SD": {
+   "features": [
+    "n_super",
+    "n_weak",
+    "n_strong",
+    "n_use",
+    "height_per_floor",
+    "area_x_floors",
+    "families_per_floor"
+   ]
+  }
+ },
+ "excluded_features": "age and any age-derived feature; any geo-derived feature; T3 features age_band, geo_foundation, geo_age, foundation_age",
+ "derived_scaling": "StandardScaler fit on the training fold, then float32 cast; same for both families; appended AFTER the existing columns (CSR hstack by ColumnTransformer, one-hot block never densified)",
+ "arms": {
+  "LR_S": "LR-C pipeline + bundle S",
+  "LR_D": "LR-C pipeline + bundle D",
+  "LR_SD": "LR-C pipeline + bundle SD",
+  "LGBM_S": "T4/T8 arm O + bundle S",
+  "LGBM_D": "T4/T8 arm O + bundle D",
+  "LGBM_SD": "T4/T8 arm O + bundle SD"
+ },
+ "baseline_of": {
+  "LR": "LR_C",
+  "LGBM": "LGBM_O"
+ },
+ "lr_params": {
+  "solver": "lbfgs",
+  "C": 1.0,
+  "max_iter": 1500,
+  "tol": 0.0001,
+  "random_state": 42
+ },
+ "lr_threadpool_limit": 1,
+ "lgbm_params": {
+  "objective": "multiclass",
+  "num_class": 3,
+  "n_estimators": 300,
+  "learning_rate": 0.05,
+  "num_leaves": 31,
+  "max_depth": -1,
+  "min_child_samples": 20,
+  "min_child_weight": 0.001,
+  "min_split_gain": 0.0,
+  "subsample": 1.0,
+  "subsample_freq": 0,
+  "colsample_bytree": 1.0,
+  "reg_alpha": 0.0,
+  "reg_lambda": 0.0,
+  "max_bin": 255,
+  "boosting_type": "gbdt",
+  "device_type": "cpu",
+  "deterministic": true,
+  "force_col_wise": true,
+  "zero_as_missing": false,
+  "random_state": 42,
+  "n_jobs": 2,
+  "verbosity": 1
+ },
+ "lgbm_threadpool_limit": 2,
+ "outer_parallel_jobs": 1,
+ "early_stopping": false,
+ "class_weight": null,
+ "sampling": null,
+ "tuning": false,
+ "threshold_or_decision_rule_change": false,
+ "decision_rule": "argmax of predicted probabilities, labels 1/2/3",
+ "schemes": [
+  "stratified",
+  "geo2",
+  "geo1"
+ ],
+ "n_folds": 5,
+ "study_fits": {
+  "LR_S": [
+   "stratified",
+   "geo2",
+   "geo1"
+  ],
+  "LR_D": [
+   "stratified",
+   "geo2",
+   "geo1"
+  ],
+  "LR_SD": [
+   "stratified",
+   "geo2",
+   "geo1"
+  ],
+  "LGBM_S": [
+   "stratified",
+   "geo2",
+   "geo1"
+  ],
+  "LGBM_D": [
+   "stratified",
+   "geo2",
+   "geo1"
+  ],
+  "LGBM_SD": [
+   "stratified",
+   "geo2",
+   "geo1"
+  ]
+ },
+ "max_new_study_fits": 90,
+ "automatic_retries": 0,
+ "stop_on_lr_nonconvergence": true,
+ "environment": {
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "scipy": "1.17.0",
+  "scikit-learn": "1.8.0",
+  "lightgbm": "4.6.0",
+  "joblib": "1.5.3",
+  "threadpoolctl": "3.6.0"
+ },
+ "manifest_sha256": {
+  "stratified": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721",
+  "geo2": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64",
+  "geo1": "1b4616ff7d5e052ac76707e58de48e3d0b23fb7a49e350c14d6704cc1ee488f5"
+ },
+ "baselines": {
+  "LR_C": {
+   "oof_sha256": {
+    "stratified": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc",
+    "geo2": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4",
+    "geo1": "453608352590cf27ddb1460926b7578d50832baa9127431422d0dd69b8f42951"
+   },
+   "refit_in_this_study": false
+  },
+  "LGBM_O": {
+   "oof_sha256": {
+    "stratified": "0bc63eb5122afb479c41826918a9fbb43a3475351a934d847833656eec6930cf",
+    "geo2": "ba282656c482264c045865de32db32d56a0b7c6c872670972c480a90abaa211c",
+    "geo1": "f4f3f9c9b966394c8d1ef0d7e6b1b5fd1367390b832bdd7f49ea8b2340b3d9f1"
+   },
+   "anchors": {
+    "stratified": "T4 LGBM_C_v1 (reports/model_families_v1/verification.json oof_sha256)",
+    "geo2": "T8 run/geo2/O/metrics.json oof_sha256 (audited PASS)",
+    "geo1": "T8 run/geo1/O/metrics.json oof_sha256 (audited PASS)"
+   },
+   "refit_in_this_study": false
+  }
+ },
+ "baseline_references": {
+  "LR_C": {
+   "stratified_mean": 0.688687,
+   "geo2_mean": 0.565146,
+   "geo2_pooled_grade3_recall": 0.5211
+  },
+  "LGBM_O": {
+   "stratified_mean": 0.669847,
+   "geo2_mean": 0.582827,
+   "geo2_pooled_grade3_recall": 0.461
+  },
+  "tolerance_mean": 5e-07,
+  "tolerance_recall": 5e-05,
+  "public_anchor": "reports/lgbm_native_cat_20261014.json models[] fold_macro_f1 for arms LR_C and O (checked to 1e-12)"
+ },
+ "control_check": {
+  "kind": "derived-feature correctness on real rows + synthetic edge cases, column-append invariance on a stratified 5k development subsample, no geo/age-derived columns, fresh-process artifact load, two sample smoke fits; not study fits",
+  "subsample_rows": 5000,
+  "subsample_seed": 42,
+  "atol": 1e-12,
+  "counted_as_study_fit": false,
+  "must_pass_before_prepare": true
+ },
+ "checkpoint": {
+  "model_reload_probability_atol_lgbm": 1e-12,
+  "lr_reload": "exact",
+  "csv_float_format": "%.17g",
+  "csv_read": "float_precision='round_trip' exact",
+  "backup_dir": "backup",
+  "resume_skips_completed": true
+ },
+ "labels": [
+  1,
+  2,
+  3
+ ],
+ "primary_metric": "unweighted mean of five fold Macro F1 (labels 1,2,3)",
+ "std_ddof": 1,
+ "error_rate_denominator": "actual_grade3_support",
+ "profiles": {
+  "age995_group": "raw age == 995",
+  "geo1_regions": [
+   26,
+   20,
+   13
+  ]
+ },
+ "rules": {
+  "joint_improvement_candidate": {
+   "per": "family F in {LR, LGBM} and arm A in {S, D, SD} vs own baseline B (LR-C for LR, LGBM-O for LGBM)",
+   "stratified_mean_delta_min": 0.003,
+   "stratified_fold_wins_min": 4,
+   "geo2_mean_delta_min": 0.003,
+   "geo2_fold_wins_min": 4,
+   "pooled_grade3_recall_delta_min": -0.005,
+   "recall_schemes": [
+    "stratified",
+    "geo2"
+   ],
+   "pooled_error32_ratio_max": 1.01,
+   "error32_schemes": [
+    "stratified",
+    "geo2"
+   ],
+   "fold_win": "A fold Macro F1 strictly greater than B on the same fold",
+   "all_conditions_required": true,
+   "label": "joint improvement candidate (needs a separate pre-registered confirmation; no holdout, no final-model change)"
+  },
+  "geo1_scheme": "descriptive only",
+  "multiplicity": "6 comparisons (3 bundles x 2 families) on the same folds: choosing the best bundle is optimistic",
+  "claims": "no significance claims, no causal claims"
+ },
+ "holdout_access": false,
+ "automatic_model_replacement": false
+}
