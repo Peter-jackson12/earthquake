@@ -1,0 +1,70 @@
+{
+  "study_id": "T8_lgbm_native_cat_v1",
+  "branch": "peter-exp/lgbm-native-cat-v1",
+  "base_commit": "7a1742f",
+  "t4_source_commit": "a5d9ed5",
+  "single_factor": "categorical representation of the 11 categorical inputs (one-hot CSR vs LightGBM native categorical integer codes)",
+  "arms": {
+    "O": "T4 LGBM_C_v1 exactly: experiments.age995.run.make_pipeline('C')['preprocess'] (scaled numeric + binary + age_is_995 + OneHotEncoder CSR float32) and LGBMClassifier(**experiments/model_families/config.json models.LGBM)",
+    "N": "Same fitted C preprocessor except the categorical OneHotEncoder is replaced by OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=NaN, encoded_missing_value=NaN, dtype=float32) fitted on the training fold only; dense float32 matrix; the 11 code columns are declared via categorical_feature; identical LGBMClassifier params"
+  },
+  "categorical_columns": ["geo_level_1_id", "geo_level_2_id", "geo_level_3_id", "land_surface_condition", "foundation_type", "roof_type", "ground_floor_type", "other_floor_type", "position", "plan_configuration", "legal_ownership_status"],
+  "n_feature_columns_N": 39,
+  "categorical_feature_indices_N": [28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38],
+  "lgbm_params_source": "experiments/model_families/config.json models.LGBM (T4, a5d9ed5, unchanged)",
+  "lgbm_params": {
+    "objective": "multiclass", "num_class": 3, "n_estimators": 300, "learning_rate": 0.05, "num_leaves": 31,
+    "max_depth": -1, "min_child_samples": 20, "min_child_weight": 0.001, "min_split_gain": 0.0,
+    "subsample": 1.0, "subsample_freq": 0, "colsample_bytree": 1.0, "reg_alpha": 0.0, "reg_lambda": 0.0,
+    "max_bin": 255, "boosting_type": "gbdt", "device_type": "cpu", "deterministic": true, "force_col_wise": true,
+    "zero_as_missing": false, "random_state": 42, "n_jobs": 2, "verbosity": 1
+  },
+  "lightgbm_categorical_defaults_expected": {
+    "max_cat_to_onehot": 4, "cat_smooth": 10, "cat_l2": 10, "max_cat_threshold": 32, "min_data_per_group": 100
+  },
+  "categorical_params_policy": "not passed; LightGBM 4.6.0 defaults; effective values read from the saved model text and recorded per fold",
+  "threadpool_limit": 2,
+  "outer_parallel_jobs": 1,
+  "early_stopping": false, "class_weight": null, "sampling": null, "threshold_or_decision_rule_change": false, "tuning": false,
+  "decision_rule": "argmax of predicted probabilities, labels 1/2/3",
+  "schemes": ["stratified", "geo2", "geo1"],
+  "n_folds": 5,
+  "study_fits": {"N": ["stratified", "geo2", "geo1"], "O": ["geo2", "geo1"]},
+  "max_new_study_fits": 25,
+  "automatic_retries": 0,
+  "environment": {"python": "3.13.5", "numpy": "2.3.5", "pandas": "2.2.3", "scipy": "1.17.0", "scikit-learn": "1.8.0", "lightgbm": "4.6.0", "joblib": "1.5.3", "threadpoolctl": "3.6.0"},
+  "manifest_sha256": {"stratified": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721", "geo2": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64", "geo1": "1b4616ff7d5e052ac76707e58de48e3d0b23fb7a49e350c14d6704cc1ee488f5"},
+  "t4_O_stratified_oof": {
+    "sha256": "0bc63eb5122afb479c41826918a9fbb43a3475351a934d847833656eec6930cf",
+    "metrics_sha256": "5d541790472993a595a0b4ca3035f21276af4dd1ed9331fd02a7f1556f70914f",
+    "anchor": "reports/model_families_v1/verification.json (a5d9ed5) experiment LGBM_C_v1 oof_sha256 / metrics_sha256",
+    "cv_mean": 0.6698469135362104,
+    "refit_in_this_study": false
+  },
+  "lr_c_oof_sha256": {"stratified": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc", "geo2": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4", "geo1": "453608352590cf27ddb1460926b7578d50832baa9127431422d0dd69b8f42951"},
+  "lr_c_reference_means": {"stratified": 0.688687, "geo2": 0.565146, "tolerance": 5e-7},
+  "control_check": {
+    "kind": "Arm O refit on stratified fold 0 vs pinned T4 LGBM_C_v1 OOF fold 0; not a study fit",
+    "scheme": "stratified", "fold": 0, "probability_atol": 1e-9, "labels_identical": true,
+    "counted_as_study_fit": false, "must_pass_before_prepare": true
+  },
+  "checkpoint": {"model_reload_probability_atol": 1e-12, "csv_float_format": "%.17g", "csv_read": "float_precision='round_trip' exact",
+                 "backup_dir": "backup", "resume_skips_completed": true},
+  "labels": [1, 2, 3],
+  "primary_metric": "unweighted mean of five fold Macro F1 (labels 1,2,3)",
+  "std_ddof": 1,
+  "error_rate_denominator": "actual_grade3_support",
+  "profiles": {"age995_group": "raw age == 995", "geo1_regions": [26, 20, 13]},
+  "rules": {
+    "primary_representation": {"scheme": "stratified", "mean_delta_N_minus_O_min": 0.005, "fold_wins_min": 4,
+      "fold_win": "N fold Macro F1 strictly greater than O on the same fold",
+      "label": "representation improvement"},
+    "secondary_baseline_challenger": {"stratified_mean_N_gt": 0.688687, "stratified_fold_wins_vs_LR_C_min": 4,
+      "geo2_mean_N_ge": 0.565146, "fold_win": "N fold Macro F1 strictly greater than LR-C on the same fold",
+      "label": "baseline challenger candidate (needs separate pre-registered confirmation; no holdout, no final-model change)"},
+    "group_cv_N_vs_O": "descriptive only",
+    "claims": "two arms on the same folds; no significance claims, no causal claims"
+  },
+  "holdout_access": false,
+  "automatic_model_replacement": false
+}
