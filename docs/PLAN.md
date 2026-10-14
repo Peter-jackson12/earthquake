@@ -50,3 +50,9 @@ main 통합, 팀 최종 선정과 평가 정책, 팀원별 전체 과정 수행,
 - 실험 ID `T11_geo_te_group_inner_v1`, 브랜치 `peter-exp/geo-te-group-inner-v1`(기준 `7956901`). [사전 등록 계획](T11_GEO_TE_GROUP_INNER_PLAN.md).
 - 단일 요인: T10에서 학습 행을 인코딩하는 내부 OOF 분할기를 바깥 분할을 모사하는 `StratifiedGroupKFold`(geo2: (geo1,geo2) 그룹, geo1: geo1 그룹)로 교체. LR_TE_G/LGBM_TE_G × geo2/geo1 × 5 Fold = 신규 fit 20회 예정. stratified는 내부 분할이 T10과 같아 T10 OOF 재사용. 기준선 재학습 없음, 홀드아웃 미사용.
 - 상태: 20/20 학습 완료, 독립 감사 PASS. 분포 복구 LR·LGBM 충족, LGBM 지역 일반화 후보 충족(경계: geo2 +0.01013, 4/5), LR-C 도전 미충족. 확정 아님(별도 확인 필요), LR-C 기준선 유지. [결과 보고서](../reports/GEO_TE_GROUP_INNER_20261014.md).
+
+## T13 LGBM_TE_G geo2 확인 (새 독립 Group 분할) — 2026-10-14 (사전 등록, 실행 중)
+
+- 실험 ID `T13_geo2_te_confirm_v1`, 브랜치 `peter-exp/geo2-te-confirm-v1`(기준 `30c3949`). [사전 등록 계획](T13_GEO2_TE_CONFIRM_PLAN.md).
+- T11의 경계 충족(단일 T5 geo2 분할, seed 42)을 새 geo2 Group 분할 seed 101/202/303에서 확인. LR_C·LGBM_O·LGBM_TE_G × 3 seed × 5 Fold = 45 fit(최대 45). 규칙 C1·C2는 계획 문서에 학습 전 고정.
+- 상태: 계획·코드·테스트 커밋 단계. 결과 보고서·집계 JSON은 메인 세션 독립 감사 후에만 커밋.
