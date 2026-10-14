@@ -24,7 +24,7 @@
 | T1 `age=995` 전처리 | LR 고정 A/B/C, D/E1/E2/E3/F1/F2 | **9개 설정 CV 비교·감사 완료** | [A/B/C](../reports/AGE995_EXPERIMENT_20261013.md), [D/E/F](../reports/AGE995_FOLLOWUP_20261013.md) |
 | T2 오류 진단 | C와 E2 예측 비교, 비995·지역·구조·연령 오류 | **OOF 사후 진단·감사 완료** | [오류 진단](../reports/AGE995_DIAGNOSTICS_20261014.md), [연구 후보](../experiments/age995/RESEARCH_CANDIDATE.json) |
 | T3 특성 조합 실험 | C 기반 G1~G5(연령 구간, 지역×구조, 지역×연령, 구조×연령) | **별도 세션 결과 추가 커밋 `a4fc5c8` 확인**. T4 세션에서는 G1~G5 OOF를 재감사하거나 결과를 비교 후보로 사용하지 않음. | [G 계획](../experiments/age995/interactions/PLAN.md), [설정](../experiments/age995/interactions/config.json), [코드](../experiments/age995/interactions/run.py) |
-| T4 모델 계열 비교 | LR 대비 XGBoost/LightGBM, A와 C 비교 | **실데이터 20 fit·독립 OOF 감사·20개 모델 재추론 완료**. 기존 LR A/C 재사용. 이번 고정 OHE 설정은 LR을 넘지 못함. | [완료 보고](../reports/MODEL_FAMILY_COMPARISON_20261014.md), [실행·검증 요약](../reports/model_families_v1/execution_summary.json) |
+| T4 모델 계열 비교 | LR 대비 XGBoost/LightGBM, A와 C 비교 | **기존 환경 20 fit·독립 OOF 감사·모델 재추론 완료**. 교차환경 T4 재학습 CV 4/4 재현, 기존 XGB 저장모델 5/20개 확률 엄격 기준 초과(분류 변경 0). 기존 LR A/C 재사용. | [완료 보고](../reports/MODEL_FAMILY_COMPARISON_20261014.md), [실행·검증 요약](../reports/model_families_v1/execution_summary.json), [교차환경 보충 보고](../reports/MODEL_FAMILY_REPRODUCTION_REVIEW_20261014.md) |
 
 **경고:** T3는 다른 세션이 계속 작업할 수 있다. 위 상태는 작성 당시 원격 확인의 스냅샷이며 완료 판정이 아니다. 다음 세션은 **최신 HEAD, 새 보고서/커밋, 실제 OOF·테스트**를 읽어 상태를 업데이트한다. 동시 세션의 변경을 덮어쓰지 않는다.
 
@@ -47,6 +47,16 @@
 - 원핫/수치 표준화 CSR 표현, 300 rounds 고정 설정에 한정한 결과다. 라이브러리 전체의 우열을 확정하지 않는다. Optuna·native categorical·추가 E2·G 조합·홀드아웃 재평가는 미실행.
 - 다음 후보는 **범주형 직접 처리(native categorical)의 별도 표현 비교 실험**이다. 기존 v1 결과는 유지하고 새 ID/사전 계획으로 분리한다. 아직 실행하지 않았다.
 - 원본·이전 코드/결과·LR C 연구 후보·앱·main/peter·기존 age995 브랜치를 변경하지 않았다. 이 문서의 갱신은 T4 전용 브랜치에만 반영한다.
+
+## 로컬 교차환경 재현 감사 보충 (2026-10-14)
+
+- 출처: 사용자 제공 `REPRODUCTION_REPORT.md`(2026-10-14 KST)와 이 브랜치의 기존 T4 완료 보고·감사 코드·`verification.json` 대조. **이 기록 작업에서 로컬 비공개 원시 로그·모델·OOF ZIP 전체를 새로 독립 실행/감사하지는 않음.**
+- 보고된 로컬 재현: 전체 **38개 실행·190 Fold** 수행(별도 BLAS 진단 1회 제외). 사전 고정 엄격 F1 기준 `1e-6`에 **16개 실행 일치**, **LR 계열 22개는 `DIFFERENCE_UNDER_REVIEW`**. 기존 age995 OOF **1,876,320개·45 Fold 산술 감사 PASS**.
+- T4 신규 재학습 XGB A/C·LGBM A/C **4설정 모두 원래 CV Macro F1 수치 재현 통과**. 기존 T4 원시 OOF 및 집계 산술 검증 PASS.
+- 기존 T4 저장 모델의 Windows 교차환경 재추론: 전체20개 중 **XGBoost 5개에서 사전 확정 절대확률 오차 `1e-7` 기준 초과**, 최대 **`1.1920928955078125e-7`**. 전체 모델의 **예측 등급 변화 0건**. 나머지15개는 해당 기준 통과. **기존 환경 내부 모델 재추론 PASS(`최대 1.11e-16`)와 이 교차환경 미달을 명확히 구분**한다.
+- LR 차이의 원인으로 OS·BLAS·wheel 수치 환경 차이가 의심된다. 동일 Fold의 CSR 입력이 일치해도 `OPENBLAS_CORETYPE=Haswell` 대 `Nehalem` 진단에서 최적화 반복수·예측이 달라졌으나, 과거 Linux 실행 환경의 정확한 빌드 및 모델 계수가 없어 역사적 차이를 단일 원인으로 확정할 수 없다.
+- **기존 5-Fold 점수·OOF·감사 영수증과 LR-C 연구 기준·후보 결정은 그대로 보존**한다. 사후 확률 허용오차 완화, 재학습/튜닝, 홀드아웃 접근·평가, 모델 재선정 금지.
+- 상세 결과·검증 한계·최소 후속 확인 범위는 [T4 로컬 재현 감사 보충 보고서](../reports/MODEL_FAMILY_REPRODUCTION_REVIEW_20261014.md)를 참조. 미확보 과거 G/age995 모델 바이너리는 원래 재추론 완료로 표시하지 않는다.
 
 ## 병렬 작업 및 인계 규칙
 
