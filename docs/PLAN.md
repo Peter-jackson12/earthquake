@@ -45,8 +45,8 @@ main 통합, 팀 최종 선정과 평가 정책, 팀원별 전체 과정 수행,
 - 단일 요인: 지역 3열의 one-hot 블록을 학습 Fold 안에서만 만든 계층적 TE 9개 특성(te1/te3/cnt × geo1/2/3, m=20, 내부 5-Fold OOF)으로 교체. LR_TE(vs LR-C)와 LGBM_TE(vs one-hot LGBM O) × stratified/geo2/geo1 × 5 Fold = 신규 fit 30회 예정. 기준선 재학습 없음, 재표집·튜닝 없음, 홀드아웃 미사용.
 - 상태: 30/30 학습 완료, 독립 감사 PASS. 사전 등록 규칙 4개 모두 미충족(LR-C 기준선 유지). Group CV는 학습·검증 TE 분포 차이로 예측이 쏠려 해석 제한. [결과 보고서](../reports/GEO_HIER_TE_20261014.md).
 
-## T12 지역 ID 없는 구조 파생 특성 — 2026-10-14 (사전 등록·진행 중)
+## T12 지역 ID 없는 구조 파생 특성 — 2026-10-14 (완료, 독립 감사 PASS)
 
 - 실험 ID `T12_struct_features_v1`, 브랜치 `peter-exp/struct-features-v1`. [사전 등록 계획](T12_STRUCT_FEATURES_PLAN.md).
 - 단일 요인: 지역·연령을 쓰지 않는 구조 파생 특성(번들 S 4개, D 3개, SD 7개)을 각 계열의 기존 행렬 뒤에 덧붙임. LR(vs LR-C)·LGBM(vs one-hot O) × 3 번들 × stratified/geo2/geo1 × 5 Fold = 신규 fit 90회 예정. 기준선 재학습 없음, 홀드아웃 미사용.
-- 상태: 계획·코드·테스트 작성 완료, 대조 확인·봉인·학습 전. 결과는 학습 완료 후 기록한다(미수행 항목은 완료로 표시하지 않음).
+- 상태: 90/90 학습 완료, 독립 감사 PASS. 공동 개선 후보 0/6(최대 Δ stratified +0.0009, geo2 +0.0011 < 기준 +0.003). 기준선 유지. [결과 보고서](../reports/STRUCT_FEATURES_20261014.md).
