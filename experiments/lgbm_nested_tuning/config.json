@@ -1,0 +1,196 @@
+{
+  "lgbm_params": {
+    "objective": "multiclass",
+    "num_class": 3,
+    "n_estimators": 300,
+    "learning_rate": 0.05,
+    "num_leaves": 31,
+    "max_depth": -1,
+    "min_child_samples": 20,
+    "min_child_weight": 0.001,
+    "min_split_gain": 0.0,
+    "subsample": 1.0,
+    "subsample_freq": 0,
+    "colsample_bytree": 1.0,
+    "reg_alpha": 0.0,
+    "reg_lambda": 0.0,
+    "max_bin": 255,
+    "boosting_type": "gbdt",
+    "device_type": "cpu",
+    "deterministic": true,
+    "force_col_wise": true,
+    "zero_as_missing": false,
+    "random_state": 42,
+    "n_jobs": 2,
+    "verbosity": 1
+  },
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "lightgbm": "4.6.0",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.6.0"
+  },
+  "checkpoint": {
+    "model_reload_probability_atol_lgbm": 1e-12,
+    "lr_reload": "exact",
+    "csv_float_format": "%.17g",
+    "backup_dir": "backup",
+    "resume_skips_completed": true
+  },
+  "lgbm_threadpool_limit": 2,
+  "class_weight": null,
+  "sampling": null,
+  "early_stopping": false,
+  "outer_parallel_jobs": 1,
+  "automatic_retries": 0,
+  "holdout_access": false,
+  "study_id": "T18_lgbm_nested_tuning_v1",
+  "candidates": {
+    "B": {
+      "n_estimators": 300,
+      "num_leaves": 31
+    },
+    "R600": {
+      "n_estimators": 600,
+      "num_leaves": 31
+    },
+    "L15": {
+      "n_estimators": 300,
+      "num_leaves": 15
+    },
+    "L63": {
+      "n_estimators": 300,
+      "num_leaves": 63
+    }
+  },
+  "policies": {
+    "ROUNDS": [
+      "B",
+      "R600"
+    ],
+    "LEAVES": [
+      "B",
+      "L15",
+      "L63"
+    ]
+  },
+  "schemes": {
+    "geo2_s42": {
+      "kind": "group2",
+      "role": "primary",
+      "seed": 42,
+      "manifest": {
+        "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T6R_20261014_local/run/geo2/manifest.csv",
+        "sha256": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64"
+      },
+      "refs": {
+        "LR_C": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T6S_20261014_c_group/t5_private/outputs/geo_group_cv_v1/geo2/C/oof.csv.gz",
+          "sha256": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4"
+        },
+        "LGBM_O": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T8_20261014_native_cat/run/geo2/O/oof.csv.gz",
+          "sha256": "ba282656c482264c045865de32db32d56a0b7c6c872670972c480a90abaa211c"
+        },
+        "LGBM_TE_G": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T11_20261014_te_group_inner/run/geo2/LGBM_TE_G/oof.csv.gz",
+          "sha256": "34f23ad64d9dbcc3c79b3112808db65d5e8a3a114b19e086d2b1bf1756ee039b"
+        }
+      }
+    },
+    "geo2_s101": {
+      "kind": "group2",
+      "role": "primary",
+      "seed": 101,
+      "manifest": {
+        "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_101/manifest.csv",
+        "sha256": "7877b21b59433dea9c4a22ddd8fc1112a3440180fc4e2ab9a73aa0a5b56af1f4"
+      },
+      "refs": {
+        "LR_C": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s101/LR_C/oof.csv.gz",
+          "sha256": "486f7975a1304f5b5703a6ae197bd34c8297149dddf8085ffaca1020fb6b0a0c"
+        },
+        "LGBM_O": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s101/LGBM_O/oof.csv.gz",
+          "sha256": "bd2f5f1790e9a6047f2c9485b8aeab28333be0742028ad678743f63eb2297f90"
+        },
+        "LGBM_TE_G": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s101/LGBM_TE_G/oof.csv.gz",
+          "sha256": "5bc7df138b8e03ef270b1f4bc3473853d64062c08d1e7081a5b6265cc562ba05"
+        }
+      }
+    },
+    "geo2_s202": {
+      "kind": "group2",
+      "role": "primary",
+      "seed": 202,
+      "manifest": {
+        "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_202/manifest.csv",
+        "sha256": "9b3a48054743a95b83d85d95ac05354456d441fe4ac6c8aa189434d3877914c7"
+      },
+      "refs": {
+        "LR_C": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s202/LR_C/oof.csv.gz",
+          "sha256": "1c8ef79e708c4ca5d5730c7b92a27ee0e690dfc451741803954fc21e69e69003"
+        },
+        "LGBM_O": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s202/LGBM_O/oof.csv.gz",
+          "sha256": "45d0d0bb8e5a61a9cd41d9bc1343d9c7dbf0496dead5efc05834f98932d99749"
+        },
+        "LGBM_TE_G": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s202/LGBM_TE_G/oof.csv.gz",
+          "sha256": "2fa8f729e6482a34871e9d93c5abaa7c61cf514469dae74beb44641c239b8d52"
+        }
+      }
+    },
+    "geo2_s303": {
+      "kind": "group2",
+      "role": "primary",
+      "seed": 303,
+      "manifest": {
+        "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_303/manifest.csv",
+        "sha256": "26f42c0b2b3ea40f736d82d178b864ce2d4a25d1eeb2d924c65a177254b8fafd"
+      },
+      "refs": {
+        "LR_C": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s303/LR_C/oof.csv.gz",
+          "sha256": "7dc09af6d8d86140d3938e0ab10695c75c5dbcdf0372c53c85067d1917d3192c"
+        },
+        "LGBM_O": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s303/LGBM_O/oof.csv.gz",
+          "sha256": "a366689191280d3dfa43e7df5cc699fcb3a331c595c76c54ddd4712ae76c27c4"
+        },
+        "LGBM_TE_G": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s303/LGBM_TE_G/oof.csv.gz",
+          "sha256": "0b8ff7187a96025fd68ae58e3b4bad7990a79817cee75ffdaadb7091b1c5eb37"
+        }
+      }
+    }
+  },
+  "inner": {
+    "n_splits": 3,
+    "seed": 42,
+    "shuffle": true,
+    "min_class_support": 30
+  },
+  "group_columns": {
+    "group2": [
+      "geo_level_1_id",
+      "geo_level_2_id"
+    ]
+  },
+  "max_new_study_fits": 280,
+  "max_inner_fits": 240,
+  "max_outer_refits": 40,
+  "decision_rule": "argmax",
+  "rules": {
+    "mean_delta_min": 0.003,
+    "fold_wins_min": 14,
+    "positive_seed_means_min": 3
+  }
+}
