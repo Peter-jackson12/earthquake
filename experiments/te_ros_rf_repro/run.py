@@ -238,6 +238,17 @@ def importance_shares(model, selected):
                 age=imp['age']/total)
 
 
+def predict_proba_deterministic(model, X):
+    """Single-thread RF predict_proba. With n_jobs>1 the per-tree accumulation order varies between calls (~1e-16),
+    which flips argmax on exact top-2 ties (237 such rows in strat fold 1, attempt 1). Training keeps n_jobs=4."""
+    keep = model.n_jobs
+    model.n_jobs = 1
+    try:
+        return np.asarray(model.predict_proba(X), dtype=np.float64)
+    finally:
+        model.n_jobs = keep
+
+
 def fit_rf(Xos, yos, c):
     model = RandomForestClassifier(**c['rf_params'])
     t0 = time.perf_counter()
@@ -436,7 +447,7 @@ def fit_fold(X, F, y, ids, folds, out, scheme, f, design):
     diag = geo_diagnostics(F.iloc[a], F.iloc[b], built)
     model, fit_seconds, fit_warnings = fit_rf(built['Xos'], built['yos'], c)
     t0 = time.perf_counter()
-    p = np.asarray(model.predict_proba(built['Bo']), dtype=np.float64)
+    p = predict_proba_deterministic(model, built['Bo'])
     predict_seconds = time.perf_counter() - t0
     require(p.shape == (len(b), 3) and np.isfinite(p).all(), 'Invalid probabilities')
     pred = p.argmax(1) + 1
@@ -451,7 +462,7 @@ def fit_fold(X, F, y, ids, folds, out, scheme, f, design):
     loaded, state = joblib.load(model_path), joblib.load(state_path)
     Bo2 = apply_state(state['geo'], F.iloc[b], state['columns'], state['cats'])
     require(Bo2.equals(built['Bo']), 'Encoder state does not reproduce the validation matrix')
-    p2 = np.asarray(loaded.predict_proba(Bo2), dtype=np.float64)
+    p2 = predict_proba_deterministic(loaded, Bo2)
     reload_diff = float(np.max(np.abs(p2 - p)))
     require(reload_diff <= c['checkpoint']['reload_probability_atol'] and np.array_equal(p2.argmax(1) + 1, pred),
             f'Model reload mismatch {reload_diff}')

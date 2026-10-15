@@ -325,6 +325,28 @@ class CheckpointTests(unittest.TestCase):
             # validation groups are unseen in training for the Group split
             self.assertEqual(rec['geo_diagnostics']['geo_level_2_id']['valid_rows_with_id_seen_in_train'], 0.0)
 
+    def test_prediction_is_single_thread_and_repeatable(self):
+        # Regression (strat fold 1, attempt 1): n_jobs=4 predict_proba varied by ~1e-16 between calls and flipped argmax
+        # on exact top-2 ties, failing the reload gate. Predictions must be single-thread and bit-identical on repeat.
+        rng = np.random.default_rng(0)
+        Xs = rng.integers(0, 2, size=(400, 3)).astype('float32')  # coarse features -> many exact probability ties
+        ys = rng.integers(0, 3, size=400)
+        m = RandomForestClassifier(n_estimators=40, n_jobs=4, random_state=0).fit(Xs, ys)
+        seen = []
+        orig = RandomForestClassifier.predict_proba
+
+        def spy(self, X):
+            seen.append(self.n_jobs)
+            return orig(self, X)
+        with mock.patch.object(RandomForestClassifier, 'predict_proba', spy):
+            p1 = t14.predict_proba_deterministic(m, Xs)
+            p2 = t14.predict_proba_deterministic(m, Xs)
+        self.assertEqual(seen, [1, 1])
+        self.assertEqual(m.n_jobs, 4)  # restored for the saved model
+        np.testing.assert_array_equal(p1, p2)
+        src = (ROOT/'experiments'/'te_ros_rf_repro'/'run.py').read_text(encoding='utf-8')
+        self.assertEqual(src.count('.predict_proba('), 1)  # only inside the deterministic helper
+
     def test_holdout_is_never_opened(self):
         opened = []
         real_open = builtins.open
