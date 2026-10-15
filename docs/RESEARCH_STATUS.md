@@ -7,7 +7,7 @@
 
 ## 현재 실행 상태 (2026-10-15 갱신)
 
-T16~T25 학습 또는 분석·집계·독립 감사와 공개 집계 검토를 완료했다. T25는18:22 학습20/20회·재시도0, 18:25 독립 감사 PASS_T25, 18:28 공개 보고355항목 PASS다. 현재 보고·집계·원장·감사 등12개 근거 SHA를 부모가 대조했고 실행 잠금은 해제됐다. 평균 Macro F1은0.582056→0.568221(Δ−0.013834), 20개 Fold 모두 기준보다 낮다. 3→1은902→527로 감소했으나 3→2 증가·Recall3 하락으로 사전 기준 미충족이며 기존 모델을 유지한다. T24 역시 평균Δ+0.002072·3→1 902→912로 기준 미충족이다. 새 학습은 시작하지 않으며 공개 push는 하지 않았다.
+T16~T25 학습 또는 분석·집계·독립 감사와 공개 집계 검토를 완료했다. T25는18:22 학습20/20회·재시도0, 18:25 독립 감사 PASS_T25, 18:28 공개 보고355항목 PASS다. 현재 보고·집계·원장·감사 등12개 근거 SHA를 부모가 대조했고 실행 잠금은 해제됐다. 평균 Macro F1은0.582056→0.568221(Δ−0.013834), 20개 Fold 모두 기준보다 낮다. 3→1은902→527로 감소했으나 3→2 증가·Recall3 하락으로 사전 기준 미충족이며 기존 모델을 유지한다. T24 역시 평균Δ+0.002072·3→1 902→912로 기준 미충족이다. 이후 사용자가 추가 실험 한 개를 요청해 T26 범주형 직접 처리 비교의 구현·독립 검토·전체 회귀를 완료했다. 최종 검증·커밋·실행 관리자 인계 전 실제 학습은 시작하지 않는다. 공개 push는 하지 않았다.
 
 | 연구 | 확인 상태 | 근거와 해석 |
 |---|---|---|
@@ -22,6 +22,7 @@ T16~T25 학습 또는 분석·집계·독립 감사와 공개 집계 검토를 �
 | T23 누적 이진분류 | 40binary/20unit·독립 감사·공개 보고 검토 PASS | [보고](../reports/ORDINAL_DAMAGE_20261015.md). 평균 Δ−0.000265, 3→1 902→895이나 Recall3 하락. 기준 미충족. |
 | T24 상위 지역 문맥 | 20/20·독립 감사·공개 보고 검토 PASS | [보고](../reports/GEO_CONTEXT_20261015.md). 평균 Δ+0.002072, 3→1 902→912로 기준 미충족. |
 | T25 CatBoost C 비교 | 20/20·독립 감사·공개 보고 검토 PASS | [보고](../reports/CATBOOST_C_20261015.md). 평균Δ−0.013834·양의 Fold0/20, 3→1 감소이나 전체 기준 미충족. |
+| T26 CatBoost native C | 구현·독립 검토·전체 회귀 통과, 실자료0회 | [계획](T26_CATBOOST_NATIVE_C_PLAN.md). 수치/이진28열 동일·범주11열 직접 처리, 주비교T25·보조LGBM-O, 신규20회. |
 
 T24 전체 회귀는 **734개 실행·실패0·스킵33(99.673초)**이며 전용 피처14/실행기24를 포함한다. 로그는 `local_reproduction/session_20261015_control/t24_full_tests_20261015.log`, 구현 영수증은 `local_reproduction/T24_20261015_geo_context/runner_implementation_validation_v1.json`이다. 별도 독립 합성17개 PASS·당시 감사 준비 영수증이며 `t24_audit/preparation_receipt_v1.json` SHA는 `9e1b0dd0646ab3277669a246ab53f190dfc80af130091b93a0c8688ff1e147d6`이다. 이후 실제 감사 PASS_T24·native20모델 최대 확률차0과 공개 검토481항목을 별도로 확인했다. 기존 T21/T22/T23 봉인 소스는 각각49개 모두 불변이며 T24 소스도 기존42개+신규7개로 결속한다.
 
@@ -58,12 +59,21 @@ README는 결과 입구, AGENTS는 현재 규칙, 이 문서는 상태·근거·
 
 ## 현재 후속 절차
 
-1. 현재 승인된 T16~T25 연구의 학습·집계·독립 감사·보고 검토는 완료했다. 기존 prepare·fit·finalize·감사를 반복하지 않는다. 새 실험은 별도 사용자 지시와 새 설계를 따른다.
+1. T16~T25 연구의 학습·집계·독립 감사·보고 검토는 완료했으며 반복하지 않는다. 추가 승인된 T26은 구현·검토·커밋 뒤 기존 Astra 실행 관리자만 최초 prepare·학습·감사를 담당한다. 출력은 `local_reproduction/T26_20261015_catboost_native_c/run`, 모듈 `experiments.catboost_native_c.run`, 팔 `CATBOOST_NATIVE_C`다.
 2. 작업은 `worktrees/peter_rules`의 `peter`에서만 한다. 기존 봉인 소스·설정·계획·산출물과 팀원 브랜치를 변경하지 않는다. 컴퓨터 자동 종료 지시는 취소됐으므로 켜 둔다.
 3. T25 소스 `44cc9744d2d8418c9df9d2f20c321d8bc3029b08`, design SHA `3d6b3fe1b1f751029bb27196a5121bcac27d7093e098a86eae00c33cdf9e8e96`를 보존한다. 전체777검사·실패0·스킵33(110.979초), adapter14/runner29·독립20검사의 근거는 `t25_full_tests_final_20261015.log`, `t25_parent_validation_v1.json` 및 구현/준비 영수증이다. 이전775검사는 CI 이식성 보완 전 기록이다.
 4. T25 실제 감사는 `local_reproduction/session_20261015_control/t25_audit/t25_audit_result_v1.json`의 PASS_T25다. native20모델 재추론 최대 확률차0, 실행기 import·joblib 역직렬화·추가 학습0으로 C/환경/원장/지표를 검증했다. 준비 영수증 READY_NOT_EXECUTED와 실제 감사 완료를 구분한다.
 5. 공개 보고 검토 `t25_public_report_review.json`의355항목 PASS와 현재 파일 SHA를 부모가 대조했다. [보고](../reports/CATBOOST_C_20261015.md)와 [집계](../reports/catboost_c_20261015.json)에는 집계만 담는다. 원시 데이터·모델·OOF·manifest는 공개 Git에 올리지 않는다.
 6. 기존 동결 Python 환경과 T25 전용 vendor를 보존한다. 환경 manifest SHA `c67feaf2addb617dea50e2cf26a3757d0f1cab037add37611851893a5fbde6ef`, vendor3014파일·기존7배포5210파일 검증 근거를 유지한다. 원격 push·원격 CI 확인은 이번 완료 범위에 포함하지 않는다.
+
+
+### T26 실행 인계 준비
+
+T25 환경을 재사용하며 신규 설치는 없다. T25 원핫 OOF와 실제 PASS_T25·설계·집계·원장 SHA를 주비교의 출처로 결속한다. 같은 geo2 네 seed의20개 Fold에서 범주 표현만 바꾸고 T25 대비 표현 개선, LGBM-O 대비 기준선 도전의 다섯 판정을 별도로 기록한다.
+
+구현 전용48개·독립22개 검사 통과, 전체 회귀825개 중792개 통과·스킵33·실패0(372.229초)이다. 전체 로그는 `local_reproduction/session_20261015_control/t26_full_tests_20261015.log`다. 작은 합성 native300트리 학습1회에서 입력39열·범주11열·저장/재추론 확률차0을 확인했으며 실자료 학습은0회다. source49개는 기존42개+신규7개이고, T21~T25 봉인 소스를 보존한다. 감사 준비 영수증 `t26_audit/preparation_receipt_v1.json` SHA `1d56cd7d01644ad95dccb3e69ff40474eca983a27e7a3f534fc65ce6f0a12350`은 READY_NOT_EXECUTED이며 실제 감사 PASS_T26과 구분한다.
+
+최종 전용/독립 검사·전체 회귀·소스 커밋·감사 준비 후, 관리자가 T25 종료·잠금·현재 자원을 확인해 첫 공식 geo2_s42/f0을 실행한다. 저장·재로딩·SHA·백업·정상 종료와 자원 재확인 후 나머지19개를 이어간다. 신규20회·재시도0, failed/running 전역 차단, 가용RAM≥8GiB·디스크≥15GiB 및 지속CPU90%/디스크 포화 회피를 유지한다. 실제 감사 PASS 뒤 `reports/CATBOOST_NATIVE_C_20261015.md`와 집계 JSON을 작성·독립 검토한다. 공통 문서·커밋은 부모 담당이다.
 
 
 T22/T23 실제 감사는 각각 `t22_audit/t22_audit_result_v1.json`의 PASS_T22, `t23_audit/t23_audit_result_v1.json`의 PASS_T23이다. 모두 native40모델 재추론 최대 확률차0이며 T23은 20외부단위를 별도로 검증했다. 공개 보고 검토 `t22_public_report_review.json` 609항목, `t23_public_report_review.json` 539항목 PASS와 해당 파일 SHA를 부모가 대조했다. 보고4파일은 로컬 `05b707a`에 반영했으며 새 공개push는 없다.
