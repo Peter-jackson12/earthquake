@@ -1,0 +1,19 @@
+{
+  "study_id": "T6_geo_ablation_v1",
+  "base_commit": "acd5ecdeefeff619c2fae9639f1627638de59383",
+  "plan_commit": "804b1cf26017e88096388cd2347865b7a0b2e7bc",
+  "variants": {"R12": ["geo_level_3_id"], "R1": ["geo_level_2_id", "geo_level_3_id"], "R0": ["geo_level_1_id", "geo_level_2_id", "geo_level_3_id"]},
+  "schemes": ["stratified", "geo2", "geo1"],
+  "lr": {"C": 1.0, "solver": "lbfgs", "max_iter": 1500, "tol": 0.0001, "random_state": 42},
+  "environment": {"python": "3.13.5", "numpy": "2.3.5", "pandas": "2.2.3", "scipy": "1.17.0", "sklearn": "1.8.0", "joblib": "1.5.3", "threadpoolctl": "3.6.0"},
+  "manifest_sha256": {"stratified": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721", "geo2": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64", "geo1": "1b4616ff7d5e052ac76707e58de48e3d0b23fb7a49e350c14d6704cc1ee488f5"},
+  "C_oof_sha256": {"stratified": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc", "geo2": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4", "geo1": "453608352590cf27ddb1460926b7578d50832baa9127431422d0dd69b8f42951"},
+  "labels": [1, 2, 3], "n_folds": 5, "seed": 42,
+  "primary": "unweighted_mean_of_five_fold_macro_f1", "std_ddof": 1,
+  "error_rate_denominator": "actual_grade3_support_in_evaluation_group",
+  "diagnostic_regions": ["26", "20", "13"],
+  "max_new_classifier_fits": 45, "threads_per_fit": 1,
+  "automatic_retries": 0, "stop_on_nonconvergence": true,
+  "probability_reload_atol": 1e-12, "holdout_access": false,
+  "automatic_model_replacement": false
+}
