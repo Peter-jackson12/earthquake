@@ -1,0 +1,315 @@
+{
+ "study_id": "T15_grade3_decision_rule_v1",
+ "experiment_id": "T15_GRADE3_DECISION_RULE",
+ "branch": "peter-exp/grade3-decision-rule-v1",
+ "base_commit": "af261c7",
+ "purpose": "Separate-factor test of a grade-3 decision rule (one scalar logit offset b on grade 3, fixed grid) applied identically to LR_C, LGBM_O, LGBM_TE_G; b fitted on inner-CV OOF inside each outer-training set only.",
+ "arms": [
+  "LR_C",
+  "LGBM_O",
+  "LGBM_TE_G"
+ ],
+ "arm_notes": {
+  "LGBM_TE_G": "group schemes: T11 group-aware TE (geo2 level for group2, geo1 level for group1); strat scheme: T10 LGBM_TE (plain inner OOF), as in the reused strat reference"
+ },
+ "n_folds": 5,
+ "schemes": {
+  "geo2_s42": {
+   "kind": "group2",
+   "role": "primary",
+   "seed": 42,
+   "manifest": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T6R_20261014_local/run/geo2/manifest.csv",
+    "sha256": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64"
+   },
+   "refs": {
+    "LR_C": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T6S_20261014_c_group/t5_private/outputs/geo_group_cv_v1/geo2/C/oof.csv.gz",
+     "sha256": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4"
+    },
+    "LGBM_O": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T8_20261014_native_cat/run/geo2/O/oof.csv.gz",
+     "sha256": "ba282656c482264c045865de32db32d56a0b7c6c872670972c480a90abaa211c"
+    },
+    "LGBM_TE_G": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T11_20261014_te_group_inner/run/geo2/LGBM_TE_G/oof.csv.gz",
+     "sha256": "34f23ad64d9dbcc3c79b3112808db65d5e8a3a114b19e086d2b1bf1756ee039b"
+    }
+   }
+  },
+  "geo2_s101": {
+   "kind": "group2",
+   "role": "primary",
+   "seed": 101,
+   "manifest": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_101/manifest.csv",
+    "sha256": "7877b21b59433dea9c4a22ddd8fc1112a3440180fc4e2ab9a73aa0a5b56af1f4"
+   },
+   "refs": {
+    "LR_C": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s101/LR_C/oof.csv.gz",
+     "sha256": "486f7975a1304f5b5703a6ae197bd34c8297149dddf8085ffaca1020fb6b0a0c"
+    },
+    "LGBM_O": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s101/LGBM_O/oof.csv.gz",
+     "sha256": "bd2f5f1790e9a6047f2c9485b8aeab28333be0742028ad678743f63eb2297f90"
+    },
+    "LGBM_TE_G": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s101/LGBM_TE_G/oof.csv.gz",
+     "sha256": "5bc7df138b8e03ef270b1f4bc3473853d64062c08d1e7081a5b6265cc562ba05"
+    }
+   }
+  },
+  "geo2_s202": {
+   "kind": "group2",
+   "role": "primary",
+   "seed": 202,
+   "manifest": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_202/manifest.csv",
+    "sha256": "9b3a48054743a95b83d85d95ac05354456d441fe4ac6c8aa189434d3877914c7"
+   },
+   "refs": {
+    "LR_C": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s202/LR_C/oof.csv.gz",
+     "sha256": "1c8ef79e708c4ca5d5730c7b92a27ee0e690dfc451741803954fc21e69e69003"
+    },
+    "LGBM_O": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s202/LGBM_O/oof.csv.gz",
+     "sha256": "45d0d0bb8e5a61a9cd41d9bc1343d9c7dbf0496dead5efc05834f98932d99749"
+    },
+    "LGBM_TE_G": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s202/LGBM_TE_G/oof.csv.gz",
+     "sha256": "2fa8f729e6482a34871e9d93c5abaa7c61cf514469dae74beb44641c239b8d52"
+    }
+   }
+  },
+  "geo2_s303": {
+   "kind": "group2",
+   "role": "primary",
+   "seed": 303,
+   "manifest": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_303/manifest.csv",
+    "sha256": "26f42c0b2b3ea40f736d82d178b864ce2d4a25d1eeb2d924c65a177254b8fafd"
+   },
+   "refs": {
+    "LR_C": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s303/LR_C/oof.csv.gz",
+     "sha256": "7dc09af6d8d86140d3938e0ab10695c75c5dbcdf0372c53c85067d1917d3192c"
+    },
+    "LGBM_O": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s303/LGBM_O/oof.csv.gz",
+     "sha256": "a366689191280d3dfa43e7df5cc699fcb3a331c595c76c54ddd4712ae76c27c4"
+    },
+    "LGBM_TE_G": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s303/LGBM_TE_G/oof.csv.gz",
+     "sha256": "0b8ff7187a96025fd68ae58e3b4bad7990a79817cee75ffdaadb7091b1c5eb37"
+    }
+   }
+  },
+  "strat_s42": {
+   "kind": "strat",
+   "role": "secondary_optimistic",
+   "seed": 42,
+   "manifest": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/earthquake/data/split_manifest.csv",
+    "sha256": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+   },
+   "refs": {
+    "LR_C": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/20261014_01/private_original/age995_abc_v1/C/lr/oof_predictions.csv.gz",
+     "sha256": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc"
+    },
+    "LGBM_O": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/20261014_01/private_t4_original/private/model_families_v1/LGBM_C_v1/oof_predictions.csv.gz",
+     "sha256": "0bc63eb5122afb479c41826918a9fbb43a3475351a934d847833656eec6930cf"
+    },
+    "LGBM_TE_G": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T10_20261014_geo_te/run/stratified/LGBM_TE/oof.csv.gz",
+     "sha256": "3c0d2cd8b3d40acc42817fe029c70335f4f5233562cfd857836d6275bd0eb859"
+    }
+   }
+  },
+  "geo1_s42": {
+   "kind": "group1",
+   "role": "secondary_diagnostic",
+   "seed": 42,
+   "manifest": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T6R_20261014_local/run/geo1/manifest.csv",
+    "sha256": "1b4616ff7d5e052ac76707e58de48e3d0b23fb7a49e350c14d6704cc1ee488f5"
+   },
+   "refs": {
+    "LR_C": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T6S_20261014_c_group/t5_private/outputs/geo_group_cv_v1/geo1/C/oof.csv.gz",
+     "sha256": "453608352590cf27ddb1460926b7578d50832baa9127431422d0dd69b8f42951"
+    },
+    "LGBM_O": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T8_20261014_native_cat/run/geo1/O/oof.csv.gz",
+     "sha256": "f4f3f9c9b966394c8d1ef0d7e6b1b5fd1367390b832bdd7f49ea8b2340b3d9f1"
+    },
+    "LGBM_TE_G": {
+     "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T11_20261014_te_group_inner/run/geo1/LGBM_TE_G/oof.csv.gz",
+     "sha256": "94f06d8e5ccafe33abe5c4ed0a59be11a7633769097dd497dc3fdde82bfc9993"
+    }
+   }
+  }
+ },
+ "primary_schemes": [
+  "geo2_s42",
+  "geo2_s101",
+  "geo2_s202",
+  "geo2_s303"
+ ],
+ "secondary_schemes": [
+  "strat_s42",
+  "geo1_s42"
+ ],
+ "group_columns": {
+  "group2": [
+   "geo_level_1_id",
+   "geo_level_2_id"
+  ],
+  "group1": [
+   "geo_level_1_id"
+  ]
+ },
+ "inner": {
+  "n_splits": 5,
+  "seed": 42,
+  "shuffle": true,
+  "splitter_group": "StratifiedGroupKFold",
+  "splitter_strat": "StratifiedKFold",
+  "min_class_support": 30,
+  "on_gate_failure": "stop and report; no seed substitution"
+ },
+ "rule": {
+  "name": "grade3_logit_offset",
+  "formula": "pred = argmax_k(p_k * w_k), w = (1, 1, exp(b))",
+  "grid": [
+   0.0,
+   0.1,
+   0.2,
+   0.3,
+   0.4,
+   0.5,
+   0.6,
+   0.7,
+   0.8,
+   0.9,
+   1.0,
+   1.1,
+   1.2,
+   1.3,
+   1.4,
+   1.5,
+   1.6,
+   1.7,
+   1.8,
+   1.9,
+   2.0
+  ],
+  "objective": "Macro F1 labels [1,2,3] on pooled inner-OOF rows of the outer-training set",
+  "tie_break": "smallest b among exact maxima (b=0 means no change)",
+  "parameters": 1,
+  "negative_b": false
+ },
+ "te": {
+  "smoothing_m": 20.0,
+  "group_level": "geo2",
+  "inner_splits": 5,
+  "inner_seed": 42
+ },
+ "lr_params": {
+  "solver": "lbfgs",
+  "C": 1.0,
+  "max_iter": 1500,
+  "tol": 0.0001,
+  "random_state": 42
+ },
+ "lr_threadpool_limit": 1,
+ "lgbm_params": {
+  "objective": "multiclass",
+  "num_class": 3,
+  "n_estimators": 300,
+  "learning_rate": 0.05,
+  "num_leaves": 31,
+  "max_depth": -1,
+  "min_child_samples": 20,
+  "min_child_weight": 0.001,
+  "min_split_gain": 0.0,
+  "subsample": 1.0,
+  "subsample_freq": 0,
+  "colsample_bytree": 1.0,
+  "reg_alpha": 0.0,
+  "reg_lambda": 0.0,
+  "max_bin": 255,
+  "boosting_type": "gbdt",
+  "device_type": "cpu",
+  "deterministic": true,
+  "force_col_wise": true,
+  "zero_as_missing": false,
+  "random_state": 42,
+  "n_jobs": 2,
+  "verbosity": 1
+ },
+ "lgbm_threadpool_limit": 2,
+ "geo_columns": [
+  "geo_level_1_id",
+  "geo_level_2_id",
+  "geo_level_3_id"
+ ],
+ "text_categorical_columns": [
+  "land_surface_condition",
+  "foundation_type",
+  "roof_type",
+  "ground_floor_type",
+  "other_floor_type",
+  "position",
+  "plan_configuration",
+  "legal_ownership_status"
+ ],
+ "outer_parallel_jobs": 1,
+ "early_stopping": false,
+ "class_weight": null,
+ "sampling": null,
+ "tuning_of_model_hyperparameters": false,
+ "automatic_retries": 0,
+ "stop_on_lr_nonconvergence": true,
+ "holdout_access": false,
+ "outer_model_refits": 0,
+ "n_inner_fits_per_scheme_arm": 25,
+ "max_new_study_fits": 450,
+ "environment": {
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "scipy": "1.17.0",
+  "scikit-learn": "1.8.0",
+  "lightgbm": "4.6.0",
+  "joblib": "1.5.3",
+  "threadpoolctl": "3.6.0"
+ },
+ "checkpoint": {
+  "model_reload_probability_atol_lgbm": 1e-12,
+  "lr_reload": "exact",
+  "csv_float_format": "%.17g",
+  "backup_dir": "backup",
+  "resume_skips_completed": true
+ },
+ "rules": {
+  "desc": "Per arm: adjusted vs the same arm unadjusted (argmax); geo2 primary schemes pooled over seeds 42/101/202/303 = 20 outer folds",
+  "P1_mean_delta_min": 0.003,
+  "P2_fold_wins_min": 14,
+  "P2_n_folds": 20,
+  "P3_positive_seed_means_min": 3,
+  "P3_n_seeds": 4,
+  "G1_pooled_grade3_recall_gain_min": 0.03,
+  "G2_error31_ratio_max": 1.25,
+  "G3_pooled_grade1_recall_drop_max": 0.03,
+  "G4_stratified_mean_delta_min": -0.003,
+  "arm_candidate": "P1 AND P2 AND P3 AND G1 AND G2 AND G3 AND G4",
+  "common_rule": "all three arms are candidates",
+  "geo1": "descriptive only, no gate",
+  "boundary_flag_fraction": 0.5
+ },
+ "holdout_access_guard": "final_holdout"
+}

@@ -1,0 +1,449 @@
+{
+ "study_id": "T15_grade3_decision_rule_v1",
+ "experiment_id": "T15_GRADE3_DECISION_RULE",
+ "branch": "peter-exp/grade3-decision-rule-v1",
+ "code_commit": "7a8796b0a135b59c3201dd6a27da720adcedc7ea",
+ "design_sha256": "0e9a1cbbd06583601847a5191b1556f622a247d07ee74db2b9ea341eb4dcc8b7",
+ "holdout_accessed": false,
+ "rule": {
+  "name": "grade3_logit_offset",
+  "formula": "pred = argmax_k(p_k * w_k), w = (1, 1, exp(b))",
+  "grid": [
+   0.0,
+   0.1,
+   0.2,
+   0.3,
+   0.4,
+   0.5,
+   0.6,
+   0.7,
+   0.8,
+   0.9,
+   1.0,
+   1.1,
+   1.2,
+   1.3,
+   1.4,
+   1.5,
+   1.6,
+   1.7,
+   1.8,
+   1.9,
+   2.0
+  ],
+  "objective": "Macro F1 labels [1,2,3] on pooled inner-OOF rows of the outer-training set",
+  "tie_break": "smallest b among exact maxima (b=0 means no change)",
+  "parameters": 1,
+  "negative_b": false
+ },
+ "rules": {
+  "desc": "Per arm: adjusted vs the same arm unadjusted (argmax); geo2 primary schemes pooled over seeds 42/101/202/303 = 20 outer folds",
+  "P1_mean_delta_min": 0.003,
+  "P2_fold_wins_min": 14,
+  "P2_n_folds": 20,
+  "P3_positive_seed_means_min": 3,
+  "P3_n_seeds": 4,
+  "G1_pooled_grade3_recall_gain_min": 0.03,
+  "G2_error31_ratio_max": 1.25,
+  "G3_pooled_grade1_recall_drop_max": 0.03,
+  "G4_stratified_mean_delta_min": -0.003,
+  "arm_candidate": "P1 AND P2 AND P3 AND G1 AND G2 AND G3 AND G4",
+  "common_rule": "all three arms are candidates",
+  "geo1": "descriptive only, no gate",
+  "boundary_flag_fraction": 0.5
+ },
+ "common_rule_holds": false,
+ "judgments": {
+  "LR_C": {
+   "candidate": false,
+   "parts": {
+    "P1_mean_delta_ok": false,
+    "P2_fold_wins_ok": true,
+    "P3_positive_seeds_ok": true,
+    "G1_grade3_recall_gain_ok": true,
+    "G2_error31_ratio_ok": true,
+    "G3_grade1_recall_drop_ok": true,
+    "G4_stratified_not_worse_ok": true
+   },
+   "inputs": {
+    "mean_delta": 0.002237575579988704,
+    "fold_wins": 16,
+    "n_folds": 20,
+    "seed_mean_deltas": {
+     "42": 0.002823409621876416,
+     "101": 0.001444005349216626,
+     "202": 0.0024456240648110137,
+     "303": 0.002237263284050761
+    },
+    "stratified_mean_delta": 0.000665183708217354,
+    "grade3_recall": [
+     0.5206344770258262,
+     0.6087296127497348
+    ],
+    "grade1_recall": [
+     0.29343499676600826,
+     0.2932608587491915
+    ],
+    "error31": [
+     738,
+     738
+    ]
+   },
+   "geo2_pooled_confusion_unadjusted": [
+    [
+     23591,
+     55285,
+     1520
+    ],
+    [
+     14865,
+     383054,
+     76509
+    ],
+    [
+     738,
+     133051,
+     145307
+    ]
+   ],
+   "geo2_pooled_confusion_adjusted": [
+    [
+     23577,
+     54518,
+     2301
+    ],
+    [
+     14864,
+     351537,
+     108027
+    ],
+    [
+     738,
+     108464,
+     169894
+    ]
+   ]
+  },
+  "LGBM_O": {
+   "candidate": true,
+   "parts": {
+    "P1_mean_delta_ok": true,
+    "P2_fold_wins_ok": true,
+    "P3_positive_seeds_ok": true,
+    "G1_grade3_recall_gain_ok": true,
+    "G2_error31_ratio_ok": true,
+    "G3_grade1_recall_drop_ok": true,
+    "G4_stratified_not_worse_ok": true
+   },
+   "inputs": {
+    "mean_delta": 0.013791562323683282,
+    "fold_wins": 20,
+    "n_folds": 20,
+    "seed_mean_deltas": {
+     "42": 0.01442579696529871,
+     "101": 0.013950691760963151,
+     "202": 0.013188605563012601,
+     "303": 0.013601155005458665
+    },
+    "stratified_mean_delta": 0.0043210832403739905,
+    "grade3_recall": [
+     0.4610635766904578,
+     0.6300054461547281
+    ],
+    "grade1_recall": [
+     0.3489974625603264,
+     0.3487486939648739
+    ],
+    "error31": [
+     902,
+     892
+    ]
+   },
+   "geo2_pooled_confusion_unadjusted": [
+    [
+     28058,
+     51454,
+     884
+    ],
+    [
+     15409,
+     402379,
+     56640
+    ],
+    [
+     902,
+     149513,
+     128681
+    ]
+   ],
+   "geo2_pooled_confusion_adjusted": [
+    [
+     28038,
+     50374,
+     1984
+    ],
+    [
+     15395,
+     351299,
+     107734
+    ],
+    [
+     892,
+     102372,
+     175832
+    ]
+   ]
+  },
+  "LGBM_TE_G": {
+   "candidate": true,
+   "parts": {
+    "P1_mean_delta_ok": true,
+    "P2_fold_wins_ok": true,
+    "P3_positive_seeds_ok": true,
+    "G1_grade3_recall_gain_ok": true,
+    "G2_error31_ratio_ok": true,
+    "G3_grade1_recall_drop_ok": true,
+    "G4_stratified_not_worse_ok": true
+   },
+   "inputs": {
+    "mean_delta": 0.004601835465690968,
+    "fold_wins": 17,
+    "n_folds": 20,
+    "seed_mean_deltas": {
+     "42": 0.006913198358952566,
+     "101": 0.001729454011399434,
+     "202": 0.007048139848100754,
+     "303": 0.002716549644311117
+    },
+    "stratified_mean_delta": 0.0017146779034894698,
+    "grade3_recall": [
+     0.5254571903574398,
+     0.6293282598102445
+    ],
+    "grade1_recall": [
+     0.37486939648738743,
+     0.3745086820239813
+    ],
+    "error31": [
+     1322,
+     1292
+    ]
+   },
+   "geo2_pooled_confusion_unadjusted": [
+    [
+     30138,
+     48934,
+     1324
+    ],
+    [
+     18934,
+     379585,
+     75909
+    ],
+    [
+     1322,
+     131121,
+     146653
+    ]
+   ],
+   "geo2_pooled_confusion_adjusted": [
+    [
+     30109,
+     48343,
+     1944
+    ],
+    [
+     18911,
+     345362,
+     110155
+    ],
+    [
+     1292,
+     102161,
+     175643
+    ]
+   ]
+  }
+ },
+ "selected_b": {
+  "LR_C": {
+   "geo2_s42": [
+    0.4,
+    0.3,
+    0.3,
+    0.3,
+    0.2
+   ],
+   "geo2_s101": [
+    0.3,
+    0.4,
+    0.3,
+    0.2,
+    0.2
+   ],
+   "geo2_s202": [
+    0.4,
+    0.3,
+    0.3,
+    0.2,
+    0.3
+   ],
+   "geo2_s303": [
+    0.3,
+    0.4,
+    0.4,
+    0.2,
+    0.3
+   ],
+   "strat_s42": [
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "geo1_s42": [
+    0.7,
+    0.8,
+    0.9,
+    1.0,
+    0.9
+   ]
+  },
+  "LGBM_O": {
+   "geo2_s42": [
+    0.5,
+    0.5,
+    0.4,
+    0.5,
+    0.5
+   ],
+   "geo2_s101": [
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+   ],
+   "geo2_s202": [
+    0.5,
+    0.5,
+    0.4,
+    0.5,
+    0.6
+   ],
+   "geo2_s303": [
+    0.5,
+    0.5,
+    0.4,
+    0.5,
+    0.5
+   ],
+   "strat_s42": [
+    0.2,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "geo1_s42": [
+    0.9,
+    1.2,
+    1.3,
+    1.3,
+    1.3
+   ]
+  },
+  "LGBM_TE_G": {
+   "geo2_s42": [
+    0.2,
+    0.2,
+    0.3,
+    0.3,
+    0.4
+   ],
+   "geo2_s101": [
+    0.5,
+    0.4,
+    0.3,
+    0.3,
+    0.2
+   ],
+   "geo2_s202": [
+    0.3,
+    0.3,
+    0.4,
+    0.2,
+    0.4
+   ],
+   "geo2_s303": [
+    0.3,
+    0.4,
+    0.4,
+    0.3,
+    0.2
+   ],
+   "strat_s42": [
+    0.1,
+    0.2,
+    0.2,
+    0.2,
+    0.2
+   ],
+   "geo1_s42": [
+    0.4,
+    0.5,
+    0.5,
+    0.4,
+    0.7
+   ]
+  }
+ },
+ "geo1_diagnostic": {
+  "LR_C": {
+   "mean_delta": 0.09663013549200702,
+   "fold_deltas": [
+    0.11959981965265476,
+    0.09659055306715231,
+    0.07755880727485054,
+    0.06766636521021441,
+    0.12173513225516314
+   ]
+  },
+  "LGBM_O": {
+   "mean_delta": 0.10341823089262563,
+   "fold_deltas": [
+    0.12467897531200478,
+    0.10977473872803528,
+    0.09236502043799599,
+    0.0766368646394795,
+    0.1136355553456126
+   ]
+  },
+  "LGBM_TE_G": {
+   "mean_delta": 0.009009063016464713,
+   "fold_deltas": [
+    0.08570669216038224,
+    0.002619046642047207,
+    -0.011227213259882629,
+    -0.0028753481593114527,
+    -0.029177862300911794
+   ]
+  }
+ },
+ "training": {
+  "new_inner_fits": 450,
+  "outer_refits": 0,
+  "retries": 0,
+  "lr_nonconverged": 0
+ },
+ "independent_audit": {
+  "status": "PASS",
+  "issues": [],
+  "artifacts_hash_checked": 1830,
+  "audit_code_sha256": "088d3c7e9dcc92e8669f2731428b672f31a3ef22d2c029c190b523d478ab7d1a",
+  "note": "audit attempt 1 raised false group-leak alarms from an audit-script bug (kind compared to \"geo2\" instead of \"group2\"); fixed and re-run with 0 issues"
+ },
+ "note": "Descriptive; stratified seed 42 is optimistic (folds reused by many studies); geo1 diagnostic only; outer models were not refit (saved OOFs reused read-only); no holdout.",
+ "private_artifacts": "local_reproduction/T15_20261015_grade3_rule (not in Git)"
+}
