@@ -52,8 +52,8 @@ Macro F1과 함께 3→1·3→2 건수와 비율 및 3등급 Recall을 보고합
 | T23 | 누적 이진분류·단조 확률투영 | 40이진 학습·20외부단위·독립 감사 완료, 기준 미충족, [결과](reports/ORDINAL_DAMAGE_20261015.md) |
 | T24 | 상위 지역 중앙값·상대 차이 6열 | 20회 학습·독립 감사·보고 검토 완료, 기준 미충족, [결과](reports/GEO_CONTEXT_20261015.md) |
 | T25 | C 입력을 유지한 CatBoost 모델 비교 | 20회 학습·독립 감사·보고 검토 완료, 기준 미충족, [결과](reports/CATBOOST_C_20261015.md) |
-| T26 | CatBoost 범주형 직접 처리 | 20:03 확인: 첫 Fold 저장·재추론 완료, 두 번째 실행 중, [계획](docs/T26_CATBOOST_NATIVE_C_PLAN.md) |
-| T27 | 넓은 파생변수 묶음 | 추가101종·인코딩 전140종 후보 구현·검토 완료, 관리자 실행 준비, [계획](docs/T27_WIDE_FEATURES_PLAN.md) |
+| T26 | CatBoost 범주형 직접 처리 | 20:34 확인: 6/20 완료, T27과 Fold 단위 교대, [계획](docs/T26_CATBOOST_NATIVE_C_PLAN.md) |
+| T27 | 넓은 파생변수 묶음 | 추가101종·인코딩 전140종 후보, 20:35 첫 공식 Fold 실행 확인, [계획](docs/T27_WIDE_FEATURES_PLAN.md) |
 
 ## 결과 보기 — 데이터나 모델 파일 없이 실행
 
