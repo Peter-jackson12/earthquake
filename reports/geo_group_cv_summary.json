@@ -1,0 +1,350 @@
+{
+  "study_id": "T5_geo_group_cv_v1",
+  "status": "COMPLETE_AUDITED",
+  "base_commit": "a4fc5c82a1907d8fc975f0971deaed8d26a4461f",
+  "training_commit": "3ebe0f39f26d6151216ebd03d0d3f024a7bc29e5",
+  "new_fits": 20,
+  "old_refits": 0,
+  "holdout_accessed": false,
+  "models": [
+    {
+      "scheme": "geo2",
+      "variant": "C",
+      "cv_mean": 0.5651464270615694,
+      "cv_std": 0.020001930726245665,
+      "macro_f1": 0.5678489520070067,
+      "accuracy": 0.6612528779739064,
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "recall": [
+        0.29240260709488036,
+        0.8062171709932803,
+        0.5210823515922837
+      ],
+      "error31": 186,
+      "error32": 33230,
+      "rate31": 0.002665749419554562,
+      "rate32": 0.4762518989881618,
+      "oof_sha256": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4",
+      "new_fits": 5
+    },
+    {
+      "scheme": "geo2",
+      "variant": "G2",
+      "cv_mean": 0.568885556987613,
+      "cv_std": 0.014465034585112783,
+      "macro_f1": 0.5706147071685369,
+      "accuracy": 0.663617613200307,
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "recall": [
+        0.2910095029603463,
+        0.8089994688340486,
+        0.5238197609424714
+      ],
+      "error31": 182,
+      "error32": 33043,
+      "rate31": 0.0026084214750480123,
+      "rate32": 0.47357181758248057,
+      "oof_sha256": "4ea28697c4480d269b1ca33d6f480aac2b6ad19fa2f528b6df4e1beb97323d33",
+      "new_fits": 5
+    },
+    {
+      "scheme": "geo1",
+      "variant": "C",
+      "cv_mean": 0.3656501200841088,
+      "cv_std": 0.04818746834121623,
+      "macro_f1": 0.36283541311636597,
+      "accuracy": 0.5769953952417498,
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "recall": [
+        0.2497139161152296,
+        0.9681806301483049,
+        0.006306073895720469
+      ],
+      "error31": 170,
+      "error32": 69164,
+      "rate31": 0.002436437641528363,
+      "rate32": 0.9912574884627512,
+      "oof_sha256": "453608352590cf27ddb1460926b7578d50832baa9127431422d0dd69b8f42951",
+      "new_fits": 5
+    },
+    {
+      "scheme": "geo1",
+      "variant": "G2",
+      "cv_mean": 0.3615391926407522,
+      "cv_std": 0.0382462744038118,
+      "macro_f1": 0.36014419211364596,
+      "accuracy": 0.5776861089792786,
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "recall": [
+        0.23841982188168565,
+        0.9714435067070241,
+        0.0060767621176942704
+      ],
+      "error31": 206,
+      "error32": 69144,
+      "rate31": 0.0029523891420873104,
+      "rate32": 0.9909708487402185,
+      "oof_sha256": "0bcad7cf7fbc7aaadf50a14ec5b05d2d6a05a03f28ba40acfa5c600fec0207f3",
+      "new_fits": 5
+    },
+    {
+      "scheme": "stratified",
+      "variant": "C",
+      "cv_mean": 0.688687372978548,
+      "cv_std": 0.0015080810709856124,
+      "macro_f1": 0.6886949550758837,
+      "accuracy": 0.7418313507290867,
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "recall": [
+        0.5186825215184835,
+        0.8396721947271241,
+        0.6397941926792214
+      ],
+      "error31": 452,
+      "error32": 24681,
+      "rate31": 0.006478057729240118,
+      "rate32": 0.3537277495915384,
+      "oof_sha256": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc",
+      "new_fits": 0
+    },
+    {
+      "scheme": "stratified",
+      "variant": "G2",
+      "cv_mean": 0.6909931342808895,
+      "cv_std": 0.002654837854780037,
+      "macro_f1": 0.6909975170966683,
+      "accuracy": 0.7427139293937068,
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "recall": [
+        0.5261455793820589,
+        0.8397902316052173,
+        0.6400808324017543
+      ],
+      "error31": 478,
+      "error32": 24635,
+      "rate31": 0.006850689368532691,
+      "rate32": 0.3530684782297131,
+      "oof_sha256": "49a9e0badd8efdac04d7a9c5bd65edccf8cd3e4952ad9050ffc4d1e612a7fb9e",
+      "new_fits": 0
+    }
+  ],
+  "age995": [
+    {
+      "scheme": "geo2",
+      "variant": "C",
+      "n": 1125,
+      "support": [
+        147,
+        661,
+        317
+      ],
+      "macro_f1": 0.5152784745096225,
+      "recall": [
+        0.14965986394557823,
+        0.8275340393343419,
+        0.5299684542586751
+      ],
+      "error31": 0,
+      "error32": 149
+    },
+    {
+      "scheme": "geo2",
+      "variant": "G2",
+      "n": 1125,
+      "support": [
+        147,
+        661,
+        317
+      ],
+      "macro_f1": 0.5085127979158405,
+      "recall": [
+        0.1360544217687075,
+        0.8335854765506808,
+        0.5205047318611987
+      ],
+      "error31": 0,
+      "error32": 152
+    },
+    {
+      "scheme": "geo1",
+      "variant": "C",
+      "n": 1125,
+      "support": [
+        147,
+        661,
+        317
+      ],
+      "macro_f1": 0.2996184526765566,
+      "recall": [
+        0.07482993197278912,
+        0.9788199697428139,
+        0.015772870662460567
+      ],
+      "error31": 0,
+      "error32": 312
+    },
+    {
+      "scheme": "geo1",
+      "variant": "G2",
+      "n": 1125,
+      "support": [
+        147,
+        661,
+        317
+      ],
+      "macro_f1": 0.28615482975800194,
+      "recall": [
+        0.05442176870748299,
+        0.9803328290468987,
+        0.012618296529968454
+      ],
+      "error31": 0,
+      "error32": 313
+    },
+    {
+      "scheme": "stratified",
+      "variant": "C",
+      "n": 1125,
+      "support": [
+        147,
+        661,
+        317
+      ],
+      "macro_f1": 0.6694766240564545,
+      "recall": [
+        0.40816326530612246,
+        0.8819969742813918,
+        0.6277602523659306
+      ],
+      "error31": 5,
+      "error32": 113
+    },
+    {
+      "scheme": "stratified",
+      "variant": "G2",
+      "n": 1125,
+      "support": [
+        147,
+        661,
+        317
+      ],
+      "macro_f1": 0.6589857933040076,
+      "recall": [
+        0.3741496598639456,
+        0.886535552193646,
+        0.6246056782334385
+      ],
+      "error31": 6,
+      "error32": 113
+    }
+  ],
+  "paired": [
+    {
+      "scheme": "geo2",
+      "group": "all",
+      "n": 208480,
+      "macro_f1_delta": 0.0027657551615302145,
+      "recall3_delta": 0.002737409350187736,
+      "error31_delta": -4,
+      "error32_delta": -187,
+      "error31_corrected": 72,
+      "error31_new": 68,
+      "error31_common": 114,
+      "prediction_agreement": 0.9630228319263239
+    },
+    {
+      "scheme": "geo2",
+      "group": "age995",
+      "n": 1125,
+      "macro_f1_delta": -0.006765676593782022,
+      "recall3_delta": -0.009463722397476393,
+      "error31_delta": 0,
+      "error32_delta": 3,
+      "error31_corrected": 0,
+      "error31_new": 0,
+      "error31_common": 0,
+      "prediction_agreement": 0.9768888888888889
+    },
+    {
+      "scheme": "geo1",
+      "group": "all",
+      "n": 208480,
+      "macro_f1_delta": -0.0026912210027200123,
+      "recall3_delta": -0.00022931177802619843,
+      "error31_delta": 36,
+      "error32_delta": -20,
+      "error31_corrected": 64,
+      "error31_new": 100,
+      "error31_common": 106,
+      "prediction_agreement": 0.9791874520337682
+    },
+    {
+      "scheme": "geo1",
+      "group": "age995",
+      "n": 1125,
+      "macro_f1_delta": -0.013463622918554685,
+      "recall3_delta": -0.003154574132492113,
+      "error31_delta": 0,
+      "error32_delta": 1,
+      "error31_corrected": 0,
+      "error31_new": 0,
+      "error31_common": 0,
+      "prediction_agreement": 0.9955555555555555
+    },
+    {
+      "scheme": "stratified",
+      "group": "all",
+      "n": 208480,
+      "macro_f1_delta": 0.0023025620207846043,
+      "recall3_delta": 0.0002866397225328443,
+      "error31_delta": 26,
+      "error32_delta": -46,
+      "error31_corrected": 52,
+      "error31_new": 78,
+      "error31_common": 400,
+      "prediction_agreement": 0.9763478511128165
+    },
+    {
+      "scheme": "stratified",
+      "group": "age995",
+      "n": 1125,
+      "macro_f1_delta": -0.010490830752446834,
+      "recall3_delta": -0.003154574132492094,
+      "error31_delta": 1,
+      "error32_delta": 0,
+      "error31_corrected": 0,
+      "error31_new": 1,
+      "error31_common": 5,
+      "prediction_agreement": 0.9884444444444445
+    }
+  ],
+  "manifest_sha256": {
+    "geo2": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64",
+    "geo1": "1b4616ff7d5e052ac76707e58de48e3d0b23fb7a49e350c14d6704cc1ee488f5"
+  },
+  "audit_sha256": "d4930a22a41d2ada4b6b34b9bb627470a14ef6ea89c7cb94e3921b1714a47bb0"
+}

@@ -1,0 +1,270 @@
+{
+  "study_id": "TE_ROS_RF_EXPLORATORY_DEV_20261014",
+  "status": "EXPLORATORY_AGGREGATES_ARITHMETIC_CHECKED_NO_MODEL_AUDIT",
+  "branch": "peter-exp/te-ros-rf-exploratory-v1",
+  "base_commit": "acd5ecdeefeff619c2fae9639f1627638de59383",
+  "original_zip_sha256": "4d549778ca0d245847c79018e5fcf74afb39886b3f0dd4db5fdc007e8ef8f184",
+  "source_sha256": {
+    "README_exploratory.md": "23482d888fdd907234e5c9d886995b87520e7cc04afecffb2062d87fcf337658",
+    "evaluate_te_ros.py": "435975ae64f5ae034764f8e85f7f718b81532da640ff44d53fe1424d325c7e61",
+    "validate_rf_5fold.py": "4dba1f1aec28b13d8a509cf94499ce5b71ca9d53f9225b31836062a314b0d585",
+    "te_ros_fold0_results.json": "7d98c7de7353fc16a0d7423e2d633c64a6337a2f3540c051e7660ae465358b74",
+    "rf_5fold_result.json": "532adb1781e806a6935c026a61e51dcfc4a003c492cfc47485697ff0c1f162cb"
+  },
+  "data": {
+    "development_rows": 208480,
+    "development_sha256": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+    "split_manifest_sha256": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721",
+    "outer": "original fixed Stratified 5Fold",
+    "final_holdout_accessed": false
+  },
+  "features": {
+    "raw_age995": "unchanged",
+    "geo_ids": "raw numeric retained",
+    "te": "geo1,geo2,geo3: class1/class3 OOF target rates with 5 inner folds m=20 and train-fold-only prior",
+    "count": "3 regional count features (outer-train-only)",
+    "ros": "outer-train only after target encoding",
+    "number_of_model_columns": 77,
+    "random_state": 0,
+    "n_jobs": 4
+  },
+  "tested_versions": {
+    "sklearn": "1.8.0",
+    "pandas": "2.2.3",
+    "numpy": "2.3.5",
+    "imbalanced-learn": "0.14.1",
+    "xgboost": "3.1.3",
+    "lightgbm": "4.6.0"
+  },
+  "fixed_fold0": {
+    "train_rows": 166784,
+    "valid_rows": 41696,
+    "ros_train_rows": 284655,
+    "models": [
+      {
+        "name": "LogisticRegression",
+        "macro_f1": 0.6599457221847604,
+        "micro_f1": 0.6906657712970069,
+        "grade3_recall": 0.7231816553206736,
+        "error31": 445,
+        "error32": 3418
+      },
+      {
+        "name": "DecisionTree",
+        "macro_f1": 0.5820478364676699,
+        "micro_f1": 0.6367277436684574,
+        "grade3_recall": 0.582228591902544,
+        "error31": 258,
+        "error32": 5572
+      },
+      {
+        "name": "RandomForest",
+        "macro_f1": 0.7002611024599479,
+        "micro_f1": 0.7409103990790483,
+        "grade3_recall": 0.6792547474023647,
+        "error31": 134,
+        "error32": 4342
+      },
+      {
+        "name": "XGBoost",
+        "macro_f1": 0.6751960809191777,
+        "micro_f1": 0.7009545280122793,
+        "grade3_recall": 0.7436761017556431,
+        "error31": 420,
+        "error32": 3157
+      },
+      {
+        "name": "LightGBM",
+        "macro_f1": 0.665619299169781,
+        "micro_f1": 0.6916730621642364,
+        "grade3_recall": 0.7395198853457542,
+        "error31": 496,
+        "error32": 3139
+      }
+    ]
+  },
+  "random_forest_5fold": {
+    "folds": [
+      {
+        "fold": 0,
+        "macro_f1": 0.7002611024599479,
+        "micro_f1": 0.7409103990790483,
+        "confusion": [
+          [
+            2465,
+            1480,
+            74
+          ],
+          [
+            1417,
+            18949,
+            3356
+          ],
+          [
+            134,
+            4342,
+            9479
+          ]
+        ],
+        "source": "original fixed Fold0 RF (no refit)"
+      },
+      {
+        "fold": 1,
+        "macro_f1": 0.7014550845788651,
+        "micro_f1": 0.7403827705295472,
+        "confusion": [
+          [
+            2496,
+            1436,
+            88
+          ],
+          [
+            1386,
+            18933,
+            3403
+          ],
+          [
+            141,
+            4371,
+            9442
+          ]
+        ],
+        "source": "additional RF fit"
+      },
+      {
+        "fold": 2,
+        "macro_f1": 0.7004512251768015,
+        "micro_f1": 0.7398791250959325,
+        "confusion": [
+          [
+            2498,
+            1441,
+            81
+          ],
+          [
+            1405,
+            18977,
+            3339
+          ],
+          [
+            148,
+            4432,
+            9375
+          ]
+        ],
+        "source": "additional RF fit"
+      },
+      {
+        "fold": 3,
+        "macro_f1": 0.7012290937793337,
+        "micro_f1": 0.7390636991557943,
+        "confusion": [
+          [
+            2548,
+            1390,
+            82
+          ],
+          [
+            1404,
+            19020,
+            3297
+          ],
+          [
+            164,
+            4543,
+            9248
+          ]
+        ],
+        "source": "additional RF fit"
+      },
+      {
+        "fold": 4,
+        "macro_f1": 0.6987390363340312,
+        "micro_f1": 0.7391836147352264,
+        "confusion": [
+          [
+            2428,
+            1505,
+            87
+          ],
+          [
+            1286,
+            18978,
+            3457
+          ],
+          [
+            157,
+            4383,
+            9415
+          ]
+        ],
+        "source": "additional RF fit"
+      }
+    ],
+    "cv_macro_f1_mean": 0.7004271084657958,
+    "cv_macro_f1_std_ddof1": 0.0010697712914379235,
+    "pooled_macro_f1": 0.7004411847262143,
+    "pooled_micro_f1": 0.7398839217191098,
+    "grade_precision": [
+      0.6193654430442795,
+      0.7638669673055243,
+      0.7311866465285023
+    ],
+    "grade_recall": [
+      0.6186874968903926,
+      0.7997588675204668,
+      0.6730157365207671
+    ],
+    "grade_f1": [
+      0.619026284348865,
+      0.7814009811068962,
+      0.7008962887228819
+    ],
+    "support": [
+      20099,
+      118607,
+      69774
+    ],
+    "confusion": [
+      [
+        12435,
+        7252,
+        412
+      ],
+      [
+        6898,
+        94857,
+        16852
+      ],
+      [
+        744,
+        22071,
+        46959
+      ]
+    ],
+    "error31": 744,
+    "error32": 22071
+  },
+  "reference_C_stratified": {
+    "macro_f1": 0.688687372978548,
+    "grade3_recall": 0.6397941926792214,
+    "error31": 452,
+    "error32": 24681,
+    "comparison_is_controlled": false
+  },
+  "audit_scope": {
+    "aggregated_cm_and_fold_arithmetic_recomputed": true,
+    "row_level_oof_not_saved": true,
+    "joblib_not_saved": true,
+    "training_or_model_reaudit": false,
+    "new_model_fits_from_git_work": 0
+  },
+  "limitations": [
+    "Only RF has complete Stratified five-fold results; other four models only Fold0",
+    "Fold4 RF macro F1 below 0.7",
+    "Existing geographies are mixed across train and validation, not unseen-region Group CV",
+    "TE, ROS, model class and age processing changed together versus LR C",
+    "3->1 errors increased relative to C",
+    "Does not replace T6 R12/R1/R0, final holdout or deployment"
+  ]
+}
