@@ -1,0 +1,197 @@
+{
+ "study_id": "T13_geo2_te_confirm_v1",
+ "branch": "peter-exp/geo2-te-confirm-v1",
+ "base_commit": "30c3949",
+ "purpose": "Confirmation on NEW independent geo2 Group splits of the T11 LGBM_TE_G boundary finding (single T5 split, seed 42). No new factor, no tuning.",
+ "geo_columns": [
+  "geo_level_1_id",
+  "geo_level_2_id",
+  "geo_level_3_id"
+ ],
+ "text_categorical_columns": [
+  "land_surface_condition",
+  "foundation_type",
+  "roof_type",
+  "ground_floor_type",
+  "other_floor_type",
+  "position",
+  "plan_configuration",
+  "legal_ownership_status"
+ ],
+ "group_columns": [
+  "geo_level_1_id",
+  "geo_level_2_id"
+ ],
+ "split": {
+  "splitter": "StratifiedGroupKFold",
+  "n_splits": 5,
+  "shuffle": true,
+  "groups": "composite (geo1, geo2), same procedure as T5 geo2",
+  "seeds": [
+   101,
+   202,
+   303
+  ],
+  "control_seed": 42,
+  "manifest_columns": [
+   "building_id",
+   "fold",
+   "geo_level_1_id",
+   "geo_level_2_id"
+  ],
+  "lineterminator": "\n",
+  "min_class_support": 30,
+  "on_gate_failure": "stop and report; no seed substitution"
+ },
+ "control_manifest_sha256_seed42": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64",
+ "arms": [
+  "LR_C",
+  "LGBM_O",
+  "LGBM_TE_G"
+ ],
+ "arm_sources": {
+  "LR_C": "experiments.age995.run.make_pipeline('C')",
+  "LGBM_O": "experiments.lgbm_native_cat.run.fit_arm(O) = T4 LGBM one-hot",
+  "LGBM_TE_G": "experiments.geo_te_group_inner.run.fit_arm('LGBM_TE_G', 'geo2')"
+ },
+ "te": {
+  "smoothing_m": 20.0,
+  "group_level": "geo2",
+  "inner_splits": 5,
+  "inner_seed": 42
+ },
+ "lr_params": {
+  "solver": "lbfgs",
+  "C": 1.0,
+  "max_iter": 1500,
+  "tol": 0.0001,
+  "random_state": 42
+ },
+ "lr_threadpool_limit": 1,
+ "lgbm_params": {
+  "objective": "multiclass",
+  "num_class": 3,
+  "n_estimators": 300,
+  "learning_rate": 0.05,
+  "num_leaves": 31,
+  "max_depth": -1,
+  "min_child_samples": 20,
+  "min_child_weight": 0.001,
+  "min_split_gain": 0.0,
+  "subsample": 1.0,
+  "subsample_freq": 0,
+  "colsample_bytree": 1.0,
+  "reg_alpha": 0.0,
+  "reg_lambda": 0.0,
+  "max_bin": 255,
+  "boosting_type": "gbdt",
+  "device_type": "cpu",
+  "deterministic": true,
+  "force_col_wise": true,
+  "zero_as_missing": false,
+  "random_state": 42,
+  "n_jobs": 2,
+  "verbosity": 1
+ },
+ "lgbm_threadpool_limit": 2,
+ "outer_parallel_jobs": 1,
+ "early_stopping": false,
+ "class_weight": null,
+ "sampling": null,
+ "tuning": false,
+ "threshold_or_decision_rule_change": false,
+ "automatic_retries": 0,
+ "stop_on_lr_nonconvergence": true,
+ "decision_rule": "argmax of predicted probabilities, labels 1/2/3",
+ "n_folds": 5,
+ "study_fits_per_arm_seed": 5,
+ "max_new_study_fits": 45,
+ "labels": [
+  1,
+  2,
+  3
+ ],
+ "std_ddof": 1,
+ "profiles": {
+  "age995_group": "raw age == 995",
+  "geo1_regions": [
+   26,
+   20,
+   13
+  ]
+ },
+ "checkpoint": {
+  "model_reload_probability_atol_lgbm": 1e-12,
+  "lr_reload": "exact",
+  "csv_float_format": "%.17g",
+  "csv_read": "float_precision='round_trip' exact",
+  "backup_dir": "backup",
+  "resume_skips_completed": true
+ },
+ "environment": {
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "scipy": "1.17.0",
+  "scikit-learn": "1.8.0",
+  "lightgbm": "4.6.0",
+  "joblib": "1.5.3",
+  "threadpoolctl": "3.6.0"
+ },
+ "control_check": {
+  "kind": "not a study fit; refits on seed-42 fold 0 only",
+  "gating": [
+   "1_seed42_manifest_byte_identical_to_T5_geo2",
+   "2_LGBM_O_and_LGBM_TE_G_fold0_probabilities_match_T8_T11_atol_1e-9"
+  ],
+  "descriptive_not_gating": [
+   "3_LR_C_fold0_vs_T5_C_geo2_oof_max_prob_diff_and_label_agreement"
+  ],
+  "prob_atol": 1e-09,
+  "fold": 0,
+  "references": {
+   "manifest_t5": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T6S_20261014_c_group/t5_private/outputs/geo_group_cv_v1/geo2/manifest.csv",
+   "manifest_t11": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T11_20261014_te_group_inner/run/geo2/manifest.csv",
+   "lgbm_o_oof": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T8_20261014_native_cat/run/geo2/O/oof.csv.gz",
+    "sha256": "ba282656c482264c045865de32db32d56a0b7c6c872670972c480a90abaa211c"
+   },
+   "lgbm_te_g_oof": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T11_20261014_te_group_inner/run/geo2/LGBM_TE_G/oof.csv.gz",
+    "sha256": "34f23ad64d9dbcc3c79b3112808db65d5e8a3a114b19e086d2b1bf1756ee039b"
+   },
+   "lr_c_oof": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T6S_20261014_c_group/t5_private/outputs/geo_group_cv_v1/geo2/C/oof.csv.gz",
+    "sha256": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4"
+   }
+  }
+ },
+ "rules": {
+  "C1": {
+   "desc": "LGBM_TE_G vs own baseline LGBM_O over 15 new folds",
+   "mean_delta_min": 0.01,
+   "fold_wins_min": 12,
+   "n_folds": 15,
+   "pooled_grade3_recall_delta_min": -0.01,
+   "repair_every_seed": {
+    "abs_accuracy_diff_max": 0.02,
+    "prediction_agreement_min": 0.8
+   }
+  },
+  "C2": {
+   "desc": "LGBM_TE_G vs study baseline LR_C over 15 new folds",
+   "mean_delta_gt": 0.0,
+   "fold_wins_min": 12,
+   "n_folds": 15,
+   "pooled_grade3_recall_margin": -0.01
+  },
+  "confirmed_geo2_candidate": "C1 AND C2"
+ },
+ "random_cv_reference": {
+  "note": "reused T10 stratified results, not refit",
+  "LGBM_TE_stratified": 0.6882,
+  "LR_C_stratified": 0.6887
+ },
+ "holdout_access": false,
+ "automatic_model_replacement": false
+}
