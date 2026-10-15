@@ -56,3 +56,10 @@ main 통합, 팀 최종 선정과 평가 정책, 팀원별 전체 과정 수행,
 - 실험 ID `T13_geo2_te_confirm_v1`, 브랜치 `peter-exp/geo2-te-confirm-v1`(기준 `30c3949`). [사전 등록 계획](T13_GEO2_TE_CONFIRM_PLAN.md).
 - T11의 경계 충족(단일 T5 geo2 분할, seed 42)을 새 geo2 Group 분할 seed 101/202/303에서 확인. LR_C·LGBM_O·LGBM_TE_G × 3 seed × 5 Fold = 45 fit(최대 45). 규칙 C1·C2는 계획 문서에 학습 전 고정.
 - 상태: 45/45 학습 완료, 독립 감사 PASS. C1(one-hot LGBM 대비) 미충족(+0.0086, 11/15), C2(LR-C 대비) 충족(+0.0243, 14/15) → 확인 실패, LR-C 기준선 유지. [결과 보고서](../reports/GEO2_TE_CONFIRM_20261014.md).
+
+## T14 팀원 탐색 파이프라인(TE + ROS + RF) 로컬 재현 — 2026-10-15 (사전 등록 단계, 학습 전)
+
+- 실험 ID `T14_TE_ROS_RF_LOCAL_REPRO`, 브랜치 `peter-exp/te-ros-rf-local-repro-v1`(기준 `af261c7`). [사전 등록 계획](T14_TE_ROS_RF_REPRO_PLAN.md).
+- `origin/peter-exp/te-ros-rf-exploratory-v1`(`0ecd351`)의 미감사 탐색 결과(RF + geo1/2/3 OOF TE + 지역 빈도 + 학습 Fold 한정 ROS, Macro F1 0.700427)를 원본 코드 보존본(`experiments/te_ros_rf_exploratory/`, SHA 고정)으로 로컬 재현한다. **재현이며 요인 분리(TE/ROS/RF/age995)는 후속 실험이다.**
+- Stage A: 고정 stratified 5 Fold, 기록된 Fold별 혼동행렬과 비교(EXACT / WITHIN_TOLERANCE / FAIL, 허용 오차 사전 고정). Stage B(Stage A 통과 시만): geo2 Group 분할 seed 42/101/202/303 20 Fold, 내부 TE Fold는 T11 그룹 인지 방식, 기존 LR-C·LGBM-O·LGBM_TE_G OOF 재사용(비교군 재학습 없음). 신규 RF 학습 25회 예정.
+- 상태: 계획·실행기·합성 테스트만 작성(실데이터 학습 0회, 분류기 학습 없는 사전 점검만 수행). 홀드아웃 미사용.

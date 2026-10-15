@@ -1,0 +1,424 @@
+{
+ "study_id": "T14_TE_ROS_RF_LOCAL_REPRO",
+ "branch": "peter-exp/te-ros-rf-local-repro-v1",
+ "base_commit": "af261c7",
+ "purpose": "Local reproduction of the teammate exploratory RF + geo TE + ROS pipeline (stratified, Stage A) and its behavior on geo2 Group splits (Stage B). Reproduction only: no factor separation, no tuning, no new method.",
+ "arm": "RF_TE_ROS",
+ "schemes": [
+  "strat",
+  "geo2_s42",
+  "geo2_s101",
+  "geo2_s202",
+  "geo2_s303"
+ ],
+ "stages": {
+  "A": [
+   "strat"
+  ],
+  "B": [
+   "geo2_s42",
+   "geo2_s101",
+   "geo2_s202",
+   "geo2_s303"
+  ]
+ },
+ "n_folds": 5,
+ "original": {
+  "branch": "origin/peter-exp/te-ros-rf-exploratory-v1",
+  "commit": "0ecd351eec426189492d2ad7856120f0b0320522",
+  "summary_json": "reports/te_ros_rf_exploratory_summary.json",
+  "summary_json_git_blob_sha256": "66f8d74f90beb06cc89b5dcfcd2050b55585537af1dfefaed43edc269ac7670d",
+  "status": "aggregates only; no model, no row-level OOF -> unaudited"
+ },
+ "original_source_sha256": {
+  "evaluate_te_ros.py": "435975ae64f5ae034764f8e85f7f718b81532da640ff44d53fe1424d325c7e61",
+  "validate_rf_5fold.py": "4dba1f1aec28b13d8a509cf94499ce5b71ca9d53f9225b31836062a314b0d585"
+ },
+ "text_columns": [
+  "land_surface_condition",
+  "foundation_type",
+  "roof_type",
+  "ground_floor_type",
+  "other_floor_type",
+  "position",
+  "plan_configuration",
+  "legal_ownership_status"
+ ],
+ "rf_params": {
+  "n_jobs": 4,
+  "random_state": 0
+ },
+ "rf_n_jobs": 4,
+ "rf_default_snapshot": {
+  "bootstrap": true,
+  "ccp_alpha": 0.0,
+  "class_weight": null,
+  "criterion": "gini",
+  "max_depth": null,
+  "max_features": "sqrt",
+  "max_leaf_nodes": null,
+  "max_samples": null,
+  "min_impurity_decrease": 0.0,
+  "min_samples_leaf": 1,
+  "min_samples_split": 2,
+  "min_weight_fraction_leaf": 0.0,
+  "monotonic_cst": null,
+  "n_estimators": 100,
+  "n_jobs": 4,
+  "oob_score": false,
+  "random_state": 0,
+  "verbose": 0,
+  "warm_start": false
+ },
+ "te": {
+  "smoothing_m": 20,
+  "geo_columns": [
+   "geo_level_1_id",
+   "geo_level_2_id",
+   "geo_level_3_id"
+  ],
+  "classes_encoded_index": [
+   0,
+   2
+  ],
+  "classes_encoded_grades": [
+   1,
+   3
+  ],
+  "features_per_geo": [
+   "te0",
+   "te2",
+   "cnt"
+  ],
+  "stratified_inner": {
+   "n_splits": 5,
+   "shuffle": true,
+   "random_state": 0
+  },
+  "group_inner": {
+   "n_splits": 5,
+   "shuffle": true,
+   "random_state": 42,
+   "group_level": "geo2"
+  },
+  "inner_choice": "strat scheme: original StratifiedKFold(5,shuffle,0) unchanged; geo2 schemes: T11 group-aware StratifiedGroupKFold on (geo1,geo2) composite groups (experiments.geo_te_group_inner.encoder), because random inner folds are known (T10) to leave the training-row encoding in-distribution while Group validation rows are unseen",
+  "validation_encoding": "full outer-train statistics, prior = outer-train class rate (as original)"
+ },
+ "ros": {
+  "random_state": 0,
+  "after_te": true,
+  "outer_train_only": true
+ },
+ "raw_age995": "unchanged",
+ "raw_geo_ids_kept_numeric": true,
+ "expected_model_columns": 77,
+ "sampling_note": "ROS is part of the reproduced pipeline (unlike T13 sampling none); it is applied to the outer-train only.",
+ "manifests": {
+  "geo2_s42": {
+   "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T6R_20261014_local/run/geo2/manifest.csv",
+   "sha256": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64"
+  },
+  "geo2_s101": {
+   "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_101/manifest.csv",
+   "sha256": "7877b21b59433dea9c4a22ddd8fc1112a3440180fc4e2ab9a73aa0a5b56af1f4"
+  },
+  "geo2_s202": {
+   "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_202/manifest.csv",
+   "sha256": "9b3a48054743a95b83d85d95ac05354456d441fe4ac6c8aa189434d3877914c7"
+  },
+  "geo2_s303": {
+   "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_303/manifest.csv",
+   "sha256": "26f42c0b2b3ea40f736d82d178b864ce2d4a25d1eeb2d924c65a177254b8fafd"
+  }
+ },
+ "comparators": {
+  "strat": {
+   "LR_C": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/20261014_01/private_original/age995_abc_v1/C/lr/oof_predictions.csv.gz",
+    "sha256": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc"
+   },
+   "LGBM_O": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/20261014_01/private_t4_original/private/model_families_v1/LGBM_C_v1/oof_predictions.csv.gz",
+    "sha256": "0bc63eb5122afb479c41826918a9fbb43a3475351a934d847833656eec6930cf"
+   },
+   "LGBM_TE": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T10_20261014_geo_te/run/stratified/LGBM_TE/oof.csv.gz",
+    "sha256": "3c0d2cd8b3d40acc42817fe029c70335f4f5233562cfd857836d6275bd0eb859"
+   }
+  },
+  "geo2_s42": {
+   "LR_C": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T6S_20261014_c_group/t5_private/outputs/geo_group_cv_v1/geo2/C/oof.csv.gz",
+    "sha256": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4"
+   },
+   "LGBM_O": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T8_20261014_native_cat/run/geo2/O/oof.csv.gz",
+    "sha256": "ba282656c482264c045865de32db32d56a0b7c6c872670972c480a90abaa211c"
+   },
+   "LGBM_TE_G": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T11_20261014_te_group_inner/run/geo2/LGBM_TE_G/oof.csv.gz",
+    "sha256": "34f23ad64d9dbcc3c79b3112808db65d5e8a3a114b19e086d2b1bf1756ee039b"
+   }
+  },
+  "geo2_s101": {
+   "LR_C": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s101/LR_C/oof.csv.gz",
+    "sha256": "486f7975a1304f5b5703a6ae197bd34c8297149dddf8085ffaca1020fb6b0a0c"
+   },
+   "LGBM_O": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s101/LGBM_O/oof.csv.gz",
+    "sha256": "bd2f5f1790e9a6047f2c9485b8aeab28333be0742028ad678743f63eb2297f90"
+   },
+   "LGBM_TE_G": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s101/LGBM_TE_G/oof.csv.gz",
+    "sha256": "5bc7df138b8e03ef270b1f4bc3473853d64062c08d1e7081a5b6265cc562ba05"
+   }
+  },
+  "geo2_s202": {
+   "LR_C": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s202/LR_C/oof.csv.gz",
+    "sha256": "1c8ef79e708c4ca5d5730c7b92a27ee0e690dfc451741803954fc21e69e69003"
+   },
+   "LGBM_O": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s202/LGBM_O/oof.csv.gz",
+    "sha256": "45d0d0bb8e5a61a9cd41d9bc1343d9c7dbf0496dead5efc05834f98932d99749"
+   },
+   "LGBM_TE_G": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s202/LGBM_TE_G/oof.csv.gz",
+    "sha256": "2fa8f729e6482a34871e9d93c5abaa7c61cf514469dae74beb44641c239b8d52"
+   }
+  },
+  "geo2_s303": {
+   "LR_C": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s303/LR_C/oof.csv.gz",
+    "sha256": "7dc09af6d8d86140d3938e0ab10695c75c5dbcdf0372c53c85067d1917d3192c"
+   },
+   "LGBM_O": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s303/LGBM_O/oof.csv.gz",
+    "sha256": "a366689191280d3dfa43e7df5cc699fcb3a331c595c76c54ddd4712ae76c27c4"
+   },
+   "LGBM_TE_G": {
+    "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s303/LGBM_TE_G/oof.csv.gz",
+    "sha256": "0b8ff7187a96025fd68ae58e3b4bad7990a79817cee75ffdaadb7091b1c5eb37"
+   }
+  }
+ },
+ "recorded_reference": {
+  "model_columns": 77,
+  "fold0": {
+   "train_rows": 166784,
+   "valid_rows": 41696,
+   "ros_train_rows": 284655
+  },
+  "folds": [
+   {
+    "fold": 0,
+    "macro_f1": 0.7002611024599479,
+    "confusion": [
+     [
+      2465,
+      1480,
+      74
+     ],
+     [
+      1417,
+      18949,
+      3356
+     ],
+     [
+      134,
+      4342,
+      9479
+     ]
+    ]
+   },
+   {
+    "fold": 1,
+    "macro_f1": 0.7014550845788651,
+    "confusion": [
+     [
+      2496,
+      1436,
+      88
+     ],
+     [
+      1386,
+      18933,
+      3403
+     ],
+     [
+      141,
+      4371,
+      9442
+     ]
+    ]
+   },
+   {
+    "fold": 2,
+    "macro_f1": 0.7004512251768015,
+    "confusion": [
+     [
+      2498,
+      1441,
+      81
+     ],
+     [
+      1405,
+      18977,
+      3339
+     ],
+     [
+      148,
+      4432,
+      9375
+     ]
+    ]
+   },
+   {
+    "fold": 3,
+    "macro_f1": 0.7012290937793337,
+    "confusion": [
+     [
+      2548,
+      1390,
+      82
+     ],
+     [
+      1404,
+      19020,
+      3297
+     ],
+     [
+      164,
+      4543,
+      9248
+     ]
+    ]
+   },
+   {
+    "fold": 4,
+    "macro_f1": 0.6987390363340312,
+    "confusion": [
+     [
+      2428,
+      1505,
+      87
+     ],
+     [
+      1286,
+      18978,
+      3457
+     ],
+     [
+      157,
+      4383,
+      9415
+     ]
+    ]
+   }
+  ],
+  "cv_macro_f1_mean": 0.7004271084657958,
+  "cv_macro_f1_std_ddof1": 0.0010697712914379235,
+  "pooled_confusion": [
+   [
+    12435,
+    7252,
+    412
+   ],
+   [
+    6898,
+    94857,
+    16852
+   ],
+   [
+    744,
+    22071,
+    46959
+   ]
+  ],
+  "pooled_grade3_recall": 0.6730157365207671,
+  "pooled_error31": 744,
+  "pooled_error32": 22071,
+  "pooled_macro_f1": 0.7004411847262143
+ },
+ "max_new_study_fits": 25,
+ "study_fits": {
+  "A": 5,
+  "B": 20
+ },
+ "comparator_refits": 0,
+ "outer_parallel_jobs": 1,
+ "early_stopping": false,
+ "tuning": false,
+ "threshold_or_decision_rule_change": false,
+ "automatic_retries": 0,
+ "holdout_access": false,
+ "decision_rule": "argmax of RF predict_proba, labels 1/2/3",
+ "min_free_disk_gb_at_prepare": 60,
+ "min_free_disk_gb_per_fold": 20,
+ "checkpoint": {
+  "model_compress": 3,
+  "reload_probability_atol": 1e-12,
+  "csv_float_format": "%.17g",
+  "backup_dir": "backup",
+  "resume_skips_completed": true,
+  "reload_check": "joblib model + stored encoder state re-encode the validation rows -> predict_proba must match the saved probabilities within atol and give identical labels"
+ },
+ "environment": {
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "scipy": "1.17.0",
+  "scikit-learn": "1.8.0",
+  "lightgbm": "4.6.0",
+  "joblib": "1.5.3",
+  "threadpoolctl": "3.6.0",
+  "imbalanced-learn": "0.14.1"
+ },
+ "rules": {
+  "stage_a": {
+   "desc": "reproduction vs recorded per-fold confusion matrices of the exploratory RF (5 stratified folds)",
+   "EXACT": "all five per-fold 3x3 confusion matrices identical cell for cell",
+   "WITHIN_TOLERANCE": "not exact, and ALL of the following hold",
+   "fold_f1_abs_diff_max": 0.002,
+   "mean_f1_abs_diff_max": 0.001,
+   "pooled_grade3_recall_abs_diff_max": 0.005,
+   "pooled_error31_rel_diff_max": 0.05,
+   "fold_confusion_cell_abs_diff_max_fraction": 0.005,
+   "FAIL": "otherwise; Stage B is not run, stop and report",
+   "also_required": "fold-0 train/valid/ROS row counts and 77 model columns equal the recorded values (preflight)"
+  },
+  "stage_b": {
+   "desc": "descriptive pre-registered labels over 20 geo2 folds (4 splits x 5 folds); not a factor attribution",
+   "B1_vs_LR_C": {
+    "mean_delta_gt": 0.0,
+    "fold_wins_min": 16,
+    "n_folds": 20,
+    "pooled_grade3_recall_delta_min": -0.01,
+    "splits_with_positive_mean_min": 3
+   },
+   "B2_vs_LGBM_O": {
+    "mean_delta_min": 0.01,
+    "fold_wins_min": 16,
+    "n_folds": 20,
+    "pooled_grade3_recall_delta_min": -0.01,
+    "splits_with_positive_mean_min": 3
+   },
+   "reported_without_threshold": [
+    "vs LGBM_TE_G",
+    "per-split means",
+    "error31 / error32 counts and rates",
+    "prediction agreement",
+    "accuracy",
+    "prediction share",
+    "train/valid TE and count distribution mismatch",
+    "feature-importance shares of raw geo IDs / TE / counts"
+   ]
+  }
+ },
+ "random_cv_reference": {
+  "note": "recorded exploratory value, comparison_is_controlled false",
+  "LR_C_stratified": 0.688687372978548
+ },
+ "automatic_model_replacement": false
+}
