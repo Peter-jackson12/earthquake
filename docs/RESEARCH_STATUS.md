@@ -5,22 +5,25 @@
 - 목적: 세션·모델 간 연구 인계의 시작점. **결정 근거는 연결된 실제 코드·보고서·OOF/검증 산출물**이며 이 문서만으로 검증을 생략하지 않는다.
 - 팀 공용 `main`과 개인 `peter`를 구분한다. 팀원 `EY`·`jjjjin`·`sy`는 변경하지 않는다. 이 문서는 팀 최종 선택이나 배포 승인 문서가 아니다.
 
-## 현재 실행 상태 (2026-10-15 14:34 KST 갱신)
+## 현재 실행 상태 (2026-10-15 15:57 KST 갱신)
+
+T21 피처 상호작용 연구를 사용자 승인으로 구현했다. 소스 커밋은 `d18f2b1e9d85611bce1aeb63f177bcd06696043a`, 전체 회귀 검사 625개 실행·실패 0·스킵 33(89.948초)이다. 새 피처 12개·실행기 20개 합성 검사를 포함하며, 별도 독립 감사 준비 검사 17개도 PASS다. 기존 의존 소스 42개는 변경하지 않았다. 비공개 로그는 `local_reproduction/session_20261015_control/t21_full_tests_20261015.log`, 독립 검토 영수증은 `local_reproduction/session_20261015_control/t21_audit/preparation_receipt_v1.json`이다. 실행 관리자가 T18 감사 PASS 후 15:56 첫 Fold를 시작했다. 첫 Fold 학습 7.95초·저장·재로딩·SHA·백업·정상 종료를 확인했고, 15:57 현재 2/40 완료·재시도 0으로 나머지를 이어간다. 다음 Fold 전 CPU 2.7~11.5%·가용 RAM 13.29GiB·디스크 여유 685.77GiB·대기열 0이었다.
 
 T19·T20 설계/구현 커밋은 `4f064c7f5edcaa54440631a2251c25120fcd21d1`이다. 전체 회귀 검사 593개 실행·실패 0·스킵 33(104.321초)을 확인했다. 비공개 로그는 `local_reproduction/session_20261015_control/t19_t20_full_tests_20261015.log`다. T16/T18의 기존 봉인 소스 31개/37개는 변경하지 않았다.
 
-T16은 56개 완료 뒤 기존 PID가 사라져 실행 관리자가 입력·봉인·완료 원본/백업 448개 SHA를 확인했다. 정확한 종료 원인은 미확정이며, 사전 허용된 수동 복구 1회로 중단 Fold `geo2_s202/ONEHOT/4`를 attempt 2로 재개했다(PID 22944). 이 Fold는 14:31:32에 저장·재로딩·백업까지 완료했고 전체 완료 수는 60/80이다. 완료 Fold 재학습은 없다. 자원 재확인(CPU 약 30~33%, 가용 RAM 14.76GiB, 디스크 대기열 0) 후 T20도 14:32에 시작했다. 첫 Fold는 14:33:10에 저장·재로딩·SHA·백업까지 완료했다(학습 10.5초). 첫 단위 종료 후 자원을 재확인하고 나머지를 같은 관리자가 이어간다.
+T16은 56개 완료 뒤 기존 PID가 사라져 실행 관리자가 입력·봉인·완료 원본/백업 448개 SHA를 확인했다. 정확한 종료 원인은 미확정이며, 사전 허용된 수동 복구 1회로 중단 Fold `geo2_s202/ONEHOT/4`를 attempt 2로 재개했다. 15:26에 80/80개·81회 시도로 학습을 마쳤고, 집계 후 15:34 독립 감사 PASS를 확인했다. 완료 Fold 재학습은 없다. T20도 20/20개·재시도 없이 학습을 마쳤으며 14:47 독립 감사 PASS다. T18은 외부 평가 20/20·280 fit과 집계를 마치고 15:55:53 독립 감사 PASS다. 280개 모델 재추론 최대 확률 차이 0을 확인했으며 공개 보고 검토는 대기 중이다.
 
 14:08 당시 관측: 사용자가 자원 확인 후 T16·T18 병행 실행을 명시 승인했다. 시작 전 CPU 20~31%(논리 CPU 24), 가용 RAM 15.04/31.43GiB, 디스크 여유 695.13GiB·대기열 0을 확인했다. 실행 관리자가 기존 T18 순차 대기 관리자를 중지하고 14:07:52에 첫 외부 Fold를 시작했다. 시작 후 CPU 35%·가용 RAM 14.65GiB·디스크 대기열 0, 실험별 실행 트리 하나씩을 확인했다. 기존 순차 대기는 해제하며 두 실험 모두 같은 관리자가 유일하게 실행한다. 봉인 설정(T16 4스레드/T18 2스레드)과 각 실험의 체크포인트·독립 감사 조건은 유지한다. 이 자원 수치는 현재 측정값을 대신하지 않는다.
 
 | 연구 | 확인 상태 | 근거·다음 단계 |
 |---|---|---|
 | T5~T15 | 기존 보고서·감사 증거 보존 | [README 실험 목록](../README.md)의 보고서 참조. 아래 T1~T4 상세는 당시 결과의 기록이다. |
-| T16 RF 요인 분리 | 60/80 완료·중단 Fold 복구 완료, PID 22944 | [사전 등록](T16_RF_FACTORS_PLAN.md). 수동 복구 1회 사용, 같은 Fold 추가 재시도 금지. 종료 → 집계 → 독립 감사 → 보고. |
+| T16 RF 요인 분리 | 80/80 완료·독립 감사 PASS, 81회 시도 | [보고](../reports/RF_FACTORS_20261015.md). 네 요인 비교 모두 사전 기준 미충족. 중단 원인은 미확정 유지. |
 | T17 결정 규칙 고정 | 완료·독립 감사 PASS, 신규 fit 0 | [보고](../reports/GRADE3_RULE_FREEZE_20261015.md). LGBM-O b=0.5, LGBM_TE_G b=0.3. 같은 개발 OOF의 선택용 통계이며 독립 성능이 아니다. |
-| T18 LGBM 내부 튜닝 | 외부 평가 5/20·76 fit 완료, 후속 학습 진행 중 | [사전 등록](T18_LGBM_TUNING_PLAN.md). 이후 현재값은 원장 확인. |
+| T18 LGBM 내부 튜닝 | 외부 평가 20/20·280 fit·독립 감사 PASS | [사전 등록](T18_LGBM_TUNING_PLAN.md). ROUNDS 평균 Δ+0.001101, LEAVES +0.002176으로 +0.003 기준 미달. 공개 보고 검토 대기. |
 | T19 고정 앙상블 | 4 seed 분석·독립 감사·공개 보고 검토 PASS, 신규 fit 0 | [보고](../reports/FIXED_ENSEMBLE_20261015.md). 원핫 대비 기준 충족, TE_G 대비 미충족. 재사용 개발 OOF 탐색평가. |
-| T20 3등급 학습 가중치 | 설계 봉인·실행 시작, 첫 Fold 1/20 완료 | [계획](T20_LGBM_GRADE3_WEIGHT_PLAN.md). 실제 등급 1/2/3 가중치 1/1/1.5, 20 fit 상한. 나머지 학습·독립 감사 대기. |
+| T20 3등급 학습 가중치 | 20/20 완료·독립 감사 PASS | [보고](../reports/LGBM_GRADE3_WEIGHT_20261015.md). F1 +0.013669·20/20 승, 반복 pooled 3→1 902→903으로 다섯 기준 동시 충족은 실패. |
+| T21 피처 상호작용 | 구현·전체 회귀·독립 시작 전 검토 PASS, 15:57 현재 2/40 완료·나머지 실행 중 | [고정 계획](T21_FEATURE_INTERACTIONS_PLAN.md). 연령×높이코드×층수와 두 구조 범주 조합을 별도 비교, 각 팔 20개·총 40 fit. |
 
 T19 독립 감사 영수증은 `local_reproduction/session_20261015_control/t19_t20_audit/t19_audit_result_v1.json`이다. 기준 동결 후 공식 코드 커밋 전에 감사 준비 산술 계산이 한 번 수행된 절차 예외를 `T19_PRECOMMIT_ARITHMETIC_EXCEPTION.json`에 보존했다. 이후 기준·가중치는 변경하지 않았으며 완전한 사전등록 검증이라고 주장하지 않는다.
 
@@ -38,32 +41,33 @@ README는 결과 입구, AGENTS는 현재 규칙, 이 문서는 상태·근거·
 | 팀 문제 정의가 개인 연구에 반영됐다 | `cc5db91` → `de4b9dc`, README/PLAN | main·peter 모두 조상 관계 확인, 해당 docs 브랜치 삭제 | 컨트롤 타워: 내용 변경 때 재대조 |
 | 통합 코드 테스트가 통과했다 | `050130b`, 로컬 `local_reproduction/session_20261015_control/peter_integrated_tests.log`, [Synthetic CI](https://github.com/Peter-jackson12/earthquake/actions/runs/38674116222), [Dashboard CI](https://github.com/Peter-jackson12/earthquake/actions/runs/38674116337) | 기존 564개·실패 0·스킵 33. 문서 변경 후 HEAD의 실자료 검증은 아님 | 코드 변경 담당: 영향 테스트와 해당 revision CI |
 | T16 설계가 봉인됐다 | `cb8c14e`, `local_reproduction/T16_20261015_rf_factors/run/design.json`, [실행기](../experiments/rf_factors/run.py) | 봉인 기록 확인, 성능 결론 대기 | 실행 관리자: 봉인 일치·80 Fold 완료 후 독립 감사 |
-| T16 실행이 완료됐다 | 같은 폴더 `ledger.json`, `RUNNING.lock` | **미완료**: 상단 관측시각의 완료 수·복구 상태 참조 | 실행 관리자: 80/80, 프로세스 종료·잠금 해제, finalize |
+| T16 실행이 완료됐다 | 같은 폴더 `ledger.json`, 독립 `audit/result_manager.json` | 80/80·집계·독립 감사 PASS, 복구 포함 81회 시도 | 완료. 근본 중단 원인과 완료된 결과 검증을 구분 |
 | T17 규칙이 고정됐다 | `3dc5daf`, [보고](../reports/GRADE3_RULE_FREEZE_20261015.md), 로컬 `local_reproduction/session_20261015_control/t17_audit_result.json` | 기존 독립 감사 PASS 재확인, 신규 fit 0 | 완료. 후속 변경 시 새 설계·증거 필요 |
 | T17 점수가 독립 성능이다 | 같은 보고의 선택 곡선과 한계 | **성립하지 않음**: 같은 OOF로 b를 선택한 통계 | 최종 선정·독립 평가를 별도 설계하기 전 주장 금지 |
 | T18 튜닝이 완료됐다 | `310c497`, `local_reproduction/T18_20261015_lgbm_tuning/run/{design,ledger}.json`, [실행기](../experiments/lgbm_nested_tuning/run.py) | **실행 중**: 상단 관측값 참조, 전체 성능 미검증 | 실행 관리자: 내부 240 fit·외부 최대 40 fit, 20단위 선택·평가, 독립 감사 |
 | T19 고정 앙상블 분석이 검증됐다 | `4f064c7`, [보고](../reports/FIXED_ENSEMBLE_20261015.md), 로컬 `t19_audit_result_v1.json`·`t19_public_review_result_v1.json` | 독립 산술 감사·공개 집계 검토 PASS. 두 baseline 동시 개선은 미충족 | 완료. 재사용 개발 OOF와 절차 예외 한계 유지 |
-| T20 가중치 효과가 검증됐다 | `4f064c7`, [계획](T20_LGBM_GRADE3_WEIGHT_PLAN.md), 로컬 T20 `design.json`·`ledger.json` | **아직 아님**: 설계·합성검사·실행 전 독립 검토 완료 | 실행 관리자: 최대 20 fit·집계, 독립 감사·공개 보고 |
+| T20 가중치 효과가 검증됐다 | `4f064c7`, [보고](../reports/LGBM_GRADE3_WEIGHT_20261015.md), 로컬 `t20_audit_result.json` | 독립 감사 PASS. F1·Recall 개선과 3→1 기준 미충족을 함께 확인 | 완료. 최종 모델 채택으로 해석하지 않음 |
 | 학습과 검증 정보가 분리된다 | T16/T18 계획 및 실행기, [데이터 계약](../configs/data_contract.json) | 설계·구현 근거 있음. 진행 중 실험의 전체 산출물 감사 대기 | 독립 감사 담당: 그룹·ID·내부 선택·예측·모델 재추론 확인 |
 | 재개가 결과를 보존한다 | 실행기 원장·백업·재로딩 로직 및 합성 검사 | T16 실제 중단 후 완료 56개·원본/백업 448개 SHA를 확인해 중단 Fold만 재개, 14:31 해당 Fold 저장·재로딩·백업 완료 | 실행 관리자: 후속 전체 감사. 종료 원인은 미확정 유지 |
-| 전체 파이프라인이 검증됐다 | 학습 → 집계 → 독립 감사 → 보고 | **아직 아님**: T16/T18/T20 학습·감사 대기 | 각 감사 PASS와 revision·설계 결속된 집계 보고 필요 |
+| 전체 파이프라인이 검증됐다 | 학습 → 집계 → 독립 감사 → 보고 | **아직 아님**: T18 보고 검토, T21 나머지 학습·감사 대기 | 각 감사 PASS와 revision·설계 결속된 집계 보고 필요 |
 | 홀드아웃·최종 모델을 바꾸지 않는다 | AGENTS, T0 보고, 후속 계획 | 현재 작업 범위로 유지. 신규 실험은 개발 자료만 사용 | 컨트롤 타워: 새 평가 설계·사용자 결정 전 접근/선정 금지 |
 
 ## 현재 후속 절차
 
-1. 컨트롤 타워가 `peter` HEAD·변경 파일·담당자를 확인한다. 실자료 학습 관리자는 하나이며 승인된 T16·T18·T20을 자원 조건 아래 병행한다. 다른 주체가 같은 실험을 추가 실행하지 않는다. 코드 통합과 실제 학습 완료를 구분한다.
-2. 작업 위치는 `worktrees/peter_rules`. 동결 Python은 작업 공간 루트의 `local_reproduction/20261014_01/venv/Scripts/python.exe`다. `TEMP/TMP`는 별도 workspace 폴더, `PYTHONIOENCODING=utf-8`을 사용한다. 환경 설치·업그레이드와 이미 봉인한 출력의 `prepare` 재실행을 하지 않는다.
-3. 작은 `ledger.json`·로그 끝부분·`RUNNING.lock`과 원 실행 관리자 정보를 함께 확인한다. `status`의 완료 수, 샌드박스에서 PID 미조회, 타 세션의 `Unknown process id`만으로 종료를 판정하지 않는다. 잠금 파일을 임의 삭제하지 않는다.
-4. T16은 완료 80/80과 실행 프로세스 종료·잠금 해제를 확인한 뒤 `-m experiments.rf_factors.run finalize --data ../../earthquake/data --output ../../local_reproduction/T16_20261015_rf_factors/run`을 실행한다. 이어 `../../local_reproduction/T16_20261015_rf_factors/audit/audit.py --destination <존재하지 않는 결과 JSON 경로>`로 독립 감사한다. PASS 전에는 성능 보고를 확정하지 않는다.
-5. 사용자 승인으로 T18은 T16과 병행한다. 최초 비용 확인은 `-m experiments.lgbm_nested_tuning.run fit-all --data ../../earthquake/data --output ../../local_reproduction/T18_20261015_lgbm_tuning/run --schemes geo2_s42 --outer-folds 0`이며 14:07에 시작했다. 해당 프로세스 종료와 첫 단위 비용·자원 여유 확인 후 같은 명령에서 마지막 두 필터를 제거하여 나머지를 진행한다. 완료 Fold는 재사용한다. 메모리 압박이나 지속 CPU·디스크 포화 시 추가 단위 시작을 보류하고 컨트롤 타워에 알린다. 무거운 감사 작업은 실행 관리자가 시간을 조율한다.
-6. T18은 내부 240 fit·외부 최대 40 fit 및 20단위 선택·평가, 실행 종료·잠금 해제를 확인한 뒤 동일 모듈의 `finalize`를 실행한다. 감사는 `../../local_reproduction/session_20261015_control/audit_t18.py`다. 감사 스크립트의 현재 입출력과 덮어쓰기 방지를 실행 전에 확인한다. 현재 기본 출력은 `t18_audit_result.json`이며 기존 파일이 있으면 덮어쓰지 않고 중단한다.
-7. 봉인 불일치, 입력 계약 실패, 중복 실행, 예산 초과, 감사 실패가 있으면 다음 단계 진입을 중단한다. 원본·실패 로그·기존 출력은 보존하고 원인과 재개 가능 범위를 확인한다. 봉인 수정이나 재학습으로 실패를 숨기지 않는다.
-8. T20은 이미 봉인한 출력을 재사용한다. T16 복구 Fold 정상 저장과 자원 여유(가용 RAM≥8GiB·디스크≥15GiB, 지속 CPU≥90%·디스크 포화 없음)를 확인한 뒤 `-m experiments.lgbm_grade3_weight.run fit-all --data ../../earthquake/data --output ../../local_reproduction/T20_20261015_lgbm_grade3_weight/run --schemes geo2_s42 --folds 0`으로 첫 Fold 비용을 확인한다. 이후 같은 관리자가 나머지 Fold를 순서대로 실행한다. 최대 20 fit, 실패 재시도 금지. 20개 완료·종료·잠금 해제 후 같은 모듈의 `finalize`, 이어 `../../local_reproduction/session_20261015_control/t19_t20_audit/audit_t20_results.py --run <T20 run 절대경로> --destination <새 JSON 절대경로>`로 독립 감사한다. 감사 일정은 T18/T20의 새 학습 시작과 겹치지 않게 관리자가 조율한다.
-9. 독립 감사 PASS 후에만 집계 보고와 JSON을 `peter`에 반영한다. 코드/설계 revision, 비교 분할, Fold 평균과 pooled OOF, 실제 3등급 오류 분모 및 한계를 함께 기록한다. 컨트롤 타워가 검토·로컬 커밋하고 이 문서의 상태·관측시각·근거를 갱신한다. 새 결과의 공개 푸시는 승인 범위를 따로 확인한다.
+1. 컨트롤 타워가 `peter` HEAD·변경 파일·담당자를 확인한다. 실자료 학습은 기존 Astra 실행 관리자만 수행한다. T16·T18·T20 학습·감사는 완료했고 T21 후속 실행을 관리한다. 다른 주체가 같은 실험을 추가 실행하지 않는다.
+2. 작업 위치는 `worktrees/peter_rules`. 동결 Python은 작업 공간 루트의 `local_reproduction/20261014_01/venv/Scripts/python.exe`다. `TEMP/TMP`는 별도 workspace 폴더, `PYTHONIOENCODING=utf-8`을 사용한다. 환경 설치·업그레이드와 봉인된 출력의 `prepare` 재실행을 하지 않는다.
+3. 작은 `ledger.json`·로그 끝부분·`RUNNING.lock`과 실행 관리자 정보를 함께 확인한다. 완료 수나 타 세션의 PID 미조회만으로 종료를 판정하지 않는다. 잠금을 임의 삭제하지 않는다.
+4. T16은 80/80 학습·집계·독립 감사 PASS, T20은 20/20 학습·집계·독립 감사 PASS다. 공개 보고 두 건도 독립 2차 검토를 통과했다. 완료 명령을 다시 실행하지 않는다. T16 종료 원인은 미확정이며 임시 실행 폴더 정리는 별도 확인 뒤 수행한다.
+5. T18은 20/20 외부 단위·280 fit·집계·독립 감사 PASS다. 감사 스크립트는 `local_reproduction/session_20261015_control/audit_t18.py`이며 기존 출력을 덮어쓰지 않는다. 감사 PASS 후 집계 보고를 작성하고 컨트롤 타워가 검토한다.
+6. T21은 `d18f2b1e9d85611bce1aeb63f177bcd06696043a`의 코드·계획을 고정했다. 실행 관리자가 `local_reproduction/T21_20261015_feature_interactions/run`을 최초 한 번 봉인하고, T18 무거운 감사 종료 뒤 자원(가용 RAM≥8GiB·디스크≥15GiB, 지속 CPU≥90%·디스크 포화 없음)을 재측정한다. `experiments.feature_interactions.run fit-all`의 `AGE_HEIGHT_FLOORS/geo2_s42/f0`을 첫 공식 Fold로 실행한다. 별도 실자료 smoke fit은 없다.
+7. 첫 Fold 저장·재로딩·SHA·백업·정상 종료와 자원 여유를 확인하면 같은 관리자가 나머지 39개를 이어간다. 두 팔 각각 20개·총 40회 시도 상한, 실패 재시도 금지다. 40개 완료·프로세스 종료·잠금 해제 후 동일 모듈의 `finalize`를 실행한다. 봉인 코드·설정·계획은 실행 중 수정하지 않는다.
+8. T21 독립 감사는 `local_reproduction/session_20261015_control/t21_audit/audit_t21_results.py`다. `--run <T21 run 절대경로> --data <earthquake/data 절대경로> --destination <새 JSON 절대경로>`로 실행하며 무거운 작업 시간을 관리자가 조율한다. 40개 모델, 기존·추가·전체 CSR, 피처 상태, SHA·백업·예산·재추론·집계·판정을 독립 대조한다. 준비 검사는 17/17 PASS이며 실제 감사 PASS와 구분한다.
+9. 봉인 불일치, 입력 계약 실패, 중복 실행, 예산 초과, 감사 실패 시 다음 단계 진입을 중단한다. 원본·실패 로그·기존 출력은 보존하고 원인과 재개 범위를 확인한다. 봉인 수정이나 재학습으로 실패를 숨기지 않는다.
+10. 감사 PASS 후 집계 보고와 JSON만 `peter`에 반영한다. 코드/설계 revision, 비교 분할, Fold 평균과 pooled OOF, 실제 3등급 오류 분모 및 한계를 기록한다. T21 보고 담당은 실행 관리자이며 파일은 `reports/FEATURE_INTERACTIONS_20261015.md`와 `reports/feature_interactions_20261015.json`이다. 컨트롤 타워가 검토·로컬 커밋·공통 상태 갱신을 맡고 공개 푸시는 별도 승인 범위에 따른다.
 
-12:15 문서 점검에서는 실험 명령을 실행하지 않았다. 이후 실행 관리자가 승인된 T18 학습과 T16 복구를 수행했고, T19는 분석·감사·보고까지 완료했다. T16/T18/T20 전체 학습 종료·finalize·독립 감사는 아직 남아 있다.
+12:15 문서 점검은 실행 없는 검토였다. 이후 승인된 실험 중 T16·T19·T20은 학습 또는 분석·감사·보고까지 마쳤다. 현재 T18 공개 보고 검토와 T21 나머지 학습·감사·보고는 아직 완료되지 않았다.
 
-문서 수정 후 로컬 링크 87개와 T16 31개·T18 37개 봉인 SOURCE의 SHA 일치를 확인했다(2026-10-15 12:17 KST). 검사 영수증은 로컬 `local_reproduction/session_20261015_control/doc_alignment_check_result.json`이다. 전체 학습이나 실자료 파이프라인을 다시 실행한 결과가 아니다.
+문서 수정 후 로컬 링크 87개와 T16 31개·T18 37개 봉인 SOURCE의 SHA 일치를 확인한 기존 기록은 2026-10-15 12:17 KST 기준이다. 영수증은 `local_reproduction/session_20261015_control/doc_alignment_check_result.json`이며 최신 검사나 전체 파이프라인 검증을 대신하지 않는다.
 
 ## 고정 데이터·평가 계약
 
@@ -120,7 +124,7 @@ README는 결과 입구, AGENTS는 현재 규칙, 이 문서는 상태·근거·
 ## 병렬 작업 및 인계 규칙
 
 1. 세션 시작 때 **peter HEAD·최근 변경 파일·현재 실행 관리자와 원장**부터 다시 확인한다. 이어지는 보고서의 출처 커밋과 증거가 맞는지 확인한다.
-2. 컨트롤 타워는 공통 문서·통합을, 실행 관리자는 승인된 T16·T18·T20 병행 학습과 감사 일정을 담당한다. 전용 보고서는 감사 후 담당자를 지정한다. 같은 파일을 동시에 수정하지 않는다. 실행 중 봉인된 코드·설정·계획을 변경하지 않는다.
+2. 컨트롤 타워는 공통 문서·통합을, 실행 관리자는 승인된 T18·T21 후속 학습과 감사 일정을 담당한다. 전용 보고서는 감사 후 담당자를 지정한다. 같은 파일을 동시에 수정하지 않는다. 실행 중 봉인된 코드·설정·계획을 변경하지 않는다.
 3. **모델 구조 효과(T4)**와 **특성 상호작용 효과(T3)**, **995 처리 효과(T1)**를 분리한다. 한 번에 둘 이상 변경한 성능 차이를 한 원인에 귀속하지 않는다.
 4. 기존 실험은 기준 데이터·Fold·모델 설정·OOF SHA가 일치할 때만 재사용한다. 과거 점수를 신규 실행으로 표시하지 않는다.
 5. 모델 선택은 개발 데이터 CV에서만 수행한다. 전처리 fit, 범주 인코딩, 샘플링, 학습/검증 선택에 쓰는 통계는 학습 Fold 안으로 제한한다.
@@ -131,6 +135,6 @@ README는 결과 입구, AGENTS는 현재 규칙, 이 문서는 상태·근거·
 
 ## 다음 진입점
 
-- **현재 후속 실행**: 위 후속 절차와 T16/T18/T20의 원장·실행 관리자 확인을 우선한다.
+- **현재 후속 실행**: 위 후속 절차와 T18/T21의 원장·실행 관리자 확인을 우선한다.
 - **과거 설계 열람**: [G1~G5 계획](../experiments/age995/interactions/PLAN.md), [T4 인계 기록](HANDOFF_MODEL_FAMILY_COMPARISON_20261014.md)은 당시 기록이다. 이미 실행한 절차를 재시작하는 지시가 아니다.
 - **프로젝트 필수 과제**: [과제 가이드](PROJECT_GUIDE_KO.md)와 팀 합의의 최신본을 확인. XGBoost/LightGBM은 필수 `sklearn GradientBoostingClassifier`를 대체하지 않는다.
