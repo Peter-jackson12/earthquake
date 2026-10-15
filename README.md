@@ -42,11 +42,14 @@ Macro F1과 함께 3→1·3→2 건수와 비율 및 3등급 Recall을 보고합
 | T13 | LGBM_TE_G geo2 확인(새 분할) | [보고](reports/GEO2_TE_CONFIRM_20261014.md) |
 | 탐색 / T14 | TE·ROS RandomForest 탐색(0.7004) / 로컬 재현 | [탐색](reports/TE_ROS_RF_EXPLORATORY_20261014.md), [재현](reports/TE_ROS_RF_REPRO_20261015.md) |
 | T15 | 3등급 결정 규칙(로짓 오프셋) | [보고](reports/GRADE3_DECISION_RULE_20261015.md) |
-| T16 | RF 요인 분리(ONEHOT·NO_ROS·DROP_GEO23_TE·AGE_C) | 학습 진행 중, [사전 등록](docs/T16_RF_FACTORS_PLAN.md) |
+| T16 | RF 요인 분리(ONEHOT·NO_ROS·DROP_GEO23_TE·AGE_C) | 80개 학습·독립 감사 완료, 네 변경 모두 기준 미충족, [결과](reports/RF_FACTORS_20261015.md) |
 | T17 | 전체 개발 Group OOF에서 결정 규칙 고정 | 독립 감사 PASS, [보고](reports/GRADE3_RULE_FREEZE_20261015.md) |
-| T18 | 내부 Group CV로 LGBM 학습 예산·복잡도 선택 | 사용자 승인 후 병행 학습 시작, [사전 등록](docs/T18_LGBM_TUNING_PLAN.md) |
+| T18 | 내부 Group CV로 LGBM 학습 예산·복잡도 선택 | 280회 학습·독립 감사 완료, 두 정책 모두 개선폭 기준 미충족, [결과](reports/LGBM_NESTED_TUNING_20261015.md) |
 | T19 | 고정 50:50 앙상블과 오류 보완 | 분석·독립 감사 완료. O 대비 개선, TE_G 대비 미충족, [결과](reports/FIXED_ENSEMBLE_20261015.md) |
-| T20 | 실제 3등급 학습 가중치 1.5 | 자원 확인 후 병행 시작·첫 Fold 저장 완료, [계획](docs/T20_LGBM_GRADE3_WEIGHT_PLAN.md) |
+| T20 | 실제 3등급 학습 가중치 1.5 | 20회 학습·독립 감사 완료, F1 개선·3→1 기준 미충족, [결과](reports/LGBM_GRADE3_WEIGHT_20261015.md) |
+| T21 | 연령 곱·구조 범주 조합 | 40회 학습·독립 감사 완료, 두 팔 모두 기준 미충족, [결과](reports/FEATURE_INTERACTIONS_20261015.md) |
+| T22 | 재료55쌍·구조별 층수 | 구현·검토 후 실행 시작, [계획](docs/T22_MATERIAL_STRUCTURE_PLAN.md) |
+| T23 | 누적 이진분류·단조 확률투영 | 구현·검토 완료, T22 이후 자원 확인해 실행 예정, [계획](docs/T23_ORDINAL_DAMAGE_PLAN.md) |
 
 ## 결과 보기 — 데이터나 모델 파일 없이 실행
 
@@ -73,7 +76,7 @@ CLI는 모델 SHA를 `reports/personal_final_holdout.json`과 대조한다. 출�
 
 ## 실험 재현
 
-아래 명령은 과거 실행 방법의 기록이다. 현재 T16/T18/T20의 실행 절차는 [연구 현황](docs/RESEARCH_STATUS.md)을 따른다. 새로운 재현은 새 실험 ID·새 비공개 출력 경로와 사전등록을 먼저 준비한다.
+아래 명령은 과거 실행 방법의 기록이다. 현재 T22/T23의 실행 절차는 [연구 현황](docs/RESEARCH_STATUS.md)을 따른다. 새로운 재현은 새 실험 ID·새 비공개 출력 경로와 사전등록을 먼저 준비한다.
 
 전처리 v1.0.1 패키지의 `data/`를 비공개로 설치한다. `configs/data_contract.json`의 개발/분할 SHA가 맞아야 한다.
 기존 outputs가 없는 깨끗한 작업 복사본에서 아래 CV를 재현한다. 기존 결과 디렉터리는 덮어쓰지 않는다.
