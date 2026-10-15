@@ -15,6 +15,26 @@
 
 이 문서는 **참고/인계용**이며 신규 학습·최종 모델 교체 지시가 아니다. T4/T5/T6 최신 상태는 각 실험 브랜치의 완료 보고·감사 기록을 우선한다. 특히 T6 R12/R1/R0의 성능은 기존 비공개 증거 복구 전까지 확정하지 않는다.
 
+## 개인 연구 실험 목록 (2026-10-15, `peter`로 통합)
+
+`peter-exp/*` 실험 브랜치의 이력은 이 브랜치에 병합했다. 각 브랜치의 원래 끝 커밋은 `archive/peter-exp/<브랜치 이름>` 태그로 보존한다. 보고서에 적힌 커밋 SHA는 그대로 유효하다. 개인 최종 모델(LR C=1)은 위 결과 그대로이고, 아래 실험은 모두 **개발 CV 연구**다(홀드아웃 재사용 없음, 기준선 LR-C 유지). 진행 상태는 [docs/PLAN.md](docs/PLAN.md)와 [연구 현황](docs/RESEARCH_STATUS.md)을 따른다.
+
+| 단계 | 주제 | 보고서 |
+|---|---|---|
+| T0 | 기존 개인 모델(위 최종 모델) | [개인 최종 보고](reports/PERSONAL_FINAL_REPORT_20261013.md) |
+| T1 / T2 | `age=995` 전처리(A/B/C, D~F) / 오류 진단 | [실험](reports/AGE995_EXPERIMENT_20261013.md), [후속](reports/AGE995_FOLLOWUP_20261013.md), [진단](reports/AGE995_DIAGNOSTICS_20261014.md) |
+| T3 | 특성 조합 G1~G5 | [보고](reports/AGE995_INTERACTIONS_20261014.md) |
+| T4 | 모델 계열 비교(XGBoost·LightGBM vs LR) | [보고](reports/MODEL_FAMILY_COMPARISON_20261014.md), [재현 검토](reports/MODEL_FAMILY_REPRODUCTION_REVIEW_20261014.md) |
+| T5 | 지역 Group CV | [보고](reports/GEO_GROUP_CV_20261014.md) |
+| T6 / T6R / T6S | 지역 특성 제거 ablation·로컬 재현·C 보완 감사 | [회수](reports/GEO_ABLATION_RETRIEVAL_20261014.md), [복구](reports/GEO_ABLATION_RECOVERY_20261014.md), [T6R](reports/GEO_ABLATION_LOCAL_REPRO_20261014.md), [T6S](reports/GEO_ABLATION_C_GROUP_SUPPLEMENT_20261014.md) |
+| T7 | 지역 계층 축소 | [보고](reports/GEO_HIER_SHRINK_20261014.md) |
+| T8 / T9 | LightGBM native categorical / 부분 native | [T8](reports/LGBM_NATIVE_CAT_20261014.md), [T9](reports/LGBM_PARTIAL_NATIVE_20261014.md) |
+| T10 / T11 | 계층적 지역 TE / 그룹 인지 내부 Fold TE | [T10](reports/GEO_HIER_TE_20261014.md), [T11](reports/GEO_TE_GROUP_INNER_20261014.md) |
+| T12 | 구조 파생 특성 | [보고](reports/STRUCT_FEATURES_20261014.md) |
+| T13 | LGBM_TE_G geo2 확인(새 분할) | [보고](reports/GEO2_TE_CONFIRM_20261014.md) |
+| 탐색 / T14 | TE·ROS RandomForest 탐색(0.7004) / 로컬 재현 | [탐색](reports/TE_ROS_RF_EXPLORATORY_20261014.md), [재현](reports/TE_ROS_RF_REPRO_20261015.md) |
+| T15 | 3등급 결정 규칙(로짓 오프셋) | [보고](reports/GRADE3_DECISION_RULE_20261015.md) |
+
 ## 결과 보기 — 데이터나 모델 파일 없이 실행
 
 ```bash

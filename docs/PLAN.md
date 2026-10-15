@@ -67,13 +67,13 @@ main 통합, 팀 최종 선정과 평가 정책, 팀원별 전체 과정 수행,
 - T11의 경계 충족(단일 T5 geo2 분할, seed 42)을 새 geo2 Group 분할 seed 101/202/303에서 확인. LR_C·LGBM_O·LGBM_TE_G × 3 seed × 5 Fold = 45 fit(최대 45). 규칙 C1·C2는 계획 문서에 학습 전 고정.
 - 상태: 45/45 학습 완료, 독립 감사 PASS. C1(one-hot LGBM 대비) 미충족(+0.0086, 11/15), C2(LR-C 대비) 충족(+0.0243, 14/15) → 확인 실패, LR-C 기준선 유지. [결과 보고서](../reports/GEO2_TE_CONFIRM_20261014.md).
 
-## T14 팀원 탐색 파이프라인(TE + ROS + RF) 로컬 재현 — 2026-10-15 (사전 등록 단계, 학습 전)
+## T14 TE·ROS RandomForest 탐색 결과 로컬 재현 — 2026-10-15 (완료, 독립 감사 PASS)
 
 - 실험 ID `T14_TE_ROS_RF_LOCAL_REPRO`, 브랜치 `peter-exp/te-ros-rf-local-repro-v1`(기준 `af261c7`). [사전 등록 계획](T14_TE_ROS_RF_REPRO_PLAN.md).
 - `origin/peter-exp/te-ros-rf-exploratory-v1`(`0ecd351`)의 미감사 탐색 결과(RF + geo1/2/3 OOF TE + 지역 빈도 + 학습 Fold 한정 ROS, Macro F1 0.700427)를 원본 코드 보존본(`experiments/te_ros_rf_exploratory/`, SHA 고정)으로 로컬 재현한다. **재현이며 요인 분리(TE/ROS/RF/age995)는 후속 실험이다.**
 - Stage A: 고정 stratified 5 Fold, 기록된 Fold별 혼동행렬과 비교(EXACT / WITHIN_TOLERANCE / FAIL, 허용 오차 사전 고정). Stage B(Stage A 통과 시만): geo2 Group 분할 seed 42/101/202/303 20 Fold, 내부 TE Fold는 T11 그룹 인지 방식, 기존 LR-C·LGBM-O·LGBM_TE_G OOF 재사용(비교군 재학습 없음). 신규 RF 학습 25회 예정.
 - 상태: **완료, 독립 감사 PASS** (시도 2 `run_v2`, 수정 1 `813fab3`). [결과 보고](../reports/TE_ROS_RF_REPRO_20261015.md). Stage A는 EXACT로, 0.7004를 혼동행렬 단위까지 재현했다. Stage B는 NEITHER로, geo2 20 Fold에서 LR-C −0.0088(8/20 승), LGBM-O −0.0250(2/20 승)이다. 기준선·최종 모델·홀드아웃은 변경하지 않았다.
-## T15 3등급 결정 규칙(로짓 오프셋) — 2026-10-15 (사전 등록 작성, 학습 전)
+## T15 3등급 결정 규칙(로짓 오프셋) — 2026-10-15 (완료, 독립 감사 PASS)
 
 - 실험 ID `T15_GRADE3_DECISION_RULE`, 브랜치 `peter-exp/grade3-decision-rule-v1`(기준 `af261c7`). [사전 등록 계획](T15_GRADE3_DECISION_RULE_PLAN.md).
 - 단일 요인: 3등급 확률에 `exp(b)`를 곱하는 결정 규칙(b는 0~2.0, 0.1 간격 21개 중 1개). LR_C·LGBM_O·LGBM_TE_G에 동일 적용, 각 팔의 보정 전 argmax와 비교. 누수 방지를 위해 b는 바깥 학습 행 안의 내부(Group 인지) 5-Fold OOF로만 선택하고, 바깥 모델은 재학습하지 않고 저장 OOF를 읽기 전용 재사용.
