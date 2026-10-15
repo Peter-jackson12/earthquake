@@ -14,14 +14,14 @@ Macro F1과 함께 3→1·3→2 건수와 비율 및 3등급 Recall을 보고합
 
 ## 후속 연구 인계·중복 실행 방지
 
-**[완료된 실험·진행 중인 연구 트랙과 중복 실행 방지 체크리스트](docs/NEXT_EXPERIMENTS_20261013.md)**를 먼저 확인한다. 기존 `peter` 개인 최종 모델과, 별도 `peter-exp/age995-outlier-treatment`에서 완료한 연령995 처리·오류 진단·G1~G5 실험은 **서로 다른 연구 단계**다. XGBoost·LightGBM 비교는 다른 브랜치에서 진행 중이므로 최신 상태를 확인한 뒤 이어간다. 이미 사용된 개인 홀드아웃은 재평가하지 않는다.
+**[현재 연구 상태·주장별 근거·후속 실행 절차](docs/RESEARCH_STATUS.md)**를 먼저 확인한다. 개인 연구는 `worktrees/peter_rules`의 `peter`에서만 진행한다. 기존 개인 최종 모델(T0)과 후속 개발 CV 연구는 서로 다른 단계다. [2026-10-13 인계 기록](docs/NEXT_EXPERIMENTS_20261013.md)은 당시 기록이며 현재 작업 지시가 아니다. 이미 사용된 개인 홀드아웃은 재평가하지 않는다.
 
 ## 연구 참고 문서 (로컬 에이전트·팀 공유)
 
 - [실제로 구현·실험한 파생변수 인벤토리](docs/FEATURE_ENGINEERING_INVENTORY_20261014.md): age_is_995, 연령 8구간과 지역·기초·연령 교차항의 정확한 정의·사용 여부. 원핫 열, 분할키, 샘플링과 구분.
 - [외부 논문·GitHub 벤치마크 비교](docs/EXTERNAL_BENCHMARK_COMPARISON_20261014.md): 원문 링크, 저자 보고 F1, Macro/Micro/Accuracy·평가 분할 차이, 독립 검증 한계.
 
-이 문서는 **참고/인계용**이며 신규 학습·최종 모델 교체 지시가 아니다. T4/T5/T6 최신 상태는 각 실험 브랜치의 완료 보고·감사 기록을 우선한다. 특히 T6 R12/R1/R0의 성능은 기존 비공개 증거 복구 전까지 확정하지 않는다.
+이 문서는 **참고/인계용**이며 신규 학습·최종 모델 교체 지시가 아니다. `peter`에 통합한 완료 보고·감사 기록을 근거로 삼는다. 특히 원본 T6 R12/R1/R0는 비공개 증거 미확보 상태이며 독립 재현 T6R의 완료와 구분한다.
 
 ## 개인 연구 실험 목록 (2026-10-15, `peter`로 통합)
 
@@ -48,6 +48,8 @@ Macro F1과 함께 3→1·3→2 건수와 비율 및 3등급 Recall을 보고합
 
 ## 결과 보기 — 데이터나 모델 파일 없이 실행
 
+아래 설치는 대시보드용 별도 환경의 안내다. 현재 연구에 사용하는 동결 환경에는 설치·업그레이드하지 않는다.
+
 ```bash
 python -m pip install -r requirements-dashboard.txt
 python -m streamlit run app.py
@@ -68,6 +70,8 @@ python scripts/predict_personal.py --input local_buildings.csv --output outputs/
 CLI는 모델 SHA를 `reports/personal_final_holdout.json`과 대조한다. 출처가 불명확한 joblib 파일은 로딩하지 않는다. 이 교육용 모델을 실무 안전 판정에 사용하지 않는다.
 
 ## 실험 재현
+
+아래 명령은 과거 실행 방법의 기록이다. 현재 T16/T18의 재개 절차는 [연구 현황](docs/RESEARCH_STATUS.md)을 따른다. 새로운 재현은 새 실험 ID·새 비공개 출력 경로와 사전등록을 먼저 준비한다.
 
 전처리 v1.0.1 패키지의 `data/`를 비공개로 설치한다. `configs/data_contract.json`의 개발/분할 SHA가 맞아야 한다.
 기존 outputs가 없는 깨끗한 작업 복사본에서 아래 CV를 재현한다. 기존 결과 디렉터리는 덮어쓰지 않는다.
