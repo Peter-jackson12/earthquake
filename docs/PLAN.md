@@ -26,3 +26,21 @@ main 통합, 팀 최종 선정과 평가 정책, 팀원별 전체 과정 수행,
 개인 평가로 공통 홀드아웃 결과는 이미 노출됐다. 이를 보면서 다른 팀 후보를 반복 선택한 뒤 같은 자료를 새로운 독립 테스트라고 부르지 않는다. 이미 완료된 개인 모델은 홀드아웃 결과에 따라 재튜닝하지 않는다.
 
 이전 진행 문서는 [원래 계획 보관본](PLAN_BEFORE_PERSONAL_COMPLETION.md)에 보존했다. 팀 README 초안은 저장소 루트의 README_TEAM_DRAFT_ARCHIVE.md에 바이트 그대로 보존했다. 이 완료 상태 변경은 main에는 적용하지 않았다.
+
+## T7 지역 계층적 축소 — 2026-10-14 (완료, 독립 감사 PASS)
+
+- 실험 ID `T7_geo_hier_shrink_v1`, 브랜치 `peter-exp/geo-hier-shrink-v1`. [사전 등록 계획](T7_GEO_HIER_SHRINK_PLAN.md).
+- C의 범주형 OHE를 geo1/geo2/geo3/text 블록으로 나누고 geo3(또는 geo2+geo3) 블록 가중치 s∈{0.5,0.25,0.1}로 축소한 6개 변형 × stratified/geo2/geo1 × 5 Fold = 신규 fit 90회 예정. C 재학습 없음, 홀드아웃 미사용.
+- 상태: 90/90 학습 완료, 독립 감사 PASS. 사전 등록 규칙 충족 변형 0/6, C 기준선 유지. [결과 보고서](../reports/GEO_HIER_SHRINK_20261014.md).
+
+## T8 LightGBM 범주형 표현 — 2026-10-14 (완료, 독립 감사 PASS)
+
+- 실험 ID `T8_lgbm_native_cat_v1`, 브랜치 `peter-exp/lgbm-native-cat-v1`. [사전 등록 계획](T8_LGBM_NATIVE_CAT_PLAN.md).
+- T4 `LGBM_C_v1`(one-hot, O)과 같은 파라미터·C 연령 정책에서 범주형 11열만 학습 Fold 어휘의 native categorical(N)로 바꾼 단일 요인 비교. stratified/geo2/geo1 × 5 Fold, 신규 fit N 15 + O 10 = 25회. O stratified는 T4 고정 OOF 재사용, 홀드아웃 미사용.
+- 상태: 25/25 학습 완료, 독립 감사 PASS. 주 판정(N>O 표현 효과) 충족, 보조 판정(기준선 도전) 미충족(geo2 하락). LR-C 기준선 유지. [결과 보고서](../reports/LGBM_NATIVE_CAT_20261014.md).
+
+## T9 LightGBM 부분 native categorical — 2026-10-14 (완료, 독립 감사 PASS)
+
+- 실험 ID `T9_lgbm_partial_native_v1`, 브랜치 `peter-exp/lgbm-partial-native-v1`(기준 `b54b129`). [사전 등록 계획](T9_LGBM_PARTIAL_NATIVE_PLAN.md).
+- T8 O와 같은 조건에서 geo 3열은 one-hot을 유지하고 텍스트 범주 8열만 학습 Fold 어휘 native categorical로 바꾼 P(CSR 유지). stratified/geo2/geo1 × 5 Fold = 신규 fit 15회. O·N·LR-C는 기존 OOF 재사용, 홀드아웃 미사용.
+- 상태: 15/15 학습 완료, 독립 감사 PASS. 결합 후보 미충족, N−O 이득 유지 비율 0.4%(이득은 지역 범주에서 옴). LR-C 기준선 유지. [결과 보고서](../reports/LGBM_PARTIAL_NATIVE_20261014.md).

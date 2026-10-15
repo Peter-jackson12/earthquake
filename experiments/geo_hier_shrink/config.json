@@ -1,0 +1,32 @@
+{
+  "study_id": "T7_geo_hier_shrink_v1",
+  "branch": "peter-exp/geo-hier-shrink-v1",
+  "base_commit": "0bee98e",
+  "mechanism": "C pipeline with the single categorical OHE split into geo1/geo2/geo3/text OHE blocks; ColumnTransformer transformer_weights scale geo blocks (weight s == L2 penalty x 1/s^2 on that block)",
+  "blocks": {"geo1": ["geo_level_1_id"], "geo2": ["geo_level_2_id"], "geo3": ["geo_level_3_id"], "text": "TEXT"},
+  "variants": {
+    "H3_050": {"geo1": 1.0, "geo2": 1.0, "geo3": 0.5, "text": 1.0},
+    "H3_025": {"geo1": 1.0, "geo2": 1.0, "geo3": 0.25, "text": 1.0},
+    "H3_010": {"geo1": 1.0, "geo2": 1.0, "geo3": 0.1, "text": 1.0},
+    "H23_050": {"geo1": 1.0, "geo2": 0.5, "geo3": 0.5, "text": 1.0},
+    "H23_025": {"geo1": 1.0, "geo2": 0.25, "geo3": 0.25, "text": 1.0},
+    "H23_010": {"geo1": 1.0, "geo2": 0.1, "geo3": 0.1, "text": 1.0}
+  },
+  "schemes": ["stratified", "geo2", "geo1"],
+  "lr": {"C": 1.0, "solver": "lbfgs", "max_iter": 1500, "tol": 0.0001, "random_state": 42},
+  "environment": {"python": "3.13.5", "numpy": "2.3.5", "pandas": "2.2.3", "scipy": "1.17.0", "sklearn": "1.8.0", "joblib": "1.5.3", "threadpoolctl": "3.6.0"},
+  "manifest_sha256": {"stratified": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721", "geo2": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64", "geo1": "1b4616ff7d5e052ac76707e58de48e3d0b23fb7a49e350c14d6704cc1ee488f5"},
+  "C_oof_sha256": {"stratified": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc", "geo2": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4", "geo1": "453608352590cf27ddb1460926b7578d50832baa9127431422d0dd69b8f42951"},
+  "c_refits": 0,
+  "labels": [1, 2, 3], "n_folds": 5,
+  "primary": "unweighted_mean_of_five_fold_macro_f1", "std_ddof": 1,
+  "error_rate_denominator": "actual_grade3_support",
+  "max_new_classifier_fits": 90, "max_concurrent_fold_processes": 4, "threads_per_fit": 1,
+  "automatic_retries": 0, "stop_on_nonconvergence": true,
+  "follow_up_rule": {"geo2_mean_delta_min": 0.010, "geo2_fold_wins_min": 4, "stratified_mean_delta_min": -0.010,
+    "fold_win": "variant fold Macro F1 strictly greater than C on the same fold"},
+  "control_check": {"rows": 5000, "valid_fraction": 0.2, "seed": 42, "probability_atol": 1e-6,
+    "counted_as_study_fit": false, "kind": "sample check, not a study training run"},
+  "holdout_access": false,
+  "automatic_model_replacement": false
+}

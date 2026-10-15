@@ -1,0 +1,194 @@
+"""Independent audit of T7_geo_hier_shrink_v1; never fits a classifier.
+
+Uses the T5 independent arithmetic() (not the training score()) and the unchanged T6 turnover().
+Reference: the unmodified C preprocessor refit preprocess-only on each training fold; every saved
+variant matrix must equal that C matrix with geo blocks multiplied by the pre-registered weights.
+Writes full private evidence to --destination and an aggregate-only JSON to --public.
+"""
+from __future__ import annotations
+import argparse
+import json
+from datetime import datetime, timezone
+from pathlib import Path
+import joblib
+import numpy as np
+import pandas as pd
+from scipy import sparse
+from threadpoolctl import threadpool_limits
+from preprocess import GEO
+from experiments.age995.run import make_pipeline as original
+from experiments.geo_group_cv.audit import arithmetic, check_oof, digest, equal, need, read_json, write_json, PROBS
+from experiments.geo_ablation.audit import turnover
+from experiments.geo_hier_shrink import run as r
+
+ROOT = Path(__file__).resolve().parents[2]
+
+
+def tree(root):
+    root = Path(root)
+    return {str(p.relative_to(root)): digest(p) for p in sorted(root.rglob('*')) if p.is_file()}
+
+
+def column_scale(names, weights):
+    scale = np.ones(len(names))
+    for b in ['geo1', 'geo2', 'geo3', 'text']:
+        scale[[i for i, n in enumerate(names) if n.startswith(b+'__')]] = weights[b]
+    return scale
+
+
+def audit(data, output, destination, public):
+    output, destination = Path(output), Path(destination)
+    need(not destination.exists() and not Path(public).exists(), 'Do not overwrite any prior audit')
+    before = tree(output)
+    design = read_json(output/'design.json'); seal = read_json(output/'design_seal.json')
+    equal(digest(output/'design.json'), seal['design_sha256'], 'design seal')
+    need(design['classifiers_fitted'] == seal['classifiers_fitted'] == 0, 'Not a pre-fit design')
+    need(design['c_refits'] == 0 and not design['holdout_accessed'], 'Design boundary')
+    for n, h in design['source_sha256'].items():
+        equal(digest(ROOT/n), h, 'source '+n)
+    cfg = design['config']
+    X, y, ids, folds, _ = r.verify(data, output)
+    for s in ['geo2', 'geo1']:
+        equal(digest(output/s/'manifest.csv'), cfg['manifest_sha256'][s], 'manifest pinned SHA')
+
+    ledger = read_json(output/'ledger.json')['folds']
+    expected = {r.key(s, v, f) for s in r.SCHEMES for v in cfg['variants'] for f in range(5)}
+    equal(sorted(ledger), sorted(expected), 'ledger fold set')
+    need(all(e['status'] == 'complete' and e['converged'] and e['attempts'] == 1 for e in ledger.values()),
+         'Incomplete/nonconverged/retried fold')
+    events = [json.loads(l) for l in (output/'attempts.jsonl').read_text(encoding='utf-8').splitlines()]
+    equal(len([e for e in events if e.get('action') == 'fit_start']), 90, 'fit_start events')
+    need(all(e['started_at_utc'] > seal['created_at_utc'] for e in ledger.values()), 'Fit preceded design seal')
+    for e in ledger.values():
+        r.check_saved(output, e)
+
+    split_checks = []
+    for scheme, cols in [('geo2', GEO[:2]), ('geo1', GEO[:1])]:
+        g = pd.factorize(pd.MultiIndex.from_frame(X[cols].astype('int64')))[0]
+        for f in range(5):
+            a, b = folds[scheme] != f, folds[scheme] == f
+            need(not set(g[a]) & set(g[b]), 'Group leakage across train/validation')
+            split_checks.append(dict(scheme=scheme, fold=f, valid_rows=int(b.sum()), group_overlap=0))
+
+    c_params = original('C')['model'].get_params()
+    preds, c_preds, fold_rows, models, matrix_checks = {}, {}, [], [], []
+    pre_fits = 0
+    for scheme in r.SCHEMES:
+        fs = folds[scheme]
+        path = design['c_oof_path'][scheme]
+        equal(digest(path), cfg['C_oof_sha256'][scheme], 'C OOF pinned SHA')
+        c_preds[scheme] = check_oof(pd.read_csv(path, float_precision='round_trip'), ids, y, fs).y_pred.to_numpy()
+        oofs = {}
+        for v in cfg['variants']:
+            d = output/scheme/v
+            saved = read_json(d/'metrics.json')
+            equal(saved['oof_sha256'], digest(d/'oof.csv.gz'), 'OOF SHA')
+            oofs[v] = check_oof(pd.read_csv(d/'oof.csv.gz', float_precision='round_trip'), ids, y, fs)
+        for f in range(5):
+            a, b = np.flatnonzero(fs != f), np.flatnonzero(fs == f)
+            with threadpool_limits(limits=1):
+                cpre = original('C')['preprocess'].fit(X.iloc[a]); pre_fits += 1
+                c_names = list(cpre['columns'].get_feature_names_out())
+                c_valid = cpre.transform(X.iloc[b]).tocsr()
+                for v, weights in cfg['variants'].items():
+                    d = output/scheme/v
+                    rec = read_json(d/f'fold_{f}.json')
+                    equal(digest(d/f'fold_{f}.joblib'), ledger[r.key(scheme, v, f)]['artifact_sha256'][f'fold_{f}.joblib'], 'model SHA')
+                    pipe = joblib.load(d/f'fold_{f}.joblib')  # SHA-verified, generated by this study
+                    equal(pipe['model'].get_params(), c_params, 'LR parameters')
+                    equal(rec['effective_parameters'], c_params, 'recorded LR parameters')
+                    np.testing.assert_array_equal(pipe['model'].classes_, [1, 2, 3])
+                    cols = pipe['preprocess']['columns']
+                    equal(cols.transformer_weights, {k: float(w) for k, w in weights.items()}, 'transformer weights')
+                    names = [n.split('__', 1)[1] for n in cols.get_feature_names_out()]
+                    equal(names, [n.split('__', 1)[1] for n in c_names], 'encoded column order vs C')
+                    v_valid = pipe['preprocess'].transform(X.iloc[b]).tocsr()
+                    expected_m = c_valid @ sparse.diags(column_scale(list(cols.get_feature_names_out()), weights))
+                    diff = abs(v_valid - expected_m)
+                    need(diff.nnz == 0 or diff.max() <= 1e-6, 'Variant matrix != weighted C matrix')
+                    equal(rec['encoded_columns'], len(names), 'recorded width')
+                    oof = oofs[v]
+                    np.testing.assert_array_equal(pipe.predict(X.iloc[b]), oof.y_pred.iloc[b])
+                    np.testing.assert_allclose(pipe.predict_proba(X.iloc[b]), oof[PROBS].iloc[b], atol=1e-12, rtol=0)
+                    calc = arithmetic(y.iloc[b], oof.y_pred.iloc[b])
+                    equal(rec['metrics'], calc, 'fold metric (training score vs independent arithmetic)')
+                    matrix_checks.append(dict(scheme=scheme, variant=v, fold=f, max_abs_diff=float(diff.max()) if diff.nnz else 0.0,
+                                              n_iter=pipe['model'].n_iter_.tolist()))
+                    fold_rows.append(dict(scheme=scheme, variant=v, fold=f, **calc))
+                    print('AUDIT', scheme, v, f, 'PASS', flush=True)
+        for v in ['C'] + list(cfg['variants']):
+            pred = c_preds[scheme] if v == 'C' else oofs[v].y_pred.to_numpy()
+            preds[scheme, v] = pred
+            vals = [arithmetic(y[fs == f], pred[fs == f])['macro_f1'] for f in range(5)]
+            mean, sd = float(np.mean(vals)), float(np.std(vals, ddof=1))
+            if v != 'C':
+                saved = read_json(output/scheme/v/'metrics.json')
+                equal(saved['pooled'], arithmetic(y, pred), 'pooled metric')
+                np.testing.assert_allclose([saved['cv_mean'], saved['cv_std']], [mean, sd], rtol=0, atol=1e-15)
+            models.append(dict(scheme=scheme, variant=v, cv_mean=mean, cv_std=sd, fold_macro_f1=vals, **arithmetic(y, pred)))
+
+    by = {(m['scheme'], m['variant']): m for m in models}
+    rule = cfg['follow_up_rule']; judgments = []
+    for v in cfg['variants']:
+        wins = {s: int(sum(x > c for x, c in zip(by[s, v]['fold_macro_f1'], by[s, 'C']['fold_macro_f1']))) for s in r.SCHEMES}
+        delta = {s: by[s, v]['cv_mean'] - by[s, 'C']['cv_mean'] for s in r.SCHEMES}
+        ok = (delta['geo2'] >= rule['geo2_mean_delta_min'] and wins['geo2'] >= rule['geo2_fold_wins_min']
+              and delta['stratified'] >= rule['stratified_mean_delta_min'])
+        judgments.append(dict(variant=v, mean_delta=delta, fold_wins=wins, follow_up_candidate=bool(ok)))
+    analysis = read_json(output/'analysis.json')
+    recorded = analysis['follow_up_candidates']
+    equal(sorted(recorded), sorted(cfg['variants']), 'judged variant set')
+    for j in judgments:
+        rec = recorded[j['variant']]
+        equal(rec['meets_rule'], j['follow_up_candidate'], 'pre-registered rule judgment '+j['variant'])
+        equal(rec['geo2_wins'], j['fold_wins']['geo2'], 'geo2 fold wins '+j['variant'])
+        np.testing.assert_allclose([rec['geo2_delta'], rec['stratified_delta']],
+                                   [j['mean_delta']['geo2'], j['mean_delta']['stratified']], rtol=0, atol=1e-12)
+
+    masks = {'all': np.ones(len(X), bool), 'age995': X.age.eq(995).to_numpy(), 'non995': X.age.ne(995).to_numpy()}
+    masks.update({'geo1='+g: X.geo_level_1_id.astype(str).eq(g).to_numpy() for g in ['26', '20', '13']})
+    paired = [dict(scheme=s, variant=v, group=n, **turnover(y[m], preds[s, 'C'][m], preds[s, v][m]))
+              for s in r.SCHEMES for v in cfg['variants'] for n, m in
+              {**masks, **{f'fold={f}': folds[s] == f for f in range(5)}}.items() if m.any()]
+
+    equal(tree(output), before, 'run outputs unchanged by audit')
+    contract = read_json(ROOT/'configs/data_contract.json')
+    equal({n: digest(Path(data)/n) for n in contract['files']}, contract['files'], 'data preserved')
+
+    destination.mkdir(parents=True)
+    for name, rows in [('models', models), ('folds', fold_rows), ('paired', paired), ('judgments', judgments),
+                       ('matrix_checks', matrix_checks), ('split_checks', split_checks)]:
+        write_json(destination/(name+'.json'), rows)
+    result = dict(study_id=r.STUDY_ID, status='PASS', audited_at_utc=datetime.now(timezone.utc).isoformat(),
+        code_commit=design['code_commit'], design_sha256=digest(output/'design.json'),
+        audit_code_sha256=digest(__file__), environment=design['environment'], data_sha256=contract['files'],
+        manifest_sha256=design['manifest_sha256'], c_oof_sha256=cfg['C_oof_sha256'],
+        new_classifier_fits=90, fit_attempts=90, c_classifier_refits=0, models_reloaded_full_validation=len(matrix_checks),
+        reference_c_preprocessor_only_fits=pre_fits, weighted_c_matrix_checks=len(matrix_checks),
+        max_weighted_matrix_abs_diff=max(m['max_abs_diff'] for m in matrix_checks),
+        group_leakage_checks=len(split_checks), backup_hash_checks=len(ledger), holdout_accessed=False,
+        follow_up_candidates=[j['variant'] for j in judgments if j['follow_up_candidate']],
+        output_sha256={p.name: digest(p) for p in destination.iterdir()},
+        limitations=[
+            'Six variants were compared on the same CV folds; any selection among them is optimistic.',
+            'Model reload is not an independent retraining; development-only descriptive CV, no holdout, '
+            'no significance test, no causal claim, no external validation.'])
+    write_json(destination/'audit.json', result)
+    keep = {'all', 'age995', 'non995', 'geo1=26', 'geo1=20', 'geo1=13'}
+    write_json(public, dict(audit={k: v for k, v in result.items() if k != 'output_sha256'},
+                            private_audit_sha256=result['output_sha256'], models=models, folds=fold_rows,
+                            judgments=judgments, paired=[p for p in paired if p['group'] in keep or p['group'].startswith('fold=')]))
+    return result
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument('--data', required=True); p.add_argument('--output', required=True)
+    p.add_argument('--destination', required=True); p.add_argument('--public', required=True)
+    a = p.parse_args()
+    res = audit(a.data, a.output, a.destination, a.public)
+    print(res['status'], res['follow_up_candidates'], res['max_weighted_matrix_abs_diff'])
+
+
+if __name__ == '__main__':
+    main()

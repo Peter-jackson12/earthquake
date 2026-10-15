@@ -1,0 +1,94 @@
+{
+  "study_id": "T9_lgbm_partial_native_v1",
+  "branch": "peter-exp/lgbm-partial-native-v1",
+  "base_commit": "b54b129",
+  "t8_reference_commit": "f7498aef7b8a6bd60091d9e31434bd4c2c47a856",
+  "single_factor": "representation of the 8 non-geo text categoricals inside LightGBM while geo_level_1/2/3_id stay one-hot (relative to T8 arm O); equivalently geo one-hot instead of native relative to T8 arm N",
+  "arms": {
+    "P": "T8 make_preprocessor('O') (C age policy, scaled numeric + binary + age_is_995, float32) except the categorical path is split: the 8 text categoricals -> OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=NaN, encoded_missing_value=NaN, dtype=float32) fitted on the training fold only, placed at columns 28..35 and declared via categorical_feature; geo_level_1/2/3_id -> OneHotEncoder(handle_unknown='ignore', sparse_output=True, dtype=float32) fitted on the training fold only (same estimator as O), placed after the codes. Output is float32 CSR (sparse_threshold 1.0); implicit zeros are code 0 (zero_as_missing=false), unseen NaN codes are stored explicitly. Identical LGBMClassifier params."
+  },
+  "reference_arms": {
+    "O": "T8 arm O (one-hot all 11); stratified = pinned T4 LGBM_C_v1 OOF, geo2/geo1 = T8 study OOF; not refit",
+    "N": "T8 arm N (native all 11); T8 study OOF for all three schemes; not refit",
+    "LR_C": "research baseline LR-C OOF; not refit"
+  },
+  "categorical_columns": ["geo_level_1_id", "geo_level_2_id", "geo_level_3_id", "land_surface_condition", "foundation_type", "roof_type", "ground_floor_type", "other_floor_type", "position", "plan_configuration", "legal_ownership_status"],
+  "geo_onehot_columns": ["geo_level_1_id", "geo_level_2_id", "geo_level_3_id"],
+  "text_code_columns": ["land_surface_condition", "foundation_type", "roof_type", "ground_floor_type", "other_floor_type", "position", "plan_configuration", "legal_ownership_status"],
+  "n_head_columns": 28,
+  "categorical_feature_indices_P": [28, 29, 30, 31, 32, 33, 34, 35],
+  "matrix_format": "scipy CSR float32; never a full .toarray()",
+  "lgbm_params_source": "experiments/model_families/config.json models.LGBM (T4, a5d9ed5, unchanged) = T8 lgbm_params",
+  "lgbm_params": {
+    "objective": "multiclass", "num_class": 3, "n_estimators": 300, "learning_rate": 0.05, "num_leaves": 31,
+    "max_depth": -1, "min_child_samples": 20, "min_child_weight": 0.001, "min_split_gain": 0.0,
+    "subsample": 1.0, "subsample_freq": 0, "colsample_bytree": 1.0, "reg_alpha": 0.0, "reg_lambda": 0.0,
+    "max_bin": 255, "boosting_type": "gbdt", "device_type": "cpu", "deterministic": true, "force_col_wise": true,
+    "zero_as_missing": false, "random_state": 42, "n_jobs": 2, "verbosity": 1
+  },
+  "lightgbm_categorical_defaults_expected": {
+    "max_cat_to_onehot": 4, "cat_smooth": 10, "cat_l2": 10, "max_cat_threshold": 32, "min_data_per_group": 100
+  },
+  "categorical_params_policy": "not passed; LightGBM 4.6.0 defaults (same as T8); effective values read from each saved model text",
+  "threadpool_limit": 2,
+  "outer_parallel_jobs": 1,
+  "early_stopping": false, "class_weight": null, "sampling": null, "threshold_or_decision_rule_change": false, "tuning": false,
+  "decision_rule": "argmax of predicted probabilities, labels 1/2/3",
+  "schemes": ["stratified", "geo2", "geo1"],
+  "n_folds": 5,
+  "study_fits": {"P": ["stratified", "geo2", "geo1"]},
+  "max_new_study_fits": 15,
+  "automatic_retries": 0,
+  "environment": {"python": "3.13.5", "numpy": "2.3.5", "pandas": "2.2.3", "scipy": "1.17.0", "scikit-learn": "1.8.0", "lightgbm": "4.6.0", "joblib": "1.5.3", "threadpoolctl": "3.6.0"},
+  "manifest_sha256": {"stratified": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721", "geo2": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64", "geo1": "1b4616ff7d5e052ac76707e58de48e3d0b23fb7a49e350c14d6704cc1ee488f5"},
+  "manifest_source": "local_reproduction/T8_20261014_native_cat/run/{geo2,geo1}/manifest.csv (copied and SHA-verified)",
+  "reference_oof_sha256": {
+    "O": {"stratified": "0bc63eb5122afb479c41826918a9fbb43a3475351a934d847833656eec6930cf",
+          "geo2": "ba282656c482264c045865de32db32d56a0b7c6c872670972c480a90abaa211c",
+          "geo1": "f4f3f9c9b966394c8d1ef0d7e6b1b5fd1367390b832bdd7f49ea8b2340b3d9f1"},
+    "N": {"stratified": "263680540b07a5cc4fe84dd294ff90ae0da7c9c7b2886f0df733edf9465f9558",
+          "geo2": "903ee979023d783080e28574bb7baab5aafc2bb1b899b100585b054c47146734",
+          "geo1": "f91db6f8bdf19bb0d1e9cf5fd22fd6575093b365286911622ef59a2917b6c334"},
+    "LR_C": {"stratified": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc",
+             "geo2": "9e58f72ba93d1a886ebcef345a5d8be9fac991097aee87dcb9841e31443b00b4",
+             "geo1": "453608352590cf27ddb1460926b7578d50832baa9127431422d0dd69b8f42951"}
+  },
+  "reference_oof_anchor": "T8 design.json (O stratified, LR-C), T8 run/{scheme}/{arm}/metrics.json oof_sha256 and T8 run/analysis.json (audited PASS, b54b129)",
+  "reference_cv_means": {
+    "O": {"stratified": 0.6698469135362104, "geo2": 0.5828265526037046, "geo1": 0.3650054402182731},
+    "N": {"stratified": 0.6993416186719987, "geo2": 0.545693506299297, "geo1": 0.3571882501544438},
+    "LR_C": {"stratified": 0.688687372978548, "geo2": 0.5651464270615694, "geo1": 0.3656501200841088},
+    "source": "reports/lgbm_native_cat_20261014.json models[].cv_mean (b54b129)",
+    "tolerance": 1e-12
+  },
+  "lr_c_geo2_pooled_grade3_recall": {"value": 0.5210823515922837, "display": 0.5211, "tolerance": 1e-12,
+                                      "source": "pooled recall[2] of the pinned LR-C geo2 OOF (= T8 analysis.json)"},
+  "checkpoint": {"model_reload_probability_atol": 1e-12, "csv_float_format": "%.17g", "csv_read": "float_precision='round_trip' exact",
+                 "backup_dir": "backup", "resume_skips_completed": true},
+  "sample_check": {
+    "kind": "real development data subsample; not a study fit; CSR-with-codes vs dense equivalent of the same matrix",
+    "source_rows": "stratified fold != 0 training rows only (no holdout)",
+    "seed": 20261014, "n_rows": 5000, "n_train": 4000,
+    "probability_atol": 0.0, "labels_identical": true,
+    "counted_as_study_fit": false, "must_pass_before_prepare": true
+  },
+  "labels": [1, 2, 3],
+  "primary_metric": "unweighted mean of five fold Macro F1 (labels 1,2,3)",
+  "std_ddof": 1,
+  "error_rate_denominator": "actual_grade3_support",
+  "profiles": {"age995_group": "raw age == 995", "geo1_regions": [26, 20, 13]},
+  "rules": {
+    "decomposition": {"kind": "descriptive", "scheme": "stratified",
+      "formula": "share = (mean_P - mean_O) / (mean_N - mean_O) on stratified fold-mean Macro F1",
+      "note": "share of the T8 stratified N-O gain retained by P; also reported for geo2/geo1 as descriptive values"},
+    "combined_candidate": {
+      "stratified_mean_P_gt": 0.688687, "stratified_fold_wins_vs_LR_C_min": 4,
+      "geo2_mean_P_ge": 0.565146, "geo2_fold_wins_vs_LR_C_min": 4,
+      "geo2_pooled_grade3_recall_P_ge": 0.5210823515922837,
+      "fold_win": "P fold Macro F1 strictly greater than LR-C on the same fold",
+      "label": "combined candidate (needs separate pre-registered confirmation; no holdout, no final-model change)"},
+    "claims": "report every result regardless of the judgment; selecting on the same folds is optimistic; no significance or causal claims"
+  },
+  "holdout_access": false,
+  "automatic_model_replacement": false
+}
