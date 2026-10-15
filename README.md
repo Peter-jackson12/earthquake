@@ -51,7 +51,7 @@ Macro F1과 함께 3→1·3→2 건수와 비율 및 3등급 Recall을 보고합
 | T22 | 재료55쌍·구조별 층수 | 40회 학습·독립 감사 완료, 두 팔 모두 기준 미충족, [결과](reports/MATERIAL_STRUCTURE_20261015.md) |
 | T23 | 누적 이진분류·단조 확률투영 | 40이진 학습·20외부단위·독립 감사 완료, 기준 미충족, [결과](reports/ORDINAL_DAMAGE_20261015.md) |
 | T24 | 상위 지역 중앙값·상대 차이 6열 | 20회 학습·독립 감사·보고 검토 완료, 기준 미충족, [결과](reports/GEO_CONTEXT_20261015.md) |
-| T25 | C 입력을 유지한 CatBoost 모델 비교 | 구현·777검사·독립20검사 완료, 동일 geo2 20 Fold 실행 인계 준비, [계획](docs/T25_CATBOOST_C_PLAN.md) |
+| T25 | C 입력을 유지한 CatBoost 모델 비교 | 17:57 실행 시작·첫 Fold 검증 완료, 동일 geo2 총20회 진행, [계획](docs/T25_CATBOOST_C_PLAN.md) |
 
 ## 결과 보기 — 데이터나 모델 파일 없이 실행
 

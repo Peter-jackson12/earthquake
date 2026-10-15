@@ -7,7 +7,7 @@
 
 ## 현재 실행 상태 (2026-10-15 갱신)
 
-T16~T24 학습 또는 분석·집계·독립 감사와 공개 집계 검토를 완료했다. T24는 20/20회·재시도0, 17:24 독립 감사 PASS_T24와 보고 검토481항목 PASS를 확인했다. 평균 Macro F1 Δ+0.002072, 3→1 902→912로 사전 다섯 기준은 미충족이며 기존 모델을 유지한다. 보고 두 파일은 로컬 `fc246c6`에 반영했다. T25는 사용자 승인으로 기존 C·geo2 분할을 유지하고 모델만 CatBoost로 교체하는 실험을 구현·검토 중이다. 아직 실자료 prepare·fit은 수행하지 않았다.
+T16~T24 학습 또는 분석·집계·독립 감사와 공개 집계 검토를 완료했다. T24는 20/20회·재시도0, 17:24 독립 감사 PASS_T24와 보고 검토481항목 PASS를 확인했다. 평균 Macro F1 Δ+0.002072, 3→1 902→912로 사전 다섯 기준은 미충족이며 기존 모델을 유지한다. 보고 두 파일은 로컬 `fc246c6`에 반영했다. T25는 기존 C·geo2 분할을 유지하고 모델만 CatBoost로 교체하는 실험을 구현·전체 회귀·독립 검토한 뒤 `44cc9744d2d8418c9df9d2f20c321d8bc3029b08`에 고정했다. 기존 실행 관리자에게 최초 봉인·자원 확인·첫 Fold·나머지 학습·독립 감사·보고까지 인계했다. 이 인계 기록 자체는 실제 학습 시작을 의미하지 않으며 작은 원장과 관리자 로그에서 확인한다.
 
 | 연구 | 확인 상태 | 근거와 해석 |
 |---|---|---|
@@ -21,7 +21,7 @@ T16~T24 학습 또는 분석·집계·독립 감사와 공개 집계 검토를 �
 | T22 재료 조합·구조별 층수 | 40/40·독립 감사·공개 보고 검토 PASS | [보고](../reports/MATERIAL_STRUCTURE_20261015.md). 평균 Δ−0.000427/−0.000313, 두 팔 모두 기준 미충족. |
 | T23 누적 이진분류 | 40binary/20unit·독립 감사·공개 보고 검토 PASS | [보고](../reports/ORDINAL_DAMAGE_20261015.md). 평균 Δ−0.000265, 3→1 902→895이나 Recall3 하락. 기준 미충족. |
 | T24 상위 지역 문맥 | 20/20·독립 감사·공개 보고 검토 PASS | [보고](../reports/GEO_CONTEXT_20261015.md). 평균 Δ+0.002072, 3→1 902→912로 기준 미충족. |
-| T25 CatBoost C 비교 | 구현·전체777검사·독립20검사 완료, 실행 인계 준비 | [계획](T25_CATBOOST_C_PLAN.md). 기존 C·geo2 20 Fold, 모델만 교체. 별도 vendor 검증, T24 종료 확인. 이 기록 시점 실자료 fit0. |
+| T25 CatBoost C 비교 | 17:58 기준1/20완료·재시도0, 다음 Fold 시작 | [계획](T25_CATBOOST_C_PLAN.md). 기존 C·geo2 20 Fold, 모델만 교체. 첫 학습20.5초·저장·재로딩·백업 정상, 자원 재확인 통과. |
 
 T24 전체 회귀는 **734개 실행·실패0·스킵33(99.673초)**이며 전용 피처14/실행기24를 포함한다. 로그는 `local_reproduction/session_20261015_control/t24_full_tests_20261015.log`, 구현 영수증은 `local_reproduction/T24_20261015_geo_context/runner_implementation_validation_v1.json`이다. 별도 독립 합성17개 PASS·당시 감사 준비 영수증이며 `t24_audit/preparation_receipt_v1.json` SHA는 `9e1b0dd0646ab3277669a246ab53f190dfc80af130091b93a0c8688ff1e147d6`이다. 이후 실제 감사 PASS_T24·native20모델 최대 확률차0과 공개 검토481항목을 별도로 확인했다. 기존 T21/T22/T23 봉인 소스는 각각49개 모두 불변이며 T24 소스도 기존42개+신규7개로 결속한다.
 
@@ -61,7 +61,7 @@ README는 결과 입구, AGENTS는 현재 규칙, 이 문서는 상태·근거·
 1. 작업 위치는 `worktrees/peter_rules`의 `peter`다. T16~T24 완료 작업과 최초 prepare를 반복하지 않으며 봉인 소스·설정·계획을 보존한다. T25 실자료 실행은 기존 Astra 관리자만 담당한다.
 2. 동결 Python `local_reproduction/20261014_01/venv/Scripts/python.exe`는 설치·업그레이드하지 않는다. T25 추가12패키지는 `local_reproduction/T25_20261015_catboost_c/vendor`에 격리했다. 환경 manifest SHA `c67feaf2addb617dea50e2cf26a3757d0f1cab037add37611851893a5fbde6ef`, vendor3014파일·기존7배포5210파일 독립 환경 검증 PASS다. 환경 확인은 실자료 학습 성공을 뜻하지 않는다.
 3. T25 전용 adapter14/runner29와 최종 전체777검사·실패0·스킵33(110.979초), 독립20검사·실패0·스킵0를 완료했다. 전체 로그는 `t25_full_tests_final_20261015.log`, 부모 검증은 `t25_parent_validation_v1.json`이다. 이전775검사는 CI 이식성 보완 전 기록이다. 소스49개·기존 T21~T24 각49봉인 불변과 로컬 링크111개를 확인했다. 최종 코드 커밋 후 관리자만 최초 prepare/fit한다. 출력 `local_reproduction/T25_20261015_catboost_c/run`, 모듈 `experiments.catboost_c.run`, 팔 `CATBOOST_C`다.
-4. T24 완료·잠금 해제·현재 자원 확인 후 최초 prepare와 첫 공식 `geo2_s42/f0`을 관리자가 실행한다. native 모델 저장·재로딩·SHA·백업·정상 종료와 자원 재확인 뒤 같은 모듈 fit-all로 나머지19개를 이어간다. 완료 Fold 재학습·실패 재시도는 금지한다.
+4. T24 완료·잠금 해제·자원 확인 후 관리자가 최초 prepare와 첫 공식 `geo2_s42/f0`을 실행했다. 코드 `44cc9744d2d8418c9df9d2f20c321d8bc3029b08`, design SHA `3d6b3fe1b1f751029bb27196a5121bcac27d7093e098a86eae00c33cdf9e8e96`. 첫 Fold는17:57:35 시작·17:58:04 정상 종료(학습20.482초), native 저장·재로딩·SHA·백업 확인 완료다. 종료 후 가용RAM9.86GiB·CPU6.7~7.7%·디스크대기열0으로 나머지19개를 같은 관리자가 이어간다. 17:58:34 두 번째 실행 시작을 확인했다. 근거는 `t25_manager.log`와 T25 `ledger.json`이며 prepare 반복·완료 Fold 재학습·실패 재시도는 금지한다.
 5. 새 Fold 전 가용 RAM≥8GiB·디스크≥15GiB, 지속 CPU≥90%나 디스크 포화가 없는지 확인한다. 자원 부족이면 후속 단위를 보류하며 관리자와 Fold 중복 실행을 금지한다.
 6. fits/finalizations 어디든 failed/running이면 후속 신규 작업을 중단하고 원본·부분 산출물·실패 로그를 보존한다. 다른 Fold 필터로 실패를 우회하지 않는다.
 7. 20회 완료·종료·잠금 해제 후 finalize, `local_reproduction/session_20261015_control/t25_audit/audit_t25_results.py --run <T25 run> --data <earthquake/data> --destination <새 JSON>`을 실행한다. 준비 영수증 `preparation_receipt_v1.json` SHA `42752238d95c3fb4ac4fa50fa1624891c255ab0f5d0fa062ff8cdc09e3921e5d`를 먼저 대조한다. 상태는 READY_NOT_EXECUTED이며 실제 PASS_T25와 구분한다. 실행기 import·joblib 역직렬화 없이 독립 C 재구축 및 native20모델 재추론·환경·원장·집계 대조를 요구한다.
