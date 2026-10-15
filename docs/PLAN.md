@@ -62,4 +62,4 @@ main 통합, 팀 최종 선정과 평가 정책, 팀원별 전체 과정 수행,
 - 실험 ID `T14_TE_ROS_RF_LOCAL_REPRO`, 브랜치 `peter-exp/te-ros-rf-local-repro-v1`(기준 `af261c7`). [사전 등록 계획](T14_TE_ROS_RF_REPRO_PLAN.md).
 - `origin/peter-exp/te-ros-rf-exploratory-v1`(`0ecd351`)의 미감사 탐색 결과(RF + geo1/2/3 OOF TE + 지역 빈도 + 학습 Fold 한정 ROS, Macro F1 0.700427)를 원본 코드 보존본(`experiments/te_ros_rf_exploratory/`, SHA 고정)으로 로컬 재현한다. **재현이며 요인 분리(TE/ROS/RF/age995)는 후속 실험이다.**
 - Stage A: 고정 stratified 5 Fold, 기록된 Fold별 혼동행렬과 비교(EXACT / WITHIN_TOLERANCE / FAIL, 허용 오차 사전 고정). Stage B(Stage A 통과 시만): geo2 Group 분할 seed 42/101/202/303 20 Fold, 내부 TE Fold는 T11 그룹 인지 방식, 기존 LR-C·LGBM-O·LGBM_TE_G OOF 재사용(비교군 재학습 없음). 신규 RF 학습 25회 예정.
-- 상태: 계획·실행기·합성 테스트만 작성(실데이터 학습 0회, 분류기 학습 없는 사전 점검만 수행). 홀드아웃 미사용.
+- 상태: **완료, 독립 감사 PASS** (시도 2 `run_v2`, 수정 1 `813fab3`). [결과 보고](../reports/TE_ROS_RF_REPRO_20261015.md). Stage A는 EXACT로, 0.7004를 혼동행렬 단위까지 재현했다. Stage B는 NEITHER로, geo2 20 Fold에서 LR-C −0.0088(8/20 승), LGBM-O −0.0250(2/20 승)이다. 기준선·최종 모델·홀드아웃은 변경하지 않았다.
