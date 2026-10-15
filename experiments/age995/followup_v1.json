@@ -1,0 +1,23 @@
+{
+  "study_id": "age995_followup_v1_20261013",
+  "base_commit": "6deae3ee71982c84b2f1de7bb42b30718152042d",
+  "metric": "macro_f1_labels_1_2_3",
+  "std_ddof": 1,
+  "quantile": 0.99,
+  "interpolation": "linear",
+  "cap_fit_population": "current_training_fold_age_ne_995_including_zero",
+  "variants": {
+    "D": {"id": "D_drop995_v1", "reference": "A", "drop": "age_eq_995", "cap": "none", "flag": false},
+    "E1": {"id": "E1_cap995_q99_v1", "reference": "A", "drop": "none", "cap": "995_only", "flag": false},
+    "E2": {"id": "E2_cap995_flag_q99_v1", "reference": "B", "drop": "none", "cap": "995_only", "flag": true},
+    "E3": {"id": "E3_cap_all_q99_v1", "reference": "E1", "drop": "none", "cap": "all_above_cap", "flag": false},
+    "F1": {"id": "F1_drop_age_gt55_v1", "reference": "A", "drop": "age_gt_55", "cap": "none", "flag": false},
+    "F2": {"id": "F2_drop_faith4_v1", "reference": "F1", "drop": "faith_four_union", "cap": "none", "flag": false}
+  },
+  "faith_thresholds": {"age": 55, "count_floors_pre_eq": 5, "area_percentage": 20, "height_percentage": 10},
+  "threshold_comparison": "strictly_greater_than",
+  "validation_policy": "keep_every_original_validation_row",
+  "holdout_policy": "never_read_or_score",
+  "rare_category_max_training_count": 5,
+  "lr": {"solver": "lbfgs", "C": 1.0, "max_iter": 1500, "tol": 0.0001, "random_state": 42}
+}

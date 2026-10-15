@@ -1,0 +1,25 @@
+{
+  "study_id": "age995_interactions_v1_20261014",
+  "base_commit": "6f0ac7c7997d9420c6d707a92afd7959dd611397",
+  "reference": "C",
+  "age_edges": [-1, 0, 10, 20, 30, 50, 100, 994, 995],
+  "age_labels": ["0", "1-10", "11-20", "21-30", "31-50", "51-100", "101-994", "995"],
+  "variants": {
+    "G1": {"reference": "C", "extra": ["age_band"]},
+    "G2": {"reference": "G1", "extra": ["age_band", "geo_foundation"]},
+    "G3": {"reference": "G1", "extra": ["age_band", "geo_age"]},
+    "G4": {"reference": "G1", "extra": ["age_band", "foundation_age"]},
+    "G5": {"reference": "G1", "extra": ["age_band", "geo_foundation", "geo_age", "foundation_age"]}
+  },
+  "geography": "geo_level_1_id",
+  "structure": "foundation_type",
+  "encoder": {"handle_unknown": "ignore", "drop": null, "min_frequency": null},
+  "lr": {"solver": "lbfgs", "C": 1.0, "max_iter": 1500, "tol": 0.0001, "random_state": 42},
+  "selection": "CV ranking plus 3-to-1, age995 and fixed-region guardrail review; no automatic deployment",
+  "profile_columns": ["geo_level_1_id", "foundation_type", "age_band"],
+  "diagnostic_regions": ["26", "20", "13"],
+  "small_grade3_support": 30,
+  "threshold_tuning": false,
+  "row_deletion": false,
+  "holdout_access": false
+}

@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "group_profile_rows_checked": 282,
+  "pair_transition_rows_checked": 27,
+  "fold_rows_checked": 30,
+  "model_rows_checked": 6,
+  "confusion_matrices_checked": 282,
+  "oof_rows_checked": 1250880,
+  "holdout_opened": false,
+  "new_predictive_fits": 0,
+  "method": "sklearn metrics and independent 3-way contingency cubes",
+  "verification_input_sha256": "9ee1e536270bae7e02cba57ccb3d9901ea5d5d6c75cf20914d3e5ef57c686fb4",
+  "verifier_sha256": "b1cf0084eebabf2c27743f6b54e1502046061aaf8d6cfae9f3b406352b354dc2"
+}

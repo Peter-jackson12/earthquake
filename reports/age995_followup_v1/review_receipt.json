@@ -1,0 +1,205 @@
+{
+  "status": "PASS",
+  "method": "independent pandas crosstab/direct equations and independently restated selection/quantile",
+  "variants": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E1",
+    "E2",
+    "E3",
+    "F1",
+    "F2"
+  ],
+  "historical_models_reused": 3,
+  "new_models": 6,
+  "predictions_checked": 1876320,
+  "folds_checked": 45,
+  "matrices_checked": 162,
+  "data_contract": {
+    "preprocessing_version": "1.0.1",
+    "source_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+    "expected_rows": 208480,
+    "n_folds": 5,
+    "seed": 42,
+    "files": {
+      "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+      "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+    }
+  },
+  "holdout_scored": false,
+  "model_refitting_performed": false,
+  "source_code_sha256": "4194aa24dc409a37c86dfbb6a18624c37f4e4b81fe9042e62ba78e117cd778b3",
+  "results": [
+    {
+      "variant": "A",
+      "origin": "historical_reused",
+      "cv_mean": 0.6836769858025985,
+      "cv_std": 0.0010708459189680733,
+      "pooled_f1": 0.6836803743012173,
+      "error_3_to_1": 467,
+      "error_3_to_2": 24761,
+      "fit_seconds": 83.17971647000002,
+      "converged": true,
+      "oof_sha256": "e8dbaa962fe4b2e2fdad160d25f72cbfd0816d73aafbc0419149c53b8a3de221",
+      "code_commit": "historical_source_sha_bound"
+    },
+    {
+      "variant": "B",
+      "origin": "historical_reused",
+      "cv_mean": 0.6871287676684521,
+      "cv_std": 0.0014550780156420751,
+      "pooled_f1": 0.6871400940917063,
+      "error_3_to_1": 438,
+      "error_3_to_2": 24693,
+      "fit_seconds": 129.00654593200005,
+      "converged": true,
+      "oof_sha256": "fff71379d0cce0dfada853e31a8611be792793e6a2b430832b00a84e19ce1403",
+      "code_commit": "historical_source_sha_bound"
+    },
+    {
+      "variant": "C",
+      "origin": "historical_reused",
+      "cv_mean": 0.688687372978548,
+      "cv_std": 0.0015080810709856124,
+      "pooled_f1": 0.6886949550758837,
+      "error_3_to_1": 452,
+      "error_3_to_2": 24681,
+      "fit_seconds": 112.89056900100002,
+      "converged": true,
+      "oof_sha256": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc",
+      "code_commit": "historical_source_sha_bound"
+    },
+    {
+      "variant": "D",
+      "origin": "new_training",
+      "cv_mean": 0.6865228192615641,
+      "cv_std": 0.0013477995284180708,
+      "pooled_f1": 0.6865316510305989,
+      "error_3_to_1": 449,
+      "error_3_to_2": 24521,
+      "fit_seconds": 86.91790807100017,
+      "converged": true,
+      "oof_sha256": "b04677e130048db7c1c66d4a43fb15ac7647b5411b1bbaa401e5e0a08d84c1bb",
+      "code_commit": "9b89cee66514b91c5e306153611b7818475616c4"
+    },
+    {
+      "variant": "E1",
+      "origin": "new_training",
+      "cv_mean": 0.6875263667774564,
+      "cv_std": 0.001317728071114846,
+      "pooled_f1": 0.6875365740743199,
+      "error_3_to_1": 453,
+      "error_3_to_2": 24660,
+      "fit_seconds": 88.49278539799991,
+      "converged": true,
+      "oof_sha256": "e99ad5e33463b218b9e7f5571863389e9e9a5240c6a4f735573857fd24ea1a2b",
+      "code_commit": "9b89cee66514b91c5e306153611b7818475616c4"
+    },
+    {
+      "variant": "E2",
+      "origin": "new_training",
+      "cv_mean": 0.6886635059843252,
+      "cv_std": 0.001264565805539733,
+      "pooled_f1": 0.6886713624916596,
+      "error_3_to_1": 455,
+      "error_3_to_2": 24653,
+      "fit_seconds": 84.70189227899982,
+      "converged": true,
+      "oof_sha256": "34208c85f1bf0e474113852984ebe43f9c8ed4165fdb73038bc3262e0794a154",
+      "code_commit": "9b89cee66514b91c5e306153611b7818475616c4"
+    },
+    {
+      "variant": "E3",
+      "origin": "new_training",
+      "cv_mean": 0.6878992135614651,
+      "cv_std": 0.001360470853894745,
+      "pooled_f1": 0.6879087412055283,
+      "error_3_to_1": 452,
+      "error_3_to_2": 24632,
+      "fit_seconds": 87.52005639100025,
+      "converged": true,
+      "oof_sha256": "15dbdfeadcdcd03a95f44a6b14b9c7da83f6e112ab012d6d4070d1ff2b6ac794",
+      "code_commit": "9b89cee66514b91c5e306153611b7818475616c4"
+    },
+    {
+      "variant": "F1",
+      "origin": "new_training",
+      "cv_mean": 0.6859025065094011,
+      "cv_std": 0.0011262602621895685,
+      "pooled_f1": 0.6859124740809254,
+      "error_3_to_1": 442,
+      "error_3_to_2": 24273,
+      "fit_seconds": 79.95681975000025,
+      "converged": true,
+      "oof_sha256": "b9f5c74d96d0b7d5dda3e8be2d2ca09fe139c7138ab2c97f016db27c6aa47ff1",
+      "code_commit": "9b89cee66514b91c5e306153611b7818475616c4"
+    },
+    {
+      "variant": "F2",
+      "origin": "new_training",
+      "cv_mean": 0.6840096201568507,
+      "cv_std": 0.0019217664310540036,
+      "pooled_f1": 0.6840196187879327,
+      "error_3_to_1": 449,
+      "error_3_to_2": 24455,
+      "fit_seconds": 80.6998279999998,
+      "converged": true,
+      "oof_sha256": "4454f17ca07bf52e38a9285e13f3f0110982e41cc10b1532fd953c65a662f3b8",
+      "code_commit": "9b89cee66514b91c5e306153611b7818475616c4"
+    }
+  ],
+  "limitations": [
+    "Does not independently refit fitted models or inspect model coefficients.",
+    "Persisted training predictions are unavailable; train Macro F1 is not independently recalculated.",
+    "Validation-transform immutability is checked by runtime assertions and synthetic tests; no fitted models are published."
+  ],
+  "training_source_commit": "9b89cee66514b91c5e306153611b7818475616c4",
+  "audit_test_commit": "206b66aaa25b001c13e3249b68dae7f1272f4e2d",
+  "remote_source_blob_verified": {
+    "experiments/age995/followup.py": "bdcf0ed44e6284f643f301d5384d24893b6bfd14",
+    "experiments/age995/audit_followup.py": "25d1d7a65368274226d84a9b8f3467fb5932cf85",
+    "tests/test_age995_followup.py": "76e5ee10eaca44666679aba727c2f7067a7c5fac",
+    "tests/test_age995_followup_audit.py": "3828f89ea0fd746784a56ae4356d4891ead9ce79"
+  },
+  "protected_files_unchanged": 27,
+  "source_csv_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+  "local_tests": {
+    "new_tests": 48,
+    "targeted_regression_total": 80,
+    "passed": 80,
+    "failed": 0,
+    "skipped": 0
+  },
+  "ci": {
+    "code_commit": "206b66aaa25b001c13e3249b68dae7f1272f4e2d",
+    "synthetic_run": 38372995848,
+    "dashboard_run": 38372995849,
+    "both_success": true,
+    "synthetic_discovered": 175,
+    "synthetic_passed": 146,
+    "synthetic_skipped": 29,
+    "synthetic_failed": 0,
+    "skip_reasons": "19 private preprocessing + 3 private development integration + 7 UI tests; UI tests run in the separate successful dashboard workflow."
+  },
+  "new_fit_folds": 30,
+  "new_fit_seconds": 508.2892898890002,
+  "fit_iterations_range": [
+    517,
+    629
+  ],
+  "holdout_features_labels_extracted": false,
+  "holdout_features_labels_read": false,
+  "publication_scope": "Git: code/tests/report + overall/fold/pooled-group metrics, pooled raw/normalized matrices, fold selection, audit receipt. Full fold-group/region/category/criterion aggregates in downloadable public evidence and reproducible audit output. No row OOF, raw labels/data or models in Git.",
+  "conclusions": {
+    "development_candidate": "C retained; E2 near-tied alternative",
+    "C_minus_E2_cv_mean": 2.3866994222743187e-05,
+    "statistical_significance_claimed": false,
+    "independent_final_evaluation": false,
+    "official_995_semantics_confirmed": false,
+    "isolation_forest_run": false,
+    "paper_full_pipeline_reproduced": false,
+    "paper_pdf_reverified_this_session": false
+  }
+}

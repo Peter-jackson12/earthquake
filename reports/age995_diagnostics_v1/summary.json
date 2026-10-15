@@ -1,0 +1,224 @@
+{
+  "status": "PASS",
+  "study_id": "age995_error_diagnostics_v1_20261014",
+  "source_commit": "0de4268f55e38368f25a0a2cc9c6cd3f77266be0",
+  "new_real_data_model_fits": 0,
+  "candidate": "C",
+  "alternative": "E2",
+  "candidate_change": false,
+  "holdout_features_labels_read": false,
+  "same_prediction_rate_C_E2": 0.9965224481964697,
+  "paired_pooled": [
+    {
+      "left": "C",
+      "right": "E2",
+      "group": "all",
+      "n": 208480,
+      "disagreements": 725,
+      "left_only_correct": 351,
+      "right_only_correct": 347,
+      "both_wrong_different": 27,
+      "fixed_e31": 6,
+      "new_e31": 9,
+      "shared_e31": 446
+    },
+    {
+      "left": "C",
+      "right": "E2",
+      "group": "age995",
+      "n": 1125,
+      "disagreements": 4,
+      "left_only_correct": 0,
+      "right_only_correct": 3,
+      "both_wrong_different": 1,
+      "fixed_e31": 0,
+      "new_e31": 1,
+      "shared_e31": 5
+    },
+    {
+      "left": "C",
+      "right": "E2",
+      "group": "non995",
+      "n": 207355,
+      "disagreements": 721,
+      "left_only_correct": 351,
+      "right_only_correct": 344,
+      "both_wrong_different": 26,
+      "fixed_e31": 6,
+      "new_e31": 8,
+      "shared_e31": 441
+    }
+  ],
+  "age995_diagnostics": [
+    {
+      "variant": "C",
+      "n": 1125,
+      "errors": 283,
+      "macro_f1": 0.6694766240564545,
+      "e31": 5,
+      "e32": 113,
+      "median_max_probability": 0.7654408014410805,
+      "high_probability_errors": 64
+    },
+    {
+      "variant": "D",
+      "n": 1125,
+      "errors": 808,
+      "macro_f1": 0.1465557096625057,
+      "e31": 0,
+      "e32": 0,
+      "median_max_probability": 0.9982093993621204,
+      "high_probability_errors": 797
+    },
+    {
+      "variant": "E2",
+      "n": 1125,
+      "errors": 280,
+      "macro_f1": 0.6715652779650481,
+      "e31": 6,
+      "e32": 111,
+      "median_max_probability": 0.7676081237823212,
+      "high_probability_errors": 62
+    },
+    {
+      "variant": "F1",
+      "n": 1125,
+      "errors": 808,
+      "macro_f1": 0.1465557096625057,
+      "e31": 0,
+      "e32": 0,
+      "median_max_probability": 0.9999689849243942,
+      "high_probability_errors": 808
+    },
+    {
+      "variant": "F2",
+      "n": 1125,
+      "errors": 808,
+      "macro_f1": 0.1465557096625057,
+      "e31": 0,
+      "e32": 0,
+      "median_max_probability": 0.999970671042427,
+      "high_probability_errors": 808
+    }
+  ],
+  "C_group_diagnostics": [
+    {
+      "group": "all",
+      "n": 208480,
+      "grade3_support": 69774,
+      "e31": 452,
+      "e32": 24681,
+      "e31_rate": 0.0064780577292401,
+      "e32_rate": 0.3537277495915384
+    },
+    {
+      "group": "age995",
+      "n": 1125,
+      "grade3_support": 317,
+      "e31": 5,
+      "e32": 113,
+      "e31_rate": 0.0157728706624605,
+      "e32_rate": 0.3564668769716088
+    },
+    {
+      "group": "non995",
+      "n": 207355,
+      "grade3_support": 69457,
+      "e31": 447,
+      "e32": 24568,
+      "e31_rate": 0.0064356364369322,
+      "e32_rate": 0.3537152482831104
+    }
+  ],
+  "C_top3_region_profiles": [
+    {
+      "value": "26",
+      "n": 18038,
+      "grade3_support": 1532,
+      "e31": 160,
+      "e31_rate": 0.1044386422976501,
+      "e31_share_all": 0.3539823008849557
+    },
+    {
+      "value": "20",
+      "n": 13786,
+      "grade3_support": 1649,
+      "e31": 80,
+      "e31_rate": 0.0485142510612492,
+      "e31_share_all": 0.1769911504424778
+    },
+    {
+      "value": "13",
+      "n": 7754,
+      "grade3_support": 1130,
+      "e31": 52,
+      "e31_rate": 0.0460176991150442,
+      "e31_share_all": 0.1150442477876106
+    }
+  ],
+  "C_top3_region_e31_share": 0.6460176991150443,
+  "age_affine_identity": {
+    "folds_checked": 5,
+    "validation_rows": 208480,
+    "median": 15,
+    "cap": 90,
+    "float64_max_scaled_error": 1.7763568394002505e-15,
+    "theoretical_relation": "age_E2=age_C+75*flag; free linear scores can be reparameterized; L2 penalty is not invariant."
+  },
+  "training_age_support": [
+    {
+      "variant": "D",
+      "train_age_max": 200.0,
+      "age995_z_min": 49.45532259068978,
+      "age995_z_max": 49.87311567262811
+    },
+    {
+      "variant": "F1",
+      "train_age_max": 55.0,
+      "age995_z_min": 73.85179820692427,
+      "age995_z_max": 74.04293534338888
+    },
+    {
+      "variant": "F2",
+      "train_age_max": 55.0,
+      "age995_z_min": 73.95208719457942,
+      "age995_z_max": 74.14896810438152
+    }
+  ],
+  "input_files_unchanged": 47,
+  "new_unit_tests": 25,
+  "local_regression_passed": 105,
+  "local_regression_failed": 0,
+  "local_regression_skipped": 0,
+  "independent_audit": {
+    "status": "PASS",
+    "predictions_checked": 1876320,
+    "groups": 27,
+    "paired_slices": 54,
+    "transition_rows": 202,
+    "profiles": 844,
+    "cost_rows": 162,
+    "tampering_cases_rejected": 3
+  },
+  "output_sha256": {
+    "age_affine_identity.csv": "9d0c63209698a1266904d456e66c3b894acf65986a0d39cefa64a2137b728263",
+    "cost_sensitivity.csv": "65a3fd9341d02e8eb9dc0a52c7a6d00bb80fcd75cf64e2d66c675ed4e330549a",
+    "error_profiles.csv": "3cb0103e30fa21cadae03b4969d85b9daab7fb4ed2aeb289fad8bd3722dc1dc1",
+    "group_diagnostics.csv": "97fc6b7f1e288383cc1463fae2e96a53ba922b1c35acc2f4cff7c327c5c59843",
+    "paired_comparisons.csv": "7720bad0b13a0a104675146eec3300c39166de865b1780fbcfbdfc79707e03fd",
+    "paired_transitions.csv": "6b7d6d8fb7fed6ebe6d2d4a6e6e8e6e29418ffd11371c928866f21d111dc5f74",
+    "training_age_support.csv": "c97b52193cfa5a0a9c1432fcc735f3e203d1365c0d4c4ad349cf85aa6a3fad4d"
+  },
+  "publication_note": "Full aggregate CSVs, per-input bindings and audit/test logs are in the delivered code/evidence ZIP and can be regenerated. No raw IDs, labels, per-row predictions or models are published.",
+  "limits": [
+    "Posthoc fixed-development-OOF description; no independent final evaluation.",
+    "No fitted-model coefficient or causal-contribution audit.",
+    "Cost weights and confidence cutoffs are illustrative, not deployed.",
+    "Only marginal region/structure slices; overlap and confounding not resolved."
+  ],
+  "diagnostic_code_commit": "f429ff5364a139a125cf21ba010562fada16002e",
+  "verified_git_blobs": {
+    "experiments/age995/diagnostics.py": "2a3d2073855b4646890e26f6f69b3a9daf150fc0",
+    "experiments/age995/audit_diagnostics.py": "3ddbc67335e058b34eff35120dc2765b68b7b94a"
+  }
+}

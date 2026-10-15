@@ -1,0 +1,19 @@
+{
+  "study_id": "age995_error_diagnostics_v1_20261014",
+  "source_commit": "0de4268f55e38368f25a0a2cc9c6cd3f77266be0",
+  "scope": "posthoc_descriptive_development_oof_only",
+  "candidate": "C",
+  "alternative": "E2",
+  "variants": ["A", "B", "C", "D", "E1", "E2", "E3", "F1", "F2"],
+  "pairs": [["A", "C"], ["B", "C"], ["C", "E2"]],
+  "high_probability_threshold": 0.8,
+  "low_margin_threshold": 0.1,
+  "illustrative_3_to_1_costs": [1, 2, 4, 5, 10, 20],
+  "other_error_cost": 1,
+  "profile_columns": ["geo_level_1_id", "foundation_type", "roof_type", "ground_floor_type", "other_floor_type", "age_band"],
+  "rate_warning_min_grade3_support": 30,
+  "model_refit": false,
+  "threshold_tuning": false,
+  "holdout_access": false,
+  "decision_scope": "research_candidate_only_not_previous_final_model"
+}

@@ -1,0 +1,26 @@
+{
+  "decision_id": "age995_research_candidate_20261014",
+  "scope": "followup_development_research_only",
+  "chosen_variant": "C",
+  "alternative_variant": "E2",
+  "factory": "experiments.age995.run.make_pipeline",
+  "factory_argument": "C",
+  "input_policy": "38_original_features_plus_original_age_is_995_indicator",
+  "age_policy": "replace_995_with_current_train_fold_non995_median_including_zero",
+  "data_row_deletion": false,
+  "model": "LogisticRegression",
+  "hyperparameters": {
+    "C": 1.0,
+    "solver": "lbfgs",
+    "max_iter": 1500,
+    "tol": 0.0001,
+    "random_state": 42
+  },
+  "evidence_source_commit": "0de4268f55e38368f25a0a2cc9c6cd3f77266be0",
+  "previous_final_model_replaced": false,
+  "main_or_peter_modified": false,
+  "deployment_approved": false,
+  "holdout_reuse_allowed": false,
+  "next_priority": "non995_severe_underprediction_diagnostics_not_more_995_replacement_value_tuning",
+  "caveat": "C is a research reference, not a statistically proven winner or operational safety certification."
+}
