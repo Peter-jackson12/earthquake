@@ -60,12 +60,14 @@ README는 결과 입구, AGENTS는 현재 규칙, 이 문서는 상태·근거·
 
 ## 현재 후속 절차
 
+**최신 승인:** 사용자는 T26·T27 전체 완료 후 독립 감사 → 결과 정리 → 공통 문서 갱신 → 최종 검토·`peter` 커밋·공개 GitHub 푸시 및 원격 확인까지 마치고 컴퓨터를 종료하도록 승인했다. 실행 관리자는 학습·감사·보고 검토를, 컨트롤 타워는 통합·푸시·최종 종료를 맡는다. 아래 과거 기록의 공개 push 미포함·종료 취소는 당시 범위다. 실제 감사·보고 검토, 원격 최종 SHA와 CI, 관련 학습·감사·관리 작업 종료를 전부 확인하기 전에는 컴퓨터를 종료하지 않는다. 원시 자료·모델·행별 OOF·manifest는 계속 로컬에 보존한다.
+
 1. T16~T25 연구의 학습·집계·독립 감사·보고 검토는 완료했으며 반복하지 않는다. 추가 승인된 T26은 봉인·첫 Fold 검증 후 기존 Astra 실행 관리자만 나머지 학습·집계·감사를 담당한다. prepare를 반복하지 않는다. 출력은 `local_reproduction/T26_20261015_catboost_native_c/run`, 모듈 `experiments.catboost_native_c.run`, 팔 `CATBOOST_NATIVE_C`다.
-2. 작업은 `worktrees/peter_rules`의 `peter`에서만 한다. 기존 봉인 소스·설정·계획·산출물과 팀원 브랜치를 변경하지 않는다. 컴퓨터 자동 종료 지시는 취소됐으므로 켜 둔다.
+2. 작업은 `worktrees/peter_rules`의 `peter`에서만 한다. 기존 봉인 소스·설정·계획·산출물과 팀원 브랜치를 변경하지 않는다. 컴퓨터는 위 최신 승인에 명시한 마감 조건이 모두 충족된 뒤 종료한다.
 3. T25 소스 `44cc9744d2d8418c9df9d2f20c321d8bc3029b08`, design SHA `3d6b3fe1b1f751029bb27196a5121bcac27d7093e098a86eae00c33cdf9e8e96`를 보존한다. 전체777검사·실패0·스킵33(110.979초), adapter14/runner29·독립20검사의 근거는 `t25_full_tests_final_20261015.log`, `t25_parent_validation_v1.json` 및 구현/준비 영수증이다. 이전775검사는 CI 이식성 보완 전 기록이다.
 4. T25 실제 감사는 `local_reproduction/session_20261015_control/t25_audit/t25_audit_result_v1.json`의 PASS_T25다. native20모델 재추론 최대 확률차0, 실행기 import·joblib 역직렬화·추가 학습0으로 C/환경/원장/지표를 검증했다. 준비 영수증 READY_NOT_EXECUTED와 실제 감사 완료를 구분한다.
 5. 공개 보고 검토 `t25_public_report_review.json`의355항목 PASS와 현재 파일 SHA를 부모가 대조했다. [보고](../reports/CATBOOST_C_20261015.md)와 [집계](../reports/catboost_c_20261015.json)에는 집계만 담는다. 원시 데이터·모델·OOF·manifest는 공개 Git에 올리지 않는다.
-6. 기존 동결 Python 환경과 T25 전용 vendor를 보존한다. 환경 manifest SHA `c67feaf2addb617dea50e2cf26a3757d0f1cab037add37611851893a5fbde6ef`, vendor3014파일·기존7배포5210파일 검증 근거를 유지한다. 원격 push·원격 CI 확인은 이번 완료 범위에 포함하지 않는다.
+6. 기존 동결 Python 환경과 T25 전용 vendor를 보존한다. 환경 manifest SHA `c67feaf2addb617dea50e2cf26a3757d0f1cab037add37611851893a5fbde6ef`, vendor3014파일·기존7배포5210파일 검증 근거를 유지한다. 최신 승인으로 T26·T27 마감 시 누적 미푸시 범위의 공개 적합성을 검토하고 `peter` push·원격 최종 SHA·CI를 확인한다.
 
 
 ### T26 실제 실행과 후속 절차
