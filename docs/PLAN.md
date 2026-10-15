@@ -56,3 +56,10 @@ main 통합, 팀 최종 선정과 평가 정책, 팀원별 전체 과정 수행,
 - 실험 ID `T13_geo2_te_confirm_v1`, 브랜치 `peter-exp/geo2-te-confirm-v1`(기준 `30c3949`). [사전 등록 계획](T13_GEO2_TE_CONFIRM_PLAN.md).
 - T11의 경계 충족(단일 T5 geo2 분할, seed 42)을 새 geo2 Group 분할 seed 101/202/303에서 확인. LR_C·LGBM_O·LGBM_TE_G × 3 seed × 5 Fold = 45 fit(최대 45). 규칙 C1·C2는 계획 문서에 학습 전 고정.
 - 상태: 45/45 학습 완료, 독립 감사 PASS. C1(one-hot LGBM 대비) 미충족(+0.0086, 11/15), C2(LR-C 대비) 충족(+0.0243, 14/15) → 확인 실패, LR-C 기준선 유지. [결과 보고서](../reports/GEO2_TE_CONFIRM_20261014.md).
+
+## T15 3등급 결정 규칙(로짓 오프셋) — 2026-10-15 (사전 등록 작성, 학습 전)
+
+- 실험 ID `T15_GRADE3_DECISION_RULE`, 브랜치 `peter-exp/grade3-decision-rule-v1`(기준 `af261c7`). [사전 등록 계획](T15_GRADE3_DECISION_RULE_PLAN.md).
+- 단일 요인: 3등급 확률에 `exp(b)`를 곱하는 결정 규칙(b는 0~2.0, 0.1 간격 21개 중 1개). LR_C·LGBM_O·LGBM_TE_G에 동일 적용, 각 팔의 보정 전 argmax와 비교. 누수 방지를 위해 b는 바깥 학습 행 안의 내부(Group 인지) 5-Fold OOF로만 선택하고, 바깥 모델은 재학습하지 않고 저장 OOF를 읽기 전용 재사용.
+- 분할: geo2 seed 42/101/202/303(주, 20 Fold), stratified seed 42(낙관적, 보조), geo1 seed 42(진단). 신규 fit은 내부 Fold 450회(최대 450), 홀드아웃 미사용.
+- 상태: 계획·실행기·합성 테스트만 작성. 실데이터 학습 0회, 아직 커밋·`prepare` 전.
