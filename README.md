@@ -44,7 +44,9 @@ Macro F1과 함께 3→1·3→2 건수와 비율 및 3등급 Recall을 보고합
 | T15 | 3등급 결정 규칙(로짓 오프셋) | [보고](reports/GRADE3_DECISION_RULE_20261015.md) |
 | T16 | RF 요인 분리(ONEHOT·NO_ROS·DROP_GEO23_TE·AGE_C) | 학습 진행 중, [사전 등록](docs/T16_RF_FACTORS_PLAN.md) |
 | T17 | 전체 개발 Group OOF에서 결정 규칙 고정 | 독립 감사 PASS, [보고](reports/GRADE3_RULE_FREEZE_20261015.md) |
-| T18 | 내부 Group CV로 LGBM 학습 예산·복잡도 선택 | 봉인 완료·T16 종료 후 학습, [사전 등록](docs/T18_LGBM_TUNING_PLAN.md) |
+| T18 | 내부 Group CV로 LGBM 학습 예산·복잡도 선택 | 사용자 승인 후 병행 학습 시작, [사전 등록](docs/T18_LGBM_TUNING_PLAN.md) |
+| T19 | 고정 50:50 앙상블과 오류 보완 | 분석·독립 감사 완료. O 대비 개선, TE_G 대비 미충족, [결과](reports/FIXED_ENSEMBLE_20261015.md) |
+| T20 | 실제 3등급 학습 가중치 1.5 | 자원 확인 후 병행 시작·첫 Fold 저장 완료, [계획](docs/T20_LGBM_GRADE3_WEIGHT_PLAN.md) |
 
 ## 결과 보기 — 데이터나 모델 파일 없이 실행
 
@@ -71,7 +73,7 @@ CLI는 모델 SHA를 `reports/personal_final_holdout.json`과 대조한다. 출�
 
 ## 실험 재현
 
-아래 명령은 과거 실행 방법의 기록이다. 현재 T16/T18의 재개 절차는 [연구 현황](docs/RESEARCH_STATUS.md)을 따른다. 새로운 재현은 새 실험 ID·새 비공개 출력 경로와 사전등록을 먼저 준비한다.
+아래 명령은 과거 실행 방법의 기록이다. 현재 T16/T18/T20의 실행 절차는 [연구 현황](docs/RESEARCH_STATUS.md)을 따른다. 새로운 재현은 새 실험 ID·새 비공개 출력 경로와 사전등록을 먼저 준비한다.
 
 전처리 v1.0.1 패키지의 `data/`를 비공개로 설치한다. `configs/data_contract.json`의 개발/분할 SHA가 맞아야 한다.
 기존 outputs가 없는 깨끗한 작업 복사본에서 아래 CV를 재현한다. 기존 결과 디렉터리는 덮어쓰지 않는다.
