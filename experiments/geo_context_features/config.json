@@ -1,0 +1,126 @@
+{
+  "study_id": "T24_geo_context_features_v1",
+  "lgbm_params": {
+    "objective": "multiclass",
+    "num_class": 3,
+    "n_estimators": 300,
+    "learning_rate": 0.05,
+    "num_leaves": 31,
+    "max_depth": -1,
+    "min_child_samples": 20,
+    "min_child_weight": 0.001,
+    "min_split_gain": 0.0,
+    "subsample": 1.0,
+    "subsample_freq": 0,
+    "colsample_bytree": 1.0,
+    "reg_alpha": 0.0,
+    "reg_lambda": 0.0,
+    "max_bin": 255,
+    "boosting_type": "gbdt",
+    "device_type": "cpu",
+    "deterministic": true,
+    "force_col_wise": true,
+    "zero_as_missing": false,
+    "random_state": 42,
+    "n_jobs": 2,
+    "verbosity": 1
+  },
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "lightgbm": "4.6.0",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.6.0"
+  },
+  "schemes": {
+    "geo2_s42": {
+      "kind": "group2",
+      "seed": 42,
+      "manifest": {
+        "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T6R_20261014_local/run/geo2/manifest.csv",
+        "sha256": "36a40ddf1153b7a25bf36d5573b26b4dc9a0d67d240869c2e5cc1d85c1f89d64"
+      },
+      "refs": {
+        "LGBM_O": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T8_20261014_native_cat/run/geo2/O/oof.csv.gz",
+          "sha256": "ba282656c482264c045865de32db32d56a0b7c6c872670972c480a90abaa211c"
+        }
+      }
+    },
+    "geo2_s101": {
+      "kind": "group2",
+      "seed": 101,
+      "manifest": {
+        "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_101/manifest.csv",
+        "sha256": "7877b21b59433dea9c4a22ddd8fc1112a3440180fc4e2ab9a73aa0a5b56af1f4"
+      },
+      "refs": {
+        "LGBM_O": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s101/LGBM_O/oof.csv.gz",
+          "sha256": "bd2f5f1790e9a6047f2c9485b8aeab28333be0742028ad678743f63eb2297f90"
+        }
+      }
+    },
+    "geo2_s202": {
+      "kind": "group2",
+      "seed": 202,
+      "manifest": {
+        "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_202/manifest.csv",
+        "sha256": "9b3a48054743a95b83d85d95ac05354456d441fe4ac6c8aa189434d3877914c7"
+      },
+      "refs": {
+        "LGBM_O": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s202/LGBM_O/oof.csv.gz",
+          "sha256": "45d0d0bb8e5a61a9cd41d9bc1343d9c7dbf0496dead5efc05834f98932d99749"
+        }
+      }
+    },
+    "geo2_s303": {
+      "kind": "group2",
+      "seed": 303,
+      "manifest": {
+        "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/manifests/seed_303/manifest.csv",
+        "sha256": "26f42c0b2b3ea40f736d82d178b864ce2d4a25d1eeb2d924c65a177254b8fafd"
+      },
+      "refs": {
+        "LGBM_O": {
+          "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T13_20261014_geo2_te_confirm/run/s303/LGBM_O/oof.csv.gz",
+          "sha256": "a366689191280d3dfa43e7df5cc699fcb3a331c595c76c54ddd4712ae76c27c4"
+        }
+      }
+    }
+  },
+  "group_columns": {
+    "group2": [
+      "geo_level_1_id",
+      "geo_level_2_id"
+    ]
+  },
+  "class_weight": null,
+  "early_stopping": false,
+  "sampling": null,
+  "decision_rule": "argmax",
+  "max_new_study_fits": 20,
+  "automatic_retries": 0,
+  "outer_parallel_jobs": 1,
+  "lgbm_threadpool_limit": 2,
+  "holdout_access": false,
+  "rules": {
+    "mean_delta_min": 0.003,
+    "fold_wins_min": 14,
+    "positive_seed_means_min": 3,
+    "pooled_recall3_delta_min": 0.0,
+    "pooled_error31_rate_delta_max": 0.0
+  },
+  "checkpoint": {
+    "model_reload_probability_atol_lgbm": 1e-12,
+    "csv_float_format": "%.17g"
+  },
+  "arms": [
+    "GEO1_CONTEXT"
+  ],
+  "sample_weight": null
+}
