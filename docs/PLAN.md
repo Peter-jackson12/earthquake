@@ -1,4 +1,12 @@
-# 개인 분석 완료 상태 — 2026-10-13
+# 개인 분석 및 후속 연구 상태 — 2026-10-15
+
+후속 개인 연구는 `worktrees/peter_rules`의 `peter`에서만 진행한다. 새 브랜치/worktree를 만들지 않는다. **T16은 봉인 후 학습 중, T17은 완료·독립 감사 PASS, T18은 봉인 후 학습 대기**다. 세 연구의 코드 통합은 완료됐지만 미실행·미감사 연구를 성능 검증 완료로 표시하지 않는다. 최신 진입점은 [연구 현황](RESEARCH_STATUS.md)이다.
+
+- T16: [RF 요인 분리 계획](T16_RF_FACTORS_PLAN.md), 4개 팔 × 4개 seed × 5 Fold. 학습 종료 후 독립 감사와 보고.
+- T17: [결정 규칙 고정 보고](../reports/GRADE3_RULE_FREEZE_20261015.md), 신규 fit 0. LGBM-O b=0.5, LGBM_TE_G b=0.3이며 선택용 통계다.
+- T18: [LGBM 내부 튜닝 계획](T18_LGBM_TUNING_PLAN.md). T16 학습 종료 후 단독 실행하며 결정 규칙과 결합하지 않는다.
+
+아래는 2026-10-13 개인 분석 완료 기록이다. 후속 연구로 기준선·최종 모델을 자동 변경하거나 홀드아웃을 재평가하지 않는다.
 
 이 브랜치는 Peter 개인 분석 완결본이다. [개인 실행 안내](../README_PERSONAL.md), [최종 보고서](../reports/PERSONAL_FINAL_REPORT_20261013.md), [선택 동결](PERSONAL_MODEL_SELECTION_20261013.md)을 우선한다. 팀 공통 main과 팀원 수행 완료를 대신하지 않는다.
 

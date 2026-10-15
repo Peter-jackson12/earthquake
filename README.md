@@ -42,6 +42,9 @@ Macro F1과 함께 3→1·3→2 건수와 비율 및 3등급 Recall을 보고합
 | T13 | LGBM_TE_G geo2 확인(새 분할) | [보고](reports/GEO2_TE_CONFIRM_20261014.md) |
 | 탐색 / T14 | TE·ROS RandomForest 탐색(0.7004) / 로컬 재현 | [탐색](reports/TE_ROS_RF_EXPLORATORY_20261014.md), [재현](reports/TE_ROS_RF_REPRO_20261015.md) |
 | T15 | 3등급 결정 규칙(로짓 오프셋) | [보고](reports/GRADE3_DECISION_RULE_20261015.md) |
+| T16 | RF 요인 분리(ONEHOT·NO_ROS·DROP_GEO23_TE·AGE_C) | 학습 진행 중, [사전 등록](docs/T16_RF_FACTORS_PLAN.md) |
+| T17 | 전체 개발 Group OOF에서 결정 규칙 고정 | 독립 감사 PASS, [보고](reports/GRADE3_RULE_FREEZE_20261015.md) |
+| T18 | 내부 Group CV로 LGBM 학습 예산·복잡도 선택 | 봉인 완료·T16 종료 후 학습, [사전 등록](docs/T18_LGBM_TUNING_PLAN.md) |
 
 ## 결과 보기 — 데이터나 모델 파일 없이 실행
 

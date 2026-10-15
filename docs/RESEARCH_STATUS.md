@@ -1,9 +1,20 @@
 # Earthquake 개인 연구 현황 (Research Status)
 
-- 기준 확인일: **2026-10-14 (KST)**, 저장소 `Peter-jackson12/earthquake`, T4 전용 브랜치 `peter-exp/model-family-comparison-v1` (base: `peter-exp/age995-outlier-treatment`) 
-- T4 실행 코드 HEAD: `bc624f84ce2f1f188af16cb155dfe6965c94b88f`; base: `a4fc5c82a1907d8fc975f0971deaed8d26a4461f`. **현재 HEAD의 값은 매번 다시 조회**한다.
+- 기준 확인일: **2026-10-15 (KST)**, 저장소 `Peter-jackson12/earthquake`. 개인 연구는 `worktrees/peter_rules`의 `peter`에서만 진행한다. 새 실험 브랜치/worktree는 만들지 않는다.
+- T0~T18 코드와 기존 보고서는 `peter`에 통합했다. 통합 확인 커밋 `050130bd9c08f066e61d360e4298f0d200c7167d`: 전체 테스트 564개 실행·실패 0·스킵 33, GitHub Synthetic/Dashboard CI 성공. **코드 통합과 실험 완료는 별개다. 현재 HEAD는 매번 다시 조회한다.**
 - 목적: 세션·모델 간 연구 인계의 시작점. **결정 근거는 연결된 실제 코드·보고서·OOF/검증 산출물**이며 이 문서만으로 검증을 생략하지 않는다.
-- 팀 공용 `main`, 기존 개인 `peter`, 이 개인 실험 브랜치를 혼동하지 않는다. 이 문서는 팀 최종 선택이나 배포 승인 문서가 아니다.
+- 팀 공용 `main`과 개인 `peter`를 구분한다. 팀원 `EY`·`jjjjin`·`sy`는 변경하지 않는다. 이 문서는 팀 최종 선택이나 배포 승인 문서가 아니다.
+
+## 현재 실행 상태
+
+| 연구 | 확인 상태 | 근거·다음 단계 |
+|---|---|---|
+| T5~T15 | 기존 보고서·감사 증거 보존 | [README 실험 목록](../README.md)의 보고서 참조. 아래 T1~T4 상세는 당시 결과의 기록이다. |
+| T16 RF 요인 분리 | 봉인 후 80 Fold 학습 진행 중 | [사전 등록](T16_RF_FACTORS_PLAN.md). 전체 학습 종료 → 집계 → 독립 감사 → 보고. 미완료 Fold로 결론을 내리지 않는다. |
+| T17 결정 규칙 고정 | 완료·독립 감사 PASS, 신규 fit 0 | [보고](../reports/GRADE3_RULE_FREEZE_20261015.md). LGBM-O b=0.5, LGBM_TE_G b=0.3. 같은 개발 OOF의 선택용 통계이며 독립 성능이 아니다. |
+| T18 LGBM 내부 튜닝 | 봉인 완료·학습 대기 | [사전 등록](T18_LGBM_TUNING_PLAN.md). T16 종료 후 단일 실행자로 내부 240 fit·외부 최대 40 fit. |
+
+LR-C 연구 기준과 기존 최종 모델은 유지한다. 홀드아웃 평가, 최종 모델 선정, T17 규칙과 T18 튜닝의 결합은 승인된 연구 범위에 포함되지 않는다. 실행 중 T16이 읽는 임시 폴더는 학습·감사 종료까지 보존한다.
 
 ## 고정 데이터·평가 계약
 
@@ -26,7 +37,7 @@
 | T3 특성 조합 실험 | C 기반 G1~G5(연령 구간, 지역×구조, 지역×연령, 구조×연령) | **별도 세션 결과 추가 커밋 `a4fc5c8` 확인**. T4 세션에서는 G1~G5 OOF를 재감사하거나 결과를 비교 후보로 사용하지 않음. | [G 계획](../experiments/age995/interactions/PLAN.md), [설정](../experiments/age995/interactions/config.json), [코드](../experiments/age995/interactions/run.py) |
 | T4 모델 계열 비교 | LR 대비 XGBoost/LightGBM, A와 C 비교 | **기존 환경 20 fit·독립 OOF 감사·모델 재추론 완료**. 교차환경 T4 재학습 CV 4/4 재현, 기존 XGB 저장모델 5/20개 확률 엄격 기준 초과(분류 변경 0). 기존 LR A/C 재사용. | [완료 보고](../reports/MODEL_FAMILY_COMPARISON_20261014.md), [실행·검증 요약](../reports/model_families_v1/execution_summary.json), [교차환경 보충 보고](../reports/MODEL_FAMILY_REPRODUCTION_REVIEW_20261014.md) |
 
-**경고:** T3는 다른 세션이 계속 작업할 수 있다. 위 상태는 작성 당시 원격 확인의 스냅샷이며 완료 판정이 아니다. 다음 세션은 **최신 HEAD, 새 보고서/커밋, 실제 OOF·테스트**를 읽어 상태를 업데이트한다. 동시 세션의 변경을 덮어쓰지 않는다.
+위 T0~T4 표는 2026-10-14 당시 확인 기록이다. 현재 연구의 진입점은 상단 실행 상태와 README 실험 목록이다. 다음 세션은 최신 HEAD와 실제 원장·감사를 확인하며, 동시 세션의 변경을 덮어쓰지 않는다.
 
 ## T1/T2 검증된 결론 (LR 조건부)
 
@@ -67,7 +78,7 @@
 5. 모델 선택은 개발 데이터 CV에서만 수행한다. 전처리 fit, 범주 인코딩, 샘플링, 학습/검증 선택에 쓰는 통계는 학습 Fold 안으로 제한한다.
 6. 평가에 **CV Macro F1 평균/표준편차, pooled OOF 구분, 등급별 P/R/F1·지지 수, 혼동행렬, 3→1/3→2, 실제 3등급 Recall, 995/비995 그룹**을 함께 기록한다. Micro F1=Accuracy는 보조지표.
 7. 결과가 없다면 **미실행**, 코드·테스트만 있으면 **구현/합성 검증**, 실제 학습과 OOF 재감사가 끝났을 때만 **성능 검증 완료**로 표시한다.
-8. 안전한 Git 작업: 대상 브랜치 확인, non-force·expected HEAD 갱신, 한국어 커밋, `main`/`peter` 변경 금지. 새 모델 세션은 동시 편집 충돌을 피하도록 **별도의 개인 실험 브랜치**를 우선 권장한다. 새 브랜치의 base SHA를 기록하고 필요 시 PR로만 통합한다.
+8. 안전한 Git 작업: `worktrees/peter_rules`의 `peter`에서만 작업하고 non-force 푸시와 한국어 커밋을 사용한다. 새 브랜치/worktree는 생성하지 않는다. 담당 파일을 나누고 메인이 커밋·푸시를 조율한다. 학습 실행자는 한 번에 하나다.
 9. 매 실험 완료 시 본 문서의 **상태·새 증거 링크·주의사항**을 갱신한다. 다른 세션에서 진행 중인 상태는 확인 전 임의로 완료 처리하지 않는다.
 
 ## 다음 진입점
