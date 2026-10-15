@@ -7,7 +7,7 @@
 
 ## 현재 실행 상태 (2026-10-15 갱신)
 
-T16~T24 학습 또는 분석·집계·독립 감사와 공개 집계 검토를 완료했다. T24는 20/20회·재시도0, 17:24 독립 감사 PASS_T24와 보고 검토481항목 PASS를 확인했다. 평균 Macro F1 Δ+0.002072, 3→1 902→912로 사전 다섯 기준은 미충족이며 기존 모델을 유지한다. 보고 두 파일은 로컬 `fc246c6`에 반영했다. T25는 기존 C·geo2 분할을 유지하고 모델만 CatBoost로 교체하는 실험을 구현·전체 회귀·독립 검토한 뒤 `44cc9744d2d8418c9df9d2f20c321d8bc3029b08`에 고정했다. 기존 실행 관리자에게 최초 봉인·자원 확인·첫 Fold·나머지 학습·독립 감사·보고까지 인계했다. 이 인계 기록 자체는 실제 학습 시작을 의미하지 않으며 작은 원장과 관리자 로그에서 확인한다.
+T16~T25 학습 또는 분석·집계·독립 감사와 공개 집계 검토를 완료했다. T25는18:22 학습20/20회·재시도0, 18:25 독립 감사 PASS_T25, 18:28 공개 보고355항목 PASS다. 현재 보고·집계·원장·감사 등12개 근거 SHA를 부모가 대조했고 실행 잠금은 해제됐다. 평균 Macro F1은0.582056→0.568221(Δ−0.013834), 20개 Fold 모두 기준보다 낮다. 3→1은902→527로 감소했으나 3→2 증가·Recall3 하락으로 사전 기준 미충족이며 기존 모델을 유지한다. T24 역시 평균Δ+0.002072·3→1 902→912로 기준 미충족이다. 새 학습은 시작하지 않으며 공개 push는 하지 않았다.
 
 | 연구 | 확인 상태 | 근거와 해석 |
 |---|---|---|
@@ -21,7 +21,7 @@ T16~T24 학습 또는 분석·집계·독립 감사와 공개 집계 검토를 �
 | T22 재료 조합·구조별 층수 | 40/40·독립 감사·공개 보고 검토 PASS | [보고](../reports/MATERIAL_STRUCTURE_20261015.md). 평균 Δ−0.000427/−0.000313, 두 팔 모두 기준 미충족. |
 | T23 누적 이진분류 | 40binary/20unit·독립 감사·공개 보고 검토 PASS | [보고](../reports/ORDINAL_DAMAGE_20261015.md). 평균 Δ−0.000265, 3→1 902→895이나 Recall3 하락. 기준 미충족. |
 | T24 상위 지역 문맥 | 20/20·독립 감사·공개 보고 검토 PASS | [보고](../reports/GEO_CONTEXT_20261015.md). 평균 Δ+0.002072, 3→1 902→912로 기준 미충족. |
-| T25 CatBoost C 비교 | 17:58 기준1/20완료·재시도0, 다음 Fold 시작 | [계획](T25_CATBOOST_C_PLAN.md). 기존 C·geo2 20 Fold, 모델만 교체. 첫 학습20.5초·저장·재로딩·백업 정상, 자원 재확인 통과. |
+| T25 CatBoost C 비교 | 20/20·독립 감사·공개 보고 검토 PASS | [보고](../reports/CATBOOST_C_20261015.md). 평균Δ−0.013834·양의 Fold0/20, 3→1 감소이나 전체 기준 미충족. |
 
 T24 전체 회귀는 **734개 실행·실패0·스킵33(99.673초)**이며 전용 피처14/실행기24를 포함한다. 로그는 `local_reproduction/session_20261015_control/t24_full_tests_20261015.log`, 구현 영수증은 `local_reproduction/T24_20261015_geo_context/runner_implementation_validation_v1.json`이다. 별도 독립 합성17개 PASS·당시 감사 준비 영수증이며 `t24_audit/preparation_receipt_v1.json` SHA는 `9e1b0dd0646ab3277669a246ab53f190dfc80af130091b93a0c8688ff1e147d6`이다. 이후 실제 감사 PASS_T24·native20모델 최대 확률차0과 공개 검토481항목을 별도로 확인했다. 기존 T21/T22/T23 봉인 소스는 각각49개 모두 불변이며 T24 소스도 기존42개+신규7개로 결속한다.
 
@@ -51,21 +51,20 @@ README는 결과 입구, AGENTS는 현재 규칙, 이 문서는 상태·근거·
 | T18 튜닝이 완료됐다 | `310c497`, `local_reproduction/T18_20261015_lgbm_tuning/run/{design,ledger}.json`, [실행기](../experiments/lgbm_nested_tuning/run.py) | 280 fit·20단위·독립 감사·공개 검토 PASS | 완료. 튜닝 두 정책의 사전 기준 미충족 |
 | T19 고정 앙상블 분석이 검증됐다 | `4f064c7`, [보고](../reports/FIXED_ENSEMBLE_20261015.md), 로컬 `t19_audit_result_v1.json`·`t19_public_review_result_v1.json` | 독립 산술 감사·공개 집계 검토 PASS. 두 baseline 동시 개선은 미충족 | 완료. 재사용 개발 OOF와 절차 예외 한계 유지 |
 | T20 가중치 효과가 검증됐다 | `4f064c7`, [보고](../reports/LGBM_GRADE3_WEIGHT_20261015.md), 로컬 `t20_audit_result.json` | 독립 감사 PASS. F1·Recall 개선과 3→1 기준 미충족을 함께 확인 | 완료. 최종 모델 채택으로 해석하지 않음 |
-| 학습과 검증 정보가 분리된다 | T16/T18 계획 및 실행기, [데이터 계약](../configs/data_contract.json) | 설계·구현 근거 있음. 진행 중 실험의 전체 산출물 감사 대기 | 독립 감사 담당: 그룹·ID·내부 선택·예측·모델 재추론 확인 |
+| 학습과 검증 정보가 분리된다 | T16/T18 계획 및 실행기, [데이터 계약](../configs/data_contract.json) | 완료된 T16~T25의 개별 독립 감사 근거 있음. 향후 새 실험은 별도 검증 필요 | 독립 감사 담당: 그룹·ID·내부 선택·예측·모델 재추론 확인 |
 | 재개가 결과를 보존한다 | 실행기 원장·백업·재로딩 로직 및 합성 검사 | T16 실제 중단 후 완료 56개·원본/백업 448개 SHA를 확인해 중단 Fold만 재개, 14:31 해당 Fold 저장·재로딩·백업 완료 | 전체 감사 PASS. 종료 원인은 미확정 유지 |
-| 전체 파이프라인이 검증됐다 | 학습 → 집계 → 독립 감사 → 보고 | 개별 T16~T24 감사 완료. 진행 중 T25와 전체 무결함 보증은 별개 | 각 감사 PASS와 revision·설계 결속된 집계 보고 필요 |
+| 전체 파이프라인이 검증됐다 | 학습 → 집계 → 독립 감사 → 보고 | 개별 T16~T25 감사 완료. 전체 무결함이나 새 실험 검증을 뜻하지 않음 | 각 감사 PASS와 revision·설계 결속된 집계 보고 필요 |
 | 홀드아웃·최종 모델을 바꾸지 않는다 | AGENTS, T0 보고, 후속 계획 | 현재 작업 범위로 유지. 신규 실험은 개발 자료만 사용 | 컨트롤 타워: 새 평가 설계·사용자 결정 전 접근/선정 금지 |
 
 ## 현재 후속 절차
 
-1. 작업 위치는 `worktrees/peter_rules`의 `peter`다. T16~T24 완료 작업과 최초 prepare를 반복하지 않으며 봉인 소스·설정·계획을 보존한다. T25 실자료 실행은 기존 Astra 관리자만 담당한다.
-2. 동결 Python `local_reproduction/20261014_01/venv/Scripts/python.exe`는 설치·업그레이드하지 않는다. T25 추가12패키지는 `local_reproduction/T25_20261015_catboost_c/vendor`에 격리했다. 환경 manifest SHA `c67feaf2addb617dea50e2cf26a3757d0f1cab037add37611851893a5fbde6ef`, vendor3014파일·기존7배포5210파일 독립 환경 검증 PASS다. 환경 확인은 실자료 학습 성공을 뜻하지 않는다.
-3. T25 전용 adapter14/runner29와 최종 전체777검사·실패0·스킵33(110.979초), 독립20검사·실패0·스킵0를 완료했다. 전체 로그는 `t25_full_tests_final_20261015.log`, 부모 검증은 `t25_parent_validation_v1.json`이다. 이전775검사는 CI 이식성 보완 전 기록이다. 소스49개·기존 T21~T24 각49봉인 불변과 로컬 링크111개를 확인했다. 최종 코드 커밋 후 관리자만 최초 prepare/fit한다. 출력 `local_reproduction/T25_20261015_catboost_c/run`, 모듈 `experiments.catboost_c.run`, 팔 `CATBOOST_C`다.
-4. T24 완료·잠금 해제·자원 확인 후 관리자가 최초 prepare와 첫 공식 `geo2_s42/f0`을 실행했다. 코드 `44cc9744d2d8418c9df9d2f20c321d8bc3029b08`, design SHA `3d6b3fe1b1f751029bb27196a5121bcac27d7093e098a86eae00c33cdf9e8e96`. 첫 Fold는17:57:35 시작·17:58:04 정상 종료(학습20.482초), native 저장·재로딩·SHA·백업 확인 완료다. 종료 후 가용RAM9.86GiB·CPU6.7~7.7%·디스크대기열0으로 나머지19개를 같은 관리자가 이어간다. 17:58:34 두 번째 실행 시작을 확인했다. 근거는 `t25_manager.log`와 T25 `ledger.json`이며 prepare 반복·완료 Fold 재학습·실패 재시도는 금지한다.
-5. 새 Fold 전 가용 RAM≥8GiB·디스크≥15GiB, 지속 CPU≥90%나 디스크 포화가 없는지 확인한다. 자원 부족이면 후속 단위를 보류하며 관리자와 Fold 중복 실행을 금지한다.
-6. fits/finalizations 어디든 failed/running이면 후속 신규 작업을 중단하고 원본·부분 산출물·실패 로그를 보존한다. 다른 Fold 필터로 실패를 우회하지 않는다.
-7. 20회 완료·종료·잠금 해제 후 finalize, `local_reproduction/session_20261015_control/t25_audit/audit_t25_results.py --run <T25 run> --data <earthquake/data> --destination <새 JSON>`을 실행한다. 준비 영수증 `preparation_receipt_v1.json` SHA `42752238d95c3fb4ac4fa50fa1624891c255ab0f5d0fa062ff8cdc09e3921e5d`를 먼저 대조한다. 상태는 READY_NOT_EXECUTED이며 실제 PASS_T25와 구분한다. 실행기 import·joblib 역직렬화 없이 독립 C 재구축 및 native20모델 재추론·환경·원장·집계 대조를 요구한다.
-8. 실제 감사 PASS 후 관리자가 `reports/CATBOOST_C_20261015.md`와 `catboost_c_20261015.json`을 집계만 작성한다. 독립 보고 검토 뒤 컨트롤 타워가 공통 문서·로컬 커밋을 정리한다. 공개 push는 이번 범위에 없다.
+1. 현재 승인된 T16~T25 연구의 학습·집계·독립 감사·보고 검토는 완료했다. 기존 prepare·fit·finalize·감사를 반복하지 않는다. 새 실험은 별도 사용자 지시와 새 설계를 따른다.
+2. 작업은 `worktrees/peter_rules`의 `peter`에서만 한다. 기존 봉인 소스·설정·계획·산출물과 팀원 브랜치를 변경하지 않는다. 컴퓨터 자동 종료 지시는 취소됐으므로 켜 둔다.
+3. T25 소스 `44cc9744d2d8418c9df9d2f20c321d8bc3029b08`, design SHA `3d6b3fe1b1f751029bb27196a5121bcac27d7093e098a86eae00c33cdf9e8e96`를 보존한다. 전체777검사·실패0·스킵33(110.979초), adapter14/runner29·독립20검사의 근거는 `t25_full_tests_final_20261015.log`, `t25_parent_validation_v1.json` 및 구현/준비 영수증이다. 이전775검사는 CI 이식성 보완 전 기록이다.
+4. T25 실제 감사는 `local_reproduction/session_20261015_control/t25_audit/t25_audit_result_v1.json`의 PASS_T25다. native20모델 재추론 최대 확률차0, 실행기 import·joblib 역직렬화·추가 학습0으로 C/환경/원장/지표를 검증했다. 준비 영수증 READY_NOT_EXECUTED와 실제 감사 완료를 구분한다.
+5. 공개 보고 검토 `t25_public_report_review.json`의355항목 PASS와 현재 파일 SHA를 부모가 대조했다. [보고](../reports/CATBOOST_C_20261015.md)와 [집계](../reports/catboost_c_20261015.json)에는 집계만 담는다. 원시 데이터·모델·OOF·manifest는 공개 Git에 올리지 않는다.
+6. 기존 동결 Python 환경과 T25 전용 vendor를 보존한다. 환경 manifest SHA `c67feaf2addb617dea50e2cf26a3757d0f1cab037add37611851893a5fbde6ef`, vendor3014파일·기존7배포5210파일 검증 근거를 유지한다. 원격 push·원격 CI 확인은 이번 완료 범위에 포함하지 않는다.
+
 
 T22/T23 실제 감사는 각각 `t22_audit/t22_audit_result_v1.json`의 PASS_T22, `t23_audit/t23_audit_result_v1.json`의 PASS_T23이다. 모두 native40모델 재추론 최대 확률차0이며 T23은 20외부단위를 별도로 검증했다. 공개 보고 검토 `t22_public_report_review.json` 609항목, `t23_public_report_review.json` 539항목 PASS와 해당 파일 SHA를 부모가 대조했다. 보고4파일은 로컬 `05b707a`에 반영했으며 새 공개push는 없다.
 
