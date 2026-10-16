@@ -1,0 +1,189 @@
+{
+ "study_id": "T30_rf_factors_stratified_v1",
+ "branch": "peter",
+ "plan": "docs/T30_RF_FACTORS_STRATIFIED_PLAN.md",
+ "plan_sha256": "ed077defc6ca2570b7101c5be69b759907af6080f56db0b1e88dbe5f53100b59",
+ "plan_sha256_at_approval_request": "d0e2fcd48d30e6997b63757e8c07bf66f7f02df0bc15c85d029f0dbe04297552",
+ "plan_sha256_note": "current edition adds the 2026-10-16 approval record only; prepare requires the file to equal plan_sha256 and to be committed",
+ "guide_line": "과제 주제 가이드 심화 항목(요인 분리). 주 평가(개발 Stratified 5-Fold seed 42) 결과를 낸다. 판정 분할=층화 seed 42 5-Fold 하나뿐.",
+ "scheme": "strat",
+ "n_folds": 5,
+ "split_manifest_sha256": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721",
+ "valid_rows_per_fold": 41696,
+ "baseline_arm": "T14_RF_TE_ROS_A",
+ "baseline_run": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T14_20261015_te_ros_rf_repro/run_v2",
+ "baseline_design_sha256": "965f8741dd48ea0b277a9a512b551fd05ac1f365bd9a4d11fd9769688db09a74",
+ "baseline_oof": {
+  "path": "C:/Projects/02_Team_Project/total_earthquake/local_reproduction/T14_20261015_te_ros_rf_repro/run_v2/strat/RF_TE_ROS/oof.csv.gz",
+  "sha256": "69a74d410da08bf06c9da35211e3fe6f1e424bd4afbc72c4de2d2d3c21c09969"
+ },
+ "baseline_expected": {
+  "fold_macro_f1_6dp": [0.700261, 0.701455, 0.700451, 0.701229, 0.698739],
+  "mean_macro_f1_6dp": 0.700427,
+  "tolerance_6dp": 6e-7,
+  "pooled_confusion": [[12435, 7252, 412], [6898, 94857, 16852], [744, 22071, 46959]],
+  "error31": 744,
+  "error32": 22071
+ },
+ "rf_params": {
+  "n_jobs": 4,
+  "random_state": 0
+ },
+ "te": {
+  "smoothing_m": 20,
+  "geo_columns": [
+   "geo_level_1_id",
+   "geo_level_2_id",
+   "geo_level_3_id"
+  ],
+  "classes_encoded_index": [
+   0,
+   2
+  ],
+  "classes_encoded_grades": [
+   1,
+   3
+  ],
+  "features_per_geo": [
+   "te0",
+   "te2",
+   "cnt"
+  ],
+  "stratified_inner": {
+   "n_splits": 5,
+   "shuffle": true,
+   "random_state": 0
+  },
+  "group_inner": {
+   "n_splits": 5,
+   "shuffle": true,
+   "random_state": 42,
+   "group_level": "geo2"
+  },
+  "inner_choice": "strat scheme: original StratifiedKFold(5,shuffle,0) unchanged; geo2 schemes: T11 group-aware StratifiedGroupKFold on (geo1,geo2) composite groups (experiments.geo_te_group_inner.encoder), because random inner folds are known (T10) to leave the training-row encoding in-distribution while Group validation rows are unseen",
+  "validation_encoding": "full outer-train statistics, prior = outer-train class rate (as original)"
+ },
+ "environment": {
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "scipy": "1.17.0",
+  "scikit-learn": "1.8.0",
+  "lightgbm": "4.6.0",
+  "joblib": "1.5.3",
+  "threadpoolctl": "3.6.0",
+  "imbalanced-learn": "0.14.1"
+ },
+ "arm_order": [
+  "C0_BASE_REFIT",
+  "N1_RS1",
+  "N2_RS2",
+  "NO_ROS",
+  "DROP_GEO23_TE",
+  "AGE_C",
+  "DROP_TE_ALL",
+  "CW_NO_ROS",
+  "ONEHOT"
+ ],
+ "arm_folds": {
+  "C0_BASE_REFIT": [0],
+  "N1_RS1": [0, 1, 2, 3, 4],
+  "N2_RS2": [0, 1, 2, 3, 4],
+  "NO_ROS": [0, 1, 2, 3, 4],
+  "DROP_GEO23_TE": [0, 1, 2, 3, 4],
+  "AGE_C": [0, 1, 2, 3, 4],
+  "DROP_TE_ALL": [0, 1, 2, 3, 4],
+  "CW_NO_ROS": [0, 1, 2, 3, 4],
+  "ONEHOT": [0, 1, 2, 3, 4]
+ },
+ "arm_changes": {
+  "ONEHOT": {"geo_encoding": "onehot", "ros": true, "age": "A", "drop_geo23_te": false},
+  "NO_ROS": {"geo_encoding": "te", "ros": false, "age": "A", "drop_geo23_te": false},
+  "DROP_GEO23_TE": {"geo_encoding": "te", "ros": true, "age": "A", "drop_geo23_te": true},
+  "AGE_C": {"geo_encoding": "te", "ros": true, "age": "C", "drop_geo23_te": false}
+ },
+ "arm_spec": {
+  "C0_BASE_REFIT": {"matrix_arm": "T14_RF_TE_ROS_A", "drop_all_te": false, "contrast": "control: identical pipeline refit on fold 0"},
+  "N1_RS1": {"matrix_arm": "T14_RF_TE_ROS_A", "drop_all_te": false, "contrast": "RF random_state 0 -> 1"},
+  "N2_RS2": {"matrix_arm": "T14_RF_TE_ROS_A", "drop_all_te": false, "contrast": "RF random_state 0 -> 2"},
+  "NO_ROS": {"matrix_arm": "NO_ROS", "drop_all_te": false, "contrast": "ROS off"},
+  "DROP_GEO23_TE": {"matrix_arm": "DROP_GEO23_TE", "drop_all_te": false, "contrast": "geo2/geo3 TE 4 columns removed"},
+  "AGE_C": {"matrix_arm": "AGE_C", "drop_all_te": false, "contrast": "age 995 -> train median + age_is_995"},
+  "DROP_TE_ALL": {"matrix_arm": "T14_RF_TE_ROS_A", "drop_all_te": true, "contrast": "all 6 geo TE columns removed (raw geo + counts kept)"},
+  "CW_NO_ROS": {"matrix_arm": "NO_ROS", "drop_all_te": false, "contrast": "vs NO_ROS: class_weight balanced only"},
+  "ONEHOT": {"matrix_arm": "ONEHOT", "drop_all_te": false, "contrast": "geo TE 6 columns replaced by geo one-hot"}
+ },
+ "arm_rf_params": {
+  "C0_BASE_REFIT": {},
+  "N1_RS1": {"random_state": 1},
+  "N2_RS2": {"random_state": 2},
+  "NO_ROS": {},
+  "DROP_GEO23_TE": {},
+  "AGE_C": {},
+  "DROP_TE_ALL": {},
+  "CW_NO_ROS": {"class_weight": "balanced"},
+  "ONEHOT": {}
+ },
+ "expected_model_columns": {
+  "C0_BASE_REFIT": 77,
+  "N1_RS1": 77,
+  "N2_RS2": 77,
+  "NO_ROS": 77,
+  "DROP_GEO23_TE": 73,
+  "AGE_C": 78,
+  "DROP_TE_ALL": 71,
+  "CW_NO_ROS": 77
+ },
+ "c0_gate": {
+  "arm": "C0_BASE_REFIT",
+  "fold": 0,
+  "max_abs_prob_diff": 1e-12,
+  "float_precision": "round_trip",
+  "tie_rule": "a label mismatch is tolerated only on a row whose probabilities are bit-identical and whose top-2 probabilities tie exactly"
+ },
+ "planned_completed_fits": 41,
+ "max_new_study_fits": 45,
+ "max_infrastructure_retries": 4,
+ "baseline_refits_control_only": 1,
+ "automatic_retries": 0,
+ "outer_parallel_jobs": 1,
+ "holdout_access": false,
+ "tuning": false,
+ "early_stopping": false,
+ "threshold_or_decision_rule_change": false,
+ "min_free_disk_gb_at_prepare": 60,
+ "min_free_disk_gb_per_fold": 15,
+ "rule": {
+  "mean_delta_min": 0.003,
+  "same_sign_folds_min": 4,
+  "recall3_delta": 0.01,
+  "to1_relative": 0.1,
+  "to1_min_abs_count": 10,
+  "noise_annotation": {
+   "max_abs_mean_delta": 0.0015,
+   "max_abs_fold_delta": 0.003
+  },
+  "boundary_epsilon": 1e-12
+ },
+ "decision_rule": "argmax probability, labels 1/2/3",
+ "raw_numeric_geo_kept": true,
+ "all_count_features_kept": true,
+ "reference_tables": {
+  "T0_RF_best_strat": {
+   "macro_f1_mean": 0.658667,
+   "macro_f1_sd": 0.000974,
+   "accuracy": 0.685932,
+   "recall3": 0.679866,
+   "error31": 1516,
+   "error32": 20821,
+   "note": "descriptive reference only; several factors differ from T14 (preprocessing, class_weight vs ROS, max_features, max_depth); not used in any T30 judgment"
+  },
+  "T16_geo2_group_20_folds": {
+   "ONEHOT": {"mean_delta": 0.012231, "positive_folds": 13, "of": 20, "recall3_delta": -0.098020},
+   "NO_ROS": {"mean_delta": -0.000182, "positive_folds": 10, "of": 20, "recall3_delta": -0.018392},
+   "DROP_GEO23_TE": {"mean_delta": -0.005238, "positive_folds": 4, "of": 20, "recall3_delta": 0.015941},
+   "AGE_C": {"mean_delta": -0.002799, "positive_folds": 7, "of": 20, "recall3_delta": 0.005772},
+   "note": "citation only (reports/RF_FACTORS_20261015.md); not used in any T30 judgment"
+  }
+ }
+}
