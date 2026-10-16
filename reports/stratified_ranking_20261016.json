@@ -1,0 +1,898 @@
+{
+  "analysis_id": "A3_stratified_ranking_20261016",
+  "report": "reports/STRATIFIED_RANKING_20261016.md",
+  "status": "computed, independent recomputation review PASS_WITH_NOTES reflected",
+  "new_fits": 0,
+  "holdout_accessed": false,
+  "scheme": "strat (Stratified 5-Fold, seed 42, split_manifest.csv cv_fold, SHA 7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721)",
+  "guide_line": "팀원 결과 비교·통합과 모델 비교 정리. 필수 네 모델·불균형 처리 항목을 대체하지 않는다. 주 평가(개발 Stratified 5-Fold seed 42)만 사용, geo2/geo1 Group 결과는 섞지 않음.",
+  "not_a_selection": "순위는 기술 관찰이며 최종 모델 선정이 아니다. 공식 개인 최종 모델은 T0 LR C=1 유지. T29 미승인.",
+  "rounding": "부동소수 소수 6자리 반올림, SD ddof=1, Fold 순위 1=가장 높음(동점 min).",
+  "compute_script_sha256": "e7f8dea6019a8479bdcf0bdaacad04f4b359a4e05e21ca4bc547527673820ca0",
+  "private_result_sha256": "ae407a7f2cff0cc3dcee2b0a32b95ad1aaa618527a859d5e55597469be6c7528",
+  "order_by_cv_mean": [
+    "T33_E1",
+    "T35_X",
+    "T35_L",
+    "T33_E2",
+    "T14",
+    "T8_N",
+    "LR_C",
+    "T0"
+  ],
+  "settings": {
+    "T35_L": {
+      "label": "T35 L EY 새 노트북 LightGBM",
+      "oof_sha256": "0ea83e83edf697e9440dbf3230675ff180afda8774f7410ee496ab362604fabc",
+      "fold_macro_f1": [
+        0.70845,
+        0.709283,
+        0.706896,
+        0.706166,
+        0.704481
+      ],
+      "cv_mean": 0.707055,
+      "cv_std": 0.001894,
+      "pooled_macro_f1": 0.707065,
+      "accuracy": 0.740963,
+      "precision": [
+        0.60191,
+        0.774112,
+        0.727887
+      ],
+      "recall": [
+        0.671178,
+        0.783563,
+        0.688652
+      ],
+      "f1": [
+        0.634659,
+        0.778809,
+        0.707726
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          13490,
+          6249,
+          360
+        ],
+        [
+          8068,
+          92936,
+          17603
+        ],
+        [
+          854,
+          20870,
+          48050
+        ]
+      ],
+      "recall3": 0.688652,
+      "err31": 854,
+      "err32": 20870,
+      "err13": 360,
+      "rate31": 0.01224,
+      "pred_share": [
+        0.107502,
+        0.575859,
+        0.316639
+      ],
+      "fold_rank": [
+        4.0,
+        4.0,
+        1.0,
+        1.0,
+        4.0
+      ],
+      "mean_fold_rank": 2.8
+    },
+    "T35_X": {
+      "label": "T35 X EY 새 노트북 XGBoost",
+      "oof_sha256": "0822dc32d2bb31a5cb6d281bf740497d895b7bfb42c564833bb56bda44638ee8",
+      "fold_macro_f1": [
+        0.709848,
+        0.709333,
+        0.706163,
+        0.705013,
+        0.705671
+      ],
+      "cv_mean": 0.707206,
+      "cv_std": 0.002223,
+      "pooled_macro_f1": 0.707215,
+      "accuracy": 0.738493,
+      "precision": [
+        0.582934,
+        0.777576,
+        0.726244
+      ],
+      "recall": [
+        0.707647,
+        0.772712,
+        0.689211
+      ],
+      "f1": [
+        0.639265,
+        0.775136,
+        0.707243
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          14223,
+          5533,
+          343
+        ],
+        [
+          9174,
+          91649,
+          17784
+        ],
+        [
+          1002,
+          20683,
+          48089
+        ]
+      ],
+      "recall3": 0.689211,
+      "err31": 1002,
+      "err32": 20683,
+      "err13": 343,
+      "rate31": 0.014361,
+      "pred_share": [
+        0.117033,
+        0.565354,
+        0.317613
+      ],
+      "fold_rank": [
+        3.0,
+        3.0,
+        2.0,
+        2.0,
+        3.0
+      ],
+      "mean_fold_rank": 2.6
+    },
+    "T33_E1": {
+      "label": "T33 E1 EY 구판 충실 재현",
+      "oof_sha256": "aa6becb4ddd6468282d757bbac55f64452f74b501e3d87bdeaba87a3fb71236d",
+      "fold_macro_f1": [
+        0.710263,
+        0.710276,
+        0.704807,
+        0.704511,
+        0.706569
+      ],
+      "cv_mean": 0.707285,
+      "cv_std": 0.002835,
+      "pooled_macro_f1": 0.707288,
+      "accuracy": 0.743462,
+      "precision": [
+        0.618688,
+        0.766081,
+        0.740796
+      ],
+      "recall": [
+        0.652918,
+        0.80362,
+        0.667283
+      ],
+      "f1": [
+        0.635343,
+        0.784402,
+        0.70212
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          13123,
+          6671,
+          305
+        ],
+        [
+          7306,
+          95315,
+          15986
+        ],
+        [
+          782,
+          22433,
+          46559
+        ]
+      ],
+      "recall3": 0.667283,
+      "err31": 782,
+      "err32": 22433,
+      "err13": 305,
+      "rate31": 0.011208,
+      "pred_share": [
+        0.101741,
+        0.596791,
+        0.301468
+      ],
+      "fold_rank": [
+        1.0,
+        1.0,
+        3.0,
+        3.0,
+        1.0
+      ],
+      "mean_fold_rank": 1.8
+    },
+    "T33_E2": {
+      "label": "T33 E2 EY 구판 ES 분리판",
+      "oof_sha256": "34296118e7edc73b6550958bdb4eb579c8d7cd0aa40bfff5581ca02b81c081a7",
+      "fold_macro_f1": [
+        0.709877,
+        0.709717,
+        0.704551,
+        0.703895,
+        0.706121
+      ],
+      "cv_mean": 0.706832,
+      "cv_std": 0.002825,
+      "pooled_macro_f1": 0.706836,
+      "accuracy": 0.743227,
+      "precision": [
+        0.618798,
+        0.765721,
+        0.740523
+      ],
+      "recall": [
+        0.650878,
+        0.803772,
+        0.66691
+      ],
+      "f1": [
+        0.634433,
+        0.784285,
+        0.701792
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          13082,
+          6706,
+          311
+        ],
+        [
+          7280,
+          95333,
+          15994
+        ],
+        [
+          779,
+          22462,
+          46533
+        ]
+      ],
+      "recall3": 0.66691,
+      "err31": 779,
+      "err32": 22462,
+      "err13": 311,
+      "rate31": 0.011165,
+      "pred_share": [
+        0.101405,
+        0.597184,
+        0.30141
+      ],
+      "fold_rank": [
+        2.0,
+        2.0,
+        4.0,
+        4.0,
+        2.0
+      ],
+      "mean_fold_rank": 2.8
+    },
+    "T14": {
+      "label": "T14 RF+TE+ROS",
+      "oof_sha256": "69a74d410da08bf06c9da35211e3fe6f1e424bd4afbc72c4de2d2d3c21c09969",
+      "fold_macro_f1": [
+        0.700261,
+        0.701455,
+        0.700451,
+        0.701229,
+        0.698739
+      ],
+      "cv_mean": 0.700427,
+      "cv_std": 0.00107,
+      "pooled_macro_f1": 0.700441,
+      "accuracy": 0.739884,
+      "precision": [
+        0.619365,
+        0.763867,
+        0.731187
+      ],
+      "recall": [
+        0.618687,
+        0.799759,
+        0.673016
+      ],
+      "f1": [
+        0.619026,
+        0.781401,
+        0.700896
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          12435,
+          7252,
+          412
+        ],
+        [
+          6898,
+          94857,
+          16852
+        ],
+        [
+          744,
+          22071,
+          46959
+        ]
+      ],
+      "recall3": 0.673016,
+      "err31": 744,
+      "err32": 22071,
+      "err13": 412,
+      "rate31": 0.010663,
+      "pred_share": [
+        0.096302,
+        0.595645,
+        0.308054
+      ],
+      "fold_rank": [
+        6.0,
+        6.0,
+        6.0,
+        5.0,
+        5.0
+      ],
+      "mean_fold_rank": 5.6
+    },
+    "T8_N": {
+      "label": "T8 LGBM-N",
+      "oof_sha256": "263680540b07a5cc4fe84dd294ff90ae0da7c9c7b2886f0df733edf9465f9558",
+      "fold_macro_f1": [
+        0.701965,
+        0.70247,
+        0.700637,
+        0.696333,
+        0.695303
+      ],
+      "cv_mean": 0.699342,
+      "cv_std": 0.003306,
+      "pooled_macro_f1": 0.699347,
+      "accuracy": 0.74645,
+      "precision": [
+        0.671423,
+        0.752828,
+        0.753301
+      ],
+      "recall": [
+        0.557242,
+        0.836637,
+        0.647648
+      ],
+      "f1": [
+        0.609027,
+        0.792523,
+        0.69649
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          11200,
+          8525,
+          374
+        ],
+        [
+          4951,
+          99231,
+          14425
+        ],
+        [
+          530,
+          24055,
+          45189
+        ]
+      ],
+      "recall3": 0.647648,
+      "err31": 530,
+      "err32": 24055,
+      "err13": 374,
+      "rate31": 0.007596,
+      "pred_share": [
+        0.080012,
+        0.632248,
+        0.28774
+      ],
+      "fold_rank": [
+        5.0,
+        5.0,
+        5.0,
+        6.0,
+        6.0
+      ],
+      "mean_fold_rank": 5.4
+    },
+    "LR_C": {
+      "label": "LR-C 연구 기준선",
+      "oof_sha256": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc",
+      "fold_macro_f1": [
+        0.688738,
+        0.688484,
+        0.689925,
+        0.690007,
+        0.686283
+      ],
+      "cv_mean": 0.688687,
+      "cv_std": 0.001508,
+      "pooled_macro_f1": 0.688695,
+      "accuracy": 0.741831,
+      "precision": [
+        0.670591,
+        0.745782,
+        0.751595
+      ],
+      "recall": [
+        0.518683,
+        0.839672,
+        0.639794
+      ],
+      "f1": [
+        0.584935,
+        0.789947,
+        0.691203
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          10425,
+          9267,
+          407
+        ],
+        [
+          4669,
+          99591,
+          14347
+        ],
+        [
+          452,
+          24681,
+          44641
+        ]
+      ],
+      "recall3": 0.639794,
+      "err31": 452,
+      "err32": 24681,
+      "err13": 407,
+      "rate31": 0.006478,
+      "pred_share": [
+        0.074568,
+        0.640536,
+        0.284895
+      ],
+      "fold_rank": [
+        7.0,
+        7.0,
+        7.0,
+        7.0,
+        7.0
+      ],
+      "mean_fold_rank": 7.0
+    },
+    "T0": {
+      "label": "T0 LR C=1 공식 개인 최종 모델",
+      "oof_sha256": "e8dbaa962fe4b2e2fdad160d25f72cbfd0816d73aafbc0419149c53b8a3de221",
+      "fold_macro_f1": [
+        0.684343,
+        0.684471,
+        0.684343,
+        0.683252,
+        0.681977
+      ],
+      "cv_mean": 0.683677,
+      "cv_std": 0.001071,
+      "pooled_macro_f1": 0.68368,
+      "accuracy": 0.739495,
+      "precision": [
+        0.66092,
+        0.743647,
+        0.750489
+      ],
+      "recall": [
+        0.505448,
+        0.83861,
+        0.638433
+      ],
+      "f1": [
+        0.572822,
+        0.788279,
+        0.68994
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          10159,
+          9527,
+          413
+        ],
+        [
+          4745,
+          99465,
+          14397
+        ],
+        [
+          467,
+          24761,
+          44546
+        ]
+      ],
+      "recall3": 0.638433,
+      "err31": 467,
+      "err32": 24761,
+      "err13": 413,
+      "rate31": 0.006693,
+      "pred_share": [
+        0.073729,
+        0.641563,
+        0.284708
+      ],
+      "fold_rank": [
+        8.0,
+        8.0,
+        8.0,
+        8.0,
+        8.0
+      ],
+      "mean_fold_rank": 8.0
+    }
+  },
+  "pairwise_row_minus_col": {
+    "T35_L|T35_X": {
+      "mean_delta": -0.00015,
+      "folds_higher": 2,
+      "folds_lower": 3
+    },
+    "T35_L|T33_E1": {
+      "mean_delta": -0.00023,
+      "folds_higher": 2,
+      "folds_lower": 3
+    },
+    "T35_L|T33_E2": {
+      "mean_delta": 0.000223,
+      "folds_higher": 2,
+      "folds_lower": 3
+    },
+    "T35_L|T14": {
+      "mean_delta": 0.006628,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T35_L|T8_N": {
+      "mean_delta": 0.007714,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T35_L|LR_C": {
+      "mean_delta": 0.018368,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T35_L|T0": {
+      "mean_delta": 0.023378,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T35_X|T35_L": {
+      "mean_delta": 0.00015,
+      "folds_higher": 3,
+      "folds_lower": 2
+    },
+    "T35_X|T33_E1": {
+      "mean_delta": -7.9e-05,
+      "folds_higher": 2,
+      "folds_lower": 3
+    },
+    "T35_X|T33_E2": {
+      "mean_delta": 0.000374,
+      "folds_higher": 2,
+      "folds_lower": 3
+    },
+    "T35_X|T14": {
+      "mean_delta": 0.006779,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T35_X|T8_N": {
+      "mean_delta": 0.007864,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T35_X|LR_C": {
+      "mean_delta": 0.018518,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T35_X|T0": {
+      "mean_delta": 0.023529,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T33_E1|T35_L": {
+      "mean_delta": 0.00023,
+      "folds_higher": 3,
+      "folds_lower": 2
+    },
+    "T33_E1|T35_X": {
+      "mean_delta": 7.9e-05,
+      "folds_higher": 3,
+      "folds_lower": 2
+    },
+    "T33_E1|T33_E2": {
+      "mean_delta": 0.000453,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T33_E1|T14": {
+      "mean_delta": 0.006858,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T33_E1|T8_N": {
+      "mean_delta": 0.007944,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T33_E1|LR_C": {
+      "mean_delta": 0.018598,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T33_E1|T0": {
+      "mean_delta": 0.023608,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T33_E2|T35_L": {
+      "mean_delta": -0.000223,
+      "folds_higher": 3,
+      "folds_lower": 2
+    },
+    "T33_E2|T35_X": {
+      "mean_delta": -0.000374,
+      "folds_higher": 3,
+      "folds_lower": 2
+    },
+    "T33_E2|T33_E1": {
+      "mean_delta": -0.000453,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T33_E2|T14": {
+      "mean_delta": 0.006405,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T33_E2|T8_N": {
+      "mean_delta": 0.00749,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T33_E2|LR_C": {
+      "mean_delta": 0.018145,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T33_E2|T0": {
+      "mean_delta": 0.023155,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T14|T35_L": {
+      "mean_delta": -0.006628,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T14|T35_X": {
+      "mean_delta": -0.006779,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T14|T33_E1": {
+      "mean_delta": -0.006858,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T14|T33_E2": {
+      "mean_delta": -0.006405,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T14|T8_N": {
+      "mean_delta": 0.001085,
+      "folds_higher": 2,
+      "folds_lower": 3
+    },
+    "T14|LR_C": {
+      "mean_delta": 0.01174,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T14|T0": {
+      "mean_delta": 0.01675,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T8_N|T35_L": {
+      "mean_delta": -0.007714,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T8_N|T35_X": {
+      "mean_delta": -0.007864,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T8_N|T33_E1": {
+      "mean_delta": -0.007944,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T8_N|T33_E2": {
+      "mean_delta": -0.00749,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T8_N|T14": {
+      "mean_delta": -0.001085,
+      "folds_higher": 3,
+      "folds_lower": 2
+    },
+    "T8_N|LR_C": {
+      "mean_delta": 0.010654,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T8_N|T0": {
+      "mean_delta": 0.015665,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "LR_C|T35_L": {
+      "mean_delta": -0.018368,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "LR_C|T35_X": {
+      "mean_delta": -0.018518,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "LR_C|T33_E1": {
+      "mean_delta": -0.018598,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "LR_C|T33_E2": {
+      "mean_delta": -0.018145,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "LR_C|T14": {
+      "mean_delta": -0.01174,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "LR_C|T8_N": {
+      "mean_delta": -0.010654,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "LR_C|T0": {
+      "mean_delta": 0.00501,
+      "folds_higher": 5,
+      "folds_lower": 0
+    },
+    "T0|T35_L": {
+      "mean_delta": -0.023378,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T0|T35_X": {
+      "mean_delta": -0.023529,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T0|T33_E1": {
+      "mean_delta": -0.023608,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T0|T33_E2": {
+      "mean_delta": -0.023155,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T0|T14": {
+      "mean_delta": -0.01675,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T0|T8_N": {
+      "mean_delta": -0.015665,
+      "folds_higher": 0,
+      "folds_lower": 5
+    },
+    "T0|LR_C": {
+      "mean_delta": -0.00501,
+      "folds_higher": 0,
+      "folds_lower": 5
+    }
+  },
+  "observed_groups_descriptive": {
+    "A": [
+      "T33_E1",
+      "T35_X",
+      "T35_L",
+      "T33_E2"
+    ],
+    "B": [
+      "T14",
+      "T8_N"
+    ],
+    "C": [
+      "LR_C"
+    ],
+    "D": [
+      "T0"
+    ],
+    "rule": "서로 다른 묶음의 모든 쌍에서 위 묶음이 5/5 Fold 모두 높음. 검정 아님. 묶음 안 순서는 구별하지 않음."
+  },
+  "out_of_scope_reference": {
+    "T34_best_cv_mean": 0.700415,
+    "sklearn_GBC_best_cv_mean_A2": 0.612109
+  },
+  "not_claimed": [
+    "최종 모델 선정·교체",
+    "채택 권고",
+    "팀원 작업물 우열 평가",
+    "독립 성능",
+    "유의성",
+    "인과 효과"
+  ]
+}
