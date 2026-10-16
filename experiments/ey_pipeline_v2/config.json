@@ -1,0 +1,67 @@
+{
+  "study_id": "T35_ey_pipeline_v2_benchmark_v1",
+  "title": "EY revised-notebook pipeline stratified-CV reproduction benchmark (not an evaluation of the teammate)",
+  "plan": {
+    "path": "docs/T35_EY_PIPELINE_V2_BENCHMARK_PLAN.md",
+    "sha256": "b5335509486b4bb1e51889a041802b203d341cbed0b305dc27fda026a1b02c78",
+    "approval": "2026-10-16 user instructed to run T35 (final LightGBM + best XGBoost of the revised notebook, stratified 5-fold, preregistration to audit and report); arms, budget and thresholds are the plan author's defaults fixed before training"
+  },
+  "notebook": {
+    "file_name": "지진.ipynb",
+    "sha256": "633f6e6b3c1c3bdf669af71df29d31581cb97df63a303ab72b0bbc21b8eed33d",
+    "cell_index": 28,
+    "cell_source_sha256": "cb7fc35bd9eae0220155b84432b483740e0c9d36bd9dbad052bfef886ef2252e",
+    "extract_text_sha256": "7ef64cda2b2e7f533f401934aa10f4a57e2f7e885c1e6b1e361702fb6ad13767",
+    "extract_functions": ["building_features", "rate_table", "make_features", "to_matrix", "make_weights"],
+    "extract_assignments": ["SEED", "CAT_COLS", "RATE_KEYS", "NEW_FEATURES", "ALL_FEATURES"],
+    "access": "read and copy only; original never modified; copy and cell extract stay private (outside Git)"
+  },
+  "arms": ["L", "X"],
+  "arm_definitions": {
+    "L": "notebook final model: LightGBM, weight strength 0.5, fixed 800 trees, no early stopping",
+    "X": "notebook best XGBoost setting: hist, weight strength 0.5, fixed 800 trees, no early stopping"
+  },
+  "n_folds": 5,
+  "split": {"scheme": "stratified", "manifest": "split_manifest.csv", "manifest_sha256": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721", "development_sha256": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1", "train_rows_per_fold": 166784, "valid_rows_per_fold": 41696},
+  "features": {"n_frame_columns": 75, "dummy_columns": ["land_surface_condition", "foundation_type", "roof_type", "ground_floor_type", "other_floor_type", "position", "plan_configuration", "legal_ownership_status", "material_group", "structure_type"], "region_ids": "restored to integers and used numerically, as in the notebook"},
+  "weights": {"strength": 0.5},
+  "lgbm_params": {"random_state": 42, "n_jobs": 4, "deterministic": true, "verbose": -1, "n_estimators": 800, "learning_rate": 0.05, "num_leaves": 127, "min_child_samples": 50, "subsample": 0.8, "subsample_freq": 1, "colsample_bytree": 0.5},
+  "xgb_params": {"tree_method": "hist", "random_state": 42, "n_jobs": 4, "n_estimators": 800, "learning_rate": 0.05, "max_depth": 8, "subsample": 0.8, "colsample_bytree": 0.7, "min_child_weight": 10},
+  "params_note": "the notebook's settings, frozen; no re-search, no early stopping",
+  "decision_rule": "argmax of predict_proba, labels 1/2/3; no threshold, no calibration",
+  "budget": {"planned_fits": 10, "max_fits": 12, "max_recovered_units": 2, "max_attempts_per_unit": 2, "automatic_retries": 0},
+  "threads": {"model_n_jobs": 4, "outer_parallel_jobs": 1, "feature_building_threads": 1},
+  "min_free_disk_gb_at_prepare": 10,
+  "checkpoint": {"reload_probability_atol": {"L": 1e-12, "X": 1e-6}, "csv_float_format": "%.17g", "csv_read": "float_precision='round_trip' exact", "backup_dir": "backup", "resume_skips_completed": true},
+  "tolerances": {"comparator_value_atol": 5e-7, "comparator_recall3_definition": "pooled"},
+  "comparators": {
+    "T33_E1": {"label": "T33 E1 (old notebook, faithful)", "path": "T33_20261016_ey_pipeline/run/E1/oof.csv.gz", "sha256": "aa6becb4ddd6468282d757bbac55f64452f74b501e3d87bdeaba87a3fb71236d", "cv_mean": 0.707285, "recall3": 0.667283, "error31": 782, "judged": true},
+    "T33_E2": {"label": "T33 E2 (old notebook, ES split)", "path": "T33_20261016_ey_pipeline/run/E2/oof.csv.gz", "sha256": "34296118e7edc73b6550958bdb4eb579c8d7cd0aa40bfff5581ca02b81c081a7", "cv_mean": 0.706832, "recall3": 0.66691, "error31": 779, "judged": true},
+    "T14": {"label": "T14 RF+TE+ROS", "path": "T14_20261015_te_ros_rf_repro/run_v2/strat/RF_TE_ROS/oof.csv.gz", "sha256": "69a74d410da08bf06c9da35211e3fe6f1e424bd4afbc72c4de2d2d3c21c09969", "cv_mean": 0.700427, "recall3": 0.673016, "error31": 744, "judged": true},
+    "T8_N": {"label": "T8 LGBM-N", "path": "T8_20261014_native_cat/run/stratified/N/oof.csv.gz", "sha256": "263680540b07a5cc4fe84dd294ff90ae0da7c9c7b2886f0df733edf9465f9558", "cv_mean": 0.699342, "recall3": 0.647648, "error31": 530, "judged": true},
+    "LR_C": {"label": "LR-C (research baseline)", "path": "20261014_01/private_original/age995_abc_v1/C/lr/oof_predictions.csv.gz", "sha256": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc", "cv_mean": 0.688687, "recall3": 0.639794, "error31": 452, "judged": true},
+    "T0": {"label": "T0 LR C=1 (= T1 A reproduced OOF)", "path": "20261014_01/private_original/age995_abc_v1/A/lr/oof_predictions.csv.gz", "sha256": "e8dbaa962fe4b2e2fdad160d25f72cbfd0816d73aafbc0419149c53b8a3de221", "cv_mean": 0.683677, "recall3": 0.638433, "error31": 467, "judged": true},
+    "LGBM_O": {"label": "LGBM-O one-hot (reference only)", "path": "20261014_01/private_t4_original/private/model_families_v1/LGBM_C_v1/oof_predictions.csv.gz", "sha256": "0bc63eb5122afb479c41826918a9fbb43a3475351a934d847833656eec6930cf", "cv_mean": 0.669847, "recall3": 0.590077, "error31": 303, "judged": false}
+  },
+  "comparator_note": "comparison of pipelines that differ in several factors at once; descriptive, no significance, no causal claims, not a single-factor ablation",
+  "notebook_reference": {
+    "L_validation_macro_f1": 0.7091, "L_test_macro_f1": 0.7131, "L_test_recall_by_grade": {"1": 0.703, "2": 0.782, "3": 0.696},
+    "X_validation_macro_f1": 0.7077,
+    "comparability": "not directly comparable: one random split of all 260,601 rows vs our 5-fold CV on the 208,480 development rows; different row sets, training sizes and libraries"
+  },
+  "rules": {
+    "D1": {"mean_delta": 0.005, "fold_wins_min": 4, "advantage": "ADVANTAGE_DESCRIPTIVE", "disadvantage": "DISADVANTAGE_DESCRIPTIVE", "otherwise": "INDISTINGUISHABLE", "delta": "arm fold Macro F1 minus comparator fold Macro F1 on the same fold; label only, not an adoption"},
+    "D2": "safety indicators (pooled Recall3, 3->1, 3->2 counts and rates) reported next to each comparator without a verdict",
+    "D3": {"mean_delta": 0.003, "fold_wins_min": 4, "advantage": "LGBM_AHEAD_DESCRIPTIVE", "disadvantage": "XGB_AHEAD_DESCRIPTIVE", "otherwise": "SIMILAR", "delta": "L fold Macro F1 minus X fold Macro F1"},
+    "D4": {"near_max": 0.005, "moderate_max": 0.015, "labels": ["NEAR", "MODERATE", "FAR"], "note": "reference label only for L CV mean vs the notebook test 0.7131; not a reproduction pass/fail"}
+  },
+  "profiles": {"age995_group": "raw age == 995", "geo1_regions": [26, 20, 13]},
+  "labels": [1, 2, 3],
+  "std_ddof": 1,
+  "error_rate_denominator": "actual_grade3_support",
+  "environment": {"python": "3.13.5", "numpy": "2.3.5", "pandas": "2.2.3", "scipy": "1.17.0", "scikit-learn": "1.8.0", "lightgbm": "4.6.0", "xgboost": "3.1.3", "joblib": "1.5.3", "threadpoolctl": "3.6.0"},
+  "holdout_access": false,
+  "automatic_model_replacement": false,
+  "tuning": false,
+  "threshold_or_decision_rule_change": false
+}
