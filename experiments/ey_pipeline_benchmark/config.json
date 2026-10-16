@@ -1,0 +1,97 @@
+{
+  "study_id": "T33_ey_pipeline_benchmark_v1",
+  "title": "EY notebook pipeline stratified-CV reproduction benchmark (not an evaluation of the teammate)",
+  "plan": {
+    "path": "docs/T33_EY_PIPELINE_BENCHMARK_PLAN.md",
+    "sha256": "4f09d934a9c35776deb902e3f9eb4d9cf27b57a99941b1347f043bfc89427ce2",
+    "approval": "2026-10-16 user approved the proposed defaults; thresholds and arms are not changed after seeing results"
+  },
+  "notebook": {
+    "file_name": "지진.ipynb",
+    "sha256": "480d63cd6adc3f68f70142ff159d229654db5d17a27d3af093baa38b831ac07b",
+    "cell_index": 25,
+    "cell_source_sha256": "8cb408a043469b3f4e4911e4040c82fef129bcec83869f115f5dc10270510f7e",
+    "extract_text_sha256": "bd0530ad0c9553e69e6cad3cddb8d107b558e8d528e4222df852e704b2658b73",
+    "extract_functions": ["add_building_features", "add_one_level", "add_region_composition", "damage_rate_table", "add_target_rates", "make_weights"],
+    "extract_constants": {"SEED": 42, "MIN_BUILDINGS": 20, "MIN_COMBO": 50},
+    "access": "read and copy only; original never modified; copy and cell extract stay private (outside Git)"
+  },
+  "arms": ["E1", "E2"],
+  "arm_definitions": {
+    "E1": "faithful order: features A from the whole training fold (target-rate OOF over all training rows), then split tr/val; early stopping on A rows; refit on all A rows",
+    "E2": "early-stopping split: split the training fold's raw rows first; features B built inside tr only (val looked up); early stopping on B; refit on A (same matrix as E1)"
+  },
+  "n_folds": 5,
+  "split": {"scheme": "stratified", "manifest": "split_manifest.csv", "manifest_sha256": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721", "development_sha256": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1", "train_rows_per_fold": 166784, "valid_rows_per_fold": 41696},
+  "inner_split": {"test_size": 0.2, "random_state": 42, "stratified": true, "expected_rows": {"train": 133427, "val": 33357}},
+  "features": {
+    "n": 75,
+    "categorical_columns": ["land_surface_condition", "foundation_type", "roof_type", "ground_floor_type", "other_floor_type", "position", "plan_configuration", "legal_ownership_status", "material_group", "structure_type"],
+    "categorical_positions_1based": [8, 9, 10, 11, 12, 13, 14, 26, 39, 40],
+    "region_ids": "restored to integers (str(int(x)) == x checked) and used numerically, as in the notebook; no claim that code magnitude has meaning",
+    "columns": [
+      "geo_level_1_id", "geo_level_2_id", "geo_level_3_id", "count_floors_pre_eq", "age", "area_percentage", "height_percentage",
+      "land_surface_condition", "foundation_type", "roof_type", "ground_floor_type", "other_floor_type", "position", "plan_configuration",
+      "has_superstructure_adobe_mud", "has_superstructure_mud_mortar_stone", "has_superstructure_stone_flag", "has_superstructure_cement_mortar_stone",
+      "has_superstructure_mud_mortar_brick", "has_superstructure_cement_mortar_brick", "has_superstructure_timber", "has_superstructure_bamboo",
+      "has_superstructure_rc_non_engineered", "has_superstructure_rc_engineered", "has_superstructure_other",
+      "legal_ownership_status", "count_families", "has_secondary_use", "has_secondary_use_agriculture", "has_secondary_use_hotel",
+      "has_secondary_use_rental", "has_secondary_use_institution", "has_secondary_use_school", "has_secondary_use_industry",
+      "has_secondary_use_health_post", "has_secondary_use_gov_office", "has_secondary_use_use_police", "has_secondary_use_other",
+      "material_group", "structure_type", "n_weak_material", "n_material",
+      "g1_weak_ratio", "g1_rc_ratio", "g1_age_vs_region", "g1_n_buildings",
+      "g2_weak_ratio", "g2_rc_ratio", "g2_age_vs_region", "g2_n_buildings",
+      "g3_weak_ratio", "g3_rc_ratio", "g3_age_vs_region", "g3_n_buildings",
+      "region_material_high_rate", "region_material_low_rate", "region_structure_high_rate", "region_structure_low_rate",
+      "material_structure_high_rate", "material_structure_low_rate", "region_material_floor_high_rate", "region_material_floor_low_rate",
+      "g2_high_rate", "g2_low_rate", "g3_high_rate", "g3_low_rate",
+      "g2_material_high_rate", "g2_material_low_rate", "g3_material_high_rate", "g3_material_low_rate",
+      "weak_age", "g2_material_high_gap", "g2_material_low_gap", "g3_material_high_gap", "g3_material_low_gap"
+    ]
+  },
+  "lgbm_params": {
+    "learning_rate": 0.03, "num_leaves": 31, "min_child_samples": 20, "subsample": 1.0, "subsample_freq": 1,
+    "colsample_bytree": 0.5, "random_state": 42, "n_jobs": 4, "verbose": -1,
+    "deterministic": true, "force_col_wise": true
+  },
+  "lgbm_params_note": "the notebook's chosen setting, frozen; no re-search. n_estimators is 2000 for the early-stopping fit and the early-stopped tree count for the refit. deterministic/force_col_wise/n_jobs=4 are our additions (design 3.5).",
+  "lightgbm_categorical_defaults_expected": {"max_cat_to_onehot": 4, "cat_smooth": 10, "cat_l2": 10, "max_cat_threshold": 32, "min_data_per_group": 100},
+  "weights": {"strength": 0.3, "early_stopping_metric_weighted": false},
+  "es": {"max_rounds": 2000, "patience": 50, "metric": "multi_logloss", "logloss_recompute_atol": 1e-6, "cap_hit_definition": "the run ended at the round cap (curve length == max_rounds); it is also true if early stopping fires exactly at the cap, and n_trees can be far below the cap, so read it together with n_trees"},
+  "decision_rule": "argmax of predict_proba, labels 1/2/3; no threshold, no calibration",
+  "budget": {"planned_fits": 20, "max_fits": 24, "max_recovered_units": 2, "max_attempts_per_stage": 2, "automatic_retries": 0, "fit_stages_per_unit": 2},
+  "threads": {"lgbm_n_jobs": 4, "outer_parallel_jobs": 1, "feature_building_threads": 1},
+  "min_free_disk_gb_at_prepare": 20,
+  "checkpoint": {"reload_probability_atol": 1e-12, "csv_float_format": "%.17g", "csv_read": "float_precision='round_trip' exact", "backup_dir": "backup", "resume_skips_completed": true},
+  "tolerances": {"comparator_value_atol": 5e-7, "comparator_recall3_definition": "pooled"},
+  "comparators": {
+    "T8_N": {"label": "T8 LGBM-N", "path": "T8_20261014_native_cat/run/stratified/N/oof.csv.gz", "sha256": "263680540b07a5cc4fe84dd294ff90ae0da7c9c7b2886f0df733edf9465f9558", "cv_mean": 0.699342, "recall3": 0.647648, "error31": 530, "judged": true},
+    "T14": {"label": "T14 RF+TE+ROS", "path": "T14_20261015_te_ros_rf_repro/run_v2/strat/RF_TE_ROS/oof.csv.gz", "sha256": "69a74d410da08bf06c9da35211e3fe6f1e424bd4afbc72c4de2d2d3c21c09969", "cv_mean": 0.700427, "recall3": 0.673016, "error31": 744, "judged": true},
+    "LR_C": {"label": "LR-C (research baseline)", "path": "20261014_01/private_original/age995_abc_v1/C/lr/oof_predictions.csv.gz", "sha256": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc", "cv_mean": 0.688687, "recall3": 0.639794, "error31": 452, "judged": true},
+    "T0": {"label": "T0 LR C=1 (= T1 A reproduced OOF)", "path": "20261014_01/private_original/age995_abc_v1/A/lr/oof_predictions.csv.gz", "sha256": "e8dbaa962fe4b2e2fdad160d25f72cbfd0816d73aafbc0419149c53b8a3de221", "cv_mean": 0.683677, "recall3": 0.638433, "error31": 467, "judged": true},
+    "LGBM_O": {"label": "LGBM-O one-hot (reference only)", "path": "20261014_01/private_t4_original/private/model_families_v1/LGBM_C_v1/oof_predictions.csv.gz", "sha256": "0bc63eb5122afb479c41826918a9fbb43a3475351a934d847833656eec6930cf", "cv_mean": 0.669847, "recall3": 0.590077, "error31": 303, "judged": false}
+  },
+  "comparator_note": "comparison of pipelines that differ in several factors at once; descriptive, no significance, no causal claims, not a single-factor ablation",
+  "notebook_reference": {
+    "single_split_test_macro_f1": 0.7143,
+    "single_split_recall_by_grade": {"1": 0.6764, "2": 0.8043, "3": 0.6740},
+    "xgboost_75_baseline_test_macro_f1": 0.7028,
+    "comparability": "not directly comparable: one 80/20 split of all 260,601 rows vs our 5-fold CV on the 208,480 development rows; different row sets, training sizes and libraries; cell 25 execution_count is null so the value is the notebook's stored report only"
+  },
+  "rules": {
+    "D1": {"mean_delta": 0.005, "fold_wins_min": 4, "advantage": "ADVANTAGE_DESCRIPTIVE", "disadvantage": "DISADVANTAGE_DESCRIPTIVE", "otherwise": "INDISTINGUISHABLE",
+           "delta": "arm fold Macro F1 minus comparator fold Macro F1 on the same fold; label only, not an adoption or recommendation"},
+    "D2": "safety indicators (pooled Recall3, 3->1, 3->2 counts and rates) reported next to each comparator without a verdict",
+    "D3": {"abs_mean_delta_max": 0.001, "abs_fold_delta_max": 0.003, "small": "ES_PROTOCOL_EFFECT_SMALL", "noticeable": "ES_PROTOCOL_EFFECT_NOTICEABLE", "note": "sum of label mixing, validation-feature construction and table base size; no single-cause attribution"},
+    "D4": {"near_max": 0.005, "moderate_max": 0.015, "labels": ["NEAR", "MODERATE", "FAR"], "note": "reference label only for E1 vs 0.7143; not a reproduction pass/fail"}
+  },
+  "profiles": {"age995_group": "raw age == 995", "geo1_regions": [26, 20, 13]},
+  "labels": [1, 2, 3],
+  "std_ddof": 1,
+  "error_rate_denominator": "actual_grade3_support",
+  "environment": {"python": "3.13.5", "numpy": "2.3.5", "pandas": "2.2.3", "scipy": "1.17.0", "scikit-learn": "1.8.0", "lightgbm": "4.6.0", "joblib": "1.5.3", "threadpoolctl": "3.6.0"},
+  "holdout_access": false,
+  "automatic_model_replacement": false,
+  "tuning": false,
+  "threshold_or_decision_rule_change": false
+}
