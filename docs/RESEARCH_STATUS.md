@@ -26,6 +26,8 @@ T26 평균Macro F1은0.524335로 T25 원핫0.568221 대비Δ−0.043886, LGBM-O0
 | T25 CatBoost C 비교 | 20/20·독립 감사·공개 보고 검토 PASS | [보고](../reports/CATBOOST_C_20261015.md). 평균Δ−0.013834·양의 Fold0/20, 3→1 감소이나 전체 기준 미충족. |
 | T26 CatBoost native C | 20/20·독립 감사·공개 보고 검토 PASS | [보고](../reports/CATBOOST_NATIVE_C_20261015.md). T25 대비Δ−0.043886·LGBM-O 대비Δ−0.057720, 두 비교 모두 기준 미충족. |
 | T27 넓은 파생변수 묶음 | 20/20·독립 감사·공개 보고 검토 PASS | [보고](../reports/WIDE_FEATURES_20261015.md). Δ+0.002163·양의Fold16/20이나3→1 902→958, 기준 미충족. |
+| A1 종합 (2026-10-16) | 신규 학습0, 감사 집계만 사용, 독립 재계산 검토 지적 반영 | [보고](../reports/EXPERIMENT_SYNTHESIS_20261016.md). 표준 5조건 적용 11팔 중 충족0. 같은 기준선 묶음 안에서만 비교하며 상관은 소수 팔·반복 평가의 기술 통계다. |
+| T28 3→1 비용 결정 규칙 | **설계 초안만**, 미승인·미구현·미실행 | [초안](T28_GRADE3_SAFETY_PLAN_DRAFT.md). 승인 항목 확정 전 prepare·학습 금지. |
 
 T24 전체 회귀는 **734개 실행·실패0·스킵33(99.673초)**이며 전용 피처14/실행기24를 포함한다. 로그는 `local_reproduction/session_20261015_control/t24_full_tests_20261015.log`, 구현 영수증은 `local_reproduction/T24_20261015_geo_context/runner_implementation_validation_v1.json`이다. 별도 독립 합성17개 PASS·당시 감사 준비 영수증이며 `t24_audit/preparation_receipt_v1.json` SHA는 `9e1b0dd0646ab3277669a246ab53f190dfc80af130091b93a0c8688ff1e147d6`이다. 이후 실제 감사 PASS_T24·native20모델 최대 확률차0과 공개 검토481항목을 별도로 확인했다. 기존 T21/T22/T23 봉인 소스는 각각49개 모두 불변이며 T24 소스도 기존42개+신규7개로 결속한다.
 

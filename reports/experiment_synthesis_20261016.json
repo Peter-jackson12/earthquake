@@ -1,0 +1,3092 @@
+{
+ "experiment_id": "A1_20261016_synthesis",
+ "version": "experiment_synthesis_20261016",
+ "date": "2026-10-16",
+ "training_performed": false,
+ "holdout_accessed": false,
+ "inputs": [
+  {
+   "study": "T15",
+   "description": "3등급 결정 규칙(로짓 오프셋) 효과",
+   "json": "grade3_decision_rule_20261015.json",
+   "json_sha256": "3aa8c191518033dc82a1aa4d32c58016da4c6d8ee49a7775abcd6e2d33fe91e1",
+   "md": "GRADE3_DECISION_RULE_20261015.md",
+   "md_sha256": "314548bbede15eecb3ffe366ef79c2e8ea0bfb4b9d7c347e4e79d5f77434f34b"
+  },
+  {
+   "study": "T16",
+   "description": "RF 파이프라인 요인별 비교",
+   "json": "rf_factors_20261015.json",
+   "json_sha256": "1b786f739bfc2665bac569d76262c720bb6acd4967cf3176c98c82714fa6a7f1",
+   "md": "RF_FACTORS_20261015.md",
+   "md_sha256": "bf81395c9e9eec08abe66c4af2126ea0c94ae6a23a79c32a7dfbcd09fab21741"
+  },
+  {
+   "study": "T17",
+   "description": "전체 개발 OOF로 b 고정(선택 절차)",
+   "json": "grade3_rule_freeze_20261015.json",
+   "json_sha256": "e15603b36eb807a363e4aa01e0226d7def779feb959109565257a854f1fa78a9",
+   "md": "GRADE3_RULE_FREEZE_20261015.md",
+   "md_sha256": "dc160a4a5082f017c7f313edf042e1e89a25d48bb895919c056a133d94f29732"
+  },
+  {
+   "study": "T18",
+   "description": "LGBM 학습 예산·복잡도 nested 선택",
+   "json": "lgbm_nested_tuning_20261015.json",
+   "json_sha256": "9ff222aeeffb2a044255961590f3fdf5fcb272dce907ba54f9ee245a47c12130",
+   "md": "LGBM_NESTED_TUNING_20261015.md",
+   "md_sha256": "d2d1275453c928ae63da367b83bc7ef481ffcf7d6aafb7ffd6230655cb3a4c10"
+  },
+  {
+   "study": "T19",
+   "description": "고정 50:50 앙상블",
+   "json": "fixed_ensemble_20261015.json",
+   "json_sha256": "a7baf839bddc1f3a081e54fcba2f64b9dce1473840a291ceaeb3a2293d04647b",
+   "md": "FIXED_ENSEMBLE_20261015.md",
+   "md_sha256": "2a03a3e25c2d3482f6f4d377ba1de08f41ec1d12f57d6593eb927ed5e744104e"
+  },
+  {
+   "study": "T20",
+   "description": "3등급 학습 가중치 1.5",
+   "json": "lgbm_grade3_weight_20261015.json",
+   "json_sha256": "ea0e788e4ad8c952fcbf60d706bc8a56cce8ede054cf3b4969369f6f88cccd0a",
+   "md": "LGBM_GRADE3_WEIGHT_20261015.md",
+   "md_sha256": "74088726cec7029eb8f5bf1d64234bf1fde445611894fb95ab94b6b91c36c5eb"
+  },
+  {
+   "study": "T21",
+   "description": "상호작용 피처 2종",
+   "json": "feature_interactions_20261015.json",
+   "json_sha256": "2b41c683b1678e4348be3e48d2a97f036b5796668267968c4c5e856830b22535",
+   "md": "FEATURE_INTERACTIONS_20261015.md",
+   "md_sha256": "a674209cb8b8f84c03e81b203e34b77b14f16b5a172ceeb68e5d7d24f2eb145d"
+  },
+  {
+   "study": "T22",
+   "description": "재료쌍·구조별 층수 피처",
+   "json": "material_structure_20261015.json",
+   "json_sha256": "27479b3235071ed3ef889f9cede2d2e1d88b53ed9f60a6195f931c561231d1e2",
+   "md": "MATERIAL_STRUCTURE_20261015.md",
+   "md_sha256": "b9381f3d2d76b596587f7f613909ae014403f876376d026ae9da423163d39c0f"
+  },
+  {
+   "study": "T23",
+   "description": "누적 이진분류+단조 투영",
+   "json": "ordinal_damage_20261015.json",
+   "json_sha256": "6f6b9c7a29a49259c3c817c9510b6b0216b99716376bcaaf39f6243ea990121d",
+   "md": "ORDINAL_DAMAGE_20261015.md",
+   "md_sha256": "bd85cfeac276c017d65c666bd1e89cfb55f6db262529b62ca1232001fef9c5c3"
+  },
+  {
+   "study": "T24",
+   "description": "geo1 중앙값·상대차 6열",
+   "json": "geo_context_20261015.json",
+   "json_sha256": "5c1b8ab09de54d5a729b96d988f6d1bf0121e515899c53e1a19330af7b10a7bb",
+   "md": "GEO_CONTEXT_20261015.md",
+   "md_sha256": "d61a91f46c22b70da6ff7e8cec4d8be77e6fc0d3f1a96b90047b1cf8fca82cc3"
+  },
+  {
+   "study": "T25",
+   "description": "CatBoost(동일 C 입력)",
+   "json": "catboost_c_20261015.json",
+   "json_sha256": "7d73a290a94040ddd2a75a4d22f17f171b4bb3408dbb67233573c62143e33370",
+   "md": "CATBOOST_C_20261015.md",
+   "md_sha256": "fa4bd38df5af3dc69df6eba9a55707a0af95aab4756047b6a594136984dda569"
+  },
+  {
+   "study": "T26",
+   "description": "CatBoost 범주형 직접 처리",
+   "json": "catboost_native_c_20261015.json",
+   "json_sha256": "511bd13b49bc7c9ae649287ab7b50fcd1bf3ac83268a0aec43f2defd421f2a13",
+   "md": "CATBOOST_NATIVE_C_20261015.md",
+   "md_sha256": "6ba2b0d55b9ae26c3f19f0d4e38495ab322b9e87afd4fa8452cc40a261e2a398"
+  },
+  {
+   "study": "T27",
+   "description": "넓은 파생변수 묶음",
+   "json": "wide_features_20261015.json",
+   "json_sha256": "e0a91a1b7537a01772e29958dbe61c1d54f935a2fdde22e8dc98ab19154b2c6a",
+   "md": "WIDE_FEATURES_20261015.md",
+   "md_sha256": "463447a0107abe0ea5ad748ea8f790b3d0c1e3a22a3bb3591f0812a040f8a642"
+  }
+ ],
+ "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+ "groups": {
+  "G_LGBM_O": {
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "baseline_fold_mean_f1": 0.5820558121641555,
+   "baseline_pooled_3to1": 902,
+   "baseline_pooled_3to2": 149513,
+   "baseline_pooled_recall3": 0.4610635766904578,
+   "n_arms": 14,
+   "arms": [
+    "T20:LGBM_O+학습가중치(1/1/1.5)",
+    "T21:AGE_HEIGHT_FLOORS",
+    "T21:STRUCTURE_PAIRS",
+    "T22:MATERIAL_PAIRS",
+    "T22:STRUCTURE_FLOORS",
+    "T23:CUMULATIVE_BINARY",
+    "T24:GEO1_CONTEXT",
+    "T27:WIDE_FEATURES",
+    "T25:CATBOOST_C",
+    "T26:CATBOOST_NATIVE_C(보조: vs LGBM-O)",
+    "T18:LGBM_O+ROUNDS 선택(R600)",
+    "T18:LGBM_O+LEAVES 선택(L63)",
+    "T19:앙상블 50:50 vs LGBM_O",
+    "T15:LGBM_O+logit 오프셋(b 내부 선택)"
+   ]
+  },
+  "G_CATBOOST_C": {
+   "baseline": "CATBOOST_C 원핫 (T25)",
+   "baseline_fold_mean_f1": 0.5682214662453886,
+   "baseline_pooled_3to1": 527,
+   "baseline_pooled_3to2": 153947,
+   "baseline_pooled_recall3": 0.4465201937684524,
+   "n_arms": 1,
+   "arms": [
+    "T26:CATBOOST_NATIVE_C(주: vs CATBOOST_C)"
+   ]
+  },
+  "G_LGBM_TE_G": {
+   "baseline": "LGBM_TE_G (geo target encoding, 고정 파라미터)",
+   "baseline_fold_mean_f1": 0.5910206411088408,
+   "baseline_pooled_3to1": 1322,
+   "baseline_pooled_3to2": 131121,
+   "baseline_pooled_recall3": 0.5254571903574398,
+   "n_arms": 2,
+   "arms": [
+    "T19:앙상블 50:50 vs LGBM_TE_G",
+    "T15:LGBM_TE_G+logit 오프셋(b 내부 선택)"
+   ]
+  },
+  "G_LR_C": {
+   "baseline": "LR-C (연구 기준선)",
+   "baseline_fold_mean_f1": null,
+   "baseline_pooled_3to1": 738,
+   "baseline_pooled_3to2": 133051,
+   "baseline_pooled_recall3": 0.5206344770258262,
+   "n_arms": 1,
+   "arms": [
+    "T15:LR_C+logit 오프셋(b 내부 선택)"
+   ]
+  },
+  "G_RF_T14": {
+   "baseline": "RF T14 기준 파이프라인(TE+ROS+RF)",
+   "baseline_fold_mean_f1": 0.5570681508102354,
+   "baseline_pooled_3to1": 1109,
+   "baseline_pooled_3to2": 128109,
+   "baseline_pooled_recall3": 0.5370123541720412,
+   "n_arms": 4,
+   "arms": [
+    "T16:RF+ONEHOT",
+    "T16:RF+NO_ROS",
+    "T16:RF+DROP_GEO23_TE",
+    "T16:RF+AGE_C"
+   ]
+  }
+ },
+ "arms": [
+  {
+   "study": "T20",
+   "experiment_id": "T20_lgbm_grade3_weight_v1",
+   "arm": "LGBM_O+학습가중치(1/1/1.5)",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5957245015810424,
+    "delta": 0.013668689416887158,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 20,
+   "positive_seeds_of_4": 4,
+   "seed_mean_deltas": {
+    "42": 0.01405837853126537,
+    "101": 0.013055212733034782,
+    "202": 0.014136167936239308,
+    "303": 0.013424998467009175
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5967001865541702,
+     "delta": 0.013511018258847374
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.6023590449164445,
+     "delta": 0.14129546822598676
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.35057714314144983,
+     "delta": 0.0015796805811234549
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.7604294013000918,
+     "delta": -0.08770561602603566
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6273172333502492,
+     "delta": -0.06375443497229849
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 903,
+     "delta": 1,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.0032354458680883998,
+     "rate_delta": 3.582996531659513e-06
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 110077,
+     "delta": -39436,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.3944055092154671,
+     "rate_delta": -0.14129905122251846
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 98122,
+     "delta": 41482,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.20682168843322907,
+     "rate_delta": 0.08743581744753683
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": true,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": true,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "풀링 3등급 Recall Δ >= 0"
+    },
+    "C5_error31_rate": {
+     "met": false,
+     "rule": "풀링 3->1 오류율 Δ <= 0"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "학습 목적함수(클래스 가중치)",
+   "criteria_family": "standard5"
+  },
+  {
+   "study": "T21",
+   "experiment_id": "T21_feature_interactions_v1",
+   "arm": "AGE_HEIGHT_FLOORS",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5811018984174968,
+    "delta": -0.0009539137466585024,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 6,
+   "positive_seeds_of_4": 0,
+   "seed_mean_deltas": {
+    "42": -0.0011729045497825385,
+    "101": -0.0011236960696363151,
+    "202": -0.0005637120727888911,
+    "303": -0.0009553422944262646
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5822180111074315,
+     "delta": -0.0009711571878913139
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.46180525697251124,
+     "delta": 0.0007416802820534585
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.3445196278421812,
+     "delta": -0.004477834718145168
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.8483795222878919,
+     "delta": 0.0002445049617644246
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6907477276624936,
+     "delta": -0.000323940660054145
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 887,
+     "delta": -15,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.00317811792358185,
+     "rate_delta": -5.3744947974890094e-05
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 149321,
+     "delta": -192,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.5350166251039069,
+     "rate_delta": -0.0006879353340786265
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 56823,
+     "delta": 183,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.11977159864088967,
+     "rate_delta": 0.00038572765519742647
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": false,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "풀링 3등급 Recall Δ >= 0"
+    },
+    "C5_error31_rate": {
+     "met": true,
+     "rule": "풀링 3->1 오류율 Δ <= 0"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "입력 피처 추가",
+   "criteria_family": "standard5"
+  },
+  {
+   "study": "T21",
+   "experiment_id": "T21_feature_interactions_v1",
+   "arm": "STRUCTURE_PAIRS",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5824398669393014,
+    "delta": 0.00038405477514605877,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 12,
+   "positive_seeds_of_4": 4,
+   "seed_mean_deltas": {
+    "42": 3.551890101767263e-05,
+    "101": 0.0002614183072905396,
+    "202": 0.0007124364905056968,
+    "303": 0.0005268454017703262
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5836753963192552,
+     "delta": 0.00048622802393238906
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.4616941840800298,
+     "delta": 0.0006306073895720465
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.3502537439673616,
+     "delta": 0.001256281407035209
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.8478146315141603,
+     "delta": -0.0003203858119672498
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6910704708784726,
+     "delta": -1.197444075118348e-06
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 906,
+     "delta": 4,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.003246194857683378,
+     "rate_delta": 1.4331986126637618e-05
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 149333,
+     "delta": -180,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.5350596210622868,
+     "rate_delta": -0.0006449393756987609
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 56723,
+     "delta": 83,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.11956081850143752,
+     "rate_delta": 0.00017494751574527456
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "풀링 3등급 Recall Δ >= 0"
+    },
+    "C5_error31_rate": {
+     "met": false,
+     "rule": "풀링 3->1 오류율 Δ <= 0"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "입력 피처 추가",
+   "criteria_family": "standard5"
+  },
+  {
+   "study": "T22",
+   "experiment_id": "T22_material_structure_interactions_v1",
+   "arm": "MATERIAL_PAIRS",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5816284574356586,
+    "delta": -0.00042735472849688707,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 7,
+   "positive_seeds_of_4": 0,
+   "seed_mean_deltas": {
+    "42": -4.885661270468411e-05,
+    "101": -0.000814299927597828,
+    "202": -0.00037924018729023067,
+    "303": -0.0004670221863948054
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5826807671906468,
+     "delta": -0.0005084011046760928
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.46118539857253416,
+     "delta": 0.00012182188207637834
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.34683317577988954,
+     "delta": -0.0021642867804368415
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.8483057492390838,
+     "delta": 0.00017073191295624568
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6908127777419978,
+     "delta": -0.00025889058054995306
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 898,
+     "delta": -4,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.003217530885430103,
+     "rate_delta": -1.4331986126637185e-05
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 149483,
+     "delta": -30,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.5355970705420358,
+     "rate_delta": -0.00010748989594977498
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 56735,
+     "delta": 95,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.11958611211817177,
+     "rate_delta": 0.00020024113247953113
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": false,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "풀링 3등급 Recall Δ >= 0"
+    },
+    "C5_error31_rate": {
+     "met": true,
+     "rule": "풀링 3->1 오류율 Δ <= 0"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "입력 피처 추가",
+   "criteria_family": "standard5"
+  },
+  {
+   "study": "T22",
+   "experiment_id": "T22_material_structure_interactions_v1",
+   "arm": "STRUCTURE_FLOORS",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5817431191181696,
+    "delta": -0.0003126930459858457,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 6,
+   "positive_seeds_of_4": 1,
+   "seed_mean_deltas": {
+    "42": -0.00021230002852079544,
+    "101": -0.0010210930416002962,
+    "202": 4.9995807889713364e-05,
+    "303": -6.737492171200454e-05
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5829389734060126,
+     "delta": -0.00025019488931021794
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.46175509502106804,
+     "delta": 0.0006915183306102635
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.3485248022289666,
+     "delta": -0.0004726603313597866
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.847494245702193,
+     "delta": -0.0006407716239344996
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6906541905818422,
+     "delta": -0.0004174777407055519
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 892,
+     "delta": -10,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.003196032906240147,
+     "rate_delta": -3.5829965316593396e-05
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 149330,
+     "delta": -183,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.5350488720726918,
+     "rate_delta": -0.0006556883652937273
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 56823,
+     "delta": 183,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.11977159864088967,
+     "rate_delta": 0.00038572765519742647
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": false,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "풀링 3등급 Recall Δ >= 0"
+    },
+    "C5_error31_rate": {
+     "met": true,
+     "rule": "풀링 3->1 오류율 Δ <= 0"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "입력 피처 추가",
+   "criteria_family": "standard5"
+  },
+  {
+   "study": "T23",
+   "experiment_id": "T23_ordinal_damage_v1",
+   "arm": "CUMULATIVE_BINARY",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5817911938771332,
+    "delta": -0.000264618287022067,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 9,
+   "positive_seeds_of_4": 2,
+   "seed_mean_deltas": {
+    "42": -0.00045584608161217675,
+    "101": 0.00019651073811004504,
+    "202": 0.00021938366377698414,
+    "303": -0.0010185214683631205
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5829258922009037,
+     "delta": -0.00026327609441911815
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.45849098518072634,
+     "delta": -0.0025725915097314367
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.3491467237175979,
+     "delta": 0.00014926115727154077
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.8497854258180377,
+     "delta": 0.0016504084919102269
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6930330044085311,
+     "delta": 0.0019613360859833673
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 895,
+     "delta": -7,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.003206781895835125,
+     "rate_delta": -2.508097572161529e-05
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 150238,
+     "delta": 725,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.5383022329234385,
+     "rate_delta": 0.002597672485452951
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 55821,
+     "delta": -819,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.11765958164357922,
+     "rate_delta": -0.0017262893421130243
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": false,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": false,
+     "rule": "풀링 3등급 Recall Δ >= 0"
+    },
+    "C5_error31_rate": {
+     "met": true,
+     "rule": "풀링 3->1 오류율 Δ <= 0"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "학습 방식 변경(누적 이진+투영)",
+   "criteria_family": "standard5"
+  },
+  {
+   "study": "T24",
+   "experiment_id": "T24_geo_context_features_v1",
+   "arm": "GEO1_CONTEXT",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5841282990090376,
+    "delta": 0.0020724868448823487,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 16,
+   "positive_seeds_of_4": 4,
+   "seed_mean_deltas": {
+    "42": 0.0027491855257491425,
+    "101": 0.0012469980318158048,
+    "202": 0.001806763144943413,
+    "303": 0.002487000677021034
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5850786500876345,
+     "delta": 0.0018894817923116314
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.4727118984148823,
+     "delta": 0.011648321724424537
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.3488730782626001,
+     "delta": -0.00012438429772626547
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.842182586187999,
+     "delta": -0.005952431138128489
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6856602361549975,
+     "delta": -0.005411432167550245
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 912,
+     "delta": 10,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.003267692836873334,
+     "rate_delta": 3.582996531659383e-05
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 146252,
+     "delta": -3261,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.5240204087482443,
+     "rate_delta": -0.01168415168974124
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 59556,
+     "delta": 2916,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.12553221985211666,
+     "rate_delta": 0.006146348866424414
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": true,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "풀링 3등급 Recall Δ >= 0"
+    },
+    "C5_error31_rate": {
+     "met": false,
+     "rule": "풀링 3->1 오류율 Δ <= 0"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "입력 피처 추가",
+   "criteria_family": "standard5"
+  },
+  {
+   "study": "T27",
+   "experiment_id": "T27_wide_features_v1",
+   "arm": "WIDE_FEATURES",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5842184730579814,
+    "delta": 0.002162660893826085,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 16,
+   "positive_seeds_of_4": 4,
+   "seed_mean_deltas": {
+    "42": 0.0022039533909237407,
+    "101": 0.002624318714273266,
+    "202": 0.002522467497033909,
+    "303": 0.0012999039730734242
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5851701038892317,
+     "delta": 0.0019809355939088835
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.47505876114311923,
+     "delta": 0.013995184452661458
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.34721876710284094,
+     "delta": -0.0017786954574854352
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.841640881229607,
+     "delta": -0.0064941360965204975
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6852289230101347,
+     "delta": -0.005842745312413022
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 958,
+     "delta": 56,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.0034325106773296643,
+     "rate_delta": 0.00020064780577292406
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 145551,
+     "delta": -3962,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.5215087281795511,
+     "rate_delta": -0.01419583225843446
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 59947,
+     "delta": 3307,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.12635637019737453,
+     "rate_delta": 0.006970499211682288
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": true,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "풀링 3등급 Recall Δ >= 0"
+    },
+    "C5_error31_rate": {
+     "met": false,
+     "rule": "풀링 3->1 오류율 Δ <= 0"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "입력 피처 추가(묶음)",
+   "criteria_family": "standard5"
+  },
+  {
+   "study": "T25",
+   "experiment_id": "T25_catboost_c_v1",
+   "arm": "CATBOOST_C",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5682214662453886,
+    "delta": -0.013834345918766883,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 0,
+   "positive_seeds_of_4": 0,
+   "seed_mean_deltas": {
+    "42": -0.014951547869649407,
+    "101": -0.013805508051201686,
+    "202": -0.01245304046931377,
+    "303": -0.014127287284902668
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5698563687322936,
+     "delta": -0.01333279956302924
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.4465201937684524,
+     "delta": -0.014543382922005355
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.31436887407333697,
+     "delta": -0.03462858848698941
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.8573545406257641,
+     "delta": 0.0092195232996366
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6986948038841919,
+     "delta": 0.007623135561644179
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 527,
+     "delta": -375,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.0018882391721844814,
+     "rate_delta": -0.0013436236993722588
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 153947,
+     "delta": 4434,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.5515915670593631,
+     "rate_delta": 0.015887006621377542
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 52949,
+     "delta": -3691,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.11160597603851374,
+     "rate_delta": -0.007779894947178498
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": false,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": false,
+     "rule": "풀링 3등급 Recall Δ >= 0"
+    },
+    "C5_error31_rate": {
+     "met": true,
+     "rule": "풀링 3->1 오류율 Δ <= 0"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "분류기 교체(CatBoost)",
+   "criteria_family": "standard5"
+  },
+  {
+   "study": "T26",
+   "experiment_id": "T26_catboost_native_c_v1",
+   "arm": "CATBOOST_NATIVE_C(보조: vs LGBM-O)",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5243354635544695,
+    "delta": -0.05772034860968585,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 0,
+   "positive_seeds_of_4": 0,
+   "seed_mean_deltas": {
+    "42": -0.061528951434006475,
+    "101": -0.06697115974133927,
+    "202": -0.04148629385064815,
+    "303": -0.06089498941274949
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5266276387701359,
+     "delta": -0.056561529525187004
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.33852509530770775,
+     "delta": -0.12253848138275003
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.2533832528981541,
+     "delta": -0.09561420966217227
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.9108758336354515,
+     "delta": 0.06274081630932404
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.7480503234285805,
+     "delta": 0.05697865510603273
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 619,
+     "delta": -283,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.0022178748530971423,
+     "rate_delta": -0.001013988018459598
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 183996,
+     "delta": 34483,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.6592570298391951,
+     "rate_delta": 0.12355246940120956
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 31178,
+     "delta": -25462,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.06571703187838829,
+     "rate_delta": -0.05366883910730395
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": false,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": false,
+     "rule": "풀링 3등급 Recall Δ >= 0"
+    },
+    "C5_error31_rate": {
+     "met": true,
+     "rule": "풀링 3->1 오류율 Δ <= 0"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "분류기 교체(CatBoost)+범주형 직접 처리",
+   "criteria_family": "standard5"
+  },
+  {
+   "study": "T26",
+   "experiment_id": "T26_catboost_native_c_v1",
+   "arm": "CATBOOST_NATIVE_C(주: vs CATBOOST_C)",
+   "group": "G_CATBOOST_C",
+   "baseline": "CATBOOST_C 원핫 (T25)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5682214662453886,
+    "candidate": 0.5243354635544695,
+    "delta": -0.043886002690918954,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 0,
+   "positive_seeds_of_4": 0,
+   "seed_mean_deltas": {
+    "42": -0.046577403564357064,
+    "101": -0.05316565169013758,
+    "202": -0.02903325338133438,
+    "303": -0.046767702127846825
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5698563687322936,
+     "candidate": 0.5266276387701359,
+     "delta": -0.043228729962157764
+    },
+    "recall3": {
+     "baseline": 0.4465201937684524,
+     "candidate": 0.33852509530770775,
+     "delta": -0.10799509846074468
+    },
+    "recall1": {
+     "baseline": 0.31436887407333697,
+     "candidate": 0.2533832528981541,
+     "delta": -0.06098562117518286
+    },
+    "recall2": {
+     "baseline": 0.8573545406257641,
+     "candidate": 0.9108758336354515,
+     "delta": 0.05352129300968744
+    },
+    "precision3": {
+     "baseline": 0.6986948038841919,
+     "candidate": 0.7480503234285805,
+     "delta": 0.04935551954438855
+    },
+    "err_3to1": {
+     "baseline": 527,
+     "candidate": 619,
+     "delta": 92,
+     "rate_baseline": 0.0018882391721844814,
+     "rate_candidate": 0.0022178748530971423,
+     "rate_delta": 0.0003296356809126609
+    },
+    "err_3to2": {
+     "baseline": 153947,
+     "candidate": 183996,
+     "delta": 30049,
+     "rate_baseline": 0.5515915670593631,
+     "rate_candidate": 0.6592570298391951,
+     "rate_delta": 0.10766546277983202
+    },
+    "err_2to3": {
+     "baseline": 52949,
+     "candidate": 31178,
+     "delta": -21771,
+     "rate_baseline": 0.11160597603851374,
+     "rate_candidate": 0.06571703187838829,
+     "rate_delta": -0.045888944160125456
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": false,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": false,
+     "rule": "풀링 3등급 Recall Δ >= 0"
+    },
+    "C5_error31_rate": {
+     "met": false,
+     "rule": "풀링 3->1 오류율 Δ <= 0"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "범주형 표현 변경(원핫->직접 처리)",
+   "criteria_family": "standard5"
+  },
+  {
+   "study": "T18",
+   "experiment_id": "T18_lgbm_nested_tuning_v1",
+   "arm": "LGBM_O+ROUNDS 선택(R600)",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5831572948944924,
+    "delta": 0.0011014827303371,
+    "baseline_origin": "T20 JSON의 동일 LGBM-O 기준선(T18 JSON에는 기준선 Fold 평균 미수록)"
+   },
+   "fold_wins_of_20": 16,
+   "positive_seeds_of_4": 4,
+   "seed_mean_deltas": {
+    "42": 0.0009290381750069798,
+    "101": 0.0013877046076381516,
+    "202": 0.001233915126604379,
+    "303": 0.0008552730120988894
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5842696448277199,
+     "delta": 0.0010804765323970678
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.4627010061054261,
+     "delta": 0.0016374294149683055
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.35155977909348723,
+     "delta": 0.0025623165331608577
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.8472792499599517,
+     "delta": -0.0008557673661757637
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6905147660373121,
+     "delta": -0.0005569022852356387
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 923,
+     "delta": 21,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.003307105798721587,
+     "rate_delta": 7.524292716484674e-05
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 149035,
+     "delta": -478,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.5339918880958523,
+     "rate_delta": -0.0017126723421332368
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 56977,
+     "delta": 337,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.12009620005564596,
+     "rate_delta": 0.000710329069953719
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": true,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": null,
+     "rule": "사전 기준에 없음(T18은 3조건)"
+    },
+    "C5_error31_rate": {
+     "met": null,
+     "rule": "사전 기준에 없음(T18은 3조건)"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {
+    "criteria.C4_recall3": "T18 사전 기준은 평균 Δ·양의 Fold·양의 seed 3조건뿐",
+    "criteria.C5_error31_rate": "T18 사전 기준은 3조건뿐"
+   },
+   "intervention_type": "하이퍼파라미터(nested 내부 Group CV 선택)",
+   "criteria_family": "custom"
+  },
+  {
+   "study": "T18",
+   "experiment_id": "T18_lgbm_nested_tuning_v1",
+   "arm": "LGBM_O+LEAVES 선택(L63)",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5842322923269601,
+    "delta": 0.002176480162804706,
+    "baseline_origin": "T20 JSON의 동일 LGBM-O 기준선(T18 JSON에는 기준선 Fold 평균 미수록)"
+   },
+   "fold_wins_of_20": 14,
+   "positive_seeds_of_4": 4,
+   "seed_mean_deltas": {
+    "42": 0.0025924722361038823,
+    "101": 0.0016798001665749185,
+    "202": 0.0022192648816348414,
+    "303": 0.0022143833669051815
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5853201583631711,
+     "delta": 0.0021309900678482263
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.4646107432568005,
+     "delta": 0.003547166566342741
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.35335091298074534,
+     "delta": 0.004353450420418958
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.8467164669876146,
+     "delta": -0.0014185503385129028
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6902497058995747,
+     "delta": -0.0008219624229730549
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 980,
+     "delta": 78,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.00351133660102617,
+     "rate_delta": 0.0002794737294694299
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 148445,
+     "delta": -1068,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.5318779201421733,
+     "rate_delta": -0.003826640295812256
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 57267,
+     "delta": 627,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.12070746246005716,
+     "rate_delta": 0.0013215914743649193
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": true,
+     "rule": "양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": null,
+     "rule": "사전 기준에 없음(T18은 3조건)"
+    },
+    "C5_error31_rate": {
+     "met": null,
+     "rule": "사전 기준에 없음(T18은 3조건)"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {
+    "criteria.C4_recall3": "T18 사전 기준은 평균 Δ·양의 Fold·양의 seed 3조건뿐",
+    "criteria.C5_error31_rate": "T18 사전 기준은 3조건뿐"
+   },
+   "intervention_type": "하이퍼파라미터(nested 내부 Group CV 선택)",
+   "criteria_family": "custom"
+  },
+  {
+   "study": "T19",
+   "experiment_id": "T19_fixed_ensemble_v1",
+   "arm": "앙상블 50:50 vs LGBM_O",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.589466109721369,
+    "delta": 0.007410297557213679,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 15,
+   "positive_seeds_of_4": 4,
+   "seed_mean_deltas": {
+    "42": 0.007593436532796538,
+    "101": 0.008697021000103722,
+    "202": 0.0051978651708172174,
+    "303": 0.00815286752513733
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5908059702122069,
+     "delta": 0.007616801916884075
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.4910604236535099,
+     "delta": 0.029996846963052104
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.365018160107468,
+     "delta": 0.016020697547141638
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.8290109352736348,
+     "delta": -0.01912408205249272
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6768885047536733,
+     "delta": -0.01418316356887439
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 1036,
+     "delta": 134,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.003711984406799094,
+     "rate_delta": 0.00048012153524235393
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 141007,
+     "delta": -8506,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.505227591939691,
+     "rate_delta": -0.03047696849829451
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 64382,
+     "delta": 7742,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.13570446938207695,
+     "rate_delta": 0.016318598396384706
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": true,
+     "rule": "20 Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": true,
+     "rule": "양의 Fold >= 15/20 (T19는 15)"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "모든 seed 풀링 Macro F1 Δ > 0 (양의 seed 평균 정의와 다름)"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "모든 seed Recall3 Δ >= -0.01 (표준 C4와 임계값 다름)"
+    },
+    "C5_error31_rate": {
+     "met": null,
+     "rule": "T19 사전 기준에 3->1 조건 없음"
+    }
+   },
+   "supports_prereg_hypothesis": true,
+   "note": null,
+   "null_reasons": {
+    "criteria.C5_error31_rate": "T19 사전 기준에 3->1 조건 없음"
+   },
+   "intervention_type": "모델 결합(고정 50:50 확률 평균)",
+   "fold_ties": 0,
+   "fold_losses": 5,
+   "criteria_family": "custom"
+  },
+  {
+   "study": "T19",
+   "experiment_id": "T19_fixed_ensemble_v1",
+   "arm": "앙상블 50:50 vs LGBM_TE_G",
+   "group": "G_LGBM_TE_G",
+   "baseline": "LGBM_TE_G (geo target encoding, 고정 파라미터)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5910206411088408,
+    "candidate": 0.589466109721369,
+    "delta": -0.001554531387471858,
+    "baseline_origin": "JSON"
+   },
+   "fold_wins_of_20": 5,
+   "positive_seeds_of_4": 1,
+   "seed_mean_deltas": {
+    "42": -0.002536694659424965,
+    "101": -0.00338599134478601,
+    "202": 0.003148472911112088,
+    "303": -0.003443912456788434
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5927179306047622,
+     "candidate": 0.5908059702122069,
+     "delta": -0.0019119603925552564
+    },
+    "recall3": {
+     "baseline": 0.5254571903574398,
+     "candidate": 0.4910604236535099,
+     "delta": -0.03439676670392988
+    },
+    "recall1": {
+     "baseline": 0.37486939648738743,
+     "candidate": 0.365018160107468,
+     "delta": -0.009851236379919415
+    },
+    "recall2": {
+     "baseline": 0.8000897923394066,
+     "candidate": 0.8290109352736348,
+     "delta": 0.028921142934228206
+    },
+    "precision3": {
+     "baseline": 0.6550342585065614,
+     "candidate": 0.6768885047536733,
+     "delta": 0.021854246247111964
+    },
+    "err_3to1": {
+     "baseline": 1322,
+     "candidate": 1036,
+     "delta": -286,
+     "rate_baseline": 0.004736721414853671,
+     "rate_candidate": 0.003711984406799094,
+     "rate_delta": -0.0010247370080545765
+    },
+    "err_3to2": {
+     "baseline": 131121,
+     "candidate": 141007,
+     "delta": 9886,
+     "rate_baseline": 0.4698060882277066,
+     "rate_candidate": 0.505227591939691,
+     "rate_delta": 0.03542150371198444
+    },
+    "err_2to3": {
+     "baseline": 75909,
+     "candidate": 64382,
+     "delta": -11527,
+     "rate_baseline": 0.16000109605672516,
+     "rate_candidate": 0.13570446938207695,
+     "rate_delta": -0.024296626674648214
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "20 Fold 평균 Macro F1 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 15/20 (T19는 15)"
+    },
+    "C3_positive_seeds": {
+     "met": false,
+     "rule": "모든 seed 풀링 Macro F1 Δ > 0 (양의 seed 평균 정의와 다름)"
+    },
+    "C4_recall3": {
+     "met": false,
+     "rule": "모든 seed Recall3 Δ >= -0.01 (표준 C4와 임계값 다름)"
+    },
+    "C5_error31_rate": {
+     "met": null,
+     "rule": "T19 사전 기준에 3->1 조건 없음"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {
+    "criteria.C5_error31_rate": "T19 사전 기준에 3->1 조건 없음"
+   },
+   "intervention_type": "모델 결합(고정 50:50 확률 평균)",
+   "fold_ties": 0,
+   "fold_losses": 15,
+   "criteria_family": "custom"
+  },
+  {
+   "study": "T15",
+   "experiment_id": "T15_GRADE3_DECISION_RULE",
+   "arm": "LR_C+logit 오프셋(b 내부 선택)",
+   "group": "G_LR_C",
+   "baseline": "LR-C (연구 기준선)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": null,
+    "candidate": null,
+    "delta": 0.002237575579988704,
+    "baseline_origin": "T15 JSON에 LR-C Fold 평균 F1 절대값 없음(MD 표 4자리 0.5658->0.5681만 존재)"
+   },
+   "fold_wins_of_20": 16,
+   "positive_seeds_of_4": 4,
+   "seed_mean_deltas": {
+    "42": 0.002823409621876416,
+    "101": 0.001444005349216626,
+    "202": 0.0024456240648110137,
+    "303": 0.002237263284050761
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5684967308876406,
+     "candidate": 0.5709275713213169,
+     "delta": 0.0024308404336762512
+    },
+    "recall3": {
+     "baseline": 0.5206344770258262,
+     "candidate": 0.6087296127497348,
+     "delta": 0.08809513572390859
+    },
+    "recall1": {
+     "baseline": 0.29343499676600826,
+     "candidate": 0.2932608587491915,
+     "delta": -0.00017413801681676055
+    },
+    "recall2": {
+     "baseline": 0.8074017553770013,
+     "candidate": 0.7409701788258704,
+     "delta": -0.06643157655113097
+    },
+    "precision3": {
+     "baseline": 0.6506205896049002,
+     "candidate": 0.6062835894398013,
+     "delta": -0.044337000165098894
+    },
+    "err_3to1": {
+     "baseline": 738,
+     "candidate": 738,
+     "delta": 0,
+     "rate_baseline": 0.0026442514403646057,
+     "rate_candidate": 0.0026442514403646057,
+     "rate_delta": 0.0
+    },
+    "err_3to2": {
+     "baseline": 133051,
+     "candidate": 108464,
+     "delta": -24587,
+     "rate_baseline": 0.47672127153380917,
+     "rate_candidate": 0.3886261358099005,
+     "rate_delta": -0.08809513572390865
+    },
+    "err_2to3": {
+     "baseline": 76509,
+     "candidate": 108027,
+     "delta": 31518,
+     "rate_baseline": 0.161265776893438,
+     "rate_candidate": 0.22769946124596355,
+     "rate_delta": 0.06643368435252556
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "P1 평균 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": true,
+     "rule": "P2 양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "P3 양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "G1 풀링 3등급 Recall 증가 >= +0.03 (표준 C4와 다름: 증가 요구)"
+    },
+    "C5_error31_rate": {
+     "met": true,
+     "rule": "G2 3->1 건수 비 <= 1.25 (표준 C5와 다름: 소폭 증가 허용)"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {
+    "fold_mean_f1": "T15 JSON에 LR-C Fold 평균 F1 절대값 없음(MD 표 4자리 0.5658->0.5681만 존재)"
+   },
+   "intervention_type": "사후 결정 규칙(3등급 확률 배수)",
+   "extra_prereg_parts": {
+    "G3_grade1_recall_drop_ok": true,
+    "G4_stratified_not_worse_ok": true
+   },
+   "fold_candidate_origin": "기준선 Fold 평균 + JSON mean_delta (파생)",
+   "criteria_family": "custom"
+  },
+  {
+   "study": "T15",
+   "experiment_id": "T15_GRADE3_DECISION_RULE",
+   "arm": "LGBM_O+logit 오프셋(b 내부 선택)",
+   "group": "G_LGBM_O",
+   "baseline": "LGBM-O 무가중치 (C 전처리, 300 rounds, 31 leaves, lr 0.05)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5820558121641555,
+    "candidate": 0.5958473744878388,
+    "delta": 0.013791562323683282,
+    "baseline_origin": "T20 JSON의 동일 LGBM-O 기준선(T15 JSON에는 Fold 평균 F1 절대값 미수록)"
+   },
+   "fold_wins_of_20": 20,
+   "positive_seeds_of_4": 4,
+   "seed_mean_deltas": {
+    "42": 0.01442579696529871,
+    "101": 0.013950691760963151,
+    "202": 0.013188605563012601,
+    "303": 0.013601155005458665
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5831891682953229,
+     "candidate": 0.5968238306713237,
+     "delta": 0.013634662376000861
+    },
+    "recall3": {
+     "baseline": 0.4610635766904578,
+     "candidate": 0.6300054461547281,
+     "delta": 0.1689418694642703
+    },
+    "recall1": {
+     "baseline": 0.3489974625603264,
+     "candidate": 0.3487486939648739,
+     "delta": -0.00024876859545247543
+    },
+    "recall2": {
+     "baseline": 0.8481350173261275,
+     "candidate": 0.7404685220939742,
+     "delta": -0.10766649523215333
+    },
+    "precision3": {
+     "baseline": 0.6910716683225477,
+     "candidate": 0.6157660654876554,
+     "delta": -0.0753056028348923
+    },
+    "err_3to1": {
+     "baseline": 902,
+     "candidate": 892,
+     "delta": -10,
+     "rate_baseline": 0.0032318628715567402,
+     "rate_candidate": 0.003196032906240147,
+     "rate_delta": -3.5829965316593396e-05
+    },
+    "err_3to2": {
+     "baseline": 149513,
+     "candidate": 102372,
+     "delta": -47141,
+     "rate_baseline": 0.5357045604379855,
+     "rate_candidate": 0.36679852093903176,
+     "rate_delta": -0.16890603949895378
+    },
+    "err_2to3": {
+     "baseline": 56640,
+     "candidate": 107734,
+     "delta": 51094,
+     "rate_baseline": 0.11938587098569224,
+     "rate_candidate": 0.2270818754373688,
+     "rate_delta": 0.10769600445167656
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": true,
+     "rule": "P1 평균 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": true,
+     "rule": "P2 양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "P3 양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "G1 풀링 3등급 Recall 증가 >= +0.03 (표준 C4와 다름: 증가 요구)"
+    },
+    "C5_error31_rate": {
+     "met": true,
+     "rule": "G2 3->1 건수 비 <= 1.25 (표준 C5와 다름: 소폭 증가 허용)"
+    }
+   },
+   "supports_prereg_hypothesis": true,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "사후 결정 규칙(3등급 확률 배수)",
+   "extra_prereg_parts": {
+    "G3_grade1_recall_drop_ok": true,
+    "G4_stratified_not_worse_ok": true
+   },
+   "fold_candidate_origin": "기준선 Fold 평균 + JSON mean_delta (파생)",
+   "criteria_family": "custom"
+  },
+  {
+   "study": "T15",
+   "experiment_id": "T15_GRADE3_DECISION_RULE",
+   "arm": "LGBM_TE_G+logit 오프셋(b 내부 선택)",
+   "group": "G_LGBM_TE_G",
+   "baseline": "LGBM_TE_G (geo target encoding, 고정 파라미터)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5910206411088408,
+    "candidate": 0.5956224765745317,
+    "delta": 0.004601835465690968,
+    "baseline_origin": "T19 JSON의 동일 LGBM_TE_G 기준선(3->1 합 일치로 같은 OOF 확인)"
+   },
+   "fold_wins_of_20": 17,
+   "positive_seeds_of_4": 4,
+   "seed_mean_deltas": {
+    "42": 0.006913198358952566,
+    "101": 0.001729454011399434,
+    "202": 0.007048139848100754,
+    "303": 0.002716549644311117
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5927179306047622,
+     "candidate": 0.597435411962611,
+     "delta": 0.004717481357848774
+    },
+    "recall3": {
+     "baseline": 0.5254571903574398,
+     "candidate": 0.6293282598102445,
+     "delta": 0.10387106945280478
+    },
+    "recall1": {
+     "baseline": 0.37486939648738743,
+     "candidate": 0.3745086820239813,
+     "delta": -0.000360714463406131
+    },
+    "recall2": {
+     "baseline": 0.8000897923394066,
+     "candidate": 0.7279545052147006,
+     "delta": -0.07213528712470596
+    },
+    "precision3": {
+     "baseline": 0.6550342585065614,
+     "candidate": 0.6104183608927441,
+     "delta": -0.044615897613817235
+    },
+    "err_3to1": {
+     "baseline": 1322,
+     "candidate": 1292,
+     "delta": -30,
+     "rate_baseline": 0.004736721414853671,
+     "rate_candidate": 0.00462923151890389,
+     "rate_delta": -0.00010748989594978105
+    },
+    "err_3to2": {
+     "baseline": 131121,
+     "candidate": 102161,
+     "delta": -28960,
+     "rate_baseline": 0.4698060882277066,
+     "rate_candidate": 0.3660425086708516,
+     "rate_delta": -0.103763579556855
+    },
+    "err_2to3": {
+     "baseline": 75909,
+     "candidate": 110155,
+     "delta": 34246,
+     "rate_baseline": 0.16000109605672516,
+     "rate_candidate": 0.2321848626135051,
+     "rate_delta": 0.07218376655677994
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": true,
+     "rule": "P1 평균 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": true,
+     "rule": "P2 양의 Fold >= 14/20"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "P3 양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "G1 풀링 3등급 Recall 증가 >= +0.03 (표준 C4와 다름: 증가 요구)"
+    },
+    "C5_error31_rate": {
+     "met": true,
+     "rule": "G2 3->1 건수 비 <= 1.25 (표준 C5와 다름: 소폭 증가 허용)"
+    }
+   },
+   "supports_prereg_hypothesis": true,
+   "note": null,
+   "null_reasons": {},
+   "intervention_type": "사후 결정 규칙(3등급 확률 배수)",
+   "extra_prereg_parts": {
+    "G3_grade1_recall_drop_ok": true,
+    "G4_stratified_not_worse_ok": true
+   },
+   "fold_candidate_origin": "기준선 Fold 평균 + JSON mean_delta (파생)",
+   "criteria_family": "custom"
+  },
+  {
+   "study": "T16",
+   "experiment_id": "T16_RF_FACTORS",
+   "arm": "RF+ONEHOT",
+   "group": "G_RF_T14",
+   "baseline": "RF T14 기준 파이프라인(TE+ROS+RF)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5570681508102354,
+    "candidate": 0.5692993261452888,
+    "delta": 0.01223117533505339,
+    "baseline_origin": "파생: 후보 Fold 평균 - JSON mean_delta (기준선 Fold 평균 절대값 미수록)"
+   },
+   "fold_wins_of_20": 13,
+   "positive_seeds_of_4": 4,
+   "seed_mean_deltas": {
+    "42": 0.00906430141672121,
+    "101": 0.01185037776414839,
+    "202": 0.016621673147818882,
+    "303": 0.011388349011525079
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5587166698738689,
+     "candidate": 0.5698179459987762,
+     "delta": 0.0111012761249073
+    },
+    "recall3": {
+     "baseline": 0.5370123541720412,
+     "candidate": 0.43899231805543615,
+     "delta": -0.09802003611660504
+    },
+    "recall1": {
+     "baseline": 0.27302353350912983,
+     "candidate": 0.3466590377630728,
+     "delta": 0.07363550425394294
+    },
+    "recall2": {
+     "baseline": 0.7884125726137581,
+     "candidate": 0.8422078798047333,
+     "delta": 0.05379530719097525
+    },
+    "precision3": {
+     "baseline": 0.6311423289580622,
+     "candidate": 0.6788544009928968,
+     "delta": 0.04771207203483463
+    },
+    "err_3to1": {
+     "baseline": 1109,
+     "candidate": 1274,
+     "delta": 165,
+     "rate_baseline": 0.003973543153610227,
+     "rate_candidate": 0.004564737581334021,
+     "rate_delta": 0.0005911944277237936
+    },
+    "err_3to2": {
+     "baseline": 128109,
+     "candidate": 155301,
+     "delta": 27192,
+     "rate_baseline": 0.4590141026743486,
+     "rate_candidate": 0.5564429443632298,
+     "rate_delta": 0.09742884168888122
+    },
+    "err_2to3": {
+     "baseline": 85769,
+     "candidate": 56781,
+     "delta": -28988,
+     "rate_baseline": 0.1807840178067062,
+     "rate_candidate": 0.11968307098231976,
+     "rate_delta": -0.06110094682438644
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": true,
+     "rule": "평균 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 16/20 (T16은 16)"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": false,
+     "rule": "풀링 3등급 Recall Δ >= -0.01 (표준 C4와 임계값 다름)"
+    },
+    "C5_error31_rate": {
+     "met": null,
+     "rule": "T16 사전 기준에 3->1 조건 없음"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {
+    "criteria.C5_error31_rate": "T16 사전 기준에 3->1 조건 없음"
+   },
+   "intervention_type": "RF 파이프라인 요인 변경",
+   "judgment_label": "NOT_SUPPORTED",
+   "criteria_family": "custom"
+  },
+  {
+   "study": "T16",
+   "experiment_id": "T16_RF_FACTORS",
+   "arm": "RF+NO_ROS",
+   "group": "G_RF_T14",
+   "baseline": "RF T14 기준 파이프라인(TE+ROS+RF)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5570681508102354,
+    "candidate": 0.556886464718429,
+    "delta": -0.00018168609180644336,
+    "baseline_origin": "파생: 후보 Fold 평균 - JSON mean_delta (기준선 Fold 평균 절대값 미수록)"
+   },
+   "fold_wins_of_20": 10,
+   "positive_seeds_of_4": 3,
+   "seed_mean_deltas": {
+    "42": -0.004464315875544611,
+    "101": 0.002645014205344487,
+    "202": 0.0005339309203459929,
+    "303": 0.0005586263826283577
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5587166698738689,
+     "candidate": 0.5580174290923146,
+     "delta": -0.0006992407815543666
+    },
+    "recall3": {
+     "baseline": 0.5370123541720412,
+     "candidate": 0.5186208329750337,
+     "delta": -0.018391521197007488
+    },
+    "recall1": {
+     "baseline": 0.27302353350912983,
+     "candidate": 0.2757351111995622,
+     "delta": 0.002711577690432343
+    },
+    "recall2": {
+     "baseline": 0.7884125726137581,
+     "candidate": 0.7970376959201396,
+     "delta": 0.008625123306381544
+    },
+    "precision3": {
+     "baseline": 0.6311423289580622,
+     "candidate": 0.631104154313021,
+     "delta": -3.817464504118906e-05
+    },
+    "err_3to1": {
+     "baseline": 1109,
+     "candidate": 838,
+     "delta": -271,
+     "rate_baseline": 0.003973543153610227,
+     "rate_candidate": 0.0030025510935305414,
+     "rate_delta": -0.000970992060079686
+    },
+    "err_3to2": {
+     "baseline": 128109,
+     "candidate": 133513,
+     "delta": 5404,
+     "rate_baseline": 0.4590141026743486,
+     "rate_candidate": 0.47837661593143577,
+     "rate_delta": 0.019362513257087155
+    },
+    "err_2to3": {
+     "baseline": 85769,
+     "candidate": 82785,
+     "delta": -2984,
+     "rate_baseline": 0.1807840178067062,
+     "rate_candidate": 0.1744943384454543,
+     "rate_delta": -0.006289679361251882
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "평균 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 16/20 (T16은 16)"
+    },
+    "C3_positive_seeds": {
+     "met": true,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": false,
+     "rule": "풀링 3등급 Recall Δ >= -0.01 (표준 C4와 임계값 다름)"
+    },
+    "C5_error31_rate": {
+     "met": null,
+     "rule": "T16 사전 기준에 3->1 조건 없음"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {
+    "criteria.C5_error31_rate": "T16 사전 기준에 3->1 조건 없음"
+   },
+   "intervention_type": "RF 파이프라인 요인 변경",
+   "judgment_label": "NOT_SUPPORTED",
+   "criteria_family": "custom"
+  },
+  {
+   "study": "T16",
+   "experiment_id": "T16_RF_FACTORS",
+   "arm": "RF+DROP_GEO23_TE",
+   "group": "G_RF_T14",
+   "baseline": "RF T14 기준 파이프라인(TE+ROS+RF)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5570681508102354,
+    "candidate": 0.5518296972873855,
+    "delta": -0.005238453522849906,
+    "baseline_origin": "파생: 후보 Fold 평균 - JSON mean_delta (기준선 Fold 평균 절대값 미수록)"
+   },
+   "fold_wins_of_20": 4,
+   "positive_seeds_of_4": 0,
+   "seed_mean_deltas": {
+    "42": -0.006393029910674919,
+    "101": -0.00291817973019739,
+    "202": -0.007009224076846387,
+    "303": -0.0046333803736809285
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5587166698738689,
+     "candidate": 0.5529406278558099,
+     "delta": -0.0057760420180590355
+    },
+    "recall3": {
+     "baseline": 0.5370123541720412,
+     "candidate": 0.5529531057413937,
+     "delta": 0.015940751569352485
+    },
+    "recall1": {
+     "baseline": 0.27302353350912983,
+     "candidate": 0.2570152743917608,
+     "delta": -0.016008259117369028
+    },
+    "recall2": {
+     "baseline": 0.7884125726137581,
+     "candidate": 0.7758669387135666,
+     "delta": -0.012545633900191477
+    },
+    "precision3": {
+     "baseline": 0.6311423289580622,
+     "candidate": 0.621371771384857,
+     "delta": -0.009770557573205219
+    },
+    "err_3to1": {
+     "baseline": 1109,
+     "candidate": 1182,
+     "delta": 73,
+     "rate_baseline": 0.003973543153610227,
+     "rate_candidate": 0.0042351019004213605,
+     "rate_delta": 0.0002615587468111332
+    },
+    "err_3to2": {
+     "baseline": 128109,
+     "candidate": 123587,
+     "delta": -4522,
+     "rate_baseline": 0.4590141026743486,
+     "rate_candidate": 0.442811792358185,
+     "rate_delta": -0.016202310316163593
+    },
+    "err_2to3": {
+     "baseline": 85769,
+     "candidate": 92036,
+     "delta": 6267,
+     "rate_baseline": 0.1807840178067062,
+     "rate_candidate": 0.1939936091461718,
+     "rate_delta": 0.013209591339465615
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "평균 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 16/20 (T16은 16)"
+    },
+    "C3_positive_seeds": {
+     "met": false,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "풀링 3등급 Recall Δ >= -0.01 (표준 C4와 임계값 다름)"
+    },
+    "C5_error31_rate": {
+     "met": null,
+     "rule": "T16 사전 기준에 3->1 조건 없음"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {
+    "criteria.C5_error31_rate": "T16 사전 기준에 3->1 조건 없음"
+   },
+   "intervention_type": "RF 파이프라인 요인 변경",
+   "judgment_label": "NOT_SUPPORTED",
+   "criteria_family": "custom"
+  },
+  {
+   "study": "T16",
+   "experiment_id": "T16_RF_FACTORS",
+   "arm": "RF+AGE_C",
+   "group": "G_RF_T14",
+   "baseline": "RF T14 기준 파이프라인(TE+ROS+RF)",
+   "split": "geo2 Group 5Fold x seed 42/101/202/303 (20 Fold, 개발 208,480건물, 풀링 833,920 반복 예측)",
+   "fold_mean_f1": {
+    "baseline": 0.5570681508102354,
+    "candidate": 0.5542689550782285,
+    "delta": -0.002799195732006915,
+    "baseline_origin": "파생: 후보 Fold 평균 - JSON mean_delta (기준선 Fold 평균 절대값 미수록)"
+   },
+   "fold_wins_of_20": 7,
+   "positive_seeds_of_4": 1,
+   "seed_mean_deltas": {
+    "42": 0.0006262220603599378,
+    "101": -0.005767707203952077,
+    "202": -0.005448638116700178,
+    "303": -0.0006066596677353431
+   },
+   "pooled": {
+    "macro_f1": {
+     "baseline": 0.5587166698738689,
+     "candidate": 0.555736095652568,
+     "delta": -0.0029805742213009356
+    },
+    "recall3": {
+     "baseline": 0.5370123541720412,
+     "candidate": 0.5427845615845444,
+     "delta": 0.005772207412503172
+    },
+    "recall1": {
+     "baseline": 0.27302353350912983,
+     "candidate": 0.264814169859197,
+     "delta": -0.008209363649932855
+    },
+    "recall2": {
+     "baseline": 0.7884125726137581,
+     "candidate": 0.7833812506850355,
+     "delta": -0.005031321928722576
+    },
+    "precision3": {
+     "baseline": 0.6311423289580622,
+     "candidate": 0.6261946097883598,
+     "delta": -0.00494771916970238
+    },
+    "err_3to1": {
+     "baseline": 1109,
+     "candidate": 1132,
+     "delta": 23,
+     "rate_baseline": 0.003973543153610227,
+     "rate_candidate": 0.004055952073838393,
+     "rate_delta": 8.240892022816533e-05
+    },
+    "err_3to2": {
+     "baseline": 128109,
+     "candidate": 126475,
+     "delta": -1634,
+     "rate_baseline": 0.4590141026743486,
+     "rate_candidate": 0.45315948634161723,
+     "rate_delta": -0.005854616332731377
+    },
+    "err_2to3": {
+     "baseline": 85769,
+     "candidate": 88577,
+     "delta": 2808,
+     "rate_baseline": 0.1807840178067062,
+     "rate_candidate": 0.18670272412252228,
+     "rate_delta": 0.005918706315816091
+    },
+    "support": [
+     80396,
+     474428,
+     279096
+    ]
+   },
+   "criteria": {
+    "C1_mean_delta": {
+     "met": false,
+     "rule": "평균 Δ >= +0.003"
+    },
+    "C2_fold_wins": {
+     "met": false,
+     "rule": "양의 Fold >= 16/20 (T16은 16)"
+    },
+    "C3_positive_seeds": {
+     "met": false,
+     "rule": "양의 seed 평균 >= 3/4"
+    },
+    "C4_recall3": {
+     "met": true,
+     "rule": "풀링 3등급 Recall Δ >= -0.01 (표준 C4와 임계값 다름)"
+    },
+    "C5_error31_rate": {
+     "met": null,
+     "rule": "T16 사전 기준에 3->1 조건 없음"
+    }
+   },
+   "supports_prereg_hypothesis": false,
+   "note": null,
+   "null_reasons": {
+    "criteria.C5_error31_rate": "T16 사전 기준에 3->1 조건 없음"
+   },
+   "intervention_type": "RF 파이프라인 요인 변경",
+   "judgment_label": "NOT_SUPPORTED",
+   "criteria_family": "custom"
+  }
+ ],
+ "selection_only": [
+  {
+   "study": "T17",
+   "experiment_id": "T17_grade3_rule_freeze_v1",
+   "model": "LGBM_O",
+   "selected_b": 0.5,
+   "selection_mean_seed_pooled_f1": {
+    "b0": 0.5831863515350555,
+    "fixed_b": 0.5970057850524417
+   },
+   "fold_mean_f1": {
+    "b0": 0.5820558121641554,
+    "fixed_b": 0.5961609982698641,
+    "n_folds": 20
+   },
+   "pooled": {
+    "recall3": [
+     0.4610635766904578,
+     0.6336493536274257
+    ],
+    "err_3to1": [
+     902,
+     892
+    ],
+    "err_3to2": [
+     149513,
+     101355
+    ],
+    "err_2to3": [
+     56640,
+     108842
+    ]
+   },
+   "criteria": null,
+   "note": "b 선택에 쓴 동일 개발 OOF의 선택 낙관 통계. 사전 효과 기준 없음. 비교표·상관에서 제외.",
+   "null_reasons": {
+    "criteria": "T17은 b 고정 절차이며 5조건 판정이 없음",
+    "positive_folds_seeds": "효과 판정 설계가 아님"
+   }
+  },
+  {
+   "study": "T17",
+   "experiment_id": "T17_grade3_rule_freeze_v1",
+   "model": "LGBM_TE_G",
+   "selected_b": 0.3,
+   "selection_mean_seed_pooled_f1": {
+    "b0": 0.5926751373094039,
+    "fixed_b": 0.5980546153277587
+   },
+   "fold_mean_f1": {
+    "b0": 0.5910206411088409,
+    "fixed_b": 0.5964426857931657,
+    "n_folds": 20
+   },
+   "pooled": {
+    "recall3": [
+     0.5254571903574398,
+     0.6234019835468799
+    ],
+    "err_3to1": [
+     1322,
+     1293
+    ],
+    "err_3to2": [
+     131121,
+     103814
+    ],
+    "err_2to3": [
+     75909,
+     107146
+    ]
+   },
+   "criteria": null,
+   "note": "b 선택에 쓴 동일 개발 OOF의 선택 낙관 통계. 사전 효과 기준 없음. 비교표·상관에서 제외.",
+   "null_reasons": {
+    "criteria": "T17은 b 고정 절차이며 5조건 판정이 없음",
+    "positive_folds_seeds": "효과 판정 설계가 아님"
+   }
+  }
+ ],
+ "g_lgbm_o_relationship": {
+  "group": "G_LGBM_O",
+  "arm_labels": [
+   "T20:LGBM_O+학습가중치(1/1/1.5)",
+   "T21:AGE_HEIGHT_FLOORS",
+   "T21:STRUCTURE_PAIRS",
+   "T22:MATERIAL_PAIRS",
+   "T22:STRUCTURE_FLOORS",
+   "T23:CUMULATIVE_BINARY",
+   "T24:GEO1_CONTEXT",
+   "T27:WIDE_FEATURES",
+   "T25:CATBOOST_C",
+   "T26:CATBOOST_NATIVE_C(보조: vs LGBM-O)",
+   "T18:LGBM_O+ROUNDS 선택(R600)",
+   "T18:LGBM_O+LEAVES 선택(L63)",
+   "T19:앙상블 50:50 vs LGBM_O",
+   "T15:LGBM_O+logit 오프셋(b 내부 선택)"
+  ],
+  "d_fold_mean_f1": [
+   0.013668689416887158,
+   -0.0009539137466585024,
+   0.00038405477514605877,
+   -0.00042735472849688707,
+   -0.0003126930459858457,
+   -0.000264618287022067,
+   0.0020724868448823487,
+   0.002162660893826085,
+   -0.013834345918766883,
+   -0.05772034860968585,
+   0.0011014827303371,
+   0.002176480162804706,
+   0.007410297557213679,
+   0.013791562323683282
+  ],
+  "d_3to1_count": [
+   1,
+   -15,
+   4,
+   -4,
+   -10,
+   -7,
+   10,
+   56,
+   -375,
+   -283,
+   21,
+   78,
+   134,
+   -10
+  ],
+  "d_3to1_rate": [
+   3.582996531659513e-06,
+   -5.3744947974890094e-05,
+   1.4331986126637618e-05,
+   -1.4331986126637185e-05,
+   -3.5829965316593396e-05,
+   -2.508097572161529e-05,
+   3.582996531659383e-05,
+   0.00020064780577292406,
+   -0.0013436236993722588,
+   -0.001013988018459598,
+   7.524292716484674e-05,
+   0.0002794737294694299,
+   0.00048012153524235393,
+   -3.5829965316593396e-05
+  ],
+  "d_recall3": [
+   0.14129546822598676,
+   0.0007416802820534585,
+   0.0006306073895720465,
+   0.00012182188207637834,
+   0.0006915183306102635,
+   -0.0025725915097314367,
+   0.011648321724424537,
+   0.013995184452661458,
+   -0.014543382922005355,
+   -0.12253848138275003,
+   0.0016374294149683055,
+   0.003547166566342741,
+   0.029996846963052104,
+   0.1689418694642703
+  ],
+  "d_3to2_count": [
+   -39436,
+   -192,
+   -180,
+   -30,
+   -183,
+   725,
+   -3261,
+   -3962,
+   4434,
+   34483,
+   -478,
+   -1068,
+   -8506,
+   -47141
+  ],
+  "d_2to3_count": [
+   41482,
+   183,
+   83,
+   95,
+   183,
+   -819,
+   2916,
+   3307,
+   -3691,
+   -25462,
+   337,
+   627,
+   7742,
+   51094
+  ],
+  "correlations": {
+   "전체": {
+    "n": 14,
+    "dF1_vs_d3to1_count": {
+     "pearson": 0.7182421463310223,
+     "spearman": 0.6644668487276422
+    },
+    "dF1_vs_d3to1_rate": {
+     "pearson": 0.7182421463310222,
+     "spearman": 0.6644668487276422
+    },
+    "dF1_vs_dRecall3": {
+     "pearson": 0.7987248795898063,
+     "spearman": 0.9208791208791208
+    },
+    "dRecall3_vs_d3to1_count": {
+     "pearson": 0.4191680490809306,
+     "spearman": 0.5610564451177111
+    },
+    "dF1_vs_d3to2_count": {
+     "pearson": -0.8014094452104359,
+     "spearman": -0.9208791208791208
+    },
+    "dF1_vs_d2to3_count": {
+     "pearson": 0.7134961211742039,
+     "spearman": 0.9130918616621573
+    }
+   },
+   "결정경계 이동 팔 제외(T15·T20)": {
+    "n": 12,
+    "dF1_vs_d3to1_count": {
+     "pearson": 0.7501449116167762,
+     "spearman": 0.965034965034965
+    },
+    "dF1_vs_d3to1_rate": {
+     "pearson": 0.7501449116167763,
+     "spearman": 0.965034965034965
+    },
+    "dF1_vs_dRecall3": {
+     "pearson": 0.9877446105790699,
+     "spearman": 0.8741258741258742
+    },
+    "dRecall3_vs_d3to1_count": {
+     "pearson": 0.6976361243528375,
+     "spearman": 0.8461538461538461
+    },
+    "dF1_vs_d3to2_count": {
+     "pearson": -0.9885300273631039,
+     "spearman": -0.8741258741258742
+    },
+    "dF1_vs_d2to3_count": {
+     "pearson": 0.9826155623115931,
+     "spearman": 0.8616475560561658
+    }
+   },
+   "분류기 교체·모델 결합 제외(T19·T25·T26)": {
+    "n": 11,
+    "dF1_vs_d3to1_count": {
+     "pearson": -0.08915741980298265,
+     "spearman": 0.4555820475782052
+    },
+    "dF1_vs_d3to1_rate": {
+     "pearson": -0.08915741980298289,
+     "spearman": 0.4555820475782052
+    },
+    "dF1_vs_dRecall3": {
+     "pearson": 0.9839705740509502,
+     "spearman": 0.8363636363636363
+    },
+    "dRecall3_vs_d3to1_count": {
+     "pearson": -0.22649532282879364,
+     "spearman": 0.24145848521644875
+    },
+    "dF1_vs_d3to2_count": {
+     "pearson": -0.9841997982854681,
+     "spearman": -0.8363636363636363
+    },
+    "dF1_vs_d2to3_count": {
+     "pearson": 0.9806265484852184,
+     "spearman": 0.8200476856407694
+    }
+   },
+   "피처 추가 팔만(T21·T22·T24·T27)": {
+    "n": 6,
+    "dF1_vs_d3to1_count": {
+     "pearson": 0.8307881524765665,
+     "spearman": 0.9428571428571428
+    },
+    "dF1_vs_d3to1_rate": {
+     "pearson": 0.8307881524765665,
+     "spearman": 0.9428571428571428
+    },
+    "dF1_vs_dRecall3": {
+     "pearson": 0.9422967360264544,
+     "spearman": 0.6
+    },
+    "dRecall3_vs_d3to1_count": {
+     "pearson": 0.8444312106430554,
+     "spearman": 0.4857142857142857
+    },
+    "dF1_vs_d3to2_count": {
+     "pearson": -0.9427697676732125,
+     "spearman": -0.6
+    },
+    "dF1_vs_d2to3_count": {
+     "pearson": 0.9394667199865241,
+     "spearman": 0.550782483869826
+    }
+   },
+   "_사용된_팔": {
+    "전체": [
+     "T20:LGBM_O+학습가중치(1/1/1.5)",
+     "T21:AGE_HEIGHT_FLOORS",
+     "T21:STRUCTURE_PAIRS",
+     "T22:MATERIAL_PAIRS",
+     "T22:STRUCTURE_FLOORS",
+     "T23:CUMULATIVE_BINARY",
+     "T24:GEO1_CONTEXT",
+     "T27:WIDE_FEATURES",
+     "T25:CATBOOST_C",
+     "T26:CATBOOST_NATIVE_C(보조: vs LGBM-O)",
+     "T18:LGBM_O+ROUNDS 선택(R600)",
+     "T18:LGBM_O+LEAVES 선택(L63)",
+     "T19:앙상블 50:50 vs LGBM_O",
+     "T15:LGBM_O+logit 오프셋(b 내부 선택)"
+    ],
+    "결정경계 이동 팔 제외(T15·T20)": [
+     "T21:AGE_HEIGHT_FLOORS",
+     "T21:STRUCTURE_PAIRS",
+     "T22:MATERIAL_PAIRS",
+     "T22:STRUCTURE_FLOORS",
+     "T23:CUMULATIVE_BINARY",
+     "T24:GEO1_CONTEXT",
+     "T27:WIDE_FEATURES",
+     "T25:CATBOOST_C",
+     "T26:CATBOOST_NATIVE_C(보조: vs LGBM-O)",
+     "T18:LGBM_O+ROUNDS 선택(R600)",
+     "T18:LGBM_O+LEAVES 선택(L63)",
+     "T19:앙상블 50:50 vs LGBM_O"
+    ],
+    "분류기 교체·모델 결합 제외(T19·T25·T26)": [
+     "T20:LGBM_O+학습가중치(1/1/1.5)",
+     "T21:AGE_HEIGHT_FLOORS",
+     "T21:STRUCTURE_PAIRS",
+     "T22:MATERIAL_PAIRS",
+     "T22:STRUCTURE_FLOORS",
+     "T23:CUMULATIVE_BINARY",
+     "T24:GEO1_CONTEXT",
+     "T27:WIDE_FEATURES",
+     "T18:LGBM_O+ROUNDS 선택(R600)",
+     "T18:LGBM_O+LEAVES 선택(L63)",
+     "T15:LGBM_O+logit 오프셋(b 내부 선택)"
+    ],
+    "피처 추가 팔만(T21·T22·T24·T27)": [
+     "T21:AGE_HEIGHT_FLOORS",
+     "T21:STRUCTURE_PAIRS",
+     "T22:MATERIAL_PAIRS",
+     "T22:STRUCTURE_FLOORS",
+     "T24:GEO1_CONTEXT",
+     "T27:WIDE_FEATURES"
+    ]
+   }
+  },
+  "quadrants": {
+   "F1_up_31_up": [
+    "T20:LGBM_O+학습가중치(1/1/1.5)",
+    "T21:STRUCTURE_PAIRS",
+    "T24:GEO1_CONTEXT",
+    "T27:WIDE_FEATURES",
+    "T18:LGBM_O+ROUNDS 선택(R600)",
+    "T18:LGBM_O+LEAVES 선택(L63)",
+    "T19:앙상블 50:50 vs LGBM_O"
+   ],
+   "F1_down_31_down": [
+    "T21:AGE_HEIGHT_FLOORS",
+    "T22:MATERIAL_PAIRS",
+    "T22:STRUCTURE_FLOORS",
+    "T23:CUMULATIVE_BINARY",
+    "T25:CATBOOST_C",
+    "T26:CATBOOST_NATIVE_C(보조: vs LGBM-O)"
+   ],
+   "F1_up_31_down": [
+    "T15:LGBM_O+logit 오프셋(b 내부 선택)"
+   ]
+  },
+  "caveat": "팔 수가 적고(n<=14) 모두 같은 208,480 개발 건물의 반복 평가·같은 기준선 대비 Δ라 독립 표본이 아니다. 상관계수는 기술 통계이며 유의성·인과를 주장하지 않는다."
+ },
+ "three_to_one_reducers": [
+  {
+   "study": "T21",
+   "arm": "AGE_HEIGHT_FLOORS",
+   "group": "G_LGBM_O",
+   "d_3to1": -15,
+   "d_3to1_rate": -5.3744947974890094e-05,
+   "d_f1_fold_mean": -0.0009539137466585024,
+   "d_recall3": 0.0007416802820534585,
+   "d_recall1": -0.004477834718145168,
+   "d_recall2": 0.0002445049617644246,
+   "d_3to2": -192,
+   "d_2to3": 183
+  },
+  {
+   "study": "T22",
+   "arm": "MATERIAL_PAIRS",
+   "group": "G_LGBM_O",
+   "d_3to1": -4,
+   "d_3to1_rate": -1.4331986126637185e-05,
+   "d_f1_fold_mean": -0.00042735472849688707,
+   "d_recall3": 0.00012182188207637834,
+   "d_recall1": -0.0021642867804368415,
+   "d_recall2": 0.00017073191295624568,
+   "d_3to2": -30,
+   "d_2to3": 95
+  },
+  {
+   "study": "T22",
+   "arm": "STRUCTURE_FLOORS",
+   "group": "G_LGBM_O",
+   "d_3to1": -10,
+   "d_3to1_rate": -3.5829965316593396e-05,
+   "d_f1_fold_mean": -0.0003126930459858457,
+   "d_recall3": 0.0006915183306102635,
+   "d_recall1": -0.0004726603313597866,
+   "d_recall2": -0.0006407716239344996,
+   "d_3to2": -183,
+   "d_2to3": 183
+  },
+  {
+   "study": "T23",
+   "arm": "CUMULATIVE_BINARY",
+   "group": "G_LGBM_O",
+   "d_3to1": -7,
+   "d_3to1_rate": -2.508097572161529e-05,
+   "d_f1_fold_mean": -0.000264618287022067,
+   "d_recall3": -0.0025725915097314367,
+   "d_recall1": 0.00014926115727154077,
+   "d_recall2": 0.0016504084919102269,
+   "d_3to2": 725,
+   "d_2to3": -819
+  },
+  {
+   "study": "T25",
+   "arm": "CATBOOST_C",
+   "group": "G_LGBM_O",
+   "d_3to1": -375,
+   "d_3to1_rate": -0.0013436236993722588,
+   "d_f1_fold_mean": -0.013834345918766883,
+   "d_recall3": -0.014543382922005355,
+   "d_recall1": -0.03462858848698941,
+   "d_recall2": 0.0092195232996366,
+   "d_3to2": 4434,
+   "d_2to3": -3691
+  },
+  {
+   "study": "T26",
+   "arm": "CATBOOST_NATIVE_C(보조: vs LGBM-O)",
+   "group": "G_LGBM_O",
+   "d_3to1": -283,
+   "d_3to1_rate": -0.001013988018459598,
+   "d_f1_fold_mean": -0.05772034860968585,
+   "d_recall3": -0.12253848138275003,
+   "d_recall1": -0.09561420966217227,
+   "d_recall2": 0.06274081630932404,
+   "d_3to2": 34483,
+   "d_2to3": -25462
+  },
+  {
+   "study": "T19",
+   "arm": "앙상블 50:50 vs LGBM_TE_G",
+   "group": "G_LGBM_TE_G",
+   "d_3to1": -286,
+   "d_3to1_rate": -0.0010247370080545765,
+   "d_f1_fold_mean": -0.001554531387471858,
+   "d_recall3": -0.03439676670392988,
+   "d_recall1": -0.009851236379919415,
+   "d_recall2": 0.028921142934228206,
+   "d_3to2": 9886,
+   "d_2to3": -11527
+  },
+  {
+   "study": "T15",
+   "arm": "LGBM_O+logit 오프셋(b 내부 선택)",
+   "group": "G_LGBM_O",
+   "d_3to1": -10,
+   "d_3to1_rate": -3.5829965316593396e-05,
+   "d_f1_fold_mean": 0.013791562323683282,
+   "d_recall3": 0.1689418694642703,
+   "d_recall1": -0.00024876859545247543,
+   "d_recall2": -0.10766649523215333,
+   "d_3to2": -47141,
+   "d_2to3": 51094
+  },
+  {
+   "study": "T15",
+   "arm": "LGBM_TE_G+logit 오프셋(b 내부 선택)",
+   "group": "G_LGBM_TE_G",
+   "d_3to1": -30,
+   "d_3to1_rate": -0.00010748989594978105,
+   "d_f1_fold_mean": 0.004601835465690968,
+   "d_recall3": 0.10387106945280478,
+   "d_recall1": -0.000360714463406131,
+   "d_recall2": -0.07213528712470596,
+   "d_3to2": -28960,
+   "d_2to3": 34246
+  },
+  {
+   "study": "T16",
+   "arm": "RF+NO_ROS",
+   "group": "G_RF_T14",
+   "d_3to1": -271,
+   "d_3to1_rate": -0.000970992060079686,
+   "d_f1_fold_mean": -0.00018168609180644336,
+   "d_recall3": -0.018391521197007488,
+   "d_recall1": 0.002711577690432343,
+   "d_recall2": 0.008625123306381544,
+   "d_3to2": 5404,
+   "d_2to3": -2984
+  }
+ ],
+ "f1_up_and_3to1_up_arms": [
+  "T20:LGBM_O+학습가중치(1/1/1.5)",
+  "T21:STRUCTURE_PAIRS",
+  "T24:GEO1_CONTEXT",
+  "T27:WIDE_FEATURES",
+  "T18:LGBM_O+ROUNDS 선택(R600)",
+  "T18:LGBM_O+LEAVES 선택(L63)",
+  "T19:앙상블 50:50 vs LGBM_O",
+  "T16:RF+ONEHOT"
+ ],
+ "criteria_standard_rules": {
+  "C1_mean_delta": "Fold 평균 Macro F1 Δ >= +0.003",
+  "C2_fold_wins": "양의 Fold >= 14/20",
+  "C3_positive_seeds": "양의 seed 평균 >= 3/4",
+  "C4_recall3": "풀링 3등급 Recall Δ >= 0",
+  "C5_error31_rate": "풀링 3->1 오류율 Δ <= 0"
+ },
+ "n_arms": 22,
+ "n_arms_standard5_all_met": 0,
+ "n_arms_standard5_total": 11,
+ "n_arms_custom_criteria_all_met": 3,
+ "custom_criteria_all_met_arms": [
+  "T19:앙상블 50:50 vs LGBM_O",
+  "T15:LGBM_O+logit 오프셋(b 내부 선택)",
+  "T15:LGBM_TE_G+logit 오프셋(b 내부 선택)"
+ ],
+ "custom_criteria_note": "T15·T19 등은 각 연구 고유 사전 기준이며 표준 5조건과 비교할 수 없다. 합산하지 않는다.",
+ "consistency_checks_passed": 71,
+ "null_policy": "JSON에 없는 값은 null + null_reasons 에 사유를 기록한다. 추정값은 *_origin/파생 표시를 붙였다.",
+ "public_note": "집계만 포함. 행별 데이터·모델·OOF·원시 자료·비공개 경로 없음. 독립 검토 PASS_WITH_NOTES 반영본. 독립 성능·채택·최종 모델 변경이 아니다.",
+ "build_script_sha256s": {
+  "build": "bd82af89f67bfcab93dddaf80993066e991d1ca4aa2f8328949101d73ff2176d",
+  "render": "409133bcf632505e3177ae16270a14cd5367de48983e876e066de616aef34ea1",
+  "note": "비공개 로컬 스크립트(공개 저장소 미포함). SHA만 기록. verify 스크립트는 렌더 이후 실행되어 SHA 미기록."
+ },
+ "synthesis_v1_sha256": "a6a50a114560341f228d6df2b63d2c99605bedf66fea309208fc6ca1305cc983"
+}
