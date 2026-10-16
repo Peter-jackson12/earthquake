@@ -1,0 +1,471 @@
+{
+ "study_id": "T32_sampling_target_scenarios_v1",
+ "plan_doc": "docs/T32_SAMPLING_TARGET_SCENARIOS_PLAN.md",
+ "plan_sha256": "1318f24769d118d8f57cbeca0978e3797c341855c5c0f4690cfacab638fc940c",
+ "plan_sha256_at_approval_request": "38223188cb5f9d95dbad4fd64649473e0ab722aea31968fcabfb5b1bef11f787",
+ "scheme": "stratified",
+ "n_folds": 5,
+ "labels": [
+  1,
+  2,
+  3
+ ],
+ "sampler_seed": 42,
+ "scope": {
+  "models": [
+   "LR",
+   "LGBMN"
+  ],
+  "rf_extension": false,
+  "note": "RF optional extension excluded (approved default); DT, GBC, T14 RF, SMOTE partial relaxation not run"
+ },
+ "phi": {
+  "P25": [
+   1,
+   4
+  ],
+  "P50": [
+   1,
+   2
+  ],
+  "P75": [
+   3,
+   4
+  ],
+  "EQ": [
+   1,
+   1
+  ]
+ },
+ "rounding": "integer half-up: add = (2*p*gap + q) // (2*q)",
+ "fold_train_counts": {
+  "0": [
+   16080,
+   94885,
+   55819
+  ],
+  "1": [
+   16079,
+   94885,
+   55820
+  ],
+  "2": [
+   16079,
+   94886,
+   55819
+  ],
+  "3": [
+   16079,
+   94886,
+   55819
+  ],
+  "4": [
+   16079,
+   94886,
+   55819
+  ]
+ },
+ "expected_rows": 208480,
+ "train_rows_per_fold": 166784,
+ "valid_rows_per_fold": 41696,
+ "grade3_support": 69774,
+ "lr": {
+  "solver": "lbfgs",
+  "C": 1.0,
+  "max_iter": 1500,
+  "tol": 0.0001,
+  "random_state": 42,
+  "scale_numeric": true,
+  "threadpool_limit": 1
+ },
+ "lgbm": {
+  "source": "experiments/lgbm_native_cat/config.json lgbm_params (T8, unchanged)",
+  "threadpool_limit": 2
+ },
+ "units": [
+  {
+   "id": "LR.RUP.P25",
+   "model": "LR",
+   "arm": "RUP",
+   "scenario": "P25",
+   "sampler_seed": 42,
+   "stage": 1,
+   "noise": false
+  },
+  {
+   "id": "LR.RUP.P50",
+   "model": "LR",
+   "arm": "RUP",
+   "scenario": "P50",
+   "sampler_seed": 42,
+   "stage": 1,
+   "noise": false
+  },
+  {
+   "id": "LR.RUP.P75",
+   "model": "LR",
+   "arm": "RUP",
+   "scenario": "P75",
+   "sampler_seed": 42,
+   "stage": 1,
+   "noise": false
+  },
+  {
+   "id": "LGBMN.WNORM.P25",
+   "model": "LGBMN",
+   "arm": "WNORM",
+   "scenario": "P25",
+   "sampler_seed": 42,
+   "stage": 1,
+   "noise": false
+  },
+  {
+   "id": "LGBMN.WNORM.P50",
+   "model": "LGBMN",
+   "arm": "WNORM",
+   "scenario": "P50",
+   "sampler_seed": 42,
+   "stage": 1,
+   "noise": false
+  },
+  {
+   "id": "LGBMN.WNORM.P75",
+   "model": "LGBMN",
+   "arm": "WNORM",
+   "scenario": "P75",
+   "sampler_seed": 42,
+   "stage": 1,
+   "noise": false
+  },
+  {
+   "id": "LR.WOBJ.P25",
+   "model": "LR",
+   "arm": "WOBJ",
+   "scenario": "P25",
+   "sampler_seed": 42,
+   "stage": 2,
+   "noise": false
+  },
+  {
+   "id": "LR.WOBJ.P50",
+   "model": "LR",
+   "arm": "WOBJ",
+   "scenario": "P50",
+   "sampler_seed": 42,
+   "stage": 2,
+   "noise": false
+  },
+  {
+   "id": "LR.WOBJ.P75",
+   "model": "LR",
+   "arm": "WOBJ",
+   "scenario": "P75",
+   "sampler_seed": 42,
+   "stage": 2,
+   "noise": false
+  },
+  {
+   "id": "LR.WOBJ.EQ",
+   "model": "LR",
+   "arm": "WOBJ",
+   "scenario": "EQ",
+   "sampler_seed": 42,
+   "stage": 2,
+   "noise": false
+  },
+  {
+   "id": "LGBMN.WNORM.EQ",
+   "model": "LGBMN",
+   "arm": "WNORM",
+   "scenario": "EQ",
+   "sampler_seed": 42,
+   "stage": 2,
+   "noise": false
+  },
+  {
+   "id": "LR.RUP.ONE1",
+   "model": "LR",
+   "arm": "RUP",
+   "scenario": "ONE1",
+   "sampler_seed": 42,
+   "stage": 3,
+   "noise": false
+  },
+  {
+   "id": "LR.RUP.ONE3",
+   "model": "LR",
+   "arm": "RUP",
+   "scenario": "ONE3",
+   "sampler_seed": 42,
+   "stage": 3,
+   "noise": false
+  },
+  {
+   "id": "LR.RDN.P25",
+   "model": "LR",
+   "arm": "RDN",
+   "scenario": "P25",
+   "sampler_seed": 42,
+   "stage": 3,
+   "noise": false
+  },
+  {
+   "id": "LR.RDN.P50",
+   "model": "LR",
+   "arm": "RDN",
+   "scenario": "P50",
+   "sampler_seed": 42,
+   "stage": 3,
+   "noise": false
+  },
+  {
+   "id": "LR.RDN.P75",
+   "model": "LR",
+   "arm": "RDN",
+   "scenario": "P75",
+   "sampler_seed": 42,
+   "stage": 3,
+   "noise": false
+  },
+  {
+   "id": "LGBMN.RUP.P50",
+   "model": "LGBMN",
+   "arm": "RUP",
+   "scenario": "P50",
+   "sampler_seed": 42,
+   "stage": 3,
+   "noise": false
+  },
+  {
+   "id": "LGBMN.RUP.EQ",
+   "model": "LGBMN",
+   "arm": "RUP",
+   "scenario": "EQ",
+   "sampler_seed": 42,
+   "stage": 3,
+   "noise": false
+  },
+  {
+   "id": "LR.RUP.P50.s101",
+   "model": "LR",
+   "arm": "RUP",
+   "scenario": "P50",
+   "sampler_seed": 101,
+   "stage": 3,
+   "noise": true
+  },
+  {
+   "id": "LR.RUP.P50.s202",
+   "model": "LR",
+   "arm": "RUP",
+   "scenario": "P50",
+   "sampler_seed": 202,
+   "stage": 3,
+   "noise": true
+  },
+  {
+   "id": "LR.RDN.P50.s101",
+   "model": "LR",
+   "arm": "RDN",
+   "scenario": "P50",
+   "sampler_seed": 101,
+   "stage": 3,
+   "noise": true
+  },
+  {
+   "id": "LR.RDN.P50.s202",
+   "model": "LR",
+   "arm": "RDN",
+   "scenario": "P50",
+   "sampler_seed": 202,
+   "stage": 3,
+   "noise": true
+  }
+ ],
+ "controls": [
+  {
+   "id": "c1",
+   "stage": 1,
+   "model": "LR",
+   "arm": "ORI",
+   "scenario": "ORI",
+   "folds": [
+    0,
+    2
+   ],
+   "reference": "LR.ORI",
+   "reuse_cell": "LR.ORI"
+  },
+  {
+   "id": "c4",
+   "stage": 1,
+   "model": "LGBMN",
+   "arm": "ORI",
+   "scenario": "ORI",
+   "folds": [
+    0,
+    2
+   ],
+   "reference": "LGBMN.ORI",
+   "reuse_cell": "LGBMN.ORI"
+  },
+  {
+   "id": "c2",
+   "stage": 2,
+   "model": "LR",
+   "arm": "RUP",
+   "scenario": "EQ",
+   "folds": [
+    0,
+    2
+   ],
+   "reference": "LR.RUP.EQ",
+   "reuse_cell": "LR.RUP.EQ"
+  },
+  {
+   "id": "c3",
+   "stage": 3,
+   "model": "LR",
+   "arm": "RDN",
+   "scenario": "EQ",
+   "folds": [
+    0,
+    2
+   ],
+   "reference": "LR.RDN.EQ",
+   "reuse_cell": "LR.RDN.EQ"
+  }
+ ],
+ "stage_fits": {
+  "1": 30,
+  "2": 25,
+  "3": 55
+ },
+ "max_new_fits": 110,
+ "max_control_fits": 8,
+ "automatic_retries": 0,
+ "manual_recovery_max": 1,
+ "stop_on_nonconvergence": true,
+ "outer_parallel_jobs": 1,
+ "control_criteria": {
+  "probability_atol": 1e-09,
+  "labels_identical": true
+ },
+ "checkpoint": {
+  "model_reload_probability_atol": 1e-12,
+  "csv_float_format": "%.17g",
+  "backup_dir": "backup"
+ },
+ "weights": {
+  "WOBJ": "t_c/n_c (no normalisation)",
+  "WNORM": "(t_c/n_c)*N/sum(t)",
+  "w_norm_eq_vs_balanced_rtol": 1e-12
+ },
+ "references": [
+  {
+   "name": "LR.ORI",
+   "kind": "oof",
+   "role": "control_target",
+   "path": "local_reproduction/20261014_01/runs/personal_none/lr/oof_predictions.csv.gz",
+   "sha256": "171db272dab314e14f360fd267f8d8939f9d14d0f0d69ed9342a2a83288fd8a4",
+   "cv_mean": 0.683787,
+   "error31": 474,
+   "description": "LR no sampling (personal_none)"
+  },
+  {
+   "name": "LR.RUP.EQ",
+   "kind": "oof",
+   "role": "control_target",
+   "path": "local_reproduction/20261014_01/runs/personal_random_over/lr/oof_predictions.csv.gz",
+   "sha256": "ba8d70e5563cb45ba2e17d37eee676d53a7b64103c2599215557bf54cb88754d",
+   "cv_mean": 0.663367,
+   "error31": 2495,
+   "description": "LR ROS all grades to the majority count (personal_random_over)"
+  },
+  {
+   "name": "LR.RDN.EQ",
+   "kind": "oof",
+   "role": "control_target",
+   "path": "local_reproduction/20261014_01/runs/lr_rus/lr/oof_predictions.csv.gz",
+   "sha256": "498900f588581866b69fc6619e7f012195c2dacd0e9f89ec111c1f8a61fefe7e",
+   "cv_mean": 0.64624,
+   "error31": 2705,
+   "description": "LR RUS all grades to the minority count (lr_rus)"
+  },
+  {
+   "name": "LR.BAL",
+   "kind": "oof",
+   "role": "reference_uncontrolled",
+   "path": "local_reproduction/20261014_01/runs/lr_balanced/lr/oof_predictions.csv.gz",
+   "sha256": "0d13a16dafd4ef78fa61dde48d45168dd9746659eab3cfea87f05e5fef108805",
+   "cv_mean": 0.664958,
+   "error31": 2457,
+   "description": "LR class_weight='balanced' (lr_balanced)"
+  },
+  {
+   "name": "LR.SMOTE.EQ",
+   "kind": "oof",
+   "role": "reference_uncontrolled",
+   "path": "local_reproduction/20261014_01/runs/personal_context_smote/lr/oof_predictions.csv.gz",
+   "sha256": "9fc530c90fc93660e968b9dd9ad27af84f70382c5d605f0357a35d4e8fdf0a5d",
+   "cv_mean": 0.663338,
+   "error31": 2496,
+   "description": "LR constrained SMOTE, all grades equal (personal_context_smote)"
+  },
+  {
+   "name": "LR_C",
+   "kind": "oof",
+   "role": "reference_column",
+   "path": "local_reproduction/20261014_01/runs/age995_abc/C/lr/oof_predictions.csv.gz",
+   "sha256": "0601965653000c121cdb22f36b8089a7837b1be2c088931aca6f0b0f9b71e425",
+   "cv_mean": 0.68886,
+   "error31": 455,
+   "description": "local reproduction LR-C (age995 C pipeline); different preprocessing, not a single-factor comparison"
+  },
+  {
+   "name": "LGBMN.ORI",
+   "kind": "folds",
+   "role": "control_target",
+   "dir": "local_reproduction/T8_20261014_native_cat/run/stratified/N",
+   "fold_sha256": [
+    "a7cf2248e803d3bf72407a7d885b66fb10dff3fd7ccbbc5af5670e65b33d88c7",
+    "d517f50f840458990845742a0e316aa0d6bca28a757e593cbb297894902d3617",
+    "9bf4d2cd7252ea001a6554cf6a576d75b8051e650fed2b779ddad7d6c240fc63",
+    "d07a6c2451b97aa5b38ced5397407d5a4f059095351b51b4564e11f31d250492",
+    "c1c6c862d7b2ccbd24557bd7c58864f4b7a9c4753bd27bf5c004e15089fef553"
+   ],
+   "cv_mean": 0.699342,
+   "error31": 530,
+   "design_path": "local_reproduction/T8_20261014_native_cat/run/design.json",
+   "design_sha256": "8f6f58ac116643ea416e7e35cbcc1a9db49870432160fc080a8f4e00f4f386e8",
+   "description": "T8 LGBM-N stratified (no sampling, no weights)"
+  }
+ ],
+ "reference_cv_mean_tolerance": 5e-07,
+ "environment": {
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "scipy": "1.17.0",
+  "scikit-learn": "1.8.0",
+  "lightgbm": "4.6.0",
+  "joblib": "1.5.3",
+  "threadpoolctl": "3.6.0",
+  "imbalanced-learn": "0.14.1"
+ },
+ "manifest_sha256": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721",
+ "min_free_gb": 10,
+ "thresholds": {
+  "T_F1": 0.003,
+  "T_win": 4,
+  "T_31": 0.003,
+  "T_R3": 0.02,
+  "C_keep": -0.003,
+  "C_small": -0.01,
+  "eps": 1e-12
+ },
+ "primary_metric": "unweighted mean of five fold Macro F1 (labels 1,2,3)",
+ "std_ddof": 1,
+ "holdout_access": false,
+ "automatic_model_replacement": false
+}
