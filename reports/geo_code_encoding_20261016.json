@@ -1,0 +1,5358 @@
+{
+ "study_id": "T31_geo_code_encoding_v1",
+ "report_version": "geo_code_encoding_20261016",
+ "created_for": "reports/GEO_CODE_ENCODING_20261016.md",
+ "status": "감사 PASS_T31 · 공개 보고 독립 검토 반영",
+ "public_report_independent_review": {
+  "review_id": "review_t31_report_v1",
+  "verdict": "PASS_WITH_DEFECTS",
+  "high": 0,
+  "medium": 1,
+  "low": 10,
+  "reflected": true,
+  "reviewed_target_md_sha256": "eaa9487721363a559b96829e05508e248454b7e086a94c75540e58b1a5595078",
+  "reviewed_target_json_sha256": "762a8c1e8ace44d0588359585ef92cabca3471be891e6f55b154c8637ffd6b59",
+  "review_file_sha256": "2ab2b7d37c6bcb4d4f56b88bebdf71e21a9f8b42c198eaaa13e7cfc9c9f3d2bb",
+  "note": "검토는 반영 전 판을 대상으로 했고 지적(M1, L1~L9)을 이 판에 모두 반영했다. L10(RESEARCH_STATUS·PLAN 갱신)은 컨트롤 타워 담당이다."
+ },
+ "plan_sha256": "bb792e626ba3015044d6470f22d5d2b58c488d03d07266a6727fe18be4c3b22c",
+ "design_sha256": "9d7deeb77ec83780eb932897e45f0b54135b3b28f6cb6ee99878d1e5bae2715c",
+ "code_commit": "d71bf5fbca4114a9466300df8644cce556915ca0",
+ "holdout_accessed": false,
+ "scheme": "stratified (Stratified 5-Fold, seed 42, split_manifest.csv SHA 7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721)",
+ "guide_line": "과제 주제 가이드 심화 항목(지역 코드를 수치로 처리한 경우와 범주형으로 처리한 경우의 성능·계산량 비교). 주 평가(개발 Stratified 5-Fold seed 42) 결과를 낸다. 판정 분할=층화 seed 42 5-Fold 하나뿐. geo2/geo1 새 학습 없음.",
+ "delta_definition": "Δ = 후보 Fold Macro F1 - 기준 Fold Macro F1(같은 Fold). SD는 ddof=1.",
+ "auxiliary_marker": "접미사 _auxiliary_not_a_preregistered_verdict 가 붙은 필드와 MD에서 '사전등록 판정 아님'이 붙은 표·문장은 보조 관찰이며 사전등록 판정(성능 태그: Fold 평균 Δ·후보 승 Fold 수·ΔRecall3, 계산량 태그: Fold 비율 중앙값)에 쓰이지 않는다.",
+ "counts": {
+  "fits": 55,
+  "attempts": 55,
+  "retries": 0,
+  "measurement_only_runs": 5,
+  "controls": 6,
+  "fit_all_wall_seconds_from_run_log": 3690.3
+ },
+ "audit": {
+  "status": "PASS_T31",
+  "receipt_file_sha256": "3ab78073ca9885c24e0f92e41fbb850b34a8aeb0fb53e01f7831366634a48041",
+  "receipt_internal_sha256": "166a62bb25b495676af6fcf15997ab820c3de692ba92b69d857db8fc04301cad",
+  "independent_core_sha256": "ac11093239dab14b9b3e7b5fe9dc752a212da5319acb82e7da4c9fbbe6e6fbb8",
+  "checks_run": 736,
+  "issues": 0,
+  "warnings": 16,
+  "failing_stages": 0,
+  "new_classifier_fits": 0,
+  "repository_runner_imports": 0,
+  "forbidden_paths_touched": 0,
+  "paths_read": 909,
+  "tracked_files": 889,
+  "joblib_restricted_loads": 95,
+  "joblib_stubbed_class_count": 6,
+  "joblib_blocked_class_count": 0,
+  "analysis_recomputed_match": true,
+  "analysis_json_sha256_at_audit": "61dd448dc3894a1261b67cfd8b5298f4b7cad4302eb5f40ce4b2447d8da0f4cb",
+  "analysis_json_sha256_matches_report_input": true,
+  "ledger_noisy_set_matches_analysis": true,
+  "noisy_exposure_by_comparison_matches": true,
+  "stored_model_reinference_bit_identical_fits": 55,
+  "lr_gradient_max_abs": "9.974e-05",
+  "lr_gradient_atol": 0.0002,
+  "cpu_wall_ratio_min": 0.920177,
+  "cpu_wall_ratio_max_allowed": 2.0,
+  "source_blob_match_modes": {
+   "exact": 21,
+   "crlf_checkout": 3
+  },
+  "target_commit": "26fe10e40a4ff3e07eb8e9f2e3aba7a8ae3788f6",
+  "at_utc": "2026-10-16T06:57:44.061564+00:00",
+  "wall_seconds": 351.9,
+  "expected_noisy_option_note": "조정자 전달: 감사는 --expected-noisy로 noisy 14건 집합을 정확히 지정해 실행했다.",
+  "method_note": "학습 행렬이 저장돼 있지 않아 LR은 저장 계수 기울기, 트리 모델은 루트·leaf_count와 재구성 학습 Macro F1로 간접 증명(영수증 boundary).",
+  "warnings_detail": {
+   "fit_warnings": {
+    "count": 15,
+    "keys": [
+     "LGBM_NAT/0",
+     "LGBM_NAT/1",
+     "LGBM_NAT/2",
+     "LGBM_NAT/3",
+     "LGBM_NAT/4",
+     "LGBM_NUM/0",
+     "LGBM_NUM/1",
+     "LGBM_NUM/2",
+     "LGBM_NUM/3",
+     "LGBM_NUM/4",
+     "LGBM_OH/0",
+     "LGBM_OH/1",
+     "LGBM_OH/2",
+     "LGBM_OH/3",
+     "LGBM_OH/4"
+    ],
+    "stage": "predict",
+    "category": "UserWarning",
+    "message": "X does not have valid feature names, but LGBMClassifier was fitted with feature names",
+    "source": "각 fit의 warnings 기록(analysis.json per_fold_records[].warnings)을 감사가 옮긴 것; LGBM 15 fit 각 1건, 다른 모델 0건"
+   },
+   "noisy_fits_kept_in_analysis": {
+    "count": 1,
+    "keys": [
+     "LGBM_NAT/3",
+     "LGBM_NAT/4",
+     "LGBM_NUM/3",
+     "LGBM_NUM/4",
+     "LGBM_OH/4",
+     "LR_NUM/0",
+     "LR_NUM/1",
+     "LR_NUM/2",
+     "LR_NUM/3",
+     "LR_OH/0",
+     "LR_OH/1",
+     "LR_OH/2",
+     "LR_OH/3",
+     "LR_OH/4"
+    ],
+    "note": "설계 규칙: noisy는 표시하되 폐기하지 않는다. 분석(계산량 비율)에 포함되어 있다."
+   }
+  }
+ },
+ "unit_tests": "tests.test_geo_code_encoding 62개 통과·skip 0, 전체 discover 1,155개 OK·skip 33 (조정자가 전달한 값을 옮긴 것이다. 이 보고서 작성 중 다시 실행하지 않았다.)",
+ "finished_at_utc": "2026-10-16T05:48:48.184610+00:00",
+ "input_sha256": {
+  "analysis.json": {
+   "path": "local_reproduction/T31_20261016_geo_code_encoding/run/analysis.json",
+   "sha256": "61dd448dc3894a1261b67cfd8b5298f4b7cad4302eb5f40ce4b2447d8da0f4cb"
+  },
+  "design.json": {
+   "path": "local_reproduction/T31_20261016_geo_code_encoding/run/design.json",
+   "sha256": "9d7deeb77ec83780eb932897e45f0b54135b3b28f6cb6ee99878d1e5bae2715c"
+  },
+  "design_seal.json": {
+   "path": "local_reproduction/T31_20261016_geo_code_encoding/run/design_seal.json",
+   "sha256": "7ef37b87c879a848ddd8291a969d558cb51c0e6600ccdaced47fe527e70a26f6"
+  },
+  "ledger.json": {
+   "path": "local_reproduction/T31_20261016_geo_code_encoding/run/ledger.json",
+   "sha256": "0986a856091256853124c159885660db7496f9febfbd60a024825e5640594109"
+  },
+  "T31_GEO_CODE_ENCODING_PLAN.md": {
+   "path": "docs/T31_GEO_CODE_ENCODING_PLAN.md",
+   "sha256": "bb792e626ba3015044d6470f22d5d2b58c488d03d07266a6727fe18be4c3b22c"
+  },
+  "t31_audit_result_v1.json": {
+   "path": "local_reproduction/session_20261016_claude/t31_audit/t31_audit_result_v1.json",
+   "sha256": "3ab78073ca9885c24e0f92e41fbb850b34a8aeb0fb53e01f7831366634a48041"
+  }
+ },
+ "environment": {
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "scipy": "1.17.0",
+  "scikit-learn": "1.8.0",
+  "lightgbm": "4.6.0",
+  "joblib": "1.5.3",
+  "threadpoolctl": "3.6.0",
+  "psutil": "7.2.2",
+  "logical_cores": 24,
+  "ram_total_gib": 31.434929,
+  "ac_connected": true,
+  "threads": 1,
+  "process_per_fit": true
+ },
+ "rule": {
+  "delta_threshold": 0.003,
+  "wins_higher_min": 4,
+  "wins_lower_max": 1,
+  "recall3_delta_min": -0.01,
+  "safety_3to1_relative": 0.1,
+  "safety_3to1_absolute": 30,
+  "ratio_lower_max": 0.5,
+  "ratio_higher_min": 2.0,
+  "memory_min_increment_mib": 16.0,
+  "idle_cpu_threshold_percent": 10.0,
+  "idle_max_wait_seconds": 60.0
+ },
+ "arms": {
+  "LR_OH": {
+   "geo_representation": "OH",
+   "model": "LR",
+   "fold_macro_f1": [
+    0.689102,
+    0.688577,
+    0.689911,
+    0.690328,
+    0.686381
+   ],
+   "fold_macro_f1_mean": 0.68886,
+   "fold_macro_f1_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.001545,
+   "recall3_pooled": 0.640067,
+   "error31_pooled": 455,
+   "rate31_pooled": 0.006521,
+   "macro_f1_pooled_auxiliary_not_a_preregistered_verdict": 0.688869,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.741937,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.67089,
+    0.745916,
+    0.751586
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.518981,
+    0.839647,
+    0.640067
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.585239,
+    0.790011,
+    0.691358
+   ],
+   "class_support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     10431,
+     9264,
+     404
+    ],
+    [
+     4662,
+     99588,
+     14357
+    ],
+    [
+     455,
+     24659,
+     44660
+    ]
+   ],
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 24659,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.353412,
+   "age995_macro_f1_auxiliary_not_a_preregistered_verdict": 0.672912,
+   "train_macro_f1_auxiliary_not_a_preregistered_verdict": [
+    0.717456,
+    0.71759,
+    0.71665,
+    0.717344,
+    0.717502
+   ],
+   "unseen_geo_subgroup_auxiliary_not_a_preregistered_verdict": [
+    {
+     "fold": 0,
+     "n": 306,
+     "macro_f1": 0.333415
+    },
+    {
+     "fold": 1,
+     "n": 287,
+     "macro_f1": 0.444251
+    },
+    {
+     "fold": 2,
+     "n": 333,
+     "macro_f1": 0.365522
+    },
+    {
+     "fold": 3,
+     "n": 267,
+     "macro_f1": 0.38115
+    },
+    {
+     "fold": 4,
+     "n": 314,
+     "macro_f1": 0.388856
+    }
+   ],
+   "matrix_facts_auxiliary_not_a_preregistered_verdict": {
+    "n_encoded_columns": [
+     12594,
+     12609,
+     12571,
+     12624,
+     12582
+    ],
+    "container": "csr",
+    "train_nnz": [
+     2951023,
+     2950434,
+     2950712,
+     2950506,
+     2950581
+    ],
+    "train_density": [
+     0.001405,
+     0.001403,
+     0.001407,
+     0.001401,
+     0.001406
+    ],
+    "train_matrix_storage_bytes": [
+     24275324,
+     24270612,
+     24272836,
+     24271188,
+     24271788
+    ],
+    "dense_float32_estimate_bytes": [
+     8401910784,
+     8411917824,
+     8386566656,
+     8421924864,
+     8393905152
+    ]
+   },
+   "noisy_per_fold": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "compute_per_fold_auxiliary_not_a_preregistered_verdict": {
+    "rss_increment_mib_predict_note": "예측 구간 RSS 증가분은 55 fit 모두 0.0이라 정보가 없다(예측 구간은 43/55 fit이 sampling_limited).",
+    "predict_milliseconds_per_1000_rows": [
+     0.176549,
+     0.189826,
+     0.161198,
+     0.140323,
+     0.145215
+    ],
+    "encode_seconds": [
+     1.299175,
+     1.235118,
+     1.236617,
+     1.150476,
+     1.216285
+    ],
+    "fit_seconds": [
+     13.197667,
+     13.182841,
+     13.539465,
+     12.395786,
+     13.151702
+    ],
+    "predict_seconds": [
+     0.007361,
+     0.007915,
+     0.006721,
+     0.005851,
+     0.006055
+    ],
+    "total_seconds": [
+     14.504204,
+     14.425874,
+     14.782804,
+     13.552113,
+     14.374041
+    ],
+    "fit_cpu_wall_ratio": [
+     0.983839,
+     0.976648,
+     0.982083,
+     0.983197,
+     0.983713
+    ],
+    "rss_increment_mib_encode_train": [
+     143.695312,
+     125.15625,
+     132.523438,
+     139.53125,
+     136.992188
+    ],
+    "rss_increment_mib_predict": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "wset_floor_limited": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "model_total_bytes": [
+     401839,
+     402284,
+     401117,
+     402751,
+     401458
+    ],
+    "classifier_bytes": [
+     303119,
+     303487,
+     302575,
+     303839,
+     302831
+    ],
+    "preprocessor_bytes": [
+     98720,
+     98797,
+     98542,
+     98912,
+     98627
+    ]
+   },
+   "compute_fold_mean_auxiliary_not_a_preregistered_verdict": {
+    "encode_seconds": 1.227534,
+    "fit_seconds": 13.093492,
+    "predict_seconds": 0.006781,
+    "total_seconds": 14.327807,
+    "rss_increment_mib_encode_train": 135.579688,
+    "model_total_bytes": 401889.8
+   },
+   "geo_train_unique_per_fold_auxiliary_not_a_preregistered_verdict": [
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1402,
+     "geo_level_3_id": 11095
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1404,
+     "geo_level_3_id": 11108
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11077
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1401,
+     "geo_level_3_id": 11126
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11088
+    }
+   ],
+   "oof_sha256": "1f69626493dd941525d6fbcad784b77fc7b33ab4da0d6a651fa604f1866d6e43",
+   "internals_auxiliary_not_a_preregistered_verdict": {
+    "geo_abs_coef_share": [
+     0.996744,
+     0.99681,
+     0.996547,
+     0.996848,
+     0.996775
+    ],
+    "n_iter": [
+     591,
+     595,
+     566,
+     578,
+     584
+    ]
+   }
+  },
+  "LR_NUM": {
+   "geo_representation": "NUM",
+   "model": "LR",
+   "fold_macro_f1": [
+    0.470598,
+    0.472836,
+    0.47524,
+    0.474868,
+    0.465221
+   ],
+   "fold_macro_f1_mean": 0.471752,
+   "fold_macro_f1_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.004094,
+   "recall3_pooled": 0.196621,
+   "error31_pooled": 353,
+   "rate31_pooled": 0.005059,
+   "macro_f1_pooled_auxiliary_not_a_preregistered_verdict": 0.471775,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.593894,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.583114,
+    0.600838,
+    0.550588
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.320265,
+    0.87397,
+    0.196621
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.41345,
+    0.712112,
+    0.289764
+   ],
+   "class_support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     6437,
+     13163,
+     499
+    ],
+    [
+     4249,
+     103659,
+     10699
+    ],
+    [
+     353,
+     55702,
+     13719
+    ]
+   ],
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 55702,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.79832,
+   "age995_macro_f1_auxiliary_not_a_preregistered_verdict": 0.390196,
+   "train_macro_f1_auxiliary_not_a_preregistered_verdict": [
+    0.472442,
+    0.471679,
+    0.472961,
+    0.472888,
+    0.474057
+   ],
+   "unseen_geo_subgroup_auxiliary_not_a_preregistered_verdict": [
+    {
+     "fold": 0,
+     "n": 306,
+     "macro_f1": 0.294952
+    },
+    {
+     "fold": 1,
+     "n": 287,
+     "macro_f1": 0.280114
+    },
+    {
+     "fold": 2,
+     "n": 333,
+     "macro_f1": 0.346824
+    },
+    {
+     "fold": 3,
+     "n": 267,
+     "macro_f1": 0.319078
+    },
+    {
+     "fold": 4,
+     "n": 314,
+     "macro_f1": 0.30963
+    }
+   ],
+   "matrix_facts_auxiliary_not_a_preregistered_verdict": {
+    "n_encoded_columns": [
+     69,
+     69,
+     69,
+     69,
+     69
+    ],
+    "container": "csr",
+    "train_nnz": [
+     2951023,
+     2950434,
+     2950712,
+     2950506,
+     2950581
+    ],
+    "train_density": [
+     0.25643,
+     0.256379,
+     0.256403,
+     0.256385,
+     0.256392
+    ],
+    "train_matrix_storage_bytes": [
+     24275324,
+     24270612,
+     24272836,
+     24271188,
+     24271788
+    ],
+    "dense_float32_estimate_bytes": [
+     46032384,
+     46032384,
+     46032384,
+     46032384,
+     46032384
+    ]
+   },
+   "noisy_per_fold": [
+    true,
+    true,
+    true,
+    true,
+    false
+   ],
+   "compute_per_fold_auxiliary_not_a_preregistered_verdict": {
+    "rss_increment_mib_predict_note": "예측 구간 RSS 증가분은 55 fit 모두 0.0이라 정보가 없다(예측 구간은 43/55 fit이 sampling_limited).",
+    "predict_milliseconds_per_1000_rows": [
+     0.166925,
+     0.14215,
+     0.1405,
+     0.177619,
+     0.138167
+    ],
+    "encode_seconds": [
+     1.237349,
+     1.248625,
+     1.19393,
+     1.249114,
+     1.230297
+    ],
+    "fit_seconds": [
+     2.409736,
+     2.433147,
+     2.464412,
+     3.29338,
+     2.333227
+    ],
+    "predict_seconds": [
+     0.00696,
+     0.005927,
+     0.005858,
+     0.007406,
+     0.005761
+    ],
+    "total_seconds": [
+     3.654045,
+     3.687699,
+     3.664201,
+     4.5499,
+     3.569285
+    ],
+    "fit_cpu_wall_ratio": [
+     0.985585,
+     0.988946,
+     0.99542,
+     0.982084,
+     0.957633
+    ],
+    "rss_increment_mib_encode_train": [
+     139.929688,
+     137.445312,
+     128.484375,
+     112.140625,
+     117.933594
+    ],
+    "rss_increment_mib_predict": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "wset_floor_limited": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "model_total_bytes": [
+     12960,
+     12960,
+     12960,
+     12960,
+     12960
+    ],
+    "classifier_bytes": [
+     2527,
+     2527,
+     2527,
+     2527,
+     2527
+    ],
+    "preprocessor_bytes": [
+     10433,
+     10433,
+     10433,
+     10433,
+     10433
+    ]
+   },
+   "compute_fold_mean_auxiliary_not_a_preregistered_verdict": {
+    "encode_seconds": 1.231863,
+    "fit_seconds": 2.586781,
+    "predict_seconds": 0.006382,
+    "total_seconds": 3.825026,
+    "rss_increment_mib_encode_train": 127.186719,
+    "model_total_bytes": 12960.0
+   },
+   "geo_train_unique_per_fold_auxiliary_not_a_preregistered_verdict": [
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1402,
+     "geo_level_3_id": 11095
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1404,
+     "geo_level_3_id": 11108
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11077
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1401,
+     "geo_level_3_id": 11126
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11088
+    }
+   ],
+   "oof_sha256": "5a81700655044e9ee6cb4f9bc62f8e98c1280102cf0dcb6b3203a6d569b657c2",
+   "internals_auxiliary_not_a_preregistered_verdict": {
+    "geo_abs_coef_share": [
+     0.010875,
+     0.009892,
+     0.010462,
+     0.009661,
+     0.010209
+    ],
+    "n_iter": [
+     121,
+     130,
+     133,
+     144,
+     120
+    ]
+   },
+   "num_equivalence_per_fold": [
+    {
+     "valid_vs_LR_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_LR_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_LR_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_LR_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_LR_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    }
+   ],
+   "num_equivalence_fold_json_extras_auxiliary_not_a_preregistered_verdict": {
+    "ok": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "geo_values_valid_max_abs_deviation": [
+     0.000371,
+     0.000549,
+     0.000481,
+     0.00031,
+     0.000348
+    ],
+    "train_only_ok": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   }
+  },
+  "DT_OH": {
+   "geo_representation": "OH",
+   "model": "DT",
+   "fold_macro_f1": [
+    0.600588,
+    0.595412,
+    0.594884,
+    0.58843,
+    0.591874
+   ],
+   "fold_macro_f1_mean": 0.594238,
+   "fold_macro_f1_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.004512,
+   "recall3_pooled": 0.515708,
+   "error31_pooled": 165,
+   "rate31_pooled": 0.002365,
+   "macro_f1_pooled_auxiliary_not_a_preregistered_verdict": 0.594287,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.692882,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.691531,
+    0.683409,
+    0.721594
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.299816,
+    0.863718,
+    0.515708
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.418283,
+    0.763056,
+    0.601521
+   ],
+   "class_support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     6026,
+     13831,
+     242
+    ],
+    [
+     2523,
+     102443,
+     13641
+    ],
+    [
+     165,
+     33626,
+     35983
+    ]
+   ],
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 33626,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.481927,
+   "age995_macro_f1_auxiliary_not_a_preregistered_verdict": 0.49484,
+   "train_macro_f1_auxiliary_not_a_preregistered_verdict": [
+    0.609414,
+    0.604331,
+    0.603659,
+    0.604497,
+    0.611187
+   ],
+   "unseen_geo_subgroup_auxiliary_not_a_preregistered_verdict": [
+    {
+     "fold": 0,
+     "n": 306,
+     "macro_f1": 0.310974
+    },
+    {
+     "fold": 1,
+     "n": 287,
+     "macro_f1": 0.270531
+    },
+    {
+     "fold": 2,
+     "n": 333,
+     "macro_f1": 0.345369
+    },
+    {
+     "fold": 3,
+     "n": 267,
+     "macro_f1": 0.290229
+    },
+    {
+     "fold": 4,
+     "n": 314,
+     "macro_f1": 0.284072
+    }
+   ],
+   "matrix_facts_auxiliary_not_a_preregistered_verdict": {
+    "n_encoded_columns": [
+     12593,
+     12608,
+     12570,
+     12623,
+     12581
+    ],
+    "container": "csr",
+    "train_nnz": [
+     2920131,
+     2919502,
+     2919696,
+     2919575,
+     2919732
+    ],
+    "train_density": [
+     0.00139,
+     0.001388,
+     0.001393,
+     0.001387,
+     0.001391
+    ],
+    "train_matrix_storage_bytes": [
+     24028188,
+     24023156,
+     24024708,
+     24023740,
+     24024996
+    ],
+    "dense_float32_estimate_bytes": [
+     8401243648,
+     8411250688,
+     8385899520,
+     8421257728,
+     8393238016
+    ]
+   },
+   "noisy_per_fold": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "compute_per_fold_auxiliary_not_a_preregistered_verdict": {
+    "rss_increment_mib_predict_note": "예측 구간 RSS 증가분은 55 fit 모두 0.0이라 정보가 없다(예측 구간은 43/55 fit이 sampling_limited).",
+    "predict_milliseconds_per_1000_rows": [
+     0.072966,
+     0.054432,
+     0.050935,
+     0.065565,
+     0.067417
+    ],
+    "encode_seconds": [
+     1.139434,
+     1.102492,
+     1.011626,
+     1.171047,
+     1.158188
+    ],
+    "fit_seconds": [
+     1.732003,
+     1.649931,
+     1.42597,
+     2.058606,
+     1.893638
+    ],
+    "predict_seconds": [
+     0.003042,
+     0.00227,
+     0.002124,
+     0.002734,
+     0.002811
+    ],
+    "total_seconds": [
+     2.87448,
+     2.754693,
+     2.439719,
+     3.232386,
+     3.054637
+    ],
+    "fit_cpu_wall_ratio": [
+     0.920177,
+     0.928069,
+     0.997128,
+     0.956351,
+     0.981906
+    ],
+    "rss_increment_mib_encode_train": [
+     110.40625,
+     111.867188,
+     98.09375,
+     101.921875,
+     112.964844
+    ],
+    "rss_increment_mib_predict": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "wset_floor_limited": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "model_total_bytes": [
+     243789,
+     237178,
+     244315,
+     239229,
+     234368
+    ],
+    "classifier_bytes": [
+     146929,
+     140241,
+     147633,
+     142177,
+     137601
+    ],
+    "preprocessor_bytes": [
+     96860,
+     96937,
+     96682,
+     97052,
+     96767
+    ]
+   },
+   "compute_fold_mean_auxiliary_not_a_preregistered_verdict": {
+    "encode_seconds": 1.116557,
+    "fit_seconds": 1.75203,
+    "predict_seconds": 0.002596,
+    "total_seconds": 2.871183,
+    "rss_increment_mib_encode_train": 107.050781,
+    "model_total_bytes": 239775.8
+   },
+   "geo_train_unique_per_fold_auxiliary_not_a_preregistered_verdict": [
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1402,
+     "geo_level_3_id": 11095
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1404,
+     "geo_level_3_id": 11108
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11077
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1401,
+     "geo_level_3_id": 11126
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11088
+    }
+   ],
+   "oof_sha256": "151d702aff6123cb1a4dc411a4cffd3a68e1839a880ea79ea7c75342db0bbd40",
+   "internals_auxiliary_not_a_preregistered_verdict": {
+    "geo_importance_sum": [
+     0.681973,
+     0.680424,
+     0.682857,
+     0.688634,
+     0.689087
+    ],
+    "node_count": [
+     1655,
+     1579,
+     1663,
+     1601,
+     1549
+    ]
+   }
+  },
+  "DT_NUM": {
+   "geo_representation": "NUM",
+   "model": "DT",
+   "fold_macro_f1": [
+    0.619917,
+    0.615579,
+    0.618938,
+    0.610683,
+    0.6068
+   ],
+   "fold_macro_f1_mean": 0.614384,
+   "fold_macro_f1_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.005568,
+   "recall3_pooled": 0.546823,
+   "error31_pooled": 426,
+   "rate31_pooled": 0.006105,
+   "macro_f1_pooled_auxiliary_not_a_preregistered_verdict": 0.614504,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.690076,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.616575,
+    0.694353,
+    0.696063
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.388676,
+    0.825423,
+    0.546823
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.476792,
+    0.754236,
+    0.612483
+   ],
+   "class_support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     7812,
+     11901,
+     386
+    ],
+    [
+     4432,
+     97901,
+     16274
+    ],
+    [
+     426,
+     31194,
+     38154
+    ]
+   ],
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 31194,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.447072,
+   "age995_macro_f1_auxiliary_not_a_preregistered_verdict": 0.549379,
+   "train_macro_f1_auxiliary_not_a_preregistered_verdict": [
+    0.653373,
+    0.649205,
+    0.654877,
+    0.650601,
+    0.647671
+   ],
+   "unseen_geo_subgroup_auxiliary_not_a_preregistered_verdict": [
+    {
+     "fold": 0,
+     "n": 306,
+     "macro_f1": 0.374215
+    },
+    {
+     "fold": 1,
+     "n": 287,
+     "macro_f1": 0.379912
+    },
+    {
+     "fold": 2,
+     "n": 333,
+     "macro_f1": 0.368558
+    },
+    {
+     "fold": 3,
+     "n": 267,
+     "macro_f1": 0.370111
+    },
+    {
+     "fold": 4,
+     "n": 314,
+     "macro_f1": 0.4087
+    }
+   ],
+   "matrix_facts_auxiliary_not_a_preregistered_verdict": {
+    "n_encoded_columns": [
+     68,
+     68,
+     68,
+     68,
+     68
+    ],
+    "container": "csr",
+    "train_nnz": [
+     2917532,
+     2916886,
+     2917116,
+     2916956,
+     2917158
+    ],
+    "train_density": [
+     0.257248,
+     0.257191,
+     0.257212,
+     0.257197,
+     0.257215
+    ],
+    "train_matrix_storage_bytes": [
+     24007396,
+     24002228,
+     24004068,
+     24002788,
+     24004404
+    ],
+    "dense_float32_estimate_bytes": [
+     45365248,
+     45365248,
+     45365248,
+     45365248,
+     45365248
+    ]
+   },
+   "noisy_per_fold": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "compute_per_fold_auxiliary_not_a_preregistered_verdict": {
+    "rss_increment_mib_predict_note": "예측 구간 RSS 증가분은 55 fit 모두 0.0이라 정보가 없다(예측 구간은 43/55 fit이 sampling_limited).",
+    "predict_milliseconds_per_1000_rows": [
+     0.078552,
+     0.074388,
+     0.076216,
+     0.078559,
+     0.078792
+    ],
+    "encode_seconds": [
+     1.171004,
+     1.135655,
+     1.242597,
+     1.089867,
+     1.208565
+    ],
+    "fit_seconds": [
+     4.617465,
+     4.239716,
+     4.070913,
+     4.94849,
+     4.661153
+    ],
+    "predict_seconds": [
+     0.003275,
+     0.003102,
+     0.003178,
+     0.003276,
+     0.003285
+    ],
+    "total_seconds": [
+     5.791744,
+     5.378473,
+     5.316687,
+     6.041633,
+     5.873003
+    ],
+    "fit_cpu_wall_ratio": [
+     0.967793,
+     0.972943,
+     0.971066,
+     0.978834,
+     0.962074
+    ],
+    "rss_increment_mib_encode_train": [
+     101.375,
+     96.925781,
+     97.496094,
+     111.464844,
+     96.484375
+    ],
+    "rss_increment_mib_predict": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "wset_floor_limited": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "model_total_bytes": [
+     349133,
+     338221,
+     346669,
+     346141,
+     341389
+    ],
+    "classifier_bytes": [
+     340337,
+     329425,
+     337873,
+     337345,
+     332593
+    ],
+    "preprocessor_bytes": [
+     8796,
+     8796,
+     8796,
+     8796,
+     8796
+    ]
+   },
+   "compute_fold_mean_auxiliary_not_a_preregistered_verdict": {
+    "encode_seconds": 1.169537,
+    "fit_seconds": 4.507547,
+    "predict_seconds": 0.003223,
+    "total_seconds": 5.680308,
+    "rss_increment_mib_encode_train": 100.749219,
+    "model_total_bytes": 344310.6
+   },
+   "geo_train_unique_per_fold_auxiliary_not_a_preregistered_verdict": [
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1402,
+     "geo_level_3_id": 11095
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1404,
+     "geo_level_3_id": 11108
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11077
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1401,
+     "geo_level_3_id": 11126
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11088
+    }
+   ],
+   "oof_sha256": "7caa63c3c744f28ccd16be5431033378db3b77900c49545c9f3b3fdaa6b0c7a8",
+   "internals_auxiliary_not_a_preregistered_verdict": {
+    "geo_importance_sum": [
+     0.629588,
+     0.639802,
+     0.633924,
+     0.634433,
+     0.636445
+    ],
+    "node_count": [
+     3853,
+     3729,
+     3825,
+     3819,
+     3765
+    ]
+   },
+   "num_equivalence_per_fold": [
+    {
+     "valid_vs_DT_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_DT_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_DT_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_DT_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_DT_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    }
+   ],
+   "num_equivalence_fold_json_extras_auxiliary_not_a_preregistered_verdict": {
+    "ok": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "geo_values_valid_max_abs_deviation": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "train_only_ok": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   }
+  },
+  "GBC_OH": {
+   "geo_representation": "OH",
+   "model": "GBC",
+   "fold_macro_f1": [
+    0.614344,
+    0.613432,
+    0.61796,
+    0.61053,
+    0.604279
+   ],
+   "fold_macro_f1_mean": 0.612109,
+   "fold_macro_f1_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.005118,
+   "recall3_pooled": 0.515593,
+   "error31_pooled": 220,
+   "rate31_pooled": 0.003153,
+   "macro_f1_pooled_auxiliary_not_a_preregistered_verdict": 0.612124,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.695506,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.647935,
+    0.688025,
+    0.728888
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.36773,
+    0.856889,
+    0.515593
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.46918,
+    0.763228,
+    0.603962
+   ],
+   "class_support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     7391,
+     12505,
+     203
+    ],
+    [
+     3796,
+     101633,
+     13178
+    ],
+    [
+     220,
+     33579,
+     35975
+    ]
+   ],
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 33579,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.481254,
+   "age995_macro_f1_auxiliary_not_a_preregistered_verdict": 0.511285,
+   "train_macro_f1_auxiliary_not_a_preregistered_verdict": [
+    0.615248,
+    0.615464,
+    0.613548,
+    0.615747,
+    0.616025
+   ],
+   "unseen_geo_subgroup_auxiliary_not_a_preregistered_verdict": [
+    {
+     "fold": 0,
+     "n": 306,
+     "macro_f1": 0.305062
+    },
+    {
+     "fold": 1,
+     "n": 287,
+     "macro_f1": 0.270531
+    },
+    {
+     "fold": 2,
+     "n": 333,
+     "macro_f1": 0.343684
+    },
+    {
+     "fold": 3,
+     "n": 267,
+     "macro_f1": 0.289381
+    },
+    {
+     "fold": 4,
+     "n": 314,
+     "macro_f1": 0.284072
+    }
+   ],
+   "matrix_facts_auxiliary_not_a_preregistered_verdict": {
+    "n_encoded_columns": [
+     12593,
+     12608,
+     12570,
+     12623,
+     12581
+    ],
+    "container": "csr",
+    "train_nnz": [
+     2920131,
+     2919502,
+     2919696,
+     2919575,
+     2919732
+    ],
+    "train_density": [
+     0.00139,
+     0.001388,
+     0.001393,
+     0.001387,
+     0.001391
+    ],
+    "train_matrix_storage_bytes": [
+     24028188,
+     24023156,
+     24024708,
+     24023740,
+     24024996
+    ],
+    "dense_float32_estimate_bytes": [
+     8401243648,
+     8411250688,
+     8385899520,
+     8421257728,
+     8393238016
+    ]
+   },
+   "noisy_per_fold": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "compute_per_fold_auxiliary_not_a_preregistered_verdict": {
+    "rss_increment_mib_predict_note": "예측 구간 RSS 증가분은 55 fit 모두 0.0이라 정보가 없다(예측 구간은 43/55 fit이 sampling_limited).",
+    "predict_milliseconds_per_1000_rows": [
+     1.880111,
+     1.787028,
+     1.830271,
+     1.828072,
+     1.763594
+    ],
+    "encode_seconds": [
+     1.167278,
+     1.13031,
+     1.134499,
+     1.144982,
+     1.151391
+    ],
+    "fit_seconds": [
+     48.134657,
+     45.800917,
+     46.860861,
+     47.043038,
+     47.302327
+    ],
+    "predict_seconds": [
+     0.078393,
+     0.074512,
+     0.076315,
+     0.076223,
+     0.073535
+    ],
+    "total_seconds": [
+     49.380328,
+     47.005738,
+     48.071676,
+     48.264243,
+     48.527253
+    ],
+    "fit_cpu_wall_ratio": [
+     0.969935,
+     0.986607,
+     0.983297,
+     0.972182,
+     0.978414
+    ],
+    "rss_increment_mib_encode_train": [
+     116.074219,
+     114.242188,
+     113.777344,
+     115.089844,
+     115.90625
+    ],
+    "rss_increment_mib_predict": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "wset_floor_limited": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "model_total_bytes": [
+     497109,
+     497330,
+     497507,
+     498309,
+     497880
+    ],
+    "classifier_bytes": [
+     400249,
+     400393,
+     400825,
+     401257,
+     401113
+    ],
+    "preprocessor_bytes": [
+     96860,
+     96937,
+     96682,
+     97052,
+     96767
+    ]
+   },
+   "compute_fold_mean_auxiliary_not_a_preregistered_verdict": {
+    "encode_seconds": 1.145692,
+    "fit_seconds": 47.02836,
+    "predict_seconds": 0.075796,
+    "total_seconds": 48.249848,
+    "rss_increment_mib_encode_train": 115.017969,
+    "model_total_bytes": 497627.0
+   },
+   "geo_train_unique_per_fold_auxiliary_not_a_preregistered_verdict": [
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1402,
+     "geo_level_3_id": 11095
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1404,
+     "geo_level_3_id": 11108
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11077
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1401,
+     "geo_level_3_id": 11126
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11088
+    }
+   ],
+   "oof_sha256": "5ea9632e67164e4ba0775599dcacc3ae01a755cfbe6f32aac15b4f130669e882",
+   "internals_auxiliary_not_a_preregistered_verdict": {
+    "geo_importance_sum": [
+     0.646278,
+     0.648125,
+     0.643999,
+     0.652338,
+     0.648103
+    ],
+    "node_count": [
+     4470,
+     4472,
+     4478,
+     4484,
+     4482
+    ]
+   }
+  },
+  "GBC_NUM": {
+   "geo_representation": "NUM",
+   "model": "GBC",
+   "fold_macro_f1": [
+    0.597816,
+    0.600201,
+    0.602132,
+    0.595392,
+    0.590852
+   ],
+   "fold_macro_f1_mean": 0.597278,
+   "fold_macro_f1_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.004395,
+   "recall3_pooled": 0.467323,
+   "error31_pooled": 251,
+   "rate31_pooled": 0.003597,
+   "macro_f1_pooled_auxiliary_not_a_preregistered_verdict": 0.597285,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.680972,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.637475,
+    0.673829,
+    0.715929
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.37375,
+    0.858718,
+    0.467323
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.471223,
+    0.755121,
+    0.56551
+   ],
+   "class_support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     7512,
+     12385,
+     202
+    ],
+    [
+     4021,
+     101850,
+     12736
+    ],
+    [
+     251,
+     36916,
+     32607
+    ]
+   ],
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 36916,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.52908,
+   "age995_macro_f1_auxiliary_not_a_preregistered_verdict": 0.494876,
+   "train_macro_f1_auxiliary_not_a_preregistered_verdict": [
+    0.599981,
+    0.600924,
+    0.598912,
+    0.60171,
+    0.600136
+   ],
+   "unseen_geo_subgroup_auxiliary_not_a_preregistered_verdict": [
+    {
+     "fold": 0,
+     "n": 306,
+     "macro_f1": 0.318622
+    },
+    {
+     "fold": 1,
+     "n": 287,
+     "macro_f1": 0.280897
+    },
+    {
+     "fold": 2,
+     "n": 333,
+     "macro_f1": 0.341036
+    },
+    {
+     "fold": 3,
+     "n": 267,
+     "macro_f1": 0.300404
+    },
+    {
+     "fold": 4,
+     "n": 314,
+     "macro_f1": 0.307297
+    }
+   ],
+   "matrix_facts_auxiliary_not_a_preregistered_verdict": {
+    "n_encoded_columns": [
+     68,
+     68,
+     68,
+     68,
+     68
+    ],
+    "container": "csr",
+    "train_nnz": [
+     2917532,
+     2916886,
+     2917116,
+     2916956,
+     2917158
+    ],
+    "train_density": [
+     0.257248,
+     0.257191,
+     0.257212,
+     0.257197,
+     0.257215
+    ],
+    "train_matrix_storage_bytes": [
+     24007396,
+     24002228,
+     24004068,
+     24002788,
+     24004404
+    ],
+    "dense_float32_estimate_bytes": [
+     45365248,
+     45365248,
+     45365248,
+     45365248,
+     45365248
+    ]
+   },
+   "noisy_per_fold": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "compute_per_fold_auxiliary_not_a_preregistered_verdict": {
+    "rss_increment_mib_predict_note": "예측 구간 RSS 증가분은 55 fit 모두 0.0이라 정보가 없다(예측 구간은 43/55 fit이 sampling_limited).",
+    "predict_milliseconds_per_1000_rows": [
+     3.909665,
+     3.809716,
+     4.021633,
+     3.841177,
+     4.110999
+    ],
+    "encode_seconds": [
+     1.186163,
+     1.179859,
+     1.184026,
+     1.152981,
+     1.066085
+    ],
+    "fit_seconds": [
+     61.402114,
+     60.946733,
+     61.269265,
+     60.981442,
+     67.108718
+    ],
+    "predict_seconds": [
+     0.163017,
+     0.15885,
+     0.167686,
+     0.160162,
+     0.171412
+    ],
+    "total_seconds": [
+     62.751295,
+     62.285442,
+     62.620978,
+     62.294584,
+     68.346216
+    ],
+    "fit_cpu_wall_ratio": [
+     0.978183,
+     0.981133,
+     0.977244,
+     0.971351,
+     0.932023
+    ],
+    "rss_increment_mib_encode_train": [
+     114.699219,
+     112.894531,
+     115.246094,
+     115.863281,
+     113.015625
+    ],
+    "rss_increment_mib_predict": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "wset_floor_limited": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "model_total_bytes": [
+     410293,
+     410293,
+     410293,
+     410293,
+     410293
+    ],
+    "classifier_bytes": [
+     401497,
+     401497,
+     401497,
+     401497,
+     401497
+    ],
+    "preprocessor_bytes": [
+     8796,
+     8796,
+     8796,
+     8796,
+     8796
+    ]
+   },
+   "compute_fold_mean_auxiliary_not_a_preregistered_verdict": {
+    "encode_seconds": 1.153823,
+    "fit_seconds": 62.341654,
+    "predict_seconds": 0.164225,
+    "total_seconds": 63.659703,
+    "rss_increment_mib_encode_train": 114.34375,
+    "model_total_bytes": 410293.0
+   },
+   "geo_train_unique_per_fold_auxiliary_not_a_preregistered_verdict": [
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1402,
+     "geo_level_3_id": 11095
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1404,
+     "geo_level_3_id": 11108
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11077
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1401,
+     "geo_level_3_id": 11126
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11088
+    }
+   ],
+   "oof_sha256": "0ac887516ff0b219de9eabf0af4b66719c4234d0c9532b07a95dc0efd86b7a70",
+   "internals_auxiliary_not_a_preregistered_verdict": {
+    "geo_importance_sum": [
+     0.567307,
+     0.574062,
+     0.57029,
+     0.57266,
+     0.574577
+    ],
+    "node_count": [
+     4500,
+     4500,
+     4500,
+     4500,
+     4500
+    ]
+   },
+   "num_equivalence_per_fold": [
+    {
+     "valid_vs_GBC_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_GBC_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_GBC_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_GBC_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_GBC_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    }
+   ],
+   "num_equivalence_fold_json_extras_auxiliary_not_a_preregistered_verdict": {
+    "ok": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "geo_values_valid_max_abs_deviation": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "train_only_ok": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   }
+  },
+  "RF_OH": {
+   "geo_representation": "OH",
+   "model": "RF",
+   "fold_macro_f1": [
+    0.6317,
+    0.62805,
+    0.633877,
+    0.627153,
+    0.624178
+   ],
+   "fold_macro_f1_mean": 0.628992,
+   "fold_macro_f1_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.003829,
+   "recall3_pooled": 0.489681,
+   "error31_pooled": 187,
+   "rate31_pooled": 0.00268,
+   "macro_f1_pooled_auxiliary_not_a_preregistered_verdict": 0.628993,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.708375,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.714758,
+    0.690127,
+    0.769614
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.397831,
+    0.889652,
+    0.489681
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.511155,
+    0.77729,
+    0.598534
+   ],
+   "class_support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     7996,
+     11959,
+     144
+    ],
+    [
+     3004,
+     105519,
+     10084
+    ],
+    [
+     187,
+     35420,
+     34167
+    ]
+   ],
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 35420,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.507639,
+   "age995_macro_f1_auxiliary_not_a_preregistered_verdict": 0.535919,
+   "train_macro_f1_auxiliary_not_a_preregistered_verdict": [
+    0.666853,
+    0.666857,
+    0.668482,
+    0.66835,
+    0.668984
+   ],
+   "unseen_geo_subgroup_auxiliary_not_a_preregistered_verdict": [
+    {
+     "fold": 0,
+     "n": 306,
+     "macro_f1": 0.304529
+    },
+    {
+     "fold": 1,
+     "n": 287,
+     "macro_f1": 0.270531
+    },
+    {
+     "fold": 2,
+     "n": 333,
+     "macro_f1": 0.345369
+    },
+    {
+     "fold": 3,
+     "n": 267,
+     "macro_f1": 0.289381
+    },
+    {
+     "fold": 4,
+     "n": 314,
+     "macro_f1": 0.292243
+    }
+   ],
+   "matrix_facts_auxiliary_not_a_preregistered_verdict": {
+    "n_encoded_columns": [
+     12593,
+     12608,
+     12570,
+     12623,
+     12581
+    ],
+    "container": "csr",
+    "train_nnz": [
+     2920131,
+     2919502,
+     2919696,
+     2919575,
+     2919732
+    ],
+    "train_density": [
+     0.00139,
+     0.001388,
+     0.001393,
+     0.001387,
+     0.001391
+    ],
+    "train_matrix_storage_bytes": [
+     24028188,
+     24023156,
+     24024708,
+     24023740,
+     24024996
+    ],
+    "dense_float32_estimate_bytes": [
+     8401243648,
+     8411250688,
+     8385899520,
+     8421257728,
+     8393238016
+    ]
+   },
+   "noisy_per_fold": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "compute_per_fold_auxiliary_not_a_preregistered_verdict": {
+    "rss_increment_mib_predict_note": "예측 구간 RSS 증가분은 55 fit 모두 0.0이라 정보가 없다(예측 구간은 43/55 fit이 sampling_limited).",
+    "predict_milliseconds_per_1000_rows": [
+     5.980176,
+     6.034289,
+     6.070458,
+     5.893244,
+     6.040802
+    ],
+    "encode_seconds": [
+     1.300701,
+     1.18154,
+     1.154926,
+     1.15961,
+     1.15981
+    ],
+    "fit_seconds": [
+     99.848931,
+     91.676607,
+     93.824467,
+     90.757567,
+     89.40046
+    ],
+    "predict_seconds": [
+     0.249349,
+     0.251606,
+     0.253114,
+     0.245725,
+     0.251877
+    ],
+    "total_seconds": [
+     101.398981,
+     93.109753,
+     95.232507,
+     92.162903,
+     90.812148
+    ],
+    "fit_cpu_wall_ratio": [
+     0.967086,
+     0.973701,
+     0.977224,
+     0.972199,
+     0.98416
+    ],
+    "rss_increment_mib_encode_train": [
+     150.242188,
+     151.148438,
+     153.621094,
+     152.019531,
+     153.132812
+    ],
+    "rss_increment_mib_predict": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "wset_floor_limited": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "model_total_bytes": [
+     45435677,
+     45434874,
+     46405963,
+     45971085,
+     45520768
+    ],
+    "classifier_bytes": [
+     45338817,
+     45337937,
+     46309281,
+     45874033,
+     45424001
+    ],
+    "preprocessor_bytes": [
+     96860,
+     96937,
+     96682,
+     97052,
+     96767
+    ]
+   },
+   "compute_fold_mean_auxiliary_not_a_preregistered_verdict": {
+    "encode_seconds": 1.191318,
+    "fit_seconds": 93.101606,
+    "predict_seconds": 0.250334,
+    "total_seconds": 94.543258,
+    "rss_increment_mib_encode_train": 152.032813,
+    "model_total_bytes": 45753673.4
+   },
+   "geo_train_unique_per_fold_auxiliary_not_a_preregistered_verdict": [
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1402,
+     "geo_level_3_id": 11095
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1404,
+     "geo_level_3_id": 11108
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11077
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1401,
+     "geo_level_3_id": 11126
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11088
+    }
+   ],
+   "oof_sha256": "906ef2ada4da0a43a1a30289ae94fe86669bfba83b1ca2ac59f85e87c0f7dc15",
+   "internals_auxiliary_not_a_preregistered_verdict": {
+    "geo_importance_sum": [
+     0.623109,
+     0.626563,
+     0.61719,
+     0.62906,
+     0.624984
+    ],
+    "node_count": [
+     514716,
+     514706,
+     525744,
+     520798,
+     515684
+    ]
+   }
+  },
+  "RF_NUM": {
+   "geo_representation": "NUM",
+   "model": "RF",
+   "fold_macro_f1": [
+    0.596677,
+    0.592899,
+    0.593917,
+    0.585587,
+    0.584027
+   ],
+   "fold_macro_f1_mean": 0.590622,
+   "fold_macro_f1_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.005512,
+   "recall3_pooled": 0.404205,
+   "error31_pooled": 233,
+   "rate31_pooled": 0.003339,
+   "macro_f1_pooled_auxiliary_not_a_preregistered_verdict": 0.590645,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.681082,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.685746,
+    0.664269,
+    0.751399
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.373153,
+    0.896144,
+    0.404205
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.48331,
+    0.762978,
+    0.525646
+   ],
+   "class_support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     7500,
+     12382,
+     217
+    ],
+    [
+     3204,
+     106289,
+     9114
+    ],
+    [
+     233,
+     41338,
+     28203
+    ]
+   ],
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 41338,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.592456,
+   "age995_macro_f1_auxiliary_not_a_preregistered_verdict": 0.474473,
+   "train_macro_f1_auxiliary_not_a_preregistered_verdict": [
+    0.67425,
+    0.674467,
+    0.67385,
+    0.673277,
+    0.670642
+   ],
+   "unseen_geo_subgroup_auxiliary_not_a_preregistered_verdict": [
+    {
+     "fold": 0,
+     "n": 306,
+     "macro_f1": 0.326603
+    },
+    {
+     "fold": 1,
+     "n": 287,
+     "macro_f1": 0.283417
+    },
+    {
+     "fold": 2,
+     "n": 333,
+     "macro_f1": 0.352347
+    },
+    {
+     "fold": 3,
+     "n": 267,
+     "macro_f1": 0.303467
+    },
+    {
+     "fold": 4,
+     "n": 314,
+     "macro_f1": 0.320504
+    }
+   ],
+   "matrix_facts_auxiliary_not_a_preregistered_verdict": {
+    "n_encoded_columns": [
+     68,
+     68,
+     68,
+     68,
+     68
+    ],
+    "container": "csr",
+    "train_nnz": [
+     2917532,
+     2916886,
+     2917116,
+     2916956,
+     2917158
+    ],
+    "train_density": [
+     0.257248,
+     0.257191,
+     0.257212,
+     0.257197,
+     0.257215
+    ],
+    "train_matrix_storage_bytes": [
+     24007396,
+     24002228,
+     24004068,
+     24002788,
+     24004404
+    ],
+    "dense_float32_estimate_bytes": [
+     45365248,
+     45365248,
+     45365248,
+     45365248,
+     45365248
+    ]
+   },
+   "noisy_per_fold": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "compute_per_fold_auxiliary_not_a_preregistered_verdict": {
+    "rss_increment_mib_predict_note": "예측 구간 RSS 증가분은 55 fit 모두 0.0이라 정보가 없다(예측 구간은 43/55 fit이 sampling_limited).",
+    "predict_milliseconds_per_1000_rows": [
+     8.235869,
+     8.262097,
+     8.291913,
+     8.196259,
+     9.073393
+    ],
+    "encode_seconds": [
+     1.160401,
+     1.178415,
+     1.161673,
+     1.180382,
+     1.143385
+    ],
+    "fit_seconds": [
+     101.751359,
+     99.554869,
+     100.686775,
+     97.794024,
+     98.658096
+    ],
+    "predict_seconds": [
+     0.343403,
+     0.344496,
+     0.34574,
+     0.341751,
+     0.378324
+    ],
+    "total_seconds": [
+     103.255162,
+     101.077781,
+     102.194188,
+     99.316157,
+     100.179806
+    ],
+    "fit_cpu_wall_ratio": [
+     0.969889,
+     0.96649,
+     0.971143,
+     0.972228,
+     0.979709
+    ],
+    "rss_increment_mib_encode_train": [
+     202.097656,
+     199.4375,
+     199.652344,
+     199.867188,
+     197.6875
+    ],
+    "rss_increment_mib_predict": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "wset_floor_limited": [
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "model_total_bytes": [
+     102228701,
+     99938765,
+     101263165,
+     100168445,
+     99761533
+    ],
+    "classifier_bytes": [
+     102219905,
+     99929969,
+     101254369,
+     100159649,
+     99752737
+    ],
+    "preprocessor_bytes": [
+     8796,
+     8796,
+     8796,
+     8796,
+     8796
+    ]
+   },
+   "compute_fold_mean_auxiliary_not_a_preregistered_verdict": {
+    "encode_seconds": 1.164851,
+    "fit_seconds": 99.689025,
+    "predict_seconds": 0.350743,
+    "total_seconds": 101.204619,
+    "rss_increment_mib_encode_train": 199.748437,
+    "model_total_bytes": 100672121.8
+   },
+   "geo_train_unique_per_fold_auxiliary_not_a_preregistered_verdict": [
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1402,
+     "geo_level_3_id": 11095
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1404,
+     "geo_level_3_id": 11108
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11077
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1401,
+     "geo_level_3_id": 11126
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11088
+    }
+   ],
+   "oof_sha256": "0444c48d0f11baaaec158ee8306c29f214138b01379a8622ef00287869eb03f7",
+   "internals_auxiliary_not_a_preregistered_verdict": {
+    "geo_importance_sum": [
+     0.357355,
+     0.353712,
+     0.354851,
+     0.35539,
+     0.351977
+    ],
+    "node_count": [
+     1161110,
+     1135088,
+     1150138,
+     1137698,
+     1133074
+    ]
+   },
+   "num_equivalence_per_fold": [
+    {
+     "valid_vs_RF_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_RF_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_RF_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_RF_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_RF_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    }
+   ],
+   "num_equivalence_fold_json_extras_auxiliary_not_a_preregistered_verdict": {
+    "ok": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "geo_values_valid_max_abs_deviation": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "train_only_ok": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   }
+  },
+  "LGBM_OH": {
+   "geo_representation": "OH",
+   "model": "LGBM",
+   "fold_macro_f1": [
+    0.672974,
+    0.66862,
+    0.674562,
+    0.667412,
+    0.666264
+   ],
+   "fold_macro_f1_mean": 0.669966,
+   "fold_macro_f1_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.003613,
+   "recall3_pooled": 0.590349,
+   "error31_pooled": 300,
+   "rate31_pooled": 0.0043,
+   "macro_f1_pooled_auxiliary_not_a_preregistered_verdict": 0.669985,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.73254,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.690355,
+    0.724875,
+    0.763178
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.466889,
+    0.861205,
+    0.590349
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.557046,
+    0.787181,
+    0.665729
+   ],
+   "class_support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     9384,
+     10486,
+     229
+    ],
+    [
+     3909,
+     102145,
+     12553
+    ],
+    [
+     300,
+     28283,
+     41191
+    ]
+   ],
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 28283,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.405352,
+   "age995_macro_f1_auxiliary_not_a_preregistered_verdict": 0.611714,
+   "train_macro_f1_auxiliary_not_a_preregistered_verdict": [
+    0.682858,
+    0.681026,
+    0.682268,
+    0.682957,
+    0.681652
+   ],
+   "unseen_geo_subgroup_auxiliary_not_a_preregistered_verdict": [
+    {
+     "fold": 0,
+     "n": 306,
+     "macro_f1": 0.312821
+    },
+    {
+     "fold": 1,
+     "n": 287,
+     "macro_f1": 0.301614
+    },
+    {
+     "fold": 2,
+     "n": 333,
+     "macro_f1": 0.35006
+    },
+    {
+     "fold": 3,
+     "n": 267,
+     "macro_f1": 0.300404
+    },
+    {
+     "fold": 4,
+     "n": 314,
+     "macro_f1": 0.336368
+    }
+   ],
+   "matrix_facts_auxiliary_not_a_preregistered_verdict": {
+    "n_encoded_columns": [
+     12564,
+     12579,
+     12541,
+     12594,
+     12552
+    ],
+    "container": "csr",
+    "train_nnz": [
+     2638624,
+     2637950,
+     2638351,
+     2638020,
+     2638035
+    ],
+    "train_density": [
+     0.001259,
+     0.001257,
+     0.001261,
+     0.001256,
+     0.00126
+    ],
+    "train_matrix_storage_bytes": [
+     21776132,
+     21770740,
+     21773948,
+     21771300,
+     21771420
+    ],
+    "dense_float32_estimate_bytes": [
+     8381896704,
+     8391903744,
+     8366552576,
+     8401910784,
+     8373891072
+    ]
+   },
+   "noisy_per_fold": [
+    false,
+    false,
+    false,
+    false,
+    true
+   ],
+   "compute_per_fold_auxiliary_not_a_preregistered_verdict": {
+    "rss_increment_mib_predict_note": "예측 구간 RSS 증가분은 55 fit 모두 0.0이라 정보가 없다(예측 구간은 43/55 fit이 sampling_limited).",
+    "predict_milliseconds_per_1000_rows": [
+     48.140755,
+     46.258809,
+     43.77925,
+     53.101293,
+     57.877525
+    ],
+    "encode_seconds": [
+     1.229526,
+     1.081329,
+     1.046942,
+     1.332721,
+     1.402635
+    ],
+    "fit_seconds": [
+     16.108332,
+     14.345405,
+     13.158765,
+     18.56805,
+     19.782985
+    ],
+    "predict_seconds": [
+     2.007277,
+     1.928807,
+     1.82542,
+     2.214111,
+     2.413261
+    ],
+    "total_seconds": [
+     19.345136,
+     17.355541,
+     16.031126,
+     22.114883,
+     23.598881
+    ],
+    "fit_cpu_wall_ratio": [
+     0.971935,
+     0.978101,
+     0.987935,
+     0.944162,
+     0.951733
+    ],
+    "rss_increment_mib_encode_train": [
+     144.445312,
+     151.0,
+     143.1875,
+     150.257812,
+     143.832031
+    ],
+    "rss_increment_mib_predict": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "wset_floor_limited": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "model_total_bytes": [
+     3650869,
+     3650025,
+     3647438,
+     3650493,
+     3649964
+    ],
+    "classifier_bytes": [
+     3551716,
+     3550795,
+     3548463,
+     3551148,
+     3550904
+    ],
+    "preprocessor_bytes": [
+     99153,
+     99230,
+     98975,
+     99345,
+     99060
+    ]
+   },
+   "compute_fold_mean_auxiliary_not_a_preregistered_verdict": {
+    "encode_seconds": 1.21863,
+    "fit_seconds": 16.392707,
+    "predict_seconds": 2.077775,
+    "total_seconds": 19.689113,
+    "rss_increment_mib_encode_train": 146.544531,
+    "model_total_bytes": 3649757.8
+   },
+   "geo_train_unique_per_fold_auxiliary_not_a_preregistered_verdict": [
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1402,
+     "geo_level_3_id": 11095
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1404,
+     "geo_level_3_id": 11108
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11077
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1401,
+     "geo_level_3_id": 11126
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11088
+    }
+   ],
+   "oof_sha256": "5396b33df6a977fb9a9ac500363b5d056277a4b23a201eb14782b529e670f60f",
+   "internals_auxiliary_not_a_preregistered_verdict": {
+    "trees": [
+     900,
+     900,
+     900,
+     900,
+     900
+    ],
+    "splits": [
+     27000,
+     27000,
+     27000,
+     27000,
+     27000
+    ],
+    "geo_splits": [
+     23278,
+     23317,
+     23169,
+     23305,
+     23312
+    ],
+    "rounds_completed": [
+     300,
+     300,
+     300,
+     300,
+     300
+    ]
+   }
+  },
+  "LGBM_NAT": {
+   "geo_representation": "NAT",
+   "model": "LGBM",
+   "fold_macro_f1": [
+    0.701965,
+    0.70247,
+    0.700637,
+    0.696333,
+    0.695303
+   ],
+   "fold_macro_f1_mean": 0.699342,
+   "fold_macro_f1_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.003306,
+   "recall3_pooled": 0.647648,
+   "error31_pooled": 530,
+   "rate31_pooled": 0.007596,
+   "macro_f1_pooled_auxiliary_not_a_preregistered_verdict": 0.699347,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.74645,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.671423,
+    0.752828,
+    0.753301
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.557242,
+    0.836637,
+    0.647648
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.609027,
+    0.792523,
+    0.69649
+   ],
+   "class_support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     11200,
+     8525,
+     374
+    ],
+    [
+     4951,
+     99231,
+     14425
+    ],
+    [
+     530,
+     24055,
+     45189
+    ]
+   ],
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 24055,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.344756,
+   "age995_macro_f1_auxiliary_not_a_preregistered_verdict": 0.66132,
+   "train_macro_f1_auxiliary_not_a_preregistered_verdict": [
+    0.778569,
+    0.778926,
+    0.780002,
+    0.779744,
+    0.780896
+   ],
+   "unseen_geo_subgroup_auxiliary_not_a_preregistered_verdict": [
+    {
+     "fold": 0,
+     "n": 306,
+     "macro_f1": 0.391722
+    },
+    {
+     "fold": 1,
+     "n": 287,
+     "macro_f1": 0.378047
+    },
+    {
+     "fold": 2,
+     "n": 333,
+     "macro_f1": 0.362254
+    },
+    {
+     "fold": 3,
+     "n": 267,
+     "macro_f1": 0.378307
+    },
+    {
+     "fold": 4,
+     "n": 314,
+     "macro_f1": 0.371626
+    }
+   ],
+   "matrix_facts_auxiliary_not_a_preregistered_verdict": {
+    "n_encoded_columns": [
+     39,
+     39,
+     39,
+     39,
+     39
+    ],
+    "container": "dense",
+    "train_nnz": [
+     2636025,
+     2635334,
+     2635771,
+     2635401,
+     2635461
+    ],
+    "train_density": [
+     0.405257,
+     0.405151,
+     0.405218,
+     0.405161,
+     0.40517
+    ],
+    "train_matrix_storage_bytes": [
+     26018304,
+     26018304,
+     26018304,
+     26018304,
+     26018304
+    ],
+    "dense_float32_estimate_bytes": [
+     26018304,
+     26018304,
+     26018304,
+     26018304,
+     26018304
+    ]
+   },
+   "noisy_per_fold": [
+    false,
+    false,
+    false,
+    true,
+    true
+   ],
+   "compute_per_fold_auxiliary_not_a_preregistered_verdict": {
+    "rss_increment_mib_predict_note": "예측 구간 RSS 증가분은 55 fit 모두 0.0이라 정보가 없다(예측 구간은 43/55 fit이 sampling_limited).",
+    "predict_milliseconds_per_1000_rows": [
+     142.463119,
+     168.903993,
+     113.534651,
+     156.040512,
+     193.119117
+    ],
+    "encode_seconds": [
+     1.139969,
+     1.228568,
+     1.013105,
+     1.385556,
+     1.248077
+    ],
+    "fit_seconds": [
+     16.42339,
+     17.035996,
+     16.17009,
+     18.599979,
+     16.960986
+    ],
+    "predict_seconds": [
+     5.940142,
+     7.042621,
+     4.733941,
+     6.506265,
+     8.052295
+    ],
+    "total_seconds": [
+     23.503501,
+     25.307184,
+     21.917136,
+     26.4918,
+     26.261358
+    ],
+    "fit_cpu_wall_ratio": [
+     0.972318,
+     0.955697,
+     0.965324,
+     0.974463,
+     0.980191
+    ],
+    "rss_increment_mib_encode_train": [
+     200.5625,
+     195.683594,
+     193.273438,
+     185.59375,
+     186.261719
+    ],
+    "rss_increment_mib_predict": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "wset_floor_limited": [
+     false,
+     false,
+     false,
+     false,
+     false
+    ],
+    "model_total_bytes": [
+     16648769,
+     16730332,
+     16618848,
+     16744777,
+     16709905
+    ],
+    "classifier_bytes": [
+     16550089,
+     16631575,
+     16520346,
+     16645905,
+     16611318
+    ],
+    "preprocessor_bytes": [
+     98680,
+     98757,
+     98502,
+     98872,
+     98587
+    ]
+   },
+   "compute_fold_mean_auxiliary_not_a_preregistered_verdict": {
+    "encode_seconds": 1.203055,
+    "fit_seconds": 17.038088,
+    "predict_seconds": 6.455053,
+    "total_seconds": 24.696196,
+    "rss_increment_mib_encode_train": 192.275,
+    "model_total_bytes": 16690526.2
+   },
+   "geo_train_unique_per_fold_auxiliary_not_a_preregistered_verdict": [
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1402,
+     "geo_level_3_id": 11095
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1404,
+     "geo_level_3_id": 11108
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11077
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1401,
+     "geo_level_3_id": 11126
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11088
+    }
+   ],
+   "oof_sha256": "263680540b07a5cc4fe84dd294ff90ae0da7c9c7b2886f0df733edf9465f9558",
+   "internals_auxiliary_not_a_preregistered_verdict": {
+    "trees": [
+     900,
+     900,
+     900,
+     900,
+     900
+    ],
+    "splits": [
+     27000,
+     27000,
+     27000,
+     27000,
+     27000
+    ],
+    "geo_splits": [
+     23198,
+     23288,
+     23128,
+     23234,
+     23290
+    ],
+    "rounds_completed": [
+     300,
+     300,
+     300,
+     300,
+     300
+    ]
+   }
+  },
+  "LGBM_NUM": {
+   "geo_representation": "NUM",
+   "model": "LGBM",
+   "fold_macro_f1": [
+    0.652954,
+    0.654408,
+    0.653722,
+    0.646866,
+    0.647158
+   ],
+   "fold_macro_f1_mean": 0.651022,
+   "fold_macro_f1_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.003698,
+   "recall3_pooled": 0.571832,
+   "error31_pooled": 269,
+   "rate31_pooled": 0.003855,
+   "macro_f1_pooled_auxiliary_not_a_preregistered_verdict": 0.651024,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.717369,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.683494,
+    0.712587,
+    0.737941
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.437186,
+    0.850464,
+    0.571832
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.533273,
+    0.775445,
+    0.644353
+   ],
+   "class_support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     8787,
+     11079,
+     233
+    ],
+    [
+     3800,
+     100871,
+     13936
+    ],
+    [
+     269,
+     29606,
+     39899
+    ]
+   ],
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 29606,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.424313,
+   "age995_macro_f1_auxiliary_not_a_preregistered_verdict": 0.604444,
+   "train_macro_f1_auxiliary_not_a_preregistered_verdict": [
+    0.667662,
+    0.668857,
+    0.667938,
+    0.667415,
+    0.670946
+   ],
+   "unseen_geo_subgroup_auxiliary_not_a_preregistered_verdict": [
+    {
+     "fold": 0,
+     "n": 306,
+     "macro_f1": 0.327827
+    },
+    {
+     "fold": 1,
+     "n": 287,
+     "macro_f1": 0.299177
+    },
+    {
+     "fold": 2,
+     "n": 333,
+     "macro_f1": 0.345193
+    },
+    {
+     "fold": 3,
+     "n": 267,
+     "macro_f1": 0.308915
+    },
+    {
+     "fold": 4,
+     "n": 314,
+     "macro_f1": 0.315725
+    }
+   ],
+   "matrix_facts_auxiliary_not_a_preregistered_verdict": {
+    "n_encoded_columns": [
+     39,
+     39,
+     39,
+     39,
+     39
+    ],
+    "container": "csr",
+    "train_nnz": [
+     2636025,
+     2635334,
+     2635771,
+     2635401,
+     2635461
+    ],
+    "train_density": [
+     0.405257,
+     0.405151,
+     0.405218,
+     0.405161,
+     0.40517
+    ],
+    "train_matrix_storage_bytes": [
+     21755340,
+     21749812,
+     21753308,
+     21750348,
+     21750828
+    ],
+    "dense_float32_estimate_bytes": [
+     26018304,
+     26018304,
+     26018304,
+     26018304,
+     26018304
+    ]
+   },
+   "noisy_per_fold": [
+    false,
+    false,
+    false,
+    true,
+    true
+   ],
+   "compute_per_fold_auxiliary_not_a_preregistered_verdict": {
+    "rss_increment_mib_predict_note": "예측 구간 RSS 증가분은 55 fit 모두 0.0이라 정보가 없다(예측 구간은 43/55 fit이 sampling_limited).",
+    "predict_milliseconds_per_1000_rows": [
+     36.249225,
+     33.138927,
+     31.80501,
+     38.268011,
+     42.077636
+    ],
+    "encode_seconds": [
+     1.252876,
+     1.115876,
+     1.081608,
+     1.420041,
+     1.391513
+    ],
+    "fit_seconds": [
+     7.091542,
+     6.670179,
+     6.543901,
+     7.907306,
+     7.685859
+    ],
+    "predict_seconds": [
+     1.511448,
+     1.381761,
+     1.326142,
+     1.595623,
+     1.754469
+    ],
+    "total_seconds": [
+     9.855866,
+     9.167816,
+     8.95165,
+     10.92297,
+     10.831841
+    ],
+    "fit_cpu_wall_ratio": [
+     0.969465,
+     0.981514,
+     0.988516,
+     0.962322,
+     0.977851
+    ],
+    "rss_increment_mib_encode_train": [
+     120.519531,
+     120.894531,
+     133.046875,
+     133.980469,
+     136.777344
+    ],
+    "rss_increment_mib_predict": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "wset_floor_limited": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "model_total_bytes": [
+     3160090,
+     3156253,
+     3159162,
+     3156158,
+     3159021
+    ],
+    "classifier_bytes": [
+     3149390,
+     3145553,
+     3148462,
+     3145458,
+     3148321
+    ],
+    "preprocessor_bytes": [
+     10700,
+     10700,
+     10700,
+     10700,
+     10700
+    ]
+   },
+   "compute_fold_mean_auxiliary_not_a_preregistered_verdict": {
+    "encode_seconds": 1.252383,
+    "fit_seconds": 7.179757,
+    "predict_seconds": 1.513888,
+    "total_seconds": 9.946029,
+    "rss_increment_mib_encode_train": 129.04375,
+    "model_total_bytes": 3158136.8
+   },
+   "geo_train_unique_per_fold_auxiliary_not_a_preregistered_verdict": [
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1402,
+     "geo_level_3_id": 11095
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1404,
+     "geo_level_3_id": 11108
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11077
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1401,
+     "geo_level_3_id": 11126
+    },
+    {
+     "geo_level_1_id": 31,
+     "geo_level_2_id": 1397,
+     "geo_level_3_id": 11088
+    }
+   ],
+   "oof_sha256": "a08d66f3838ae40405fb9543fa02188f11f9082dbee1aaacb302696c5ba7d0c0",
+   "internals_auxiliary_not_a_preregistered_verdict": {
+    "trees": [
+     900,
+     900,
+     900,
+     900,
+     900
+    ],
+    "splits": [
+     27000,
+     27000,
+     27000,
+     27000,
+     27000
+    ],
+    "geo_splits": [
+     16123,
+     16268,
+     16173,
+     15976,
+     16294
+    ],
+    "rounds_completed": [
+     300,
+     300,
+     300,
+     300,
+     300
+    ]
+   },
+   "num_equivalence_per_fold": [
+    {
+     "valid_vs_LGBM_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     },
+     "valid_vs_LGBM_NAT": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_LGBM_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     },
+     "valid_vs_LGBM_NAT": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_LGBM_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     },
+     "valid_vs_LGBM_NAT": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_LGBM_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     },
+     "valid_vs_LGBM_NAT": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    },
+    {
+     "valid_vs_LGBM_OH": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     },
+     "valid_vs_LGBM_NAT": {
+      "ok": true,
+      "bitwise_equal": true,
+      "max_abs_diff_approx_columns": 0.0
+     }
+    }
+   ],
+   "num_equivalence_fold_json_extras_auxiliary_not_a_preregistered_verdict": {
+    "ok": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ],
+    "geo_values_valid_max_abs_deviation": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ],
+    "train_only_ok": [
+     true,
+     true,
+     true,
+     true,
+     true
+    ]
+   }
+  }
+ },
+ "comparisons": [
+  {
+   "candidate": "LR_NUM",
+   "baseline": "LR_OH",
+   "mean_delta": -0.217107,
+   "fold_delta": [
+    -0.218504,
+    -0.215741,
+    -0.214672,
+    -0.21546,
+    -0.22116
+   ],
+   "fold_wins": 0,
+   "recall3_delta": -0.443446,
+   "error31": {
+    "candidate": 353,
+    "baseline": 455,
+    "delta": -102,
+    "candidate_rate": 0.005059,
+    "baseline_rate": 0.006521
+   },
+   "safety_3to1_flagged_arms": [
+    "LR_OH"
+   ],
+   "performance_tag": "NUM_LOWER",
+   "container_confounded": false,
+   "compute_tags_allowed": true,
+   "compute": {
+    "train_seconds": {
+     "median": 0.182588,
+     "min": 0.177409,
+     "max": 0.265685,
+     "fold_ratios": [
+      0.182588,
+      0.184569,
+      0.182017,
+      0.265685,
+      0.177409
+     ],
+     "tag": "LOWER",
+     "boundary": false
+    },
+    "predict_seconds": {
+     "median": 0.945486,
+     "min": 0.748844,
+     "max": 1.265788,
+     "fold_ratios": [
+      0.945486,
+      0.748844,
+      0.871602,
+      1.265788,
+      0.951461
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    },
+    "total_seconds": {
+     "median": 0.25193,
+     "min": 0.247869,
+     "max": 0.335734,
+     "fold_ratios": [
+      0.25193,
+      0.255631,
+      0.247869,
+      0.335734,
+      0.248315
+     ],
+     "tag": "LOWER",
+     "boundary": false
+    },
+    "model_bytes": {
+     "median": 0.032252,
+     "min": 0.032179,
+     "max": 0.03231,
+     "fold_ratios": [
+      0.032252,
+      0.032216,
+      0.03231,
+      0.032179,
+      0.032282
+     ],
+     "tag": "LOWER",
+     "boundary": false
+    },
+    "matrix_storage_bytes": {
+     "median": 1.0,
+     "min": 1.0,
+     "max": 1.0,
+     "fold_ratios": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    }
+   },
+   "noisy_fold_pairs_auxiliary_not_a_preregistered_verdict": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "clean_fold_pairs_auxiliary_not_a_preregistered_verdict": [],
+   "delta_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.002687,
+   "positive_folds_auxiliary_not_a_preregistered_verdict": 0,
+   "negative_folds_auxiliary_not_a_preregistered_verdict": 5,
+   "error32_auxiliary_not_a_preregistered_verdict": {
+    "candidate": 55702,
+    "baseline": 24659,
+    "delta": 31043
+   },
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 17878,
+    "new_errors": 48742,
+    "prediction_agreement": 0.674357,
+    "error31_removed": 339,
+    "error31_new": 237,
+    "error31_common": 116,
+    "error32_removed": 2912,
+    "error32_new": 33955,
+    "error32_common": 21747
+   },
+   "compute_memory_not_tagged_auxiliary_not_a_preregistered_verdict": {
+    "tag": null,
+    "n_eligible_folds": 0,
+    "eligible_folds": [],
+    "excluded_folds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "candidate_increment_mib": [
+     139.929688,
+     137.445312,
+     128.484375,
+     112.140625,
+     117.933594
+    ],
+    "baseline_increment_mib": [
+     143.695312,
+     125.15625,
+     132.523438,
+     139.53125,
+     136.992188
+    ],
+    "exclusion_reason": "increment < 16 MiB or FLOOR_LIMITED for the pair"
+   },
+   "compute_encode_seconds_untagged_auxiliary_not_a_preregistered_verdict": {
+    "median": 1.010936,
+    "min": 0.952411,
+    "max": 1.085736,
+    "fold_ratios": [
+     0.952411,
+     1.010936,
+     0.965481,
+     1.085736,
+     1.011521
+    ],
+    "tag": null,
+    "boundary": false
+   }
+  },
+  {
+   "candidate": "DT_NUM",
+   "baseline": "DT_OH",
+   "mean_delta": 0.020146,
+   "fold_delta": [
+    0.01933,
+    0.020168,
+    0.024054,
+    0.022253,
+    0.014926
+   ],
+   "fold_wins": 5,
+   "recall3_delta": 0.031115,
+   "error31": {
+    "candidate": 426,
+    "baseline": 165,
+    "delta": 261,
+    "candidate_rate": 0.006105,
+    "baseline_rate": 0.002365
+   },
+   "safety_3to1_flagged_arms": [
+    "DT_NUM"
+   ],
+   "performance_tag": "NUM_HIGHER",
+   "container_confounded": false,
+   "compute_tags_allowed": true,
+   "compute": {
+    "train_seconds": {
+     "median": 2.569633,
+     "min": 2.403807,
+     "max": 2.854838,
+     "fold_ratios": [
+      2.665968,
+      2.569633,
+      2.854838,
+      2.403807,
+      2.46148
+     ],
+     "tag": "HIGHER",
+     "boundary": false
+    },
+    "predict_seconds": {
+     "median": 1.198186,
+     "min": 1.076551,
+     "max": 1.496327,
+     "fold_ratios": [
+      1.076551,
+      1.366628,
+      1.496327,
+      1.198186,
+      1.16873
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    },
+    "total_seconds": {
+     "median": 1.952477,
+     "min": 1.869094,
+     "max": 2.179221,
+     "fold_ratios": [
+      2.014884,
+      1.952477,
+      2.179221,
+      1.869094,
+      1.922652
+     ],
+     "tag": "SIMILAR",
+     "boundary": true
+    },
+    "model_bytes": {
+     "median": 1.432111,
+     "min": 1.418943,
+     "max": 1.456637,
+     "fold_ratios": [
+      1.432111,
+      1.426022,
+      1.418943,
+      1.446902,
+      1.456637
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    },
+    "matrix_storage_bytes": {
+     "median": 0.999135,
+     "min": 0.999128,
+     "max": 0.999143,
+     "fold_ratios": [
+      0.999135,
+      0.999129,
+      0.999141,
+      0.999128,
+      0.999143
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    }
+   },
+   "noisy_fold_pairs_auxiliary_not_a_preregistered_verdict": [],
+   "clean_fold_pairs_auxiliary_not_a_preregistered_verdict": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "delta_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.003451,
+   "positive_folds_auxiliary_not_a_preregistered_verdict": 5,
+   "negative_folds_auxiliary_not_a_preregistered_verdict": 0,
+   "error32_auxiliary_not_a_preregistered_verdict": {
+    "candidate": 31194,
+    "baseline": 33626,
+    "delta": -2432
+   },
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 12109,
+    "new_errors": 12694,
+    "prediction_agreement": 0.877389,
+    "error31_removed": 77,
+    "error31_new": 338,
+    "error31_common": 88,
+    "error32_removed": 5988,
+    "error32_new": 3556,
+    "error32_common": 27638
+   },
+   "compute_memory_not_tagged_auxiliary_not_a_preregistered_verdict": {
+    "tag": null,
+    "n_eligible_folds": 0,
+    "eligible_folds": [],
+    "excluded_folds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "candidate_increment_mib": [
+     101.375,
+     96.925781,
+     97.496094,
+     111.464844,
+     96.484375
+    ],
+    "baseline_increment_mib": [
+     110.40625,
+     111.867188,
+     98.09375,
+     101.921875,
+     112.964844
+    ],
+    "exclusion_reason": "increment < 16 MiB or FLOOR_LIMITED for the pair"
+   },
+   "compute_encode_seconds_untagged_auxiliary_not_a_preregistered_verdict": {
+    "median": 1.03008,
+    "min": 0.930677,
+    "max": 1.228316,
+    "fold_ratios": [
+     1.027706,
+     1.03008,
+     1.228316,
+     0.930677,
+     1.043496
+    ],
+    "tag": null,
+    "boundary": false
+   }
+  },
+  {
+   "candidate": "GBC_NUM",
+   "baseline": "GBC_OH",
+   "mean_delta": -0.014831,
+   "fold_delta": [
+    -0.016528,
+    -0.013231,
+    -0.015828,
+    -0.015139,
+    -0.013428
+   ],
+   "fold_wins": 0,
+   "recall3_delta": -0.04827,
+   "error31": {
+    "candidate": 251,
+    "baseline": 220,
+    "delta": 31,
+    "candidate_rate": 0.003597,
+    "baseline_rate": 0.003153
+   },
+   "safety_3to1_flagged_arms": [
+    "GBC_NUM"
+   ],
+   "performance_tag": "NUM_LOWER",
+   "container_confounded": false,
+   "compute_tags_allowed": true,
+   "compute": {
+    "train_seconds": {
+     "median": 1.307472,
+     "min": 1.275632,
+     "max": 1.418719,
+     "fold_ratios": [
+      1.275632,
+      1.330688,
+      1.307472,
+      1.29629,
+      1.418719
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    },
+    "predict_seconds": {
+     "median": 2.131873,
+     "min": 2.079487,
+     "max": 2.331035,
+     "fold_ratios": [
+      2.079487,
+      2.131873,
+      2.197288,
+      2.101217,
+      2.331035
+     ],
+     "tag": "HIGHER",
+     "boundary": false
+    },
+    "total_seconds": {
+     "median": 1.302659,
+     "min": 1.270775,
+     "max": 1.408409,
+     "fold_ratios": [
+      1.270775,
+      1.32506,
+      1.302659,
+      1.290698,
+      1.408409
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    },
+    "model_bytes": {
+     "median": 0.824698,
+     "min": 0.823371,
+     "max": 0.825358,
+     "fold_ratios": [
+      0.825358,
+      0.824991,
+      0.824698,
+      0.823371,
+      0.82408
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    },
+    "matrix_storage_bytes": {
+     "median": 0.999135,
+     "min": 0.999128,
+     "max": 0.999143,
+     "fold_ratios": [
+      0.999135,
+      0.999129,
+      0.999141,
+      0.999128,
+      0.999143
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    }
+   },
+   "noisy_fold_pairs_auxiliary_not_a_preregistered_verdict": [],
+   "clean_fold_pairs_auxiliary_not_a_preregistered_verdict": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "delta_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.001457,
+   "positive_folds_auxiliary_not_a_preregistered_verdict": 0,
+   "negative_folds_auxiliary_not_a_preregistered_verdict": 5,
+   "error32_auxiliary_not_a_preregistered_verdict": {
+    "candidate": 36916,
+    "baseline": 33579,
+    "delta": 3337
+   },
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 6547,
+    "new_errors": 9577,
+    "prediction_agreement": 0.921254,
+    "error31_removed": 71,
+    "error31_new": 102,
+    "error31_common": 149,
+    "error32_removed": 1959,
+    "error32_new": 5296,
+    "error32_common": 31620
+   },
+   "compute_memory_not_tagged_auxiliary_not_a_preregistered_verdict": {
+    "tag": null,
+    "n_eligible_folds": 0,
+    "eligible_folds": [],
+    "excluded_folds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "candidate_increment_mib": [
+     114.699219,
+     112.894531,
+     115.246094,
+     115.863281,
+     113.015625
+    ],
+    "baseline_increment_mib": [
+     116.074219,
+     114.242188,
+     113.777344,
+     115.089844,
+     115.90625
+    ],
+    "exclusion_reason": "increment < 16 MiB or FLOOR_LIMITED for the pair"
+   },
+   "compute_encode_seconds_untagged_auxiliary_not_a_preregistered_verdict": {
+    "median": 1.016179,
+    "min": 0.925911,
+    "max": 1.043837,
+    "fold_ratios": [
+     1.016179,
+     1.043837,
+     1.043655,
+     1.006986,
+     0.925911
+    ],
+    "tag": null,
+    "boundary": false
+   }
+  },
+  {
+   "candidate": "RF_NUM",
+   "baseline": "RF_OH",
+   "mean_delta": -0.03837,
+   "fold_delta": [
+    -0.035023,
+    -0.035151,
+    -0.03996,
+    -0.041566,
+    -0.040151
+   ],
+   "fold_wins": 0,
+   "recall3_delta": -0.085476,
+   "error31": {
+    "candidate": 233,
+    "baseline": 187,
+    "delta": 46,
+    "candidate_rate": 0.003339,
+    "baseline_rate": 0.00268
+   },
+   "safety_3to1_flagged_arms": [
+    "RF_NUM"
+   ],
+   "performance_tag": "NUM_LOWER",
+   "container_confounded": false,
+   "compute_tags_allowed": true,
+   "compute": {
+    "train_seconds": {
+     "median": 1.07753,
+     "min": 1.019053,
+     "max": 1.103552,
+     "fold_ratios": [
+      1.019053,
+      1.085935,
+      1.07314,
+      1.07753,
+      1.103552
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    },
+    "predict_seconds": {
+     "median": 1.377195,
+     "min": 1.365945,
+     "max": 1.502018,
+     "fold_ratios": [
+      1.377195,
+      1.369192,
+      1.365945,
+      1.390789,
+      1.502018
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    },
+    "total_seconds": {
+     "median": 1.077615,
+     "min": 1.018306,
+     "max": 1.103154,
+     "fold_ratios": [
+      1.018306,
+      1.085577,
+      1.073102,
+      1.077615,
+      1.103154
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    },
+    "model_bytes": {
+     "median": 2.191561,
+     "min": 2.178945,
+     "max": 2.249965,
+     "fold_ratios": [
+      2.249965,
+      2.199605,
+      2.182115,
+      2.178945,
+      2.191561
+     ],
+     "tag": "HIGHER",
+     "boundary": false
+    },
+    "matrix_storage_bytes": {
+     "median": 0.999135,
+     "min": 0.999128,
+     "max": 0.999143,
+     "fold_ratios": [
+      0.999135,
+      0.999129,
+      0.999141,
+      0.999128,
+      0.999143
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    }
+   },
+   "noisy_fold_pairs_auxiliary_not_a_preregistered_verdict": [],
+   "clean_fold_pairs_auxiliary_not_a_preregistered_verdict": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "delta_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.003061,
+   "positive_folds_auxiliary_not_a_preregistered_verdict": 0,
+   "negative_folds_auxiliary_not_a_preregistered_verdict": 5,
+   "error32_auxiliary_not_a_preregistered_verdict": {
+    "candidate": 41338,
+    "baseline": 35420,
+    "delta": 5918
+   },
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 8789,
+    "new_errors": 14479,
+    "prediction_agreement": 0.886819,
+    "error31_removed": 42,
+    "error31_new": 88,
+    "error31_common": 145,
+    "error32_removed": 3564,
+    "error32_new": 9482,
+    "error32_common": 31856
+   },
+   "compute_memory_not_tagged_auxiliary_not_a_preregistered_verdict": {
+    "tag": null,
+    "n_eligible_folds": 0,
+    "eligible_folds": [],
+    "excluded_folds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "candidate_increment_mib": [
+     202.097656,
+     199.4375,
+     199.652344,
+     199.867188,
+     197.6875
+    ],
+    "baseline_increment_mib": [
+     150.242188,
+     151.148438,
+     153.621094,
+     152.019531,
+     153.132812
+    ],
+    "exclusion_reason": "increment < 16 MiB or FLOOR_LIMITED for the pair"
+   },
+   "compute_encode_seconds_untagged_auxiliary_not_a_preregistered_verdict": {
+    "median": 0.997356,
+    "min": 0.892135,
+    "max": 1.017913,
+    "fold_ratios": [
+     0.892135,
+     0.997356,
+     1.005842,
+     1.017913,
+     0.985838
+    ],
+    "tag": null,
+    "boundary": false
+   }
+  },
+  {
+   "candidate": "LGBM_NUM",
+   "baseline": "LGBM_OH",
+   "mean_delta": -0.018945,
+   "fold_delta": [
+    -0.020019,
+    -0.014212,
+    -0.02084,
+    -0.020546,
+    -0.019107
+   ],
+   "fold_wins": 0,
+   "recall3_delta": -0.018517,
+   "error31": {
+    "candidate": 269,
+    "baseline": 300,
+    "delta": -31,
+    "candidate_rate": 0.003855,
+    "baseline_rate": 0.0043
+   },
+   "safety_3to1_flagged_arms": [
+    "LGBM_OH"
+   ],
+   "performance_tag": "NUM_LOWER",
+   "container_confounded": false,
+   "compute_tags_allowed": true,
+   "compute": {
+    "train_seconds": {
+     "median": 0.440241,
+     "min": 0.388509,
+     "max": 0.497304,
+     "fold_ratios": [
+      0.440241,
+      0.46497,
+      0.497304,
+      0.425855,
+      0.388509
+     ],
+     "tag": "LOWER",
+     "boundary": false
+    },
+    "predict_seconds": {
+     "median": 0.726486,
+     "min": 0.716381,
+     "max": 0.752984,
+     "fold_ratios": [
+      0.752984,
+      0.716381,
+      0.726486,
+      0.720661,
+      0.727012
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    },
+    "total_seconds": {
+     "median": 0.509475,
+     "min": 0.458998,
+     "max": 0.558392,
+     "fold_ratios": [
+      0.509475,
+      0.528236,
+      0.558392,
+      0.493919,
+      0.458998
+     ],
+     "tag": "SIMILAR",
+     "boundary": true
+    },
+    "model_bytes": {
+     "median": 0.865494,
+     "min": 0.864584,
+     "max": 0.866132,
+     "fold_ratios": [
+      0.865572,
+      0.864721,
+      0.866132,
+      0.864584,
+      0.865494
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    },
+    "matrix_storage_bytes": {
+     "median": 0.999045,
+     "min": 0.999038,
+     "max": 0.999054,
+     "fold_ratios": [
+      0.999045,
+      0.999039,
+      0.999052,
+      0.999038,
+      0.999054
+     ],
+     "tag": "SIMILAR",
+     "boundary": false
+    }
+   },
+   "noisy_fold_pairs_auxiliary_not_a_preregistered_verdict": [
+    3,
+    4
+   ],
+   "clean_fold_pairs_auxiliary_not_a_preregistered_verdict": [
+    0,
+    1,
+    2
+   ],
+   "delta_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.002727,
+   "positive_folds_auxiliary_not_a_preregistered_verdict": 0,
+   "negative_folds_auxiliary_not_a_preregistered_verdict": 5,
+   "error32_auxiliary_not_a_preregistered_verdict": {
+    "candidate": 29606,
+    "baseline": 28283,
+    "delta": 1323
+   },
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 6198,
+    "new_errors": 9361,
+    "prediction_agreement": 0.924012,
+    "error31_removed": 88,
+    "error31_new": 57,
+    "error31_common": 212,
+    "error32_removed": 2610,
+    "error32_new": 3933,
+    "error32_common": 25673
+   },
+   "compute_memory_not_tagged_auxiliary_not_a_preregistered_verdict": {
+    "tag": null,
+    "n_eligible_folds": 0,
+    "eligible_folds": [],
+    "excluded_folds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "candidate_increment_mib": [
+     120.519531,
+     120.894531,
+     133.046875,
+     133.980469,
+     136.777344
+    ],
+    "baseline_increment_mib": [
+     144.445312,
+     151.0,
+     143.1875,
+     150.257812,
+     143.832031
+    ],
+    "exclusion_reason": "increment < 16 MiB or FLOOR_LIMITED for the pair"
+   },
+   "compute_encode_seconds_untagged_auxiliary_not_a_preregistered_verdict": {
+    "median": 1.031949,
+    "min": 0.992071,
+    "max": 1.06552,
+    "fold_ratios": [
+     1.01899,
+     1.031949,
+     1.033111,
+     1.06552,
+     0.992071
+    ],
+    "tag": null,
+    "boundary": false
+   },
+   "clean_pair_sensitivity_post_hoc_auxiliary_not_a_preregistered_verdict": {
+    "train_seconds": {
+     "folds": [
+      0,
+      1,
+      2
+     ],
+     "fold_ratios": [
+      0.440241,
+      0.46497,
+      0.497304
+     ],
+     "median": 0.46497,
+     "class_if_tagged": "LOWER",
+     "boundary": false
+    },
+    "predict_seconds": {
+     "folds": [
+      0,
+      1,
+      2
+     ],
+     "fold_ratios": [
+      0.752984,
+      0.716381,
+      0.726486
+     ],
+     "median": 0.726486,
+     "class_if_tagged": "SIMILAR",
+     "boundary": false
+    },
+    "total_seconds": {
+     "folds": [
+      0,
+      1,
+      2
+     ],
+     "fold_ratios": [
+      0.509475,
+      0.528236,
+      0.558392
+     ],
+     "median": 0.528236,
+     "class_if_tagged": "SIMILAR",
+     "boundary": false
+    },
+    "model_bytes": {
+     "folds": [
+      0,
+      1,
+      2
+     ],
+     "fold_ratios": [
+      0.865572,
+      0.864721,
+      0.866132
+     ],
+     "median": 0.865572,
+     "class_if_tagged": "SIMILAR",
+     "boundary": false
+    },
+    "matrix_storage_bytes": {
+     "folds": [
+      0,
+      1,
+      2
+     ],
+     "fold_ratios": [
+      0.999045,
+      0.999039,
+      0.999052
+     ],
+     "median": 0.999045,
+     "class_if_tagged": "SIMILAR",
+     "boundary": false
+    }
+   }
+  },
+  {
+   "candidate": "LGBM_NUM",
+   "baseline": "LGBM_NAT",
+   "mean_delta": -0.04832,
+   "fold_delta": [
+    -0.049011,
+    -0.048062,
+    -0.046915,
+    -0.049467,
+    -0.048145
+   ],
+   "fold_wins": 0,
+   "recall3_delta": -0.075816,
+   "error31": {
+    "candidate": 269,
+    "baseline": 530,
+    "delta": -261,
+    "candidate_rate": 0.003855,
+    "baseline_rate": 0.007596
+   },
+   "safety_3to1_flagged_arms": [
+    "LGBM_NAT"
+   ],
+   "performance_tag": "NUM_LOWER",
+   "container_confounded": true,
+   "compute_tags_allowed": false,
+   "compute": {
+    "train_seconds": {
+     "median": 0.425124,
+     "min": 0.391534,
+     "max": 0.453149,
+     "fold_ratios": [
+      0.431795,
+      0.391534,
+      0.404692,
+      0.425124,
+      0.453149
+     ],
+     "tag": null,
+     "boundary": false
+    },
+    "predict_seconds": {
+     "median": 0.245244,
+     "min": 0.1962,
+     "max": 0.280135,
+     "fold_ratios": [
+      0.254446,
+      0.1962,
+      0.280135,
+      0.245244,
+      0.217884
+     ],
+     "tag": null,
+     "boundary": false
+    },
+    "total_seconds": {
+     "median": 0.412315,
+     "min": 0.362261,
+     "max": 0.419336,
+     "fold_ratios": [
+      0.419336,
+      0.362261,
+      0.408432,
+      0.412315,
+      0.412463
+     ],
+     "tag": null,
+     "boundary": false
+    },
+    "model_bytes": {
+     "median": 0.189051,
+     "min": 0.188486,
+     "max": 0.190095,
+     "fold_ratios": [
+      0.189809,
+      0.188655,
+      0.190095,
+      0.188486,
+      0.189051
+     ],
+     "tag": null,
+     "boundary": false
+    },
+    "matrix_storage_bytes": {
+     "median": 0.835982,
+     "min": 0.835943,
+     "max": 0.836155,
+     "fold_ratios": [
+      0.836155,
+      0.835943,
+      0.836077,
+      0.835963,
+      0.835982
+     ],
+     "tag": null,
+     "boundary": false
+    }
+   },
+   "noisy_fold_pairs_auxiliary_not_a_preregistered_verdict": [
+    3,
+    4
+   ],
+   "clean_fold_pairs_auxiliary_not_a_preregistered_verdict": [
+    0,
+    1,
+    2
+   ],
+   "delta_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.000983,
+   "positive_folds_auxiliary_not_a_preregistered_verdict": 0,
+   "negative_folds_auxiliary_not_a_preregistered_verdict": 5,
+   "error32_auxiliary_not_a_preregistered_verdict": {
+    "candidate": 29606,
+    "baseline": 24055,
+    "delta": 5551
+   },
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 13439,
+    "new_errors": 19502,
+    "prediction_agreement": 0.838315,
+    "error31_removed": 363,
+    "error31_new": 102,
+    "error31_common": 167,
+    "error32_removed": 3856,
+    "error32_new": 9407,
+    "error32_common": 20199
+   },
+   "compute_memory_not_tagged_auxiliary_not_a_preregistered_verdict": {
+    "tag": null,
+    "n_eligible_folds": 0,
+    "eligible_folds": [],
+    "excluded_folds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "candidate_increment_mib": [
+     120.519531,
+     120.894531,
+     133.046875,
+     133.980469,
+     136.777344
+    ],
+    "baseline_increment_mib": [
+     200.5625,
+     195.683594,
+     193.273438,
+     185.59375,
+     186.261719
+    ],
+    "exclusion_reason": "increment < 16 MiB or FLOOR_LIMITED for the pair"
+   },
+   "compute_encode_seconds_untagged_auxiliary_not_a_preregistered_verdict": {
+    "median": 1.067616,
+    "min": 0.908274,
+    "max": 1.114926,
+    "fold_ratios": [
+     1.099043,
+     0.908274,
+     1.067616,
+     1.024889,
+     1.114926
+    ],
+    "tag": null,
+    "boundary": false
+   }
+  },
+  {
+   "candidate": "LGBM_NAT",
+   "baseline": "LGBM_OH",
+   "mean_delta": 0.029375,
+   "fold_delta": [
+    0.028992,
+    0.03385,
+    0.026075,
+    0.028921,
+    0.029039
+   ],
+   "fold_wins": 5,
+   "recall3_delta": 0.057299,
+   "error31": {
+    "candidate": 530,
+    "baseline": 300,
+    "delta": 230,
+    "candidate_rate": 0.007596,
+    "baseline_rate": 0.0043
+   },
+   "safety_3to1_flagged_arms": [
+    "LGBM_NAT"
+   ],
+   "performance_tag": null,
+   "container_confounded": true,
+   "compute_tags_allowed": false,
+   "compute": {
+    "train_seconds": {
+     "median": 1.019559,
+     "min": 0.857352,
+     "max": 1.228846,
+     "fold_ratios": [
+      1.019559,
+      1.187558,
+      1.228846,
+      1.00172,
+      0.857352
+     ],
+     "tag": null,
+     "boundary": false
+    },
+    "predict_seconds": {
+     "median": 2.959304,
+     "min": 2.593344,
+     "max": 3.651283,
+     "fold_ratios": [
+      2.959304,
+      3.651283,
+      2.593344,
+      2.938545,
+      3.336686
+     ],
+     "tag": null,
+     "boundary": false
+    },
+    "total_seconds": {
+     "median": 1.214957,
+     "min": 1.112822,
+     "max": 1.458162,
+     "fold_ratios": [
+      1.214957,
+      1.458162,
+      1.367161,
+      1.197917,
+      1.112822
+     ],
+     "tag": null,
+     "boundary": false
+    },
+    "model_bytes": {
+     "median": 4.578101,
+     "min": 4.556307,
+     "max": 4.586991,
+     "fold_ratios": [
+      4.560221,
+      4.583621,
+      4.556307,
+      4.586991,
+      4.578101
+     ],
+     "tag": null,
+     "boundary": false
+    },
+    "matrix_storage_bytes": {
+     "median": 1.195067,
+     "min": 1.194808,
+     "max": 1.195104,
+     "fold_ratios": [
+      1.194808,
+      1.195104,
+      1.194928,
+      1.195074,
+      1.195067
+     ],
+     "tag": null,
+     "boundary": false
+    }
+   },
+   "noisy_fold_pairs_auxiliary_not_a_preregistered_verdict": [
+    3,
+    4
+   ],
+   "clean_fold_pairs_auxiliary_not_a_preregistered_verdict": [
+    0,
+    1,
+    2
+   ],
+   "delta_sd_ddof1_auxiliary_not_a_preregistered_verdict": 0.002801,
+   "positive_folds_auxiliary_not_a_preregistered_verdict": 5,
+   "negative_folds_auxiliary_not_a_preregistered_verdict": 0,
+   "error32_auxiliary_not_a_preregistered_verdict": {
+    "candidate": 24055,
+    "baseline": 28283,
+    "delta": -4228
+   },
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 14968,
+    "new_errors": 12068,
+    "prediction_agreement": 0.867177,
+    "error31_removed": 95,
+    "error31_new": 325,
+    "error31_common": 205,
+    "error32_removed": 7456,
+    "error32_new": 3228,
+    "error32_common": 20827
+   },
+   "compute_memory_not_tagged_auxiliary_not_a_preregistered_verdict": {
+    "tag": null,
+    "n_eligible_folds": 0,
+    "eligible_folds": [],
+    "excluded_folds": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ],
+    "candidate_increment_mib": [
+     200.5625,
+     195.683594,
+     193.273438,
+     185.59375,
+     186.261719
+    ],
+    "baseline_increment_mib": [
+     144.445312,
+     151.0,
+     143.1875,
+     150.257812,
+     143.832031
+    ],
+    "exclusion_reason": "increment < 16 MiB or FLOOR_LIMITED for the pair"
+   },
+   "compute_encode_seconds_untagged_auxiliary_not_a_preregistered_verdict": {
+    "median": 0.967681,
+    "min": 0.889809,
+    "max": 1.136164,
+    "fold_ratios": [
+     0.927161,
+     1.136164,
+     0.967681,
+     1.039644,
+     0.889809
+    ],
+    "tag": null,
+    "boundary": false
+   }
+  }
+ ],
+ "finalize_summary_labels": {
+  "LR_NUM_vs_LR_OH": "NUM_LOWER",
+  "DT_NUM_vs_DT_OH": "NUM_HIGHER",
+  "GBC_NUM_vs_GBC_OH": "NUM_LOWER",
+  "RF_NUM_vs_RF_OH": "NUM_LOWER",
+  "LGBM_NUM_vs_LGBM_OH": "NUM_LOWER",
+  "LGBM_NUM_vs_LGBM_NAT": "NUM_LOWER",
+  "LGBM_NAT_vs_LGBM_OH": null
+ },
+ "null_meaning": "performance_tag is defined only for a NUM candidate against its baseline (plan sec. 9.1, delta = NUM - baseline). LGBM_NAT vs LGBM_OH is the 'existing pair re-check' of plan sec. 5, so the finalize step assigns no performance tag (null). null means 'tag not defined', not 'no material difference'. Its numeric values are reported.",
+ "boundary_marks_definition_auxiliary_not_a_preregistered_verdict": "결과를 확인한 뒤 보고서 작성자가 정한 보조 기준이며 사전등록 규칙이 아니다. 판정 라벨에는 쓰이지 않았다. 성능 태그: |Δ|가 0.003에서 0.001 이내, 후보 승 Fold 수가 경계(1↔2, 3↔4)에 걸림(2 또는 3), ΔRecall3가 -0.01에서 0.005 이내. 3→1 안전 점검: 두 팔의 건수 차가 절대 기준 30건에서 5건 이내(25~35건). 계산량 태그: 5개 Fold 비율 중앙값이 0.5 또는 2.0에서 0.1 이내(태그가 붙은 5개 비교만).",
+ "boundary_adjacent_marks_auxiliary_not_a_preregistered_verdict": [
+  {
+   "comparison": "DT_NUM_vs_DT_OH",
+   "item": "compute_total_seconds_median_ratio",
+   "value": 1.952477,
+   "boundary": 2.0,
+   "distance": 0.047523,
+   "tag": "SIMILAR",
+   "preregistered_boundary_mark": true
+  },
+  {
+   "comparison": "GBC_NUM_vs_GBC_OH",
+   "item": "error31_abs_difference",
+   "value": 31,
+   "boundary": 30,
+   "distance": 1,
+   "relative_difference": 0.140909,
+   "relative_boundary": 0.1,
+   "flagged_arms": [
+    "GBC_NUM"
+   ]
+  },
+  {
+   "comparison": "LGBM_NUM_vs_LGBM_OH",
+   "item": "error31_abs_difference",
+   "value": 31,
+   "boundary": 30,
+   "distance": 1,
+   "relative_difference": 0.115242,
+   "relative_boundary": 0.1,
+   "flagged_arms": [
+    "LGBM_OH"
+   ]
+  },
+  {
+   "comparison": "LGBM_NUM_vs_LGBM_OH",
+   "item": "compute_train_seconds_median_ratio",
+   "value": 0.440241,
+   "boundary": 0.5,
+   "distance": 0.059759,
+   "tag": "LOWER",
+   "preregistered_boundary_mark": false
+  },
+  {
+   "comparison": "LGBM_NUM_vs_LGBM_OH",
+   "item": "compute_total_seconds_median_ratio",
+   "value": 0.509475,
+   "boundary": 0.5,
+   "distance": 0.009475,
+   "tag": "SIMILAR",
+   "preregistered_boundary_mark": true
+  }
+ ],
+ "post_hoc_criteria_by_report_author": [
+  "boundary_adjacent_marks (sec. 3.5) thresholds: |delta| within 0.001 of 0.003, wins in {2,3}, delta_recall3 within 0.005 of -0.01, 3->1 difference 25-35, compute median ratio within 0.1 of 0.5/2.0",
+  "clean_pair_sensitivity (sec. 4.3): keeping only fold pairs without a noisy fit (LGBM_NUM vs LGBM_OH folds 0,1,2)"
+ ],
+ "controls": {
+  "LR_OH": {
+   "status": "PASS",
+   "fold": 0,
+   "reference_oof_sha256": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc",
+   "new_fold0_pred_sha256": "c30bf1573c34fe6190fa4e171b50ac9ac0d9c418056d54d3674b7e0b2c7bb05a",
+   "control_check_sha256": "866023f66bca689744de798c4031274f0b3d61d6f879b2fbdae9e6d09cc30013",
+   "rule": "Fold 0 Macro F1 absolute difference <= 5e-4 (cross-environment reference)",
+   "fold_macro_f1_new": 0.689102,
+   "fold_macro_f1_reference": 0.688738,
+   "abs_diff": 0.000364,
+   "label_mismatch_rows": 136,
+   "max_abs_probability_diff_info": 0.047461,
+   "secondary_max_abs_probability_diff": 0.0,
+   "secondary_probability_atol": "1e-06",
+   "secondary_labels_identical": true,
+   "secondary_within_atol": true,
+   "secondary_required": false
+  },
+  "DT_OH": {
+   "status": "PASS",
+   "fold": 0,
+   "reference_oof_sha256": "0f9b57c0853d8418929428cf294bf5e8fbb71dc63df4fbe0dfeefc9faaf0712f",
+   "new_fold0_pred_sha256": "307964b8ad2fce63e27d2ecb853b6bab7e7e7b70692852a9de0e5104a63727c6",
+   "control_check_sha256": "aa4cf627b36771b88135f4ff9cd4a739c1364a2f492d69f11381607634162c7e",
+   "rule": "max abs probability diff <= 1e-9 and identical labels (exact top-2 ties tolerated up to 2e-9)",
+   "max_abs_diff": 0.0,
+   "label_mismatch_rows": 0,
+   "tie_allowed_rows": 0,
+   "unexplained_label_mismatch_rows": 0
+  },
+  "GBC_OH": {
+   "status": "PASS",
+   "fold": 0,
+   "reference_oof_sha256": "ff9d764e2cb8e5faebaffa1fc118a529d989ef5e99aea653f18d444ca8d99477",
+   "new_fold0_pred_sha256": "2588585c3ea881a3971f53ea4f74fbddfa61ae97d509bfea6455513d508da244",
+   "control_check_sha256": "c2868f4205f2bea3208eb504081fd0c3dbf983fce868d497e5d1eedb98ade6f3",
+   "rule": "max abs probability diff <= 1e-9 and identical labels (exact top-2 ties tolerated up to 2e-9)",
+   "max_abs_diff": 0.0,
+   "label_mismatch_rows": 0,
+   "tie_allowed_rows": 0,
+   "unexplained_label_mismatch_rows": 0
+  },
+  "RF_OH": {
+   "status": "PASS",
+   "fold": 0,
+   "reference_oof_sha256": "b99e35c4210cc80ecb8dc0ca06a6574bc57cf4c50ebd247027b8adf7019ceb60",
+   "new_fold0_pred_sha256": "48d1fd818407b61f88ac1ba8888e0a2f8c1b12d86e68b60b578296803b8889a3",
+   "control_check_sha256": "ce3d63c542f7b1b3f95255e6cb4e118d55f8a80049cf83552a560b0a7b2d39c5",
+   "rule": "max abs probability diff <= 1e-9 and identical labels (exact top-2 ties tolerated up to 2e-9)",
+   "max_abs_diff": "3.331e-16",
+   "label_mismatch_rows": 0,
+   "tie_allowed_rows": 0,
+   "unexplained_label_mismatch_rows": 0
+  },
+  "LGBM_OH": {
+   "status": "PASS",
+   "fold": 0,
+   "reference_oof_sha256": "5396b33df6a977fb9a9ac500363b5d056277a4b23a201eb14782b529e670f60f",
+   "new_fold0_pred_sha256": "03e90ab6840df215058bf8cd7528fdccb90e6cadc01d2cf4b0ee4b50fb337637",
+   "control_check_sha256": "0c7dc2967d89b94ba8ae1d0769c115941b4b7d7afa1ccafcd58872013c14152d",
+   "rule": "max abs probability diff <= 1e-9 and identical labels (exact top-2 ties tolerated up to 2e-9)",
+   "max_abs_diff": 0.0,
+   "label_mismatch_rows": 0,
+   "tie_allowed_rows": 0,
+   "unexplained_label_mismatch_rows": 0
+  },
+  "LGBM_NAT": {
+   "status": "PASS",
+   "fold": 0,
+   "reference_oof_sha256": "263680540b07a5cc4fe84dd294ff90ae0da7c9c7b2886f0df733edf9465f9558",
+   "new_fold0_pred_sha256": "a7cf2248e803d3bf72407a7d885b66fb10dff3fd7ccbbc5af5670e65b33d88c7",
+   "control_check_sha256": "aaa73ef6a21aec92cdfdc975e2cffb6cb8f25c68c938d3b15addd7df23aaaf93",
+   "rule": "max abs probability diff <= 1e-9 and identical labels (exact top-2 ties tolerated up to 2e-9)",
+   "max_abs_diff": 0.0,
+   "label_mismatch_rows": 0,
+   "tie_allowed_rows": 0,
+   "unexplained_label_mismatch_rows": 0
+  }
+ },
+ "noisy": {
+  "ledger_noisy_fits": [
+   "LR_OH/0",
+   "LR_NUM/0",
+   "LR_NUM/1",
+   "LR_OH/1",
+   "LR_OH/2",
+   "LR_NUM/2",
+   "LR_NUM/3",
+   "LR_OH/3",
+   "LR_OH/4",
+   "LGBM_NAT/3",
+   "LGBM_NUM/3",
+   "LGBM_NAT/4",
+   "LGBM_NUM/4",
+   "LGBM_OH/4"
+  ],
+  "count": 14,
+  "by_group": {
+   "LR_first_nine": [
+    "LR_OH/0",
+    "LR_NUM/0",
+    "LR_NUM/1",
+    "LR_OH/1",
+    "LR_OH/2",
+    "LR_NUM/2",
+    "LR_NUM/3",
+    "LR_OH/3",
+    "LR_OH/4"
+   ],
+   "LGBM_last_five": [
+    "LGBM_NAT/3",
+    "LGBM_NUM/3",
+    "LGBM_NAT/4",
+    "LGBM_NUM/4",
+    "LGBM_OH/4"
+   ]
+  },
+  "cause_reported_by_execution_owner": {
+   "LR_nine": "외부 고아 시스템 python 프로세스(3개)가 CPU 코어를 점유",
+   "LGBM_five": "동시에 진행된 보조 작업",
+   "note": "실행 주체가 보고한 내용이며 원장에는 플래그와 CPU 샘플만 기록돼 있다(프로세스 이름·원인 미기록).",
+   "ledger_time_window_utc_lr": [
+    "04:47",
+    "04:58"
+   ],
+   "ledger_time_window_utc_lgbm": [
+    "05:38",
+    "05:47"
+   ]
+  },
+  "idle_rule": "system CPU <= 10% for a 5 s window; after 60 s of waiting the fit proceeds and is flagged noisy (never discarded)",
+  "handling": {
+   "fits_discarded_or_excluded_from_compute_ratios": 0,
+   "compute_ratios_use_all_five_folds": true,
+   "noisy_flag_is_input_of_compute_comparison": false,
+   "eligible_folds_scope": "memory tag only (16 MiB floor / FLOOR_LIMITED rule); empty for all 7 comparisons",
+   "memory_tags_assigned": 0
+  },
+  "noisy_exposure_by_comparison": {
+   "LR_NUM_vs_LR_OH": [
+    0,
+    1,
+    2,
+    3,
+    4
+   ],
+   "DT_NUM_vs_DT_OH": [],
+   "GBC_NUM_vs_GBC_OH": [],
+   "RF_NUM_vs_RF_OH": [],
+   "LGBM_NUM_vs_LGBM_OH": [
+    3,
+    4
+   ],
+   "LGBM_NUM_vs_LGBM_NAT": [
+    3,
+    4
+   ],
+   "LGBM_NAT_vs_LGBM_OH": [
+    3,
+    4
+   ]
+  },
+  "detail_idle_metadata_from_fold_json_auxiliary_not_a_preregistered_verdict": {
+   "LR_OH/0": {
+    "arm": "LR_OH",
+    "fold": 0,
+    "fit_seconds": 13.197667,
+    "cpu_wall": 0.983839,
+    "waited_seconds": 60.008683,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 28.7,
+    "idle_cpu_max_percent": 47.6,
+    "idle_cpu_min_percent": 21.1
+   },
+   "LR_OH/1": {
+    "arm": "LR_OH",
+    "fold": 1,
+    "fit_seconds": 13.182841,
+    "cpu_wall": 0.976648,
+    "waited_seconds": 60.007802,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 23.8,
+    "idle_cpu_max_percent": 26.2,
+    "idle_cpu_min_percent": 21.7
+   },
+   "LR_OH/2": {
+    "arm": "LR_OH",
+    "fold": 2,
+    "fit_seconds": 13.539465,
+    "cpu_wall": 0.982083,
+    "waited_seconds": 60.009011,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 25.2,
+    "idle_cpu_max_percent": 25.2,
+    "idle_cpu_min_percent": 21.9
+   },
+   "LR_OH/3": {
+    "arm": "LR_OH",
+    "fold": 3,
+    "fit_seconds": 12.395786,
+    "cpu_wall": 0.983197,
+    "waited_seconds": 60.006792,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 16.8,
+    "idle_cpu_max_percent": 25.5,
+    "idle_cpu_min_percent": 14.9
+   },
+   "LR_OH/4": {
+    "arm": "LR_OH",
+    "fold": 4,
+    "fit_seconds": 13.151702,
+    "cpu_wall": 0.983713,
+    "waited_seconds": 60.008387,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 22.2,
+    "idle_cpu_max_percent": 29.7,
+    "idle_cpu_min_percent": 17.9
+   },
+   "LR_NUM/0": {
+    "arm": "LR_NUM",
+    "fold": 0,
+    "fit_seconds": 2.409736,
+    "cpu_wall": 0.985585,
+    "waited_seconds": 60.008962,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 24.4,
+    "idle_cpu_max_percent": 25.8,
+    "idle_cpu_min_percent": 21.6
+   },
+   "LR_NUM/1": {
+    "arm": "LR_NUM",
+    "fold": 1,
+    "fit_seconds": 2.433147,
+    "cpu_wall": 0.988946,
+    "waited_seconds": 60.009514,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 27.5,
+    "idle_cpu_max_percent": 33.4,
+    "idle_cpu_min_percent": 23.6
+   },
+   "LR_NUM/2": {
+    "arm": "LR_NUM",
+    "fold": 2,
+    "fit_seconds": 2.464412,
+    "cpu_wall": 0.99542,
+    "waited_seconds": 60.007359,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 18.1,
+    "idle_cpu_max_percent": 23.8,
+    "idle_cpu_min_percent": 15.3
+   },
+   "LR_NUM/3": {
+    "arm": "LR_NUM",
+    "fold": 3,
+    "fit_seconds": 3.29338,
+    "cpu_wall": 0.982084,
+    "waited_seconds": 60.009567,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 23.8,
+    "idle_cpu_max_percent": 27.2,
+    "idle_cpu_min_percent": 18.5
+   },
+   "LGBM_OH/4": {
+    "arm": "LGBM_OH",
+    "fold": 4,
+    "fit_seconds": 19.782985,
+    "cpu_wall": 0.951733,
+    "waited_seconds": 60.009637,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 16.7,
+    "idle_cpu_max_percent": 20.8,
+    "idle_cpu_min_percent": 15.3
+   },
+   "LGBM_NAT/3": {
+    "arm": "LGBM_NAT",
+    "fold": 3,
+    "fit_seconds": 18.599979,
+    "cpu_wall": 0.974463,
+    "waited_seconds": 60.007345,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 18.0,
+    "idle_cpu_max_percent": 22.4,
+    "idle_cpu_min_percent": 10.5
+   },
+   "LGBM_NAT/4": {
+    "arm": "LGBM_NAT",
+    "fold": 4,
+    "fit_seconds": 16.960986,
+    "cpu_wall": 0.980191,
+    "waited_seconds": 60.007704,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 11.7,
+    "idle_cpu_max_percent": 16.5,
+    "idle_cpu_min_percent": 11.3
+   },
+   "LGBM_NUM/3": {
+    "arm": "LGBM_NUM",
+    "fold": 3,
+    "fit_seconds": 7.907306,
+    "cpu_wall": 0.962322,
+    "waited_seconds": 60.008922,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 12.2,
+    "idle_cpu_max_percent": 19.8,
+    "idle_cpu_min_percent": 11.7
+   },
+   "LGBM_NUM/4": {
+    "arm": "LGBM_NUM",
+    "fold": 4,
+    "fit_seconds": 7.685859,
+    "cpu_wall": 0.977851,
+    "waited_seconds": 60.009085,
+    "n_idle_samples": 12,
+    "idle_cpu_last_percent": 17.7,
+    "idle_cpu_max_percent": 18.6,
+    "idle_cpu_min_percent": 11.2
+   }
+  },
+  "f1_verdict_affected": false,
+  "f1_basis": [
+   "verdict uses OOF predictions only",
+   "single thread, fixed seeds, LGBM deterministic=true",
+   "noisy LR_OH fold 0 matched the earlier local refit with max abs probability diff 0.0 and identical labels",
+   "audit: stored-model reinference bit-identical in all 55 fits including the 14 noisy ones"
+  ],
+  "measurement_only_warmup_noisy": true,
+  "measurement_only_repeats_noisy": [
+   false,
+   false,
+   false,
+   false
+  ]
+ },
+ "memory_measurement_scope_auxiliary_not_a_preregistered_verdict": {
+  "wset_floor_limited_encode_train": 45,
+  "sampling_limited_encode_train": 0,
+  "sampling_limited_encode_only": 55,
+  "sampling_limited_predict": 43,
+  "fits": 55,
+  "predict_interval_rss_increment_mib_all_zero": true,
+  "peak_pagefile_unchanged_fits": 45,
+  "note": "analysis.json의 sampling_limited 0건은 인코딩+학습 구간 기준이다."
+ },
+ "repeat_cv_auxiliary_not_a_preregistered_verdict": {
+  "DT_OH/encode_seconds": {
+   "repeats_only": 0.000395,
+   "with_main_fold0": 0.012525,
+   "values": [
+    1.164184,
+    1.164834,
+    1.139434
+   ]
+  },
+  "DT_OH/fit_seconds": {
+   "repeats_only": 0.005264,
+   "with_main_fold0": 0.009312,
+   "values": [
+    1.712977,
+    1.700271,
+    1.732003
+   ]
+  },
+  "DT_OH/predict_seconds": {
+   "repeats_only": 0.005328,
+   "with_main_fold0": 0.137928,
+   "values": [
+    0.002406,
+    0.002425,
+    0.003042
+   ]
+  },
+  "DT_NUM/encode_seconds": {
+   "repeats_only": 0.000965,
+   "with_main_fold0": 0.004274,
+   "values": [
+    1.180407,
+    1.178797,
+    1.171004
+   ]
+  },
+  "DT_NUM/fit_seconds": {
+   "repeats_only": 0.045994,
+   "with_main_fold0": 0.032833,
+   "values": [
+    4.725345,
+    4.427663,
+    4.617465
+   ]
+  },
+  "DT_NUM/predict_seconds": {
+   "repeats_only": 0.020007,
+   "with_main_fold0": 0.020175,
+   "values": [
+    0.00331,
+    0.003405,
+    0.003275
+   ]
+  }
+ },
+ "geo_citations": {
+  "note": "geo2 Group values are quoted from T8/T9 reports, not measured here",
+  "lgbm_geo2": {
+   "O": 0.582827,
+   "P": 0.582545,
+   "N": 0.545694,
+   "LR_C": 0.565146
+  },
+  "used_for_verdict": false
+ },
+ "not_claimed": [
+  "최종 모델 선정",
+  "팔 간 우열 확정",
+  "모델 간 순위",
+  "채택 권고",
+  "새 독립 성능",
+  "지역 일반화 평가",
+  "인과 효과"
+ ],
+ "t29_status": "확인 평가(T29)는 현재 설계 초안만 있는 미승인 상태이며 승인 여부는 별도 사용자 결정이다.",
+ "notes": [
+  "층화 seed 42 5-Fold 하나의 기술 판정이며 p-value·신뢰구간·인과·일반화 주장이 아니다.",
+  "계산량 측정은 오염됐다: noisy 14건(LR 9, LGBM 5)은 폐기하지 않고 비율 계산에 포함됐다. LR은 깨끗한 Fold 쌍이 없다.",
+  "메모리 태그는 7개 비교 모두 부여되지 않았다(16 MiB 하한/FLOOR_LIMITED 규칙).",
+  "LGBM_NAT이 낀 비교는 컨테이너(dense 대 CSR)가 섞여 계산량 태그를 붙이지 않았다.",
+  "performance_tag null은 태그 미정의이며 '차이 없음'이 아니다.",
+  "하이퍼파라미터는 원핫 기준으로 고정했고 표현별로 다시 조정하지 않았다.",
+  "T29는 현재 설계 초안만 있는 미승인 상태이며 이 결과는 새 독립 성능이 아니다."
+ ],
+ "limitations_plan_section_13": [
+  "1 지역 일반화를 보지 못한다(층화 CV)",
+  "2 하이퍼파라미터를 표현별로 다시 조정하지 않았다(RF max_features 후보 특성 수 변화)",
+  "3 LGBM_NUM은 max_bin=255에 묶인다",
+  "4 LR_NUM은 표준화한 선형 단조 항",
+  "5 지역 3열을 함께만 바꿨다",
+  "6 단일 시드·분할·기계, Fold 쌍 5개",
+  "7 연령 정책이 모델별로 다르다",
+  "8 재사용 OOF의 증거 수준이 다르다",
+  "9 선택 통계",
+  "10 설계자가 확인하지 못한 것(실행 뒤 상태는 MD 8절에 기록)",
+  "11 컨테이너와 메모리 측정의 한계",
+  "12 인코딩 시간의 왕복 비용"
+ ],
+ "limitations_added": [
+  "계산량 측정은 오염됐다(§4). LR의 시간 비율(학습·예측·종단)은 전부 noisy 쌍에서 나왔고 LGBM은 Fold 3·4 쌍이 섞였으며 LR에는 깨끗한 쌍이 없다. 모델 파일 크기·행렬 저장 크기 비율은 결정적 값이다. 시간 비율은 정밀한 값으로 인용하지 않는다. 깨끗한 환경에서의 재측정은 하지 않았다. 전원 관리 옵션은 균형 조정이며 고성능이 아니다.",
+  "메모리 계산량 태그가 7개 비교 모두 없다(위 11번). 메모리 축의 비교 결론은 없다.",
+  "§3.5의 경계 근접 기준과 §4.3의 \"깨끗한 쌍\" 민감도 기준은 결과를 확인한 뒤 보고서 작성자가 정했다. 사전등록 규칙이 아니고 판정 라벨에 쓰이지 않았다.",
+  "성능 태그의 임계(|Δ| 0.003, 승수 4/5, ΔRecall3 −0.01, 3→1 상대 +10%·절대 +30건)와 계산량 비율 임계(0.5, 2.0)는 사전 승인된 제안값이다. Fold SD가 LR 약 0.0015, LGBM 약 0.0033~0.0037, DT 0.0045~0.0056, GBC 0.0044~0.0051, RF 약 0.0038~0.0055라 트리 모델에서는 0.003이 Fold 변동폭 안이다. 그래서 Fold 승수를 함께 요구한다. 어느 태그도 유의성 검정이 아니다.",
+  "3→1은 풀링 건수가 수백 건 규모이고 `SAFETY_3to1` 표시는 건수 차 30건 이상일 때만 켜진다. 3→1 허용 상한은 오류 비용 판단이라 이 연구에서 정하지 않았다(T29 사용자 결정 항목).",
+  "계획 §3.3이 적은 대로 재적합한 `OH`/`NAT` OOF를 기준으로 삼았으므로 과거 보고 수치와는 대조(§5)를 통해서만 연결된다.",
+  "독립 감사(PASS_T31)는 학습 행렬이 저장돼 있지 않아 LR 기울기·트리 구조·학습 Macro F1로 학습 입력을 간접 증명했다. 이 공개 보고서의 독립 검토(PASS_WITH_DEFECTS, high 0 / medium 1 / low 10)의 지적은 이 판에 모두 반영했다.",
+  "단위 테스트 수치는 조정자가 전달한 값이며 이 작업에서 재실행하지 않았다: tests.test_geo_code_encoding 62개 통과·skip 0, 전체 discover 1,155개 OK·skip 33 (조정자가 전달한 값을 옮긴 것이다. 이 보고서 작성 중 다시 실행하지 않았다.)",
+  "홀드아웃은 접근하지 않았다. 이 결과는 새 독립 성능이 아니다. 확인 평가(T29)는 현재 설계 초안만 있는 미승인 상태이며 승인 여부는 별도 사용자 결정이다."
+ ],
+ "rounding": "부동소수 값은 소수 6자리 반올림, 정수 건수는 반올림하지 않음. 원자료 전체 자릿수는 analysis.json(비공개)에 있다. 표시된 Δ와 평균의 합이 반올림 때문에 1e-6 단위로 어긋날 수 있다. 반올림 예외(유효숫자 보존: 6자리로 반올림하면 0이 되거나 자릿수를 잃는 값을 유효숫자 4자리 문자열로 저장): audit.lr_gradient_max_abs, controls.LR_OH.secondary_probability_atol, controls.RF_OH.max_abs_diff. 판정 규칙의 경계 허용 오차 1e-12 등 규칙 상수는 JSON 값이 아니라 본문 문장에만 적었다.",
+ "rounding_exceptions_as_strings": [
+  "audit.lr_gradient_max_abs",
+  "controls.LR_OH.secondary_probability_atol",
+  "controls.RF_OH.max_abs_diff"
+ ]
+}
