@@ -1,0 +1,316 @@
+{
+ "study_id": "T38_wide_tuning_v1",
+ "title": "Wider nested-CV tuning of DT, RF and sklearn GBC (T37 follow-up), no weighting or sampling",
+ "plan": {
+  "path": "docs/T38_WIDE_TUNING_PLAN.md",
+  "sha256": "46fa5f93023a297672bd939ec7c09ba81bdceef14e52b81ac200c5e71961fa07",
+  "approval": "2026-10-17 user: 'all as proposed' (GBC depth 5/7 x 600 stages, J1 vs T37 tuned procedure, RF leaf 2 fixed)"
+ },
+ "n_folds": 5,
+ "models": [
+  "DT",
+  "RF",
+  "GBC"
+ ],
+ "split": {
+  "scheme": "stratified",
+  "manifest": "split_manifest.csv",
+  "manifest_sha256": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721",
+  "development_sha256": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+  "train_rows_per_fold": 166784,
+  "valid_rows_per_fold": 41696
+ },
+ "inner": {
+  "n_splits": 3,
+  "shuffle": true,
+  "random_state": 42,
+  "splitter": "StratifiedKFold",
+  "rows": "outer training fold in building_id order"
+ },
+ "preprocessing": "preprocess.make_model_pipeline v1.0.1 (no scaling for these models), fitted on the training rows of each fit",
+ "class_weighting": null,
+ "sampling": null,
+ "fixed_params": {
+  "DT": {
+   "random_state": 42
+  },
+  "RF": {
+   "n_estimators": 100,
+   "min_samples_leaf": 2,
+   "random_state": 42,
+   "n_jobs": 4
+  },
+  "GBC": {
+   "learning_rate": 0.1,
+   "max_features": null,
+   "subsample": 1.0,
+   "random_state": 42
+  }
+ },
+ "candidates": {
+  "DT": {
+   "DT0": {
+    "max_depth": 16,
+    "min_samples_leaf": 50
+   },
+   "DT1": {
+    "max_depth": 16,
+    "min_samples_leaf": 5
+   },
+   "DT2": {
+    "max_depth": 16,
+    "min_samples_leaf": 20
+   },
+   "DT3": {
+    "max_depth": 16,
+    "min_samples_leaf": 100
+   },
+   "DT4": {
+    "max_depth": 20,
+    "min_samples_leaf": 5
+   },
+   "DT5": {
+    "max_depth": 20,
+    "min_samples_leaf": 20
+   },
+   "DT6": {
+    "max_depth": 20,
+    "min_samples_leaf": 50
+   },
+   "DT7": {
+    "max_depth": 20,
+    "min_samples_leaf": 100
+   },
+   "DT8": {
+    "max_depth": 24,
+    "min_samples_leaf": 5
+   },
+   "DT9": {
+    "max_depth": 24,
+    "min_samples_leaf": 20
+   },
+   "DT10": {
+    "max_depth": 24,
+    "min_samples_leaf": 50
+   },
+   "DT11": {
+    "max_depth": 24,
+    "min_samples_leaf": 100
+   },
+   "DT12": {
+    "max_depth": 32,
+    "min_samples_leaf": 5
+   },
+   "DT13": {
+    "max_depth": 32,
+    "min_samples_leaf": 20
+   },
+   "DT14": {
+    "max_depth": 32,
+    "min_samples_leaf": 50
+   },
+   "DT15": {
+    "max_depth": 32,
+    "min_samples_leaf": 100
+   },
+   "DT16": {
+    "max_depth": null,
+    "min_samples_leaf": 5
+   },
+   "DT17": {
+    "max_depth": null,
+    "min_samples_leaf": 20
+   },
+   "DT18": {
+    "max_depth": null,
+    "min_samples_leaf": 50
+   },
+   "DT19": {
+    "max_depth": null,
+    "min_samples_leaf": 100
+   }
+  },
+  "RF": {
+   "RF0": {
+    "max_features": 0.3,
+    "max_depth": 20
+   },
+   "RF1": {
+    "max_features": 0.3,
+    "max_depth": 30
+   },
+   "RF2": {
+    "max_features": 0.45,
+    "max_depth": 20
+   },
+   "RF3": {
+    "max_features": 0.45,
+    "max_depth": 30
+   },
+   "RF4": {
+    "max_features": 0.6,
+    "max_depth": 20
+   },
+   "RF5": {
+    "max_features": 0.6,
+    "max_depth": 30
+   },
+   "RF6": {
+    "max_features": 0.8,
+    "max_depth": 20
+   },
+   "RF7": {
+    "max_features": 0.8,
+    "max_depth": 30
+   }
+  },
+  "GBC": {
+   "GBC0": {
+    "n_estimators": 300,
+    "max_depth": 5
+   },
+   "GBC1": {
+    "n_estimators": 600,
+    "max_depth": 5
+   },
+   "GBC2": {
+    "n_estimators": 300,
+    "max_depth": 7
+   },
+   "GBC3": {
+    "n_estimators": 600,
+    "max_depth": 7
+   }
+  }
+ },
+ "gbc_groups": {
+  "d5": [
+   "GBC0",
+   "GBC1"
+  ],
+  "d7": [
+   "GBC2",
+   "GBC3"
+  ]
+ },
+ "selection": {
+  "metric": "pooled inner Macro F1 over the 3 inner validation folds, labels [1,2,3]",
+  "tie_break": "registered candidate order (T37 anchor first)"
+ },
+ "decision_rule": "argmax of predict_proba, labels 1/2/3; no threshold, no calibration",
+ "references": {
+  "T37": {
+   "DT": {
+    "path": "T37_20261016_required_tuning/run/DT/outer/oof.csv.gz",
+    "sha256": "c4a1225ad72839394d23bfa7c0b02f2985dbda84a52cb96b836c357385290d8d",
+    "cv_mean": 0.623402
+   },
+   "RF": {
+    "path": "T37_20261016_required_tuning/run/RF/outer/oof.csv.gz",
+    "sha256": "d06146e71216a0c40dccdd2b38cef4970d17234fe7481d225a189c83769a8664",
+    "cv_mean": 0.646608
+   },
+   "GBC": {
+    "path": "T37_20261016_required_tuning/run/GBC/outer/oof.csv.gz",
+    "sha256": "315bf2c816b8741dc2bfd6f9b6c808baa3910fadbab66b2aef23e7a540792ce9",
+    "cv_mean": 0.662003
+   }
+  },
+  "A2": {
+   "DT": {
+    "path": "20261014_01/runs/baseline_initial/dt/oof_predictions.csv.gz",
+    "sha256": "0f9b57c0853d8418929428cf294bf5e8fbb71dc63df4fbe0dfeefc9faaf0712f",
+    "cv_mean": 0.594238
+   },
+   "RF": {
+    "path": "20261014_01/runs/feature_budget/rf/oof_predictions.csv.gz",
+    "sha256": "b99e35c4210cc80ecb8dc0ca06a6574bc57cf4c50ebd247027b8adf7019ceb60",
+    "cv_mean": 0.628992
+   },
+   "GBC": {
+    "path": "20261014_01/runs/feature_budget/gbc/oof_predictions.csv.gz",
+    "sha256": "ff9d764e2cb8e5faebaffa1fc118a529d989ef5e99aea653f18d444ca8d99477",
+    "cv_mean": 0.612109
+   }
+  }
+ },
+ "control": {
+  "probability_atol": 1e-09,
+  "fits": {
+   "DT": {
+    "fold": 0,
+    "candidate": "DT0"
+   },
+   "GBC": {
+    "fold": 0,
+    "candidate": "GBC0"
+   },
+   "RF": {
+    "fold": 1,
+    "candidate": "RF0"
+   }
+  }
+ },
+ "budget": {
+  "inner_fits": 450,
+  "outer_refits": 15,
+  "planned_fits": 465,
+  "max_fits": 490,
+  "max_recovered_units": 10,
+  "max_attempts_per_unit": 2,
+  "automatic_retries": 0,
+  "control_fits": 3
+ },
+ "threads": {
+  "rf_n_jobs": 4,
+  "other_models_threads": 1,
+  "outer_parallel_jobs": 1
+ },
+ "min_free_disk_gb_at_prepare": 50,
+ "checkpoint": {
+  "reload_probability_atol": 1e-12,
+  "model_format": "joblib (compress=3) of the fitted sklearn Pipeline",
+  "csv_float_format": "%.17g",
+  "backup_dir": "backup",
+  "resume_skips_completed": true
+ },
+ "rules": {
+  "J1": {
+   "mean_delta": 0.003,
+   "fold_wins_min": 4,
+   "advantage": "IMPROVED_DESCRIPTIVE",
+   "disadvantage": "WORSENED_DESCRIPTIVE",
+   "otherwise": "NOT_MET",
+   "delta": "T38 outer fold Macro F1 minus T37 tuned fold Macro F1 on the same fold"
+  },
+  "J1b": {
+   "mean_delta": 0.003,
+   "fold_wins_min": 4,
+   "advantage": "IMPROVED_DESCRIPTIVE",
+   "disadvantage": "WORSENED_DESCRIPTIVE",
+   "otherwise": "NOT_MET",
+   "delta": "T38 outer fold Macro F1 minus A2 baseline fold Macro F1 on the same fold"
+  },
+  "J2": "safety indicators vs T37 and A2, no verdict",
+  "J3": "selection record; boundary hits recorded, no further widening"
+ },
+ "labels": [
+  1,
+  2,
+  3
+ ],
+ "std_ddof": 1,
+ "error_rate_denominator": "actual_grade3_support",
+ "environment": {
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "scipy": "1.17.0",
+  "scikit-learn": "1.8.0",
+  "joblib": "1.5.3",
+  "threadpoolctl": "3.6.0"
+ },
+ "holdout_access": false,
+ "automatic_model_replacement": false,
+ "threshold_or_decision_rule_change": false
+}
