@@ -1,0 +1,2562 @@
+{
+ "experiment_id": "A2_20261016_stratified_summary",
+ "status": "독립 검토 PASS_WITH_NOTES 반영본(2026-10-16)",
+ "generated_for": "reports/STRATIFIED_SUMMARY_20261016.md",
+ "training_performed": false,
+ "holdout_accessed": false,
+ "split": {
+  "name": "Stratified 5-Fold seed 42 (split_manifest.csv)",
+  "manifest_sha256": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721",
+  "development_rows": 208480,
+  "train_per_fold": 166784,
+  "valid_per_fold": 41696,
+  "grade3_support": 69774,
+  "cv_kind": "전체 개발 CV(표본 CV 아님)"
+ },
+ "baseline": {
+  "name": "LR-C (T1 C)",
+  "cv_f1_mean": 0.688687372978548,
+  "report_text": "0.688687"
+ },
+ "delta_definition": "cv_f1_mean - baseline.cv_f1_mean (LR-C, T1 C)",
+ "rounding": {
+  "display_decimals": 6,
+  "values_in_json": "source float, unrounded"
+ },
+ "error_denominator_grade3": 69774,
+ "rows": [
+  {
+   "experiment": "T0",
+   "key": "baseline_v1|dummy",
+   "setting": "Dummy (최빈 클래스)",
+   "family": "Dummy",
+   "change": "기준선 v1.0.1, 최빈 클래스(2등급)만 예측",
+   "cv_f1_mean": 0.24174404157162677,
+   "cv_f1_std": 3.557753677275682e-06,
+   "accuracy": 0.5689130851880276,
+   "recall3": 0.0,
+   "err_3to1": 0,
+   "err_3to2": 69774,
+   "delta_vs_lrc": -0.4469433314069212,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=baseline_v1, model=dummy] cv_mean/cv_std/matrix; accuracy/recall3: model_summary.csv[experiment=baseline_v1,model=dummy]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/BASELINE_REPORT.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/BASELINE_REPORT.md": "aee0dc115ae244164212b75088947a6645ec2fb68b3a014db3b1ee134645fdac"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "baseline_v1|lr",
+   "setting": "LR 기본 C=1 (무가중치)",
+   "family": "Logistic Regression",
+   "change": "v1.0.1 전처리 + lbfgs, C=1, max_iter=1500; 개인 최종 모델",
+   "cv_f1_mean": 0.6836769858025985,
+   "cv_f1_std": 0.0010708459189680733,
+   "accuracy": 0.7394953952417498,
+   "recall3": 0.638432653997191,
+   "err_3to1": 467,
+   "err_3to2": 24761,
+   "delta_vs_lrc": -0.005010387175949482,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=baseline_v1, model=lr] cv_mean/cv_std/matrix; accuracy/recall3: model_summary.csv[experiment=baseline_v1,model=lr]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/BASELINE_REPORT.md",
+    "reports/PERSONAL_FINAL_REPORT_20261013.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "개인 최종 모델(홀드아웃 1회 평가됨)",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/BASELINE_REPORT.md": "aee0dc115ae244164212b75088947a6645ec2fb68b3a014db3b1ee134645fdac",
+    "reports/PERSONAL_FINAL_REPORT_20261013.md": "07172c7b2e3e2b5ce8c0f0eeef7bdee234d4af51a5c04a2204ed80d7ab064676"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "baseline_v1|dt",
+   "setting": "DT 초기",
+   "family": "Decision Tree",
+   "change": "max_depth=12, min_samples_leaf=5",
+   "cv_f1_mean": 0.5942375198685499,
+   "cv_f1_std": 0.004511996381611361,
+   "accuracy": 0.6928818112049118,
+   "recall3": 0.5157078567947946,
+   "err_3to1": 165,
+   "err_3to2": 33626,
+   "delta_vs_lrc": -0.0944498531099981,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=baseline_v1, model=dt] cv_mean/cv_std/matrix; accuracy/recall3: model_summary.csv[experiment=baseline_v1,model=dt]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/BASELINE_REPORT.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/BASELINE_REPORT.md": "aee0dc115ae244164212b75088947a6645ec2fb68b3a014db3b1ee134645fdac"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "baseline_v1|rf",
+   "setting": "RF 초기 (max_features=sqrt)",
+   "family": "Random Forest",
+   "change": "100 trees, depth 20, leaf 2, max_features=sqrt",
+   "cv_f1_mean": 0.35770418224120093,
+   "cv_f1_std": 0.015771268647071242,
+   "accuracy": 0.6115310821181887,
+   "recall3": 0.12230916960472382,
+   "err_3to1": 2,
+   "err_3to2": 61238,
+   "delta_vs_lrc": -0.33098319073734705,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=baseline_v1, model=rf] cv_mean/cv_std/matrix; accuracy/recall3: model_summary.csv[experiment=baseline_v1,model=rf]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/BASELINE_REPORT.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/BASELINE_REPORT.md": "aee0dc115ae244164212b75088947a6645ec2fb68b3a014db3b1ee134645fdac"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "baseline_v1|gbc",
+   "setting": "GBC 초기 (max_features=sqrt)",
+   "family": "sklearn GradientBoostingClassifier",
+   "change": "100 stages, lr 0.1, depth 3, max_features=sqrt",
+   "cv_f1_mean": 0.469489223228558,
+   "cv_f1_std": 0.01676877387676787,
+   "accuracy": 0.6496354566385265,
+   "recall3": 0.25381947430274887,
+   "err_3to1": 47,
+   "err_3to2": 52017,
+   "delta_vs_lrc": -0.21919814974998997,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=baseline_v1, model=gbc] cv_mean/cv_std/matrix; accuracy/recall3: model_summary.csv[experiment=baseline_v1,model=gbc]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/BASELINE_REPORT.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/BASELINE_REPORT.md": "aee0dc115ae244164212b75088947a6645ec2fb68b3a014db3b1ee134645fdac"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "feature_budget_v1|gbc",
+   "setting": "GBC (max_features=None)",
+   "family": "sklearn GradientBoostingClassifier",
+   "change": "후보 변수 수 제한 완화 (max_features=None)",
+   "cv_f1_mean": 0.6121091305870022,
+   "cv_f1_std": 0.005118111143153289,
+   "accuracy": 0.6955055640828857,
+   "recall3": 0.5155932009057815,
+   "err_3to1": 220,
+   "err_3to2": 33579,
+   "delta_vs_lrc": -0.07657824239154576,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=feature_budget_v1, model=gbc] cv_mean/cv_std/matrix; accuracy/recall3: model_summary.csv[experiment=feature_budget_v1,model=gbc]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/BASELINE_REPORT.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/BASELINE_REPORT.md": "aee0dc115ae244164212b75088947a6645ec2fb68b3a014db3b1ee134645fdac"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "feature_budget_v1|rf",
+   "setting": "RF (max_features=0.1)",
+   "family": "Random Forest",
+   "change": "후보 변수 수 제한 완화 (max_features=0.1)",
+   "cv_f1_mean": 0.6289916137335532,
+   "cv_f1_std": 0.0038285283257128433,
+   "accuracy": 0.7083749040675364,
+   "recall3": 0.48968096998882105,
+   "err_3to1": 187,
+   "err_3to2": 35420,
+   "delta_vs_lrc": -0.05969575924499482,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=feature_budget_v1, model=rf] cv_mean/cv_std/matrix; accuracy/recall3: model_summary.csv[experiment=feature_budget_v1,model=rf]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/BASELINE_REPORT.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/BASELINE_REPORT.md": "aee0dc115ae244164212b75088947a6645ec2fb68b3a014db3b1ee134645fdac"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "lr_balanced_v1|lr",
+   "setting": "LR class_weight=balanced",
+   "family": "Logistic Regression",
+   "change": "클래스 가중치 balanced",
+   "cv_f1_mean": 0.6651657701477227,
+   "cv_f1_std": 0.00140649314861651,
+   "accuracy": 0.6910638910207214,
+   "recall3": 0.7420242497205263,
+   "err_3to1": 2445,
+   "err_3to2": 15555,
+   "delta_vs_lrc": -0.023521602830825272,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=lr_balanced_v1, model=lr] cv_mean/cv_std/matrix; accuracy/recall3: model_summary.csv[experiment=lr_balanced_v1,model=lr]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/BASELINE_REPORT.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/BASELINE_REPORT.md": "aee0dc115ae244164212b75088947a6645ec2fb68b3a014db3b1ee134645fdac"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "class_weights_v1|dt",
+   "setting": "DT balanced",
+   "family": "Decision Tree",
+   "change": "클래스 가중치 balanced",
+   "cv_f1_mean": 0.5980695072041702,
+   "cv_f1_std": 0.008849988053623166,
+   "accuracy": 0.6225153491941673,
+   "recall3": 0.6784045633043827,
+   "err_3to1": 2499,
+   "err_3to2": 19940,
+   "delta_vs_lrc": -0.0906178657743778,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=class_weights_v1, model=dt] cv_mean/cv_std/matrix; accuracy/recall3: followup_model_summary.csv[experiment=class_weights_v1,model=dt]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/FOLLOWUP_REPORT_20261013.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/FOLLOWUP_REPORT_20261013.md": "9b625dfa4d428d3974e5f048759f0f0994e519ce9832b10be7575af43086785b"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "class_weights_v1|rf",
+   "setting": "RF balanced (max_features=0.1, leaf=2)",
+   "family": "Random Forest",
+   "change": "클래스 가중치 balanced",
+   "cv_f1_mean": 0.6478674406599272,
+   "cv_f1_std": 0.0006455426218509846,
+   "accuracy": 0.6725537221795855,
+   "recall3": 0.6942557399604438,
+   "err_3to1": 1862,
+   "err_3to2": 19471,
+   "delta_vs_lrc": -0.0408199323186208,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=class_weights_v1, model=rf] cv_mean/cv_std/matrix; accuracy/recall3: followup_model_summary.csv[experiment=class_weights_v1,model=rf]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/FOLLOWUP_REPORT_20261013.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/FOLLOWUP_REPORT_20261013.md": "9b625dfa4d428d3974e5f048759f0f0994e519ce9832b10be7575af43086785b"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "class_weights_v1|gbc",
+   "setting": "GBC sample_weight (max_features=None)",
+   "family": "sklearn GradientBoostingClassifier",
+   "change": "학습 Fold sample_weight(균형 가중)",
+   "cv_f1_mean": 0.6048929674218411,
+   "cv_f1_std": 0.002463982292495505,
+   "accuracy": 0.6308566768994628,
+   "recall3": 0.6757961418293347,
+   "err_3to1": 3118,
+   "err_3to2": 19503,
+   "delta_vs_lrc": -0.08379440555670692,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=class_weights_v1, model=gbc] cv_mean/cv_std/matrix; accuracy/recall3: followup_model_summary.csv[experiment=class_weights_v1,model=gbc]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/FOLLOWUP_REPORT_20261013.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/FOLLOWUP_REPORT_20261013.md": "9b625dfa4d428d3974e5f048759f0f0994e519ce9832b10be7575af43086785b"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "lr_rus_v1|lr",
+   "setting": "LR + Random Under Sampling",
+   "family": "Logistic Regression",
+   "change": "학습 Fold 내 RandomUnderSampler(seed 42), 검증 비변경",
+   "cv_f1_mean": 0.6463017383663605,
+   "cv_f1_std": 0.0009967054148466007,
+   "accuracy": 0.6695174597083653,
+   "recall3": 0.7314902399174478,
+   "err_3to1": 2701,
+   "err_3to2": 16034,
+   "delta_vs_lrc": -0.04238563461218747,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=lr_rus_v1, model=lr] cv_mean/cv_std/matrix; accuracy/recall3: followup_model_summary.csv[experiment=lr_rus_v1,model=lr]와 혼동행렬 산출값 일치",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "reports/FOLLOWUP_REPORT_20261013.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/FOLLOWUP_REPORT_20261013.md": "9b625dfa4d428d3974e5f048759f0f0994e519ce9832b10be7575af43086785b"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "tuning_v1_lr_c01|lr",
+   "setting": "LR C=0.1 (제한 튜닝)",
+   "family": "Logistic Regression",
+   "change": "규제 강도 C=0.1",
+   "cv_f1_mean": 0.6699485238986824,
+   "cv_f1_std": 0.002947962437081347,
+   "accuracy": 0.7367900997697621,
+   "recall3": 0.6230257689110557,
+   "err_3to1": 309,
+   "err_3to2": 25994,
+   "delta_vs_lrc": -0.01873884907986556,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=tuning_v1_lr_c01, model=lr] cv_mean/cv_std/matrix; accuracy/recall3/3→1/3→2는 snapshot 혼동행렬(행=실제)에서 산출",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "accuracy",
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md": "9908fa60fea289d01fda423240170641fad4074b0b919fb6d3e128eb0d8d19f1"
+   },
+   "report_value_found_in_own_report": false,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "tuning_v1_lr_c10|lr",
+   "setting": "LR C=10 (제한 튜닝)",
+   "family": "Logistic Regression",
+   "change": "규제 강도 C=10",
+   "cv_f1_mean": 0.683151593528649,
+   "cv_f1_std": 0.0019031960026341477,
+   "accuracy": 0.7364543361473522,
+   "recall3": 0.6426462579184223,
+   "err_3to1": 562,
+   "err_3to2": 24372,
+   "delta_vs_lrc": -0.005535779449899025,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=tuning_v1_lr_c10, model=lr] cv_mean/cv_std/matrix; accuracy/recall3/3→1/3→2는 snapshot 혼동행렬(행=실제)에서 산출",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "accuracy",
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md": "9908fa60fea289d01fda423240170641fad4074b0b919fb6d3e128eb0d8d19f1"
+   },
+   "report_value_found_in_own_report": false,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "tuning_v1_rf_bal_mf01_leaf1|rf",
+   "setting": "RF balanced mf=0.1 / leaf=1 (제한 튜닝)",
+   "family": "Random Forest",
+   "change": "class_weight=balanced, max_features=0.1, min_samples_leaf=1",
+   "cv_f1_mean": 0.6515381959737905,
+   "cv_f1_std": 0.0010281460476604162,
+   "accuracy": 0.6780746354566385,
+   "recall3": 0.6948003554332559,
+   "err_3to1": 1662,
+   "err_3to2": 19633,
+   "delta_vs_lrc": -0.037149177004757505,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=tuning_v1_rf_bal_mf01_leaf1, model=rf] cv_mean/cv_std/matrix; accuracy/recall3/3→1/3→2는 snapshot 혼동행렬(행=실제)에서 산출",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "accuracy",
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md": "9908fa60fea289d01fda423240170641fad4074b0b919fb6d3e128eb0d8d19f1"
+   },
+   "report_value_found_in_own_report": false,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "tuning_v1_rf_bal_mf02_leaf1|rf",
+   "setting": "RF balanced mf=0.2 / leaf=1 (제한 튜닝)",
+   "family": "Random Forest",
+   "change": "class_weight=balanced, max_features=0.2, min_samples_leaf=1",
+   "cv_f1_mean": 0.6586671468105235,
+   "cv_f1_std": 0.0009741278361129949,
+   "accuracy": 0.6859315042210284,
+   "recall3": 0.6798664258892997,
+   "err_3to1": 1516,
+   "err_3to2": 20821,
+   "delta_vs_lrc": -0.030020226168024466,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=tuning_v1_rf_bal_mf02_leaf1, model=rf] cv_mean/cv_std/matrix; accuracy/recall3/3→1/3→2는 snapshot 혼동행렬(행=실제)에서 산출",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "accuracy",
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md": "9908fa60fea289d01fda423240170641fad4074b0b919fb6d3e128eb0d8d19f1"
+   },
+   "report_value_found_in_own_report": false,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "tuning_v1_rf_bal_mf02_leaf2|rf",
+   "setting": "RF balanced mf=0.2 / leaf=2 (제한 튜닝)",
+   "family": "Random Forest",
+   "change": "class_weight=balanced, max_features=0.2, min_samples_leaf=2",
+   "cv_f1_mean": 0.656676598122906,
+   "cv_f1_std": 0.0013545286916397405,
+   "accuracy": 0.6827417498081351,
+   "recall3": 0.6851979247284089,
+   "err_3to1": 1673,
+   "err_3to2": 20292,
+   "delta_vs_lrc": -0.032010774855641966,
+   "source_file": "reports/personal_reference_snapshot.json",
+   "source_location": "[experiment=tuning_v1_rf_bal_mf02_leaf2, model=rf] cv_mean/cv_std/matrix; accuracy/recall3/3→1/3→2는 snapshot 혼동행렬(행=실제)에서 산출",
+   "source_sha256": "35b6a6ba6e740353e3dd5fc72217377341dc15e8fcdf5a9cba4a0a7270cf12b6",
+   "report_files": [
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md"
+   ],
+   "origin": "신규 학습(T0 비교)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [
+    "accuracy",
+    "recall3",
+    "err_3to1",
+    "err_3to2"
+   ],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md": "9908fa60fea289d01fda423240170641fad4074b0b919fb6d3e128eb0d8d19f1"
+   },
+   "report_value_found_in_own_report": false,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "personal_random_over_v1|lr",
+   "setting": "LR RandomOverSampler",
+   "family": "Logistic Regression",
+   "change": "학습 Fold 내 단순 무작위 복제 오버샘플링",
+   "cv_f1_mean": 0.6633687842735632,
+   "cv_f1_std": 0.001729803984144098,
+   "accuracy": 0.6895097851112817,
+   "recall3": 0.7415799581506005,
+   "err_3to1": 2493,
+   "err_3to2": 15538,
+   "delta_vs_lrc": -0.025318588704984824,
+   "source_file": "reports/personal_sampling_summary.csv",
+   "source_location": "[mode=random_over] cv_mean,cv_std,accuracy,grade3_recall,error_3_to_1,error_3_to_2",
+   "source_sha256": "e3aa2a533a354272b988efbbcb8d367eabc5b1205db1b536dd36ecae18ab612c",
+   "report_files": [
+    "reports/PERSONAL_FINAL_REPORT_20261013.md",
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/PERSONAL_FINAL_REPORT_20261013.md": "07172c7b2e3e2b5ce8c0f0eeef7bdee234d4af51a5c04a2204ed80d7ab064676",
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md": "9908fa60fea289d01fda423240170641fad4074b0b919fb6d3e128eb0d8d19f1"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T0",
+   "key": "personal_context_smote_v1|lr",
+   "setting": "LR 제약형 SMOTE + 복제 fallback",
+   "family": "Logistic Regression",
+   "change": "동일 범주·층수·가구수·연령 상태 안에서만 수치 3개 보간 (stock SMOTENC 아님)",
+   "cv_f1_mean": 0.6632064390613277,
+   "cv_f1_std": 0.001460805320125874,
+   "accuracy": 0.6893562931696086,
+   "recall3": 0.7413793103448276,
+   "err_3to1": 2491,
+   "err_3to2": 15554,
+   "delta_vs_lrc": -0.025480933917220283,
+   "source_file": "reports/personal_sampling_summary.csv",
+   "source_location": "[mode=context_smote] cv_mean,cv_std,accuracy,grade3_recall,error_3_to_1,error_3_to_2",
+   "source_sha256": "e3aa2a533a354272b988efbbcb8d367eabc5b1205db1b536dd36ecae18ab612c",
+   "report_files": [
+    "reports/PERSONAL_FINAL_REPORT_20261013.md",
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "personal_selection.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/PERSONAL_FINAL_REPORT_20261013.md": "07172c7b2e3e2b5ce8c0f0eeef7bdee234d4af51a5c04a2204ed80d7ab064676",
+    "docs/PERSONAL_MODEL_SELECTION_20261013.md": "9908fa60fea289d01fda423240170641fad4074b0b919fb6d3e128eb0d8d19f1"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T1",
+   "key": "age995_A",
+   "setting": "A: age 원값 유지",
+   "family": "Logistic Regression (C=1)",
+   "change": "T0 LR C=1과 동일 설정 (연령 원값, 표시 없음)",
+   "cv_f1_mean": 0.6836769858025985,
+   "cv_f1_std": 0.0010708459189680733,
+   "accuracy": 0.739495395242,
+   "recall3": 0.638432653997,
+   "err_3to1": 467,
+   "err_3to2": 24761,
+   "delta_vs_lrc": -0.005010387175949482,
+   "source_file": "reports/age995_followup_v1/model_summary.csv",
+   "source_location": "[variant=A] cv_mean,cv_std,error_3_to_1/2; accuracy,grade3_recall: age995_followup_v1/pooled_group_summary.csv[variant=A,fold=pooled,group=all]",
+   "source_sha256": "4e8410a06d9502ce348b820df46e7b00a766304de5f2d08ccc2f0a4a4e41aef9",
+   "report_files": [
+    "reports/AGE995_FOLLOWUP_20261013.md",
+    "reports/AGE995_EXPERIMENT_20261013.md"
+   ],
+   "origin": "A/B/C는 이전 OOF 재사용",
+   "notes": "T0 LR C=1과 같은 설정(같은 값)이며 중복 집계하지 않음",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_FOLLOWUP_20261013.md §2: 개발 Stratified 5-Fold·seed 42, split manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": "baseline_v1|lr",
+   "report_file_sha256": {
+    "reports/AGE995_FOLLOWUP_20261013.md": "ba9a5a745b6785dfc4456de17509cfcd96ba72a225b5b963c3946981b2a3c885",
+    "reports/AGE995_EXPERIMENT_20261013.md": "1641205970d710340c78b8070aacaa9a207f182bfa635674e275bf14a6452319"
+   },
+   "source_extra": {
+    "pooled_group_summary_sha256": "083da0e475e2e096bc860b02dd0777c0bad3d2c60ae8d810dc7c05dfd48765d9"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T1",
+   "key": "age995_B",
+   "setting": "B: 원값 + age_is_995 표시",
+   "family": "Logistic Regression (C=1)",
+   "change": "age_is_995 표시 1열 추가",
+   "cv_f1_mean": 0.6871287676684521,
+   "cv_f1_std": 0.0014550780156420751,
+   "accuracy": 0.741207789716,
+   "recall3": 0.639822856651,
+   "err_3to1": 438,
+   "err_3to2": 24693,
+   "delta_vs_lrc": -0.001558605310095884,
+   "source_file": "reports/age995_followup_v1/model_summary.csv",
+   "source_location": "[variant=B] cv_mean,cv_std,error_3_to_1/2; accuracy,grade3_recall: age995_followup_v1/pooled_group_summary.csv[variant=B,fold=pooled,group=all]",
+   "source_sha256": "4e8410a06d9502ce348b820df46e7b00a766304de5f2d08ccc2f0a4a4e41aef9",
+   "report_files": [
+    "reports/AGE995_FOLLOWUP_20261013.md",
+    "reports/AGE995_EXPERIMENT_20261013.md"
+   ],
+   "origin": "A/B/C는 이전 OOF 재사용",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_FOLLOWUP_20261013.md §2: 개발 Stratified 5-Fold·seed 42, split manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_FOLLOWUP_20261013.md": "ba9a5a745b6785dfc4456de17509cfcd96ba72a225b5b963c3946981b2a3c885",
+    "reports/AGE995_EXPERIMENT_20261013.md": "1641205970d710340c78b8070aacaa9a207f182bfa635674e275bf14a6452319"
+   },
+   "source_extra": {
+    "pooled_group_summary_sha256": "083da0e475e2e096bc860b02dd0777c0bad3d2c60ae8d810dc7c05dfd48765d9"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T1",
+   "key": "age995_C",
+   "setting": "C (LR-C): 995만 학습 Fold 중앙값 대체 + 표시",
+   "family": "Logistic Regression (C=1)",
+   "change": "995만 학습 Fold 비995 중앙값(15.0)으로 대체 + age_is_995 표시; 이후 연구의 기준선",
+   "cv_f1_mean": 0.688687372978548,
+   "cv_f1_std": 0.0015080810709856124,
+   "accuracy": 0.741831350729,
+   "recall3": 0.639794192679,
+   "err_3to1": 452,
+   "err_3to2": 24681,
+   "delta_vs_lrc": 0.0,
+   "source_file": "reports/age995_followup_v1/model_summary.csv",
+   "source_location": "[variant=C] cv_mean,cv_std,error_3_to_1/2; accuracy,grade3_recall: age995_followup_v1/pooled_group_summary.csv[variant=C,fold=pooled,group=all]",
+   "source_sha256": "4e8410a06d9502ce348b820df46e7b00a766304de5f2d08ccc2f0a4a4e41aef9",
+   "report_files": [
+    "reports/AGE995_FOLLOWUP_20261013.md",
+    "reports/AGE995_EXPERIMENT_20261013.md"
+   ],
+   "origin": "A/B/C는 이전 OOF 재사용",
+   "notes": "Δ 계산의 기준선",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_FOLLOWUP_20261013.md §2: 개발 Stratified 5-Fold·seed 42, split manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_FOLLOWUP_20261013.md": "ba9a5a745b6785dfc4456de17509cfcd96ba72a225b5b963c3946981b2a3c885",
+    "reports/AGE995_EXPERIMENT_20261013.md": "1641205970d710340c78b8070aacaa9a207f182bfa635674e275bf14a6452319"
+   },
+   "source_extra": {
+    "pooled_group_summary_sha256": "083da0e475e2e096bc860b02dd0777c0bad3d2c60ae8d810dc7c05dfd48765d9"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T1",
+   "key": "age995_D",
+   "setting": "D: 학습 age=995 행 삭제",
+   "family": "Logistic Regression (C=1)",
+   "change": "학습 Fold에서만 age==995 행 제거(검증은 원값)",
+   "cv_f1_mean": 0.6865228192615641,
+   "cv_f1_std": 0.0013477995284180708,
+   "accuracy": 0.739313123561,
+   "recall3": 0.642130306418,
+   "err_3to1": 449,
+   "err_3to2": 24521,
+   "delta_vs_lrc": -0.0021645537169838747,
+   "source_file": "reports/age995_followup_v1/model_summary.csv",
+   "source_location": "[variant=D] cv_mean,cv_std,error_3_to_1/2; accuracy,grade3_recall: age995_followup_v1/pooled_group_summary.csv[variant=D,fold=pooled,group=all]",
+   "source_sha256": "4e8410a06d9502ce348b820df46e7b00a766304de5f2d08ccc2f0a4a4e41aef9",
+   "report_files": [
+    "reports/AGE995_FOLLOWUP_20261013.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "검증 age995 1,125건을 모두 3등급으로 예측(1/2등급 구분 불능); 안전성 개선으로 해석 금지",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_FOLLOWUP_20261013.md §2: 개발 Stratified 5-Fold·seed 42, split manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_FOLLOWUP_20261013.md": "ba9a5a745b6785dfc4456de17509cfcd96ba72a225b5b963c3946981b2a3c885"
+   },
+   "source_extra": {
+    "pooled_group_summary_sha256": "083da0e475e2e096bc860b02dd0777c0bad3d2c60ae8d810dc7c05dfd48765d9"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T1",
+   "key": "age995_E1",
+   "setting": "E1: 995만 q99 절단",
+   "family": "Logistic Regression (C=1)",
+   "change": "학습 Fold 비995 q99(=90)로 995만 대체, 표시 없음",
+   "cv_f1_mean": 0.6875263667774564,
+   "cv_f1_std": 0.001317728071114846,
+   "accuracy": 0.74130372218,
+   "recall3": 0.640080832402,
+   "err_3to1": 453,
+   "err_3to2": 24660,
+   "delta_vs_lrc": -0.0011610062010916078,
+   "source_file": "reports/age995_followup_v1/model_summary.csv",
+   "source_location": "[variant=E1] cv_mean,cv_std,error_3_to_1/2; accuracy,grade3_recall: age995_followup_v1/pooled_group_summary.csv[variant=E1,fold=pooled,group=all]",
+   "source_sha256": "4e8410a06d9502ce348b820df46e7b00a766304de5f2d08ccc2f0a4a4e41aef9",
+   "report_files": [
+    "reports/AGE995_FOLLOWUP_20261013.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_FOLLOWUP_20261013.md §2: 개발 Stratified 5-Fold·seed 42, split manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_FOLLOWUP_20261013.md": "ba9a5a745b6785dfc4456de17509cfcd96ba72a225b5b963c3946981b2a3c885"
+   },
+   "source_extra": {
+    "pooled_group_summary_sha256": "083da0e475e2e096bc860b02dd0777c0bad3d2c60ae8d810dc7c05dfd48765d9"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T1",
+   "key": "age995_E2",
+   "setting": "E2: 995 q99 절단 + 표시",
+   "family": "Logistic Regression (C=1)",
+   "change": "E1 + 원본995 표시",
+   "cv_f1_mean": 0.6886635059843252,
+   "cv_f1_std": 0.001264565805539733,
+   "accuracy": 0.741812164236,
+   "recall3": 0.640152492332,
+   "err_3to1": 455,
+   "err_3to2": 24653,
+   "delta_vs_lrc": -2.3866994222743187e-05,
+   "source_file": "reports/age995_followup_v1/model_summary.csv",
+   "source_location": "[variant=E2] cv_mean,cv_std,error_3_to_1/2; accuracy,grade3_recall: age995_followup_v1/pooled_group_summary.csv[variant=E2,fold=pooled,group=all]",
+   "source_sha256": "4e8410a06d9502ce348b820df46e7b00a766304de5f2d08ccc2f0a4a4e41aef9",
+   "report_files": [
+    "reports/AGE995_FOLLOWUP_20261013.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_FOLLOWUP_20261013.md §2: 개발 Stratified 5-Fold·seed 42, split manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_FOLLOWUP_20261013.md": "ba9a5a745b6785dfc4456de17509cfcd96ba72a225b5b963c3946981b2a3c885"
+   },
+   "source_extra": {
+    "pooled_group_summary_sha256": "083da0e475e2e096bc860b02dd0777c0bad3d2c60ae8d810dc7c05dfd48765d9"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T1",
+   "key": "age995_E3",
+   "setting": "E3: 전체 연령 q99 절단",
+   "family": "Logistic Regression (C=1)",
+   "change": "학습 Fold q99 초과 연령 모두 절단",
+   "cv_f1_mean": 0.6878992135614651,
+   "cv_f1_std": 0.001360470853894745,
+   "accuracy": 0.741548349962,
+   "recall3": 0.640496459999,
+   "err_3to1": 452,
+   "err_3to2": 24632,
+   "delta_vs_lrc": -0.0007881594170828787,
+   "source_file": "reports/age995_followup_v1/model_summary.csv",
+   "source_location": "[variant=E3] cv_mean,cv_std,error_3_to_1/2; accuracy,grade3_recall: age995_followup_v1/pooled_group_summary.csv[variant=E3,fold=pooled,group=all]",
+   "source_sha256": "4e8410a06d9502ce348b820df46e7b00a766304de5f2d08ccc2f0a4a4e41aef9",
+   "report_files": [
+    "reports/AGE995_FOLLOWUP_20261013.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_FOLLOWUP_20261013.md §2: 개발 Stratified 5-Fold·seed 42, split manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_FOLLOWUP_20261013.md": "ba9a5a745b6785dfc4456de17509cfcd96ba72a225b5b963c3946981b2a3c885"
+   },
+   "source_extra": {
+    "pooled_group_summary_sha256": "083da0e475e2e096bc860b02dd0777c0bad3d2c60ae8d810dc7c05dfd48765d9"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T1",
+   "key": "age995_F1",
+   "setting": "F1: 학습 age>55 삭제",
+   "family": "Logistic Regression (C=1)",
+   "change": "학습 Fold에서 age>55 행 제거",
+   "cv_f1_mean": 0.6859025065094011,
+   "cv_f1_std": 0.0011262602621895685,
+   "accuracy": 0.737576745971,
+   "recall3": 0.64578496288,
+   "err_3to1": 442,
+   "err_3to2": 24273,
+   "delta_vs_lrc": -0.002784866469146885,
+   "source_file": "reports/age995_followup_v1/model_summary.csv",
+   "source_location": "[variant=F1] cv_mean,cv_std,error_3_to_1/2; accuracy,grade3_recall: age995_followup_v1/pooled_group_summary.csv[variant=F1,fold=pooled,group=all]",
+   "source_sha256": "4e8410a06d9502ce348b820df46e7b00a766304de5f2d08ccc2f0a4a4e41aef9",
+   "report_files": [
+    "reports/AGE995_FOLLOWUP_20261013.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "검증 age995 1,125건을 모두 3등급으로 예측(1/2등급 구분 불능); 안전성 개선으로 해석 금지",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_FOLLOWUP_20261013.md §2: 개발 Stratified 5-Fold·seed 42, split manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_FOLLOWUP_20261013.md": "ba9a5a745b6785dfc4456de17509cfcd96ba72a225b5b963c3946981b2a3c885"
+   },
+   "source_extra": {
+    "pooled_group_summary_sha256": "083da0e475e2e096bc860b02dd0777c0bad3d2c60ae8d810dc7c05dfd48765d9"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T1",
+   "key": "age995_F2",
+   "setting": "F2: FAITH 4조건 OR 삭제",
+   "family": "Logistic Regression (C=1)",
+   "change": "학습 age>55 OR floors>5 OR area>20 OR height>10 제거",
+   "cv_f1_mean": 0.6840096201568507,
+   "cv_f1_std": 0.0019217664310540036,
+   "accuracy": 0.736804489639,
+   "recall3": 0.643076217502,
+   "err_3to1": 449,
+   "err_3to2": 24455,
+   "delta_vs_lrc": -0.004677752821697245,
+   "source_file": "reports/age995_followup_v1/model_summary.csv",
+   "source_location": "[variant=F2] cv_mean,cv_std,error_3_to_1/2; accuracy,grade3_recall: age995_followup_v1/pooled_group_summary.csv[variant=F2,fold=pooled,group=all]",
+   "source_sha256": "4e8410a06d9502ce348b820df46e7b00a766304de5f2d08ccc2f0a4a4e41aef9",
+   "report_files": [
+    "reports/AGE995_FOLLOWUP_20261013.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "검증 age995 1,125건을 모두 3등급으로 예측(1/2등급 구분 불능); 안전성 개선으로 해석 금지",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_FOLLOWUP_20261013.md §2: 개발 Stratified 5-Fold·seed 42, split manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_FOLLOWUP_20261013.md": "ba9a5a745b6785dfc4456de17509cfcd96ba72a225b5b963c3946981b2a3c885"
+   },
+   "source_extra": {
+    "pooled_group_summary_sha256": "083da0e475e2e096bc860b02dd0777c0bad3d2c60ae8d810dc7c05dfd48765d9"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T3",
+   "key": "interactions_G1",
+   "setting": "G1: C + 연령 8구간",
+   "family": "Logistic Regression (C=1)",
+   "change": "원본 연령 8구간 원핫 추가",
+   "cv_f1_mean": 0.6900762756317078,
+   "cv_f1_std": 0.0020619372594833855,
+   "accuracy": 0.74242133538,
+   "recall3": 0.640496459999,
+   "err_3to1": 454,
+   "err_3to2": 24630,
+   "delta_vs_lrc": 0.0013889026531598292,
+   "source_file": "reports/age995_interactions_v1/models.csv",
+   "source_location": "[variant=G1] cv_mean,cv_std,error31/32; accuracy,R3: age995_interactions_v1/pooled_groups.csv[variant=G1,fold=pooled,group=all]",
+   "source_sha256": "34b473b52fad285289d9f1c1ab75cac5f60dd16d0c5b491572c20d2db02afaff",
+   "report_files": [
+    "reports/AGE995_INTERACTIONS_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_INTERACTIONS_20261014.md §2: \"개발208,480행…기존 Stratified 5-Fold와 seed42를 유지\" 기재; age995_interactions_v1/review.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721, holdout_scored=false (직접 확인, review.json sha256=388a192ecc6fc5c20f094b57ff51cfab0599c0ec45481a09c3bd811c2b486cf8)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_INTERACTIONS_20261014.md": "edfed466ed04a9cb529ed2a74a7431c691419f0d0f476cda1c284aa98be367c1"
+   },
+   "source_extra": {
+    "pooled_groups_sha256": "14cab135fe762973b897c647b9502375ffc2bb1895f84b9cfe95811d7a876c0a"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T3",
+   "key": "interactions_G2",
+   "setting": "G2: G1 + 1차 지역×기초구조",
+   "family": "Logistic Regression (C=1)",
+   "change": "geo1×foundation_type 교차 원핫 추가",
+   "cv_f1_mean": 0.6909931342808895,
+   "cv_f1_std": 0.002654837854780037,
+   "accuracy": 0.742713929394,
+   "recall3": 0.640080832402,
+   "err_3to1": 478,
+   "err_3to2": 24635,
+   "delta_vs_lrc": 0.0023057613023415025,
+   "source_file": "reports/age995_interactions_v1/models.csv",
+   "source_location": "[variant=G2] cv_mean,cv_std,error31/32; accuracy,R3: age995_interactions_v1/pooled_groups.csv[variant=G2,fold=pooled,group=all]",
+   "source_sha256": "34b473b52fad285289d9f1c1ab75cac5f60dd16d0c5b491572c20d2db02afaff",
+   "report_files": [
+    "reports/AGE995_INTERACTIONS_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "사전 기준(3→1 증가 없음)을 만족하는 후보 없음; 3→1은 C(452)보다 증가",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_INTERACTIONS_20261014.md §2: \"개발208,480행…기존 Stratified 5-Fold와 seed42를 유지\" 기재; age995_interactions_v1/review.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721, holdout_scored=false (직접 확인, review.json sha256=388a192ecc6fc5c20f094b57ff51cfab0599c0ec45481a09c3bd811c2b486cf8)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_INTERACTIONS_20261014.md": "edfed466ed04a9cb529ed2a74a7431c691419f0d0f476cda1c284aa98be367c1"
+   },
+   "source_extra": {
+    "pooled_groups_sha256": "14cab135fe762973b897c647b9502375ffc2bb1895f84b9cfe95811d7a876c0a"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T3",
+   "key": "interactions_G3",
+   "setting": "G3: G1 + 1차 지역×연령구간",
+   "family": "Logistic Regression (C=1)",
+   "change": "geo1×연령구간 교차 원핫 추가",
+   "cv_f1_mean": 0.6898167384581237,
+   "cv_f1_std": 0.0022140405886462602,
+   "accuracy": 0.742205487337,
+   "recall3": 0.640009172471,
+   "err_3to1": 457,
+   "err_3to2": 24661,
+   "delta_vs_lrc": 0.0011293654795757613,
+   "source_file": "reports/age995_interactions_v1/models.csv",
+   "source_location": "[variant=G3] cv_mean,cv_std,error31/32; accuracy,R3: age995_interactions_v1/pooled_groups.csv[variant=G3,fold=pooled,group=all]",
+   "source_sha256": "34b473b52fad285289d9f1c1ab75cac5f60dd16d0c5b491572c20d2db02afaff",
+   "report_files": [
+    "reports/AGE995_INTERACTIONS_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_INTERACTIONS_20261014.md §2: \"개발208,480행…기존 Stratified 5-Fold와 seed42를 유지\" 기재; age995_interactions_v1/review.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721, holdout_scored=false (직접 확인, review.json sha256=388a192ecc6fc5c20f094b57ff51cfab0599c0ec45481a09c3bd811c2b486cf8)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_INTERACTIONS_20261014.md": "edfed466ed04a9cb529ed2a74a7431c691419f0d0f476cda1c284aa98be367c1"
+   },
+   "source_extra": {
+    "pooled_groups_sha256": "14cab135fe762973b897c647b9502375ffc2bb1895f84b9cfe95811d7a876c0a"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T3",
+   "key": "interactions_G4",
+   "setting": "G4: G1 + 기초구조×연령구간",
+   "family": "Logistic Regression (C=1)",
+   "change": "foundation_type×연령구간 교차 원핫 추가",
+   "cv_f1_mean": 0.6902661465316994,
+   "cv_f1_std": 0.0022577806718676982,
+   "accuracy": 0.742502877974,
+   "recall3": 0.640940751569,
+   "err_3to1": 456,
+   "err_3to2": 24597,
+   "delta_vs_lrc": 0.0015787735531513913,
+   "source_file": "reports/age995_interactions_v1/models.csv",
+   "source_location": "[variant=G4] cv_mean,cv_std,error31/32; accuracy,R3: age995_interactions_v1/pooled_groups.csv[variant=G4,fold=pooled,group=all]",
+   "source_sha256": "34b473b52fad285289d9f1c1ab75cac5f60dd16d0c5b491572c20d2db02afaff",
+   "report_files": [
+    "reports/AGE995_INTERACTIONS_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_INTERACTIONS_20261014.md §2: \"개발208,480행…기존 Stratified 5-Fold와 seed42를 유지\" 기재; age995_interactions_v1/review.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721, holdout_scored=false (직접 확인, review.json sha256=388a192ecc6fc5c20f094b57ff51cfab0599c0ec45481a09c3bd811c2b486cf8)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_INTERACTIONS_20261014.md": "edfed466ed04a9cb529ed2a74a7431c691419f0d0f476cda1c284aa98be367c1"
+   },
+   "source_extra": {
+    "pooled_groups_sha256": "14cab135fe762973b897c647b9502375ffc2bb1895f84b9cfe95811d7a876c0a"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T3",
+   "key": "interactions_G5",
+   "setting": "G5: G1 + 세 교차항 모두",
+   "family": "Logistic Regression (C=1)",
+   "change": "위 세 가지 2변수 조합을 동시에 추가",
+   "cv_f1_mean": 0.6905690759849293,
+   "cv_f1_std": 0.0028842010922711836,
+   "accuracy": 0.742215080583,
+   "recall3": 0.639507552957,
+   "err_3to1": 483,
+   "err_3to2": 24670,
+   "delta_vs_lrc": 0.0018817030063813522,
+   "source_file": "reports/age995_interactions_v1/models.csv",
+   "source_location": "[variant=G5] cv_mean,cv_std,error31/32; accuracy,R3: age995_interactions_v1/pooled_groups.csv[variant=G5,fold=pooled,group=all]",
+   "source_sha256": "34b473b52fad285289d9f1c1ab75cac5f60dd16d0c5b491572c20d2db02afaff",
+   "report_files": [
+    "reports/AGE995_INTERACTIONS_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "AGE995_INTERACTIONS_20261014.md §2: \"개발208,480행…기존 Stratified 5-Fold와 seed42를 유지\" 기재; age995_interactions_v1/review.json data_contract: n_folds=5, seed=42, split_manifest.csv SHA=7673dbeb…838721, holdout_scored=false (직접 확인, review.json sha256=388a192ecc6fc5c20f094b57ff51cfab0599c0ec45481a09c3bd811c2b486cf8)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/AGE995_INTERACTIONS_20261014.md": "edfed466ed04a9cb529ed2a74a7431c691419f0d0f476cda1c284aa98be367c1"
+   },
+   "source_extra": {
+    "pooled_groups_sha256": "14cab135fe762973b897c647b9502375ffc2bb1895f84b9cfe95811d7a876c0a"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T4",
+   "key": "XGB_A_v1",
+   "setting": "XGBoost A (원핫, 연령 원값)",
+   "family": "XGBoost",
+   "change": "hist, depth 6, lr 0.05, 300 rounds; 입력 A(연령 원값)",
+   "cv_f1_mean": 0.6379462107464511,
+   "cv_f1_std": 0.004431082815423037,
+   "accuracy": 0.7119819646968534,
+   "recall3": 0.543798549603004,
+   "err_3to1": 238,
+   "err_3to2": 31593,
+   "delta_vs_lrc": -0.050741162232096904,
+   "source_file": "reports/model_families_v1/model_summary.csv",
+   "source_location": "[experiment=XGB_A_v1]",
+   "source_sha256": "45e5964f249ae3bbefdf1e3cfdf61f79a72f51fd724078ef9dec65e271bac395",
+   "report_files": [
+    "reports/MODEL_FAMILY_COMPARISON_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "LR_A/LR_C 행은 T1 A/C 재사용이므로 중복하지 않음",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "MODEL_FAMILY_COMPARISON_20261014.md §2: 개발 Stratified 5-Fold·seed 42, manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/MODEL_FAMILY_COMPARISON_20261014.md": "89438b717980c4b5fb55a45176bb66b9ba8f0d90bfd746e300af8221f0fd1278"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T4",
+   "key": "XGB_C_v1",
+   "setting": "XGBoost C (원핫, 995 대체+표시)",
+   "family": "XGBoost",
+   "change": "입력 C(995 중앙값 대체+표시); 나머지 XGB_A와 동일",
+   "cv_f1_mean": 0.6385580614937013,
+   "cv_f1_std": 0.004234545016843538,
+   "accuracy": 0.7123177283192632,
+   "recall3": 0.5441855132284232,
+   "err_3to1": 239,
+   "err_3to2": 31565,
+   "delta_vs_lrc": -0.05012931148484667,
+   "source_file": "reports/model_families_v1/model_summary.csv",
+   "source_location": "[experiment=XGB_C_v1]",
+   "source_sha256": "45e5964f249ae3bbefdf1e3cfdf61f79a72f51fd724078ef9dec65e271bac395",
+   "report_files": [
+    "reports/MODEL_FAMILY_COMPARISON_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "LR_A/LR_C 행은 T1 A/C 재사용이므로 중복하지 않음",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "MODEL_FAMILY_COMPARISON_20261014.md §2: 개발 Stratified 5-Fold·seed 42, manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/MODEL_FAMILY_COMPARISON_20261014.md": "89438b717980c4b5fb55a45176bb66b9ba8f0d90bfd746e300af8221f0fd1278"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T4",
+   "key": "LGBM_A_v1",
+   "setting": "LightGBM A (원핫, 연령 원값)",
+   "family": "LightGBM",
+   "change": "num_leaves 31, lr 0.05, 300 rounds; 입력 A",
+   "cv_f1_mean": 0.6698299628686256,
+   "cv_f1_std": 0.003634294479682236,
+   "accuracy": 0.7326026477359938,
+   "recall3": 0.5898328890417635,
+   "err_3to1": 297,
+   "err_3to2": 28322,
+   "delta_vs_lrc": -0.018857410109922368,
+   "source_file": "reports/model_families_v1/model_summary.csv",
+   "source_location": "[experiment=LGBM_A_v1]",
+   "source_sha256": "45e5964f249ae3bbefdf1e3cfdf61f79a72f51fd724078ef9dec65e271bac395",
+   "report_files": [
+    "reports/MODEL_FAMILY_COMPARISON_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "LR_A/LR_C 행은 T1 A/C 재사용이므로 중복하지 않음",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "MODEL_FAMILY_COMPARISON_20261014.md §2: 개발 Stratified 5-Fold·seed 42, manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/MODEL_FAMILY_COMPARISON_20261014.md": "89438b717980c4b5fb55a45176bb66b9ba8f0d90bfd746e300af8221f0fd1278"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T4",
+   "key": "LGBM_C_v1",
+   "setting": "LightGBM C = LGBM-O (원핫)",
+   "family": "LightGBM",
+   "change": "입력 C; 이후 연구에서 \"LGBM-O\"(원핫 LightGBM) 기준으로 재사용",
+   "cv_f1_mean": 0.6698469135362104,
+   "cv_f1_std": 0.0028917894127983325,
+   "accuracy": 0.7326362240982348,
+   "recall3": 0.5900765328059162,
+   "err_3to1": 303,
+   "err_3to2": 28299,
+   "delta_vs_lrc": -0.018840459442337587,
+   "source_file": "reports/model_families_v1/model_summary.csv",
+   "source_location": "[experiment=LGBM_C_v1]",
+   "source_sha256": "45e5964f249ae3bbefdf1e3cfdf61f79a72f51fd724078ef9dec65e271bac395",
+   "report_files": [
+    "reports/MODEL_FAMILY_COMPARISON_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "LR_A/LR_C 행은 T1 A/C 재사용이므로 중복하지 않음",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "MODEL_FAMILY_COMPARISON_20261014.md §2: 개발 Stratified 5-Fold·seed 42, manifest SHA 7673dbeb…838721 기재 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/MODEL_FAMILY_COMPARISON_20261014.md": "89438b717980c4b5fb55a45176bb66b9ba8f0d90bfd746e300af8221f0fd1278"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T6R",
+   "key": "T6R_R12",
+   "setting": "R12: 지역 geo3 제거 (geo1·geo2 유지)",
+   "family": "Logistic Regression (C=1)",
+   "change": "C에서 geo_level_3_id 원핫 제거",
+   "cv_f1_mean": 0.6530984252561759,
+   "cv_f1_std": 0.002070327232528388,
+   "accuracy": 0.7181887950882578,
+   "recall3": 0.5995499756356236,
+   "err_3to1": 326,
+   "err_3to2": 27615,
+   "delta_vs_lrc": -0.03558894772237209,
+   "source_file": "reports/geo_ablation_local_repro_20261014.json",
+   "source_location": "models[scheme=stratified, variant=R12]",
+   "source_sha256": "aaf26a955438fa0a3fc79bbdb32e9e8f641d765edae34ff1741742441108666f",
+   "report_files": [
+    "reports/GEO_ABLATION_LOCAL_REPRO_20261014.md"
+   ],
+   "origin": "신규 학습(T6R 재현)",
+   "notes": "원래 T6 증거는 미확보(BLOCKED); T6R은 별도 재현",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "geo_ablation_local_repro_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GEO_ABLATION_LOCAL_REPRO_20261014.md": "2f0e0e71f87b3356db4bbef1783754d895ec82178da9e3e88db92b4732478488"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T6R",
+   "key": "T6R_R1",
+   "setting": "R1: geo1만 유지",
+   "family": "Logistic Regression (C=1)",
+   "change": "C에서 geo2·geo3 제거",
+   "cv_f1_mean": 0.5934251426875182,
+   "cv_f1_std": 0.004768795649714676,
+   "accuracy": 0.6717862624712203,
+   "recall3": 0.5212543354258034,
+   "err_3to1": 217,
+   "err_3to2": 33187,
+   "delta_vs_lrc": -0.09526223029102976,
+   "source_file": "reports/geo_ablation_local_repro_20261014.json",
+   "source_location": "models[scheme=stratified, variant=R1]",
+   "source_sha256": "aaf26a955438fa0a3fc79bbdb32e9e8f641d765edae34ff1741742441108666f",
+   "report_files": [
+    "reports/GEO_ABLATION_LOCAL_REPRO_20261014.md"
+   ],
+   "origin": "신규 학습(T6R 재현)",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "geo_ablation_local_repro_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GEO_ABLATION_LOCAL_REPRO_20261014.md": "2f0e0e71f87b3356db4bbef1783754d895ec82178da9e3e88db92b4732478488"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T6R",
+   "key": "T6R_R0",
+   "setting": "R0: 지역 3열 모두 제거",
+   "family": "Logistic Regression (C=1)",
+   "change": "C에서 지역 3열 제거",
+   "cv_f1_mean": 0.4578945923824961,
+   "cv_f1_std": 0.0026347830803159235,
+   "accuracy": 0.589413852647736,
+   "recall3": 0.17424828732765787,
+   "err_3to1": 358,
+   "err_3to2": 57258,
+   "delta_vs_lrc": -0.2307927805960519,
+   "source_file": "reports/geo_ablation_local_repro_20261014.json",
+   "source_location": "models[scheme=stratified, variant=R0]",
+   "source_sha256": "aaf26a955438fa0a3fc79bbdb32e9e8f641d765edae34ff1741742441108666f",
+   "report_files": [
+    "reports/GEO_ABLATION_LOCAL_REPRO_20261014.md"
+   ],
+   "origin": "신규 학습(T6R 재현)",
+   "notes": "보고서 본문 표기 0.45790는 원자료(0.457895)와 마지막 자리가 다름",
+   "null_reasons": {},
+   "report_text_value": "0.45790",
+   "derived_fields": [],
+   "split_evidence": "geo_ablation_local_repro_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GEO_ABLATION_LOCAL_REPRO_20261014.md": "2f0e0e71f87b3356db4bbef1783754d895ec82178da9e3e88db92b4732478488"
+   },
+   "report_value_found_in_own_report": false,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T7",
+   "key": "T7_H3_050",
+   "setting": "T7 H3_050",
+   "family": "Logistic Regression (C=1)",
+   "change": "geo3 원핫 블록 가중 s=0.5 (축소)",
+   "cv_f1_mean": 0.6863697236403016,
+   "cv_f1_std": 0.0019325536040255928,
+   "accuracy": 0.7423829623944743,
+   "recall3": 0.6357525725915097,
+   "err_3to1": 383,
+   "err_3to2": 25032,
+   "delta_vs_lrc": -0.002317649338246408,
+   "source_file": "reports/geo_hier_shrink_20261014.json",
+   "source_location": "models[scheme=stratified, variant=H3_050]",
+   "source_sha256": "1eb7b754eddca70a4d6680d65b9d875caa5ff4173b4d97f87f08ea2390503f9a",
+   "report_files": [
+    "reports/GEO_HIER_SHRINK_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "geo_hier_shrink_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GEO_HIER_SHRINK_20261014.md": "7c5803a2fd41a02d26a93b8c2da4b544f05fe81a7db6990518f9ed14881e1f4a"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T7",
+   "key": "T7_H3_025",
+   "setting": "T7 H3_025",
+   "family": "Logistic Regression (C=1)",
+   "change": "geo3 블록 s=0.25",
+   "cv_f1_mean": 0.6772580884493471,
+   "cv_f1_std": 0.0018832007261464815,
+   "accuracy": 0.7375143898695319,
+   "recall3": 0.6273253647490469,
+   "err_3to1": 340,
+   "err_3to2": 25663,
+   "delta_vs_lrc": -0.01142928452920089,
+   "source_file": "reports/geo_hier_shrink_20261014.json",
+   "source_location": "models[scheme=stratified, variant=H3_025]",
+   "source_sha256": "1eb7b754eddca70a4d6680d65b9d875caa5ff4173b4d97f87f08ea2390503f9a",
+   "report_files": [
+    "reports/GEO_HIER_SHRINK_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "geo_hier_shrink_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GEO_HIER_SHRINK_20261014.md": "7c5803a2fd41a02d26a93b8c2da4b544f05fe81a7db6990518f9ed14881e1f4a"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T7",
+   "key": "T7_H3_010",
+   "setting": "T7 H3_010",
+   "family": "Logistic Regression (C=1)",
+   "change": "geo3 블록 s=0.10",
+   "cv_f1_mean": 0.6609432753850919,
+   "cv_f1_std": 0.0021867388072405736,
+   "accuracy": 0.7244483883346124,
+   "recall3": 0.6078768595751999,
+   "err_3to1": 327,
+   "err_3to2": 27033,
+   "delta_vs_lrc": -0.027744097593456085,
+   "source_file": "reports/geo_hier_shrink_20261014.json",
+   "source_location": "models[scheme=stratified, variant=H3_010]",
+   "source_sha256": "1eb7b754eddca70a4d6680d65b9d875caa5ff4173b4d97f87f08ea2390503f9a",
+   "report_files": [
+    "reports/GEO_HIER_SHRINK_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "geo_hier_shrink_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GEO_HIER_SHRINK_20261014.md": "7c5803a2fd41a02d26a93b8c2da4b544f05fe81a7db6990518f9ed14881e1f4a"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T7",
+   "key": "T7_H23_050",
+   "setting": "T7 H23_050",
+   "family": "Logistic Regression (C=1)",
+   "change": "geo2+geo3 블록 s=0.5",
+   "cv_f1_mean": 0.6842262566950762,
+   "cv_f1_std": 0.001340089057685478,
+   "accuracy": 0.7422198772064467,
+   "recall3": 0.6331441511164617,
+   "err_3to1": 362,
+   "err_3to2": 25235,
+   "delta_vs_lrc": -0.004461116283471789,
+   "source_file": "reports/geo_hier_shrink_20261014.json",
+   "source_location": "models[scheme=stratified, variant=H23_050]",
+   "source_sha256": "1eb7b754eddca70a4d6680d65b9d875caa5ff4173b4d97f87f08ea2390503f9a",
+   "report_files": [
+    "reports/GEO_HIER_SHRINK_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "geo_hier_shrink_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GEO_HIER_SHRINK_20261014.md": "7c5803a2fd41a02d26a93b8c2da4b544f05fe81a7db6990518f9ed14881e1f4a"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T7",
+   "key": "T7_H23_025",
+   "setting": "T7 H23_025",
+   "family": "Logistic Regression (C=1)",
+   "change": "geo2+geo3 블록 s=0.25",
+   "cv_f1_mean": 0.66952990275411,
+   "cv_f1_std": 0.002540953451280796,
+   "accuracy": 0.7361377590176515,
+   "recall3": 0.6195001003239029,
+   "err_3to1": 262,
+   "err_3to2": 26287,
+   "delta_vs_lrc": -0.019157470224438033,
+   "source_file": "reports/geo_hier_shrink_20261014.json",
+   "source_location": "models[scheme=stratified, variant=H23_025]",
+   "source_sha256": "1eb7b754eddca70a4d6680d65b9d875caa5ff4173b4d97f87f08ea2390503f9a",
+   "report_files": [
+    "reports/GEO_HIER_SHRINK_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "geo_hier_shrink_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GEO_HIER_SHRINK_20261014.md": "7c5803a2fd41a02d26a93b8c2da4b544f05fe81a7db6990518f9ed14881e1f4a"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T7",
+   "key": "T7_H23_010",
+   "setting": "T7 H23_010",
+   "family": "Logistic Regression (C=1)",
+   "change": "geo2+geo3 블록 s=0.10",
+   "cv_f1_mean": 0.6379781273732654,
+   "cv_f1_std": 0.002676901738609415,
+   "accuracy": 0.7149654643131236,
+   "recall3": 0.5825952360478115,
+   "err_3to1": 217,
+   "err_3to2": 28907,
+   "delta_vs_lrc": -0.05070924560528256,
+   "source_file": "reports/geo_hier_shrink_20261014.json",
+   "source_location": "models[scheme=stratified, variant=H23_010]",
+   "source_sha256": "1eb7b754eddca70a4d6680d65b9d875caa5ff4173b4d97f87f08ea2390503f9a",
+   "report_files": [
+    "reports/GEO_HIER_SHRINK_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "geo_hier_shrink_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GEO_HIER_SHRINK_20261014.md": "7c5803a2fd41a02d26a93b8c2da4b544f05fe81a7db6990518f9ed14881e1f4a"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T8",
+   "key": "T8_N",
+   "setting": "LGBM-N: 범주형 11열 native categorical",
+   "family": "LightGBM",
+   "change": "LGBM-O(원핫)와 같은 파라미터에서 범주형 11열만 학습 Fold 어휘의 native categorical로 변경",
+   "cv_f1_mean": 0.6993416186719987,
+   "cv_f1_std": 0.0033058271416470542,
+   "accuracy": 0.7464504988488104,
+   "recall3": 0.6476481210766188,
+   "err_3to1": 530,
+   "err_3to2": 24055,
+   "delta_vs_lrc": 0.010654245693450748,
+   "source_file": "reports/lgbm_native_cat_20261014.json",
+   "source_location": "models[scheme=stratified, arm=N]",
+   "source_sha256": "e5d86b30dd226f70c7c928e462ee981d739b9695afcf70a6893ce6d28b4764bc",
+   "report_files": [
+    "reports/LGBM_NATIVE_CAT_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "지역 일반화(geo2)에서는 LR-C보다 낮음(별도 보고)",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "lgbm_native_cat_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/LGBM_NATIVE_CAT_20261014.md": "2b03218d78ed55d5c4191ced328d68480ffc294bad1b61695492d6e87314f053"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T9",
+   "key": "T9_P",
+   "setting": "LGBM-P: 텍스트 범주 8열만 native",
+   "family": "LightGBM",
+   "change": "geo 3열은 원핫 유지, 텍스트 범주 8열만 native categorical",
+   "cv_f1_mean": 0.6699663372188654,
+   "cv_f1_std": 0.003612906102328346,
+   "accuracy": 0.7325402916346891,
+   "recall3": 0.5903488405423224,
+   "err_3to1": 300,
+   "err_3to2": 28283,
+   "delta_vs_lrc": -0.018721035759682536,
+   "source_file": "reports/lgbm_partial_native_20261014.json",
+   "source_location": "models[scheme=stratified, arm=P]",
+   "source_sha256": "099c4d2d702559b2f8953b91a2b2efd845677668765f792ae431fa7555ec606c",
+   "report_files": [
+    "reports/LGBM_PARTIAL_NATIVE_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "lgbm_partial_native_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/LGBM_PARTIAL_NATIVE_20261014.md": "324c2b1f587c746ad94d8b683725b3e0bcdcb573bbf5edb405020bfd03d1a2b0"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T10",
+   "key": "T10_LR_TE",
+   "setting": "LR_TE: 지역 계층적 Target Encoding",
+   "family": "Logistic Regression (C=1)",
+   "change": "지역 3열 원핫을 학습 Fold 내부 5-Fold OOF 계층적 TE 9특성(m=20)으로 교체",
+   "cv_f1_mean": 0.6671673243518822,
+   "cv_f1_std": 0.002462901078208712,
+   "accuracy": 0.735144858019954,
+   "recall3": 0.6290881990426234,
+   "err_3to1": 359,
+   "err_3to2": 25521,
+   "delta_vs_lrc": -0.02152004862666579,
+   "source_file": "reports/geo_hier_te_20261014.json",
+   "source_location": "models[scheme=stratified, arm=LR_TE]",
+   "source_sha256": "92785b94c7dc770a6e31f07585ac1164199229a54792b4c2e3d2cbeb2d711e93",
+   "report_files": [
+    "reports/GEO_HIER_TE_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "T11 LR_TE_G의 stratified 값은 이 값을 재사용",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "geo_hier_te_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GEO_HIER_TE_20261014.md": "c65ac1725bb75da174b30b9b3ec946b61ae5973ec805def4a978739f72913d90"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T10",
+   "key": "T10_LGBM_TE",
+   "setting": "LGBM_TE: 지역 계층적 Target Encoding",
+   "family": "LightGBM",
+   "change": "LGBM-O의 지역 원핫을 계층적 TE 9특성으로 교체",
+   "cv_f1_mean": 0.6881695889272522,
+   "cv_f1_std": 0.0032391182108851484,
+   "accuracy": 0.7424165387567153,
+   "recall3": 0.6390489294006363,
+   "err_3to1": 387,
+   "err_3to2": 24798,
+   "delta_vs_lrc": -0.0005177840512957665,
+   "source_file": "reports/geo_hier_te_20261014.json",
+   "source_location": "models[scheme=stratified, arm=LGBM_TE]",
+   "source_sha256": "92785b94c7dc770a6e31f07585ac1164199229a54792b4c2e3d2cbeb2d711e93",
+   "report_files": [
+    "reports/GEO_HIER_TE_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "T11 LGBM_TE_G의 stratified 값은 이 값을 재사용",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "geo_hier_te_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GEO_HIER_TE_20261014.md": "c65ac1725bb75da174b30b9b3ec946b61ae5973ec805def4a978739f72913d90"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T12",
+   "key": "T12_LR_S",
+   "setting": "LR_S",
+   "family": "Logistic Regression (C=1)",
+   "change": "구조 요약 4특성(재료·용도 개수) 추가",
+   "cv_f1_mean": 0.6888446855169155,
+   "cv_f1_std": 0.0013530952946300921,
+   "accuracy": 0.7418937068303914,
+   "recall3": 0.6403961360965402,
+   "err_3to1": 463,
+   "err_3to2": 24628,
+   "delta_vs_lrc": 0.00015731253836748227,
+   "source_file": "reports/struct_features_20261014.json",
+   "source_location": "models[scheme=stratified, arm=LR_S]",
+   "source_sha256": "fe4a133ef4878633e8ee1d1e2800ebe18e9f466507caccf79c7594d060785351",
+   "report_files": [
+    "reports/STRUCT_FEATURES_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "공동 개선 후보 0/6 (사전 기준 +0.003 미달); 보고서 본문 표기 0.68885는 원자료(0.688845)와 마지막 자리가 다름",
+   "null_reasons": {},
+   "report_text_value": "0.68885",
+   "derived_fields": [],
+   "split_evidence": "struct_features_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/STRUCT_FEATURES_20261014.md": "7c8f94b58bb943dcb7613c9016dfdcba57102b6a4dce1a0f92326eb295ae0651"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T12",
+   "key": "T12_LR_D",
+   "setting": "LR_D",
+   "family": "Logistic Regression (C=1)",
+   "change": "크기·비율 3특성(층당 높이, 면적×층수, 층당 가구수) 추가",
+   "cv_f1_mean": 0.6888166113460904,
+   "cv_f1_std": 0.0015460878756129825,
+   "accuracy": 0.7417066385264773,
+   "recall3": 0.6399088485682346,
+   "err_3to1": 456,
+   "err_3to2": 24669,
+   "delta_vs_lrc": 0.0001292383675424169,
+   "source_file": "reports/struct_features_20261014.json",
+   "source_location": "models[scheme=stratified, arm=LR_D]",
+   "source_sha256": "fe4a133ef4878633e8ee1d1e2800ebe18e9f466507caccf79c7594d060785351",
+   "report_files": [
+    "reports/STRUCT_FEATURES_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "공동 개선 후보 0/6 (사전 기준 +0.003 미달)",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "struct_features_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/STRUCT_FEATURES_20261014.md": "7c8f94b58bb943dcb7613c9016dfdcba57102b6a4dce1a0f92326eb295ae0651"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T12",
+   "key": "T12_LR_SD",
+   "setting": "LR_SD",
+   "family": "Logistic Regression (C=1)",
+   "change": "S+D 7특성 추가",
+   "cv_f1_mean": 0.6888430952467781,
+   "cv_f1_std": 0.0014168317008703558,
+   "accuracy": 0.7417210283960092,
+   "recall3": 0.6404248000687935,
+   "err_3to1": 456,
+   "err_3to2": 24633,
+   "delta_vs_lrc": 0.00015572226823012958,
+   "source_file": "reports/struct_features_20261014.json",
+   "source_location": "models[scheme=stratified, arm=LR_SD]",
+   "source_sha256": "fe4a133ef4878633e8ee1d1e2800ebe18e9f466507caccf79c7594d060785351",
+   "report_files": [
+    "reports/STRUCT_FEATURES_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "공동 개선 후보 0/6 (사전 기준 +0.003 미달)",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "struct_features_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/STRUCT_FEATURES_20261014.md": "7c8f94b58bb943dcb7613c9016dfdcba57102b6a4dce1a0f92326eb295ae0651"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T12",
+   "key": "T12_LGBM_S",
+   "setting": "LGBM_S",
+   "family": "LightGBM",
+   "change": "LGBM-O + 구조 요약 4특성",
+   "cv_f1_mean": 0.6703412891370231,
+   "cv_f1_std": 0.003298097506879388,
+   "accuracy": 0.7329480046047583,
+   "recall3": 0.5892882735689512,
+   "err_3to1": 307,
+   "err_3to2": 28350,
+   "delta_vs_lrc": -0.01834608384152492,
+   "source_file": "reports/struct_features_20261014.json",
+   "source_location": "models[scheme=stratified, arm=LGBM_S]",
+   "source_sha256": "fe4a133ef4878633e8ee1d1e2800ebe18e9f466507caccf79c7594d060785351",
+   "report_files": [
+    "reports/STRUCT_FEATURES_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "공동 개선 후보 0/6 (사전 기준 +0.003 미달)",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "struct_features_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/STRUCT_FEATURES_20261014.md": "7c8f94b58bb943dcb7613c9016dfdcba57102b6a4dce1a0f92326eb295ae0651"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T12",
+   "key": "T12_LGBM_D",
+   "setting": "LGBM_D",
+   "family": "LightGBM",
+   "change": "LGBM-O + 크기·비율 3특성",
+   "cv_f1_mean": 0.6705503760647028,
+   "cv_f1_std": 0.0032573852229309135,
+   "accuracy": 0.7327705295471988,
+   "recall3": 0.5903775045145756,
+   "err_3to1": 300,
+   "err_3to2": 28281,
+   "delta_vs_lrc": -0.018136996913845183,
+   "source_file": "reports/struct_features_20261014.json",
+   "source_location": "models[scheme=stratified, arm=LGBM_D]",
+   "source_sha256": "fe4a133ef4878633e8ee1d1e2800ebe18e9f466507caccf79c7594d060785351",
+   "report_files": [
+    "reports/STRUCT_FEATURES_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "공동 개선 후보 0/6 (사전 기준 +0.003 미달)",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "struct_features_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/STRUCT_FEATURES_20261014.md": "7c8f94b58bb943dcb7613c9016dfdcba57102b6a4dce1a0f92326eb295ae0651"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": false
+   }
+  },
+  {
+   "experiment": "T12",
+   "key": "T12_LGBM_SD",
+   "setting": "LGBM_SD",
+   "family": "LightGBM",
+   "change": "LGBM-O + S+D 7특성",
+   "cv_f1_mean": 0.6707245501802819,
+   "cv_f1_std": 0.003266209830768509,
+   "accuracy": 0.733096699923254,
+   "recall3": 0.5905351563619686,
+   "err_3to1": 306,
+   "err_3to2": 28264,
+   "delta_vs_lrc": -0.01796282279826611,
+   "source_file": "reports/struct_features_20261014.json",
+   "source_location": "models[scheme=stratified, arm=LGBM_SD]",
+   "source_sha256": "fe4a133ef4878633e8ee1d1e2800ebe18e9f466507caccf79c7594d060785351",
+   "report_files": [
+    "reports/STRUCT_FEATURES_20261014.md"
+   ],
+   "origin": "신규 학습",
+   "notes": "공동 개선 후보 0/6 (사전 기준 +0.003 미달); 보고서 본문 표기 0.67073는 원자료(0.670725)와 마지막 자리가 다름",
+   "null_reasons": {},
+   "report_text_value": "0.67073",
+   "derived_fields": [],
+   "split_evidence": "struct_features_20261014.json audit.status=PASS, audit.manifest_sha256.stratified=7673dbeb…838721, holdout_accessed=false (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/STRUCT_FEATURES_20261014.md": "7c8f94b58bb943dcb7613c9016dfdcba57102b6a4dce1a0f92326eb295ae0651"
+   },
+   "report_value_found_in_own_report": false,
+   "report_counts_found_in_own_report": {
+    "err_3to1": false,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T14",
+   "key": "T14_te_ros_rf",
+   "setting": "RF + geo1/2/3 OOF TE + 지역 빈도 + 학습 Fold ROS (원본 raw age 유지)",
+   "family": "Random Forest",
+   "change": "TE(내부 5-Fold, m=20) + 지역 빈도 + 학습 Fold RandomOverSampler + RF; 모델 77열. TE·ROS·RF·age995 원값을 동시에 변경(요인 미분리)",
+   "cv_f1_mean": 0.7004271084657958,
+   "cv_f1_std": 0.0010697712914379235,
+   "accuracy": 0.7398839217191098,
+   "recall3": 0.6730157365207671,
+   "err_3to1": 744,
+   "err_3to2": 22071,
+   "delta_vs_lrc": 0.011739735487247827,
+   "source_file": "reports/te_ros_rf_repro_20261015.json",
+   "source_location": "per_scheme.strat (cv_mean, cv_std, pooled.accuracy/recall/error31/error32); stage_a.status=EXACT",
+   "source_sha256": "441ddde5e5883da831206df56d2b3b92e1bcec378c05ddba033fb6e540f07c2a",
+   "report_files": [
+    "reports/TE_ROS_RF_REPRO_20261015.md",
+    "reports/TE_ROS_RF_EXPLORATORY_20261014.md"
+   ],
+   "origin": "로컬 재현 신규 학습(원본 탐색 값과 혼동행렬 셀 단위 일치)",
+   "notes": "stratified에서만 0.7을 넘음. geo2 Group(20 Fold)에서는 LR-C −0.0088, LGBM-O −0.0250 (T14 보고서). 원본 탐색(0ecd351)은 미감사 집계였고 재현으로 감사 가능해짐",
+   "null_reasons": {},
+   "report_text_value": null,
+   "derived_fields": [],
+   "split_evidence": "te_ros_rf_exploratory_summary.json data.split_manifest_sha256=7673dbeb…838721 / T14_TE_ROS_RF_REPRO_PLAN.md §Stage A: split_manifest.csv cv_fold 0-4 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/TE_ROS_RF_REPRO_20261015.md": "ff5d9e00283cf58bc95255569813cdd0ffc5b6cfb0915594404b0716b3cf2015",
+    "reports/TE_ROS_RF_EXPLORATORY_20261014.md": "d4db0d17c5078262697dd5d3845e09946c9736452fa420b8e3328923bb6ac013"
+   },
+   "source_extra": {
+    "exploratory_summary_sha256": "66f8d74f90beb06cc89b5dcfcd2050b55585537af1dfefaed43edc269ac7670d"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": {
+    "err_3to1": true,
+    "err_3to2": true
+   }
+  },
+  {
+   "experiment": "T15",
+   "key": "T15_LR_C",
+   "setting": "LR_C + 3등급 로짓 오프셋(보정 후)",
+   "family": "Logistic Regression (C=1)",
+   "change": "T1 C(LR-C) 저장 OOF에 3등급 확률 exp(b) 배 규칙 적용(b는 내부 OOF로 선택, 층화에서 0.1~0.2); 바깥 모델 재학습 없음",
+   "cv_f1_mean": 0.6893525566867653,
+   "cv_f1_std": null,
+   "accuracy": null,
+   "recall3": null,
+   "err_3to1": null,
+   "err_3to2": null,
+   "delta_vs_lrc": 0.0006651837082173317,
+   "source_file": "reports/grade3_decision_rule_20261015.json",
+   "source_location": "judgments.LR_C.inputs.stratified_mean_delta = 0.000665183708217354 (보정 전 평균에 더해 산출)",
+   "source_sha256": "3aa8c191518033dc82a1aa4d32c58016da4c6d8ee49a7775abcd6e2d33fe91e1",
+   "report_files": [
+    "reports/GRADE3_DECISION_RULE_20261015.md"
+   ],
+   "origin": "저장 OOF 재사용 + 내부 Fold 보정(바깥 모델 재학습 없음)",
+   "notes": "사전 기준 G4(stratified 감시)용 보조 지표. 보고서는 stratified를 낙관적(반복 노출 Fold)으로 규정. 보정 후 평균은 보고서 표기 4자리가 정확",
+   "null_reasons": {
+    "cv_f1_std": "보고서·JSON에 stratified 보정 후 Fold 표준편차 없음",
+    "accuracy": "stratified 보정 후 혼동행렬이 집계에 없음",
+    "recall3": "위와 같음(보고서의 Recall3은 geo2 기준)",
+    "err_3to1": "위와 같음",
+    "err_3to2": "위와 같음"
+   },
+   "report_text_value": "0.6887 → 0.6894",
+   "derived_fields": [
+    "cv_f1_mean=보정 전 평균+stratified_mean_delta"
+   ],
+   "split_evidence": "T15_GRADE3_DECISION_RULE_PLAN.md: strat_s42 = split_manifest.csv SHA 7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GRADE3_DECISION_RULE_20261015.md": "314548bbede15eecb3ffe366ef79c2e8ea0bfb4b9d7c347e4e79d5f77434f34b"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": null
+  },
+  {
+   "experiment": "T15",
+   "key": "T15_LGBM_O",
+   "setting": "LGBM_O + 3등급 로짓 오프셋(보정 후)",
+   "family": "LightGBM",
+   "change": "T4 LGBM_C_v1(LGBM-O) 저장 OOF에 3등급 확률 exp(b) 배 규칙 적용(b는 내부 OOF로 선택, 층화에서 0.1~0.2); 바깥 모델 재학습 없음",
+   "cv_f1_mean": 0.6741679967765843,
+   "cv_f1_std": null,
+   "accuracy": null,
+   "recall3": null,
+   "err_3to1": null,
+   "err_3to2": null,
+   "delta_vs_lrc": -0.01451937620196364,
+   "source_file": "reports/grade3_decision_rule_20261015.json",
+   "source_location": "judgments.LGBM_O.inputs.stratified_mean_delta = 0.0043210832403739905 (보정 전 평균에 더해 산출)",
+   "source_sha256": "3aa8c191518033dc82a1aa4d32c58016da4c6d8ee49a7775abcd6e2d33fe91e1",
+   "report_files": [
+    "reports/GRADE3_DECISION_RULE_20261015.md"
+   ],
+   "origin": "저장 OOF 재사용 + 내부 Fold 보정(바깥 모델 재학습 없음)",
+   "notes": "사전 기준 G4(stratified 감시)용 보조 지표. 보고서는 stratified를 낙관적(반복 노출 Fold)으로 규정. 보정 후 평균은 보고서 표기 4자리가 정확",
+   "null_reasons": {
+    "cv_f1_std": "보고서·JSON에 stratified 보정 후 Fold 표준편차 없음",
+    "accuracy": "stratified 보정 후 혼동행렬이 집계에 없음",
+    "recall3": "위와 같음(보고서의 Recall3은 geo2 기준)",
+    "err_3to1": "위와 같음",
+    "err_3to2": "위와 같음"
+   },
+   "report_text_value": "0.6698 → 0.6742",
+   "derived_fields": [
+    "cv_f1_mean=보정 전 평균+stratified_mean_delta"
+   ],
+   "split_evidence": "T15_GRADE3_DECISION_RULE_PLAN.md: strat_s42 = split_manifest.csv SHA 7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GRADE3_DECISION_RULE_20261015.md": "314548bbede15eecb3ffe366ef79c2e8ea0bfb4b9d7c347e4e79d5f77434f34b"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": null
+  },
+  {
+   "experiment": "T15",
+   "key": "T15_LGBM_TE_G",
+   "setting": "LGBM_TE_G + 3등급 로짓 오프셋(보정 후)",
+   "family": "LightGBM",
+   "change": "T10 LGBM_TE(층화에서 LGBM_TE_G와 동일) 저장 OOF에 3등급 확률 exp(b) 배 규칙 적용(b는 내부 OOF로 선택, 층화에서 0.1~0.2); 바깥 모델 재학습 없음",
+   "cv_f1_mean": 0.6898842668307417,
+   "cv_f1_std": null,
+   "accuracy": null,
+   "recall3": null,
+   "err_3to1": null,
+   "err_3to2": null,
+   "delta_vs_lrc": 0.0011968938521936812,
+   "source_file": "reports/grade3_decision_rule_20261015.json",
+   "source_location": "judgments.LGBM_TE_G.inputs.stratified_mean_delta = 0.0017146779034894698 (보정 전 평균에 더해 산출)",
+   "source_sha256": "3aa8c191518033dc82a1aa4d32c58016da4c6d8ee49a7775abcd6e2d33fe91e1",
+   "report_files": [
+    "reports/GRADE3_DECISION_RULE_20261015.md"
+   ],
+   "origin": "저장 OOF 재사용 + 내부 Fold 보정(바깥 모델 재학습 없음)",
+   "notes": "사전 기준 G4(stratified 감시)용 보조 지표. 보고서는 stratified를 낙관적(반복 노출 Fold)으로 규정. 보정 후 평균은 보고서 표기 4자리가 정확",
+   "null_reasons": {
+    "cv_f1_std": "보고서·JSON에 stratified 보정 후 Fold 표준편차 없음",
+    "accuracy": "stratified 보정 후 혼동행렬이 집계에 없음",
+    "recall3": "위와 같음(보고서의 Recall3은 geo2 기준)",
+    "err_3to1": "위와 같음",
+    "err_3to2": "위와 같음"
+   },
+   "report_text_value": "0.6882 → 0.6899",
+   "derived_fields": [
+    "cv_f1_mean=보정 전 평균+stratified_mean_delta"
+   ],
+   "split_evidence": "T15_GRADE3_DECISION_RULE_PLAN.md: strat_s42 = split_manifest.csv SHA 7673dbeb…838721 (확인됨)",
+   "duplicate_of": null,
+   "report_file_sha256": {
+    "reports/GRADE3_DECISION_RULE_20261015.md": "314548bbede15eecb3ffe366ef79c2e8ea0bfb4b9d7c347e4e79d5f77434f34b"
+   },
+   "report_value_found_in_own_report": true,
+   "report_counts_found_in_own_report": null
+  }
+ ],
+ "no_stratified_result": [
+  {
+   "experiment": "T2 오류 진단",
+   "report": "reports/AGE995_DIAGNOSTICS_20261014.md",
+   "json": "reports/age995_diagnostics_v1/summary.json",
+   "reason": "신규 설정 없음: T1의 기존 OOF(C·E2 등)를 재분석한 진단(학습 0회)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 0,
+   "report_sha256": "a0424600b418f486db669cd38316335e5c7a517d6ceae7a5357f425b516cc5b9",
+   "json_sha256": "0075ad1a2cf8280a99e387d7cdc062f27463fb18c9cf5c9d546c2c6f62075de2",
+   "note": ""
+  },
+  {
+   "experiment": "T5 지역 Group CV",
+   "report": "reports/GEO_GROUP_CV_20261014.md",
+   "json": "reports/geo_group_cv_summary.json",
+   "reason": "신규 학습은 geo2/geo1 Group CV 전용(지역 일반화). 층화 값은 T1 C·T3 G2의 기존 값을 인용만 함",
+   "scan_stratified_mentions_md": 29,
+   "scan_stratified_mentions_json": 6,
+   "scan_geo2_mentions_md": 3,
+   "report_sha256": "323de42e24351ebb88189772c0dd6f745c9858774817c2f97e632f6c933b1c88",
+   "json_sha256": "4c184b697f08497b52c4082db37563682f697006bba9bd5190d67ee8aa3acf13",
+   "note": ""
+  },
+  {
+   "experiment": "T6S C 보완 감사",
+   "report": "reports/GEO_ABLATION_C_GROUP_SUPPLEMENT_20261014.md",
+   "json": "reports/geo_ablation_c_group_supplement_20261014.json",
+   "reason": "Group CV의 C 행 단위 보완 감사. 층화 값은 T6R 표와 동일(중복)",
+   "scan_stratified_mentions_md": 1,
+   "scan_stratified_mentions_json": 41,
+   "scan_geo2_mentions_md": 4,
+   "report_sha256": "1858d36c05f725c76f98afb7e97bbdf059e4f2ee7d484afea251269e0a6fde5c",
+   "json_sha256": "b20676937af5d04cba0b3efba8decfdf22a2f5d319b3e1ad505caa25a4e5b765",
+   "note": ""
+  },
+  {
+   "experiment": "T11 그룹 인지 내부 Fold TE",
+   "report": "reports/GEO_TE_GROUP_INNER_20261014.md",
+   "json": "reports/geo_te_group_inner_20261014.json",
+   "reason": "신규 학습은 geo2/geo1 전용. 층화 값(LR_TE_G 0.6672, LGBM_TE_G 0.6882)은 T10 값 재사용(내부 분할이 같아 새 층화 학습 없음)",
+   "scan_stratified_mentions_md": 8,
+   "scan_stratified_mentions_json": 43,
+   "scan_geo2_mentions_md": 19,
+   "report_sha256": "7e589ff32b6c81a411895b969775ec9575bd8aebc259aa324b9f3487721241d1",
+   "json_sha256": "a8d8dee8e583b1885960524b1f60d769f8427c9dce029590f5141441b63baf75",
+   "note": "T10 LR_TE/LGBM_TE 행과 동일 값"
+  },
+  {
+   "experiment": "T13 LGBM_TE_G geo2 확인",
+   "report": "reports/GEO2_TE_CONFIRM_20261014.md",
+   "json": "reports/geo2_te_confirm_20261014.json",
+   "reason": "geo2 Group 새 seed 101/202/303 전용. 층화 값은 T10 재사용 언급만",
+   "scan_stratified_mentions_md": 1,
+   "scan_stratified_mentions_json": 1,
+   "scan_geo2_mentions_md": 9,
+   "report_sha256": "6f1631b3e739ffbe45c01e94e88909984eb17fb21f72ca6c8fba2c369c797505",
+   "json_sha256": "c30f3989f6a4f947c3797d977f13a2166276c73bb0ee4347ef5acb29dfc4680c",
+   "note": ""
+  },
+  {
+   "experiment": "T6 원본(R12/R1/R0 원래 실행)",
+   "report": "reports/GEO_ABLATION_RETRIEVAL_20261014.md",
+   "json": "reports/geo_ablation_retrieval_20261014.json",
+   "reason": "원래 T6 비공개 증거 미확보(BLOCKED_T6_PRIVATE_EVIDENCE_MISSING). 같은 설정의 독립 재현 T6R만 표2에 포함",
+   "scan_stratified_mentions_md": 5,
+   "scan_stratified_mentions_json": 3,
+   "scan_geo2_mentions_md": 0,
+   "report_sha256": "d00e93ac38fc3d8da7dae8ec4c44ec9cbc039d7c1408010c30ad7b1a9a08421a",
+   "json_sha256": "9aaa7cbc1559b4ca67460069cfd13c165e7e0cc45a6fe8d84eba0c0d2bfd0508",
+   "note": ""
+  },
+  {
+   "experiment": "T16 RF 요인 분리",
+   "report": "reports/RF_FACTORS_20261015.md",
+   "json": "reports/rf_factors_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 4,
+   "report_sha256": "bf81395c9e9eec08abe66c4af2126ea0c94ae6a23a79c32a7dfbcd09fab21741",
+   "json_sha256": "1b786f739bfc2665bac569d76262c720bb6acd4967cf3176c98c82714fa6a7f1",
+   "note": ""
+  },
+  {
+   "experiment": "T17 3등급 규칙 고정",
+   "report": "reports/GRADE3_RULE_FREEZE_20261015.md",
+   "json": "reports/grade3_rule_freeze_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 2,
+   "report_sha256": "dc160a4a5082f017c7f313edf042e1e89a25d48bb895919c056a133d94f29732",
+   "json_sha256": "e15603b36eb807a363e4aa01e0226d7def779feb959109565257a854f1fa78a9",
+   "note": ""
+  },
+  {
+   "experiment": "T18 LGBM 내부 튜닝",
+   "report": "reports/LGBM_NESTED_TUNING_20261015.md",
+   "json": "reports/lgbm_nested_tuning_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 1,
+   "report_sha256": "d2d1275453c928ae63da367b83bc7ef481ffcf7d6aafb7ffd6230655cb3a4c10",
+   "json_sha256": "9ff222aeeffb2a044255961590f3fdf5fcb272dce907ba54f9ee245a47c12130",
+   "note": ""
+  },
+  {
+   "experiment": "T19 고정 앙상블",
+   "report": "reports/FIXED_ENSEMBLE_20261015.md",
+   "json": "reports/fixed_ensemble_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 1,
+   "report_sha256": "2a03a3e25c2d3482f6f4d377ba1de08f41ec1d12f57d6593eb927ed5e744104e",
+   "json_sha256": "a7baf839bddc1f3a081e54fcba2f64b9dce1473840a291ceaeb3a2293d04647b",
+   "note": ""
+  },
+  {
+   "experiment": "T20 LGBM 3등급 가중 1.5",
+   "report": "reports/LGBM_GRADE3_WEIGHT_20261015.md",
+   "json": "reports/lgbm_grade3_weight_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 1,
+   "report_sha256": "74088726cec7029eb8f5bf1d64234bf1fde445611894fb95ab94b6b91c36c5eb",
+   "json_sha256": "ea0e788e4ad8c952fcbf60d706bc8a56cce8ede054cf3b4969369f6f88cccd0a",
+   "note": ""
+  },
+  {
+   "experiment": "T21 연령 곱·구조 조합",
+   "report": "reports/FEATURE_INTERACTIONS_20261015.md",
+   "json": "reports/feature_interactions_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 1,
+   "report_sha256": "a674209cb8b8f84c03e81b203e34b77b14f16b5a172ceeb68e5d7d24f2eb145d",
+   "json_sha256": "2b41c683b1678e4348be3e48d2a97f036b5796668267968c4c5e856830b22535",
+   "note": ""
+  },
+  {
+   "experiment": "T22 재료쌍·구조별 층수",
+   "report": "reports/MATERIAL_STRUCTURE_20261015.md",
+   "json": "reports/material_structure_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 1,
+   "report_sha256": "b9381f3d2d76b596587f7f613909ae014403f876376d026ae9da423163d39c0f",
+   "json_sha256": "27479b3235071ed3ef889f9cede2d2e1d88b53ed9f60a6195f931c561231d1e2",
+   "note": ""
+  },
+  {
+   "experiment": "T23 누적 이진·단조 투영",
+   "report": "reports/ORDINAL_DAMAGE_20261015.md",
+   "json": "reports/ordinal_damage_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 1,
+   "report_sha256": "bd85cfeac276c017d65c666bd1e89cfb55f6db262529b62ca1232001fef9c5c3",
+   "json_sha256": "6f6b9c7a29a49259c3c817c9510b6b0216b99716376bcaaf39f6243ea990121d",
+   "note": ""
+  },
+  {
+   "experiment": "T24 상위 지역 맥락 6열",
+   "report": "reports/GEO_CONTEXT_20261015.md",
+   "json": "reports/geo_context_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 2,
+   "report_sha256": "d61a91f46c22b70da6ff7e8cec4d8be77e6fc0d3f1a96b90047b1cf8fca82cc3",
+   "json_sha256": "5c1b8ab09de54d5a729b96d988f6d1bf0121e515899c53e1a19330af7b10a7bb",
+   "note": ""
+  },
+  {
+   "experiment": "T25 CatBoost (C 입력)",
+   "report": "reports/CATBOOST_C_20261015.md",
+   "json": "reports/catboost_c_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 1,
+   "report_sha256": "fa4bd38df5af3dc69df6eba9a55707a0af95aab4756047b6a594136984dda569",
+   "json_sha256": "7d73a290a94040ddd2a75a4d22f17f171b4bb3408dbb67233573c62143e33370",
+   "note": ""
+  },
+  {
+   "experiment": "T26 CatBoost 범주형 직접",
+   "report": "reports/CATBOOST_NATIVE_C_20261015.md",
+   "json": "reports/catboost_native_c_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 1,
+   "report_sha256": "6ba2b0d55b9ae26c3f19f0d4e38495ab322b9e87afd4fa8452cc40a261e2a398",
+   "json_sha256": "511bd13b49bc7c9ae649287ab7b50fcd1bf3ac83268a0aec43f2defd421f2a13",
+   "note": ""
+  },
+  {
+   "experiment": "T27 넓은 파생변수",
+   "report": "reports/WIDE_FEATURES_20261015.md",
+   "json": "reports/wide_features_20261015.json",
+   "reason": "geo2 Group 분할 seed 42/101/202/303 전용(층화 분할 결과 없음)",
+   "scan_stratified_mentions_md": 0,
+   "scan_stratified_mentions_json": 0,
+   "scan_geo2_mentions_md": 21,
+   "report_sha256": "463447a0107abe0ea5ad748ea8f790b3d0c1e3a22a3bb3591f0812a040f8a642",
+   "json_sha256": "e0a91a1b7537a01772e29958dbe61c1d54f935a2fdde22e8dc98ab19154b2c6a",
+   "note": ""
+  },
+  {
+   "experiment": "A1 T15~T27 종합",
+   "report": "reports/EXPERIMENT_SYNTHESIS_20261016.md",
+   "json": "reports/experiment_synthesis_20261016.json",
+   "reason": "신규 학습 0회 종합 분석(geo2 중심). 층화는 T15 G4 조건 언급뿐이며 새 층화 수치 없음",
+   "scan_stratified_mentions_md": 1,
+   "scan_stratified_mentions_json": 3,
+   "scan_geo2_mentions_md": 3,
+   "report_sha256": "10920c0327d8c09b97ce911ad0f61e052758dd18e364c4b4129ffc7788e0558b",
+   "json_sha256": "77824659a524f43a0751597253c4c0c7a9e0d39320f1506164a2d24ff9370f07",
+   "note": ""
+  },
+  {
+   "experiment": "T28 3→1 비용 결정 규칙",
+   "report": "docs/T28_GRADE3_SAFETY_PLAN_DRAFT.md",
+   "json": null,
+   "reason": "미승인·미구현·미실행(설계 초안)",
+   "scan_stratified_mentions_md": 1,
+   "scan_stratified_mentions_json": null,
+   "scan_geo2_mentions_md": 8,
+   "report_sha256": "60e83205d44c458a432e52820a61f01adf8d64729ef0dc780a20cb7cdf265465",
+   "json_sha256": null,
+   "note": "초안 문서에 결과 수치 없음"
+  }
+ ],
+ "holdout_single": {
+  "setting": "T0 LR 기본 C=1 (무가중치)",
+  "macro_f1": 0.6867713036658166,
+  "accuracy": 0.7423687189424608,
+  "rows": 52121,
+  "evaluation_count": 1,
+  "source_file": "reports/personal_final_holdout.json",
+  "source_sha256": "3973ac2b4652b116a46bc24369e29941ad9d43c850a270b7a167fa74ef48372e",
+  "report": "reports/PERSONAL_FINAL_REPORT_20261013.md",
+  "report_sha256": "07172c7b2e3e2b5ce8c0f0eeef7bdee234d4af51a5c04a2204ed80d7ab064676"
+ },
+ "cross_checks": [
+  "dashboard_models.json 19개 vs 추출값(cv_mean, cv_std, 3→1, 3→2, accuracy) 일치: 19/19",
+  "T6S JSON(stratified) vs T6R/T1-C 추출값 일치: 4/4",
+  "T8/T9/T10/T12 JSON의 참조 팔(O, LR_C)이 T4 LGBM_C_v1 / T1 C와 동일: 8건 일치",
+  "T11 stratified(LR_TE_G, LGBM_TE_G)는 T10 값과 동일하며 reused_from_T10=true: 2/2",
+  "T14 재현 평균 == 원본 탐색 RF 5-Fold 평균(0.7004271084657958), stage_a.status=EXACT"
+ ],
+ "report_rounding_discrepancies": [
+  {
+   "key": "T12_LR_S",
+   "report_file": "reports/STRUCT_FEATURES_20261014.md",
+   "report_text": "0.68885",
+   "source_value": 0.6888446855169155,
+   "source_rounded": "0.68884",
+   "note": "보고서 표기가 원자료 반올림과 마지막 자리에서 1 차이(이중 반올림 추정). 본 요약은 원자료 값을 사용"
+  },
+  {
+   "key": "T12_LGBM_SD",
+   "report_file": "reports/STRUCT_FEATURES_20261014.md",
+   "report_text": "0.67073",
+   "source_value": 0.6707245501802819,
+   "source_rounded": "0.67072",
+   "note": "보고서 표기가 원자료 반올림과 마지막 자리에서 1 차이(이중 반올림 추정). 본 요약은 원자료 값을 사용"
+  },
+  {
+   "key": "T6R_R0",
+   "report_file": "reports/GEO_ABLATION_LOCAL_REPRO_20261014.md",
+   "report_text": "0.45790",
+   "source_value": 0.4578945923824961,
+   "source_rounded": "0.45789",
+   "note": "보고서 표기가 원자료 반올림과 마지막 자리에서 1 차이(이중 반올림 추정). 본 요약은 원자료 값을 사용"
+  }
+ ]
+}
