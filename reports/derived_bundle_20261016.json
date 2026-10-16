@@ -1,0 +1,3544 @@
+{
+ "study_id": "T34_derived_bundle_stratified_v1",
+ "report_version": "derived_bundle_20261016",
+ "created_for": "reports/DERIVED_BUNDLE_20261016.md",
+ "status": "감사 PASS_T34 · 공개 보고 독립 검토 반영",
+ "public_report_independent_review": {
+  "review_id": "t34_report_review_v1",
+  "verdict": "PASS_WITH_DEFECTS",
+  "high": 0,
+  "medium": 2,
+  "low": 7,
+  "reflected": true,
+  "reviewed_target_md_sha256": "17cbdea787617b14cd8a2786b16569b0500c554243623937e4eb6cc3cb688ee4",
+  "reviewed_target_json_sha256": "39d81f91df4e53a0eaf67d5bba44aa550d78640cdae3f388684c9cddf6908e92"
+ },
+ "boundary_marks_definition_auxiliary_not_a_preregistered_verdict": "조건 1·5는 임계에서 ΔF1 0.001 이내, 조건 2는 4/5에서 한 Fold 이내(3 또는 4), 조건 3·4는 건수 차 30건 이내(계획서 §8.2의 안전 점검 절대 기준 30건 척도를 빌림)를 \"근접\"으로 적는다. 이 기준은 사전등록 규칙이 아니라 결과를 확인한 뒤 보고서 작성자가 정했다. 판정 라벨에는 쓰이지 않았다. side_by_condition은 해당 조건을 충족한 쪽인지 미충족 쪽인지를 뜻한다.",
+ "design_sha256": "b68096864b797f8a5a432aeee3ec9373d0205018557529630004dbe3d8de862c",
+ "plan_sha256": "9b9edfed62f70af280b691934da83bfc1d78709627fd429287de1c1b2190255e",
+ "config_sha256": "adc1a193620fe4da8873855f425c9d7a887ab83a4a68fad3620abc21538bd216",
+ "code_commit": "d71bf5fbca4114a9466300df8644cce556915ca0",
+ "holdout_accessed": false,
+ "scheme": "strat (Stratified 5-Fold, seed 42, split_manifest.csv SHA 7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721)",
+ "guide_line": "과제 가이드 심화 항목 '추가 피처'. 주 평가(개발 Stratified 5-Fold seed 42, split_manifest.csv) 결과를 낸다. 판정 분할=층화 seed 42 5-Fold 하나뿐(geo2/geo1 Group 분할은 쓰지 않는다). 필수 항목 문구(전처리 변경 효과 비교)는 저장소 안에서 원문을 찾지 못해 원문 대조는 미확인이다(계획서 단서를 옮김).",
+ "rounding": "부동소수는 소수 6자리 반올림, 정수 건수는 반올림하지 않음. 전체 자릿수는 비공개 analysis.json에 있음. 표시값의 합은 1e-6 단위로 어긋날 수 있음. 반올림 예외(6자리로 반올림하면 0이 되는 값이라 문자열 또는 과학 표기로 저장): rule.boundary_epsilon(1e-12), control_check.*.probability_atol(1e-09), preflight.fold0_independent_reference_max_diff_scientific_notation_text(예: 5.77e-08).",
+ "delta_definition": "Δ = 처리 팔 Fold Macro F1 - 비교 팔 Fold Macro F1(같은 Fold). SD는 ddof=1.",
+ "auxiliary_marker": "접미사 _auxiliary_not_a_preregistered_verdict 가 붙은 필드와 MD에서 '사전등록 판정 아님'이 붙은 표·문장은 보조 관찰이며 사전등록 5개 조건에 쓰이지 않는다.",
+ "audit": {
+  "status": "PASS_T34",
+  "receipt_file_sha256": "82b00bf01a4239865efe214090cea31210e3476587198fc46fc13c7a817c0be7",
+  "receipt_internal_sha256": "a31670dcd86649804f82bb000b301f2cd31157fd56d440c0b43f95ef336a33af",
+  "independent_core_sha256": "9a8b8c6f14dee22b5db8e39829fc39fc963c425d4913a309d2e82a998e3b2a57",
+  "checks_run": 439,
+  "issues": 0,
+  "warnings": 0,
+  "failing_stages": 0,
+  "new_classifier_fits": 0,
+  "joblib_restricted_loads": 78,
+  "joblib_stubbed_class_count": 5,
+  "joblib_blocked_class_count": 0,
+  "repository_runner_imports": 0,
+  "forbidden_paths_touched": 0,
+  "paths_read": 371,
+  "tracked_files": 351,
+  "guard_logs": 1,
+  "analysis_recomputed_match": true,
+  "analysis_json_sha256_at_audit": "7842dc22b7c08e828a502243507d34d75e7d4927f07b08123704748f6b0287d9",
+  "at_utc": "2026-10-16T06:19:02.270363+00:00",
+  "wall_seconds": 364.0,
+  "method_note": "학습 행렬이 저장돼 있지 않아 LR은 저장 계수 기울기, LightGBM은 leaf_count 합과 재구성 학습 Macro F1로 간접 증명(영수증 boundary)."
+ },
+ "unit_tests": "tests.test_derived_bundle 75개 통과·skip 0, 전체 discover 1,155개 OK·skip 33 (커밋 d71bf5f 직전 값이며 조정자가 전달한 값을 옮긴 것이다. 이 보고서 작성 중 다시 실행하지 않았다.)",
+ "environment": {
+  "python": "3.13.5",
+  "numpy": "2.3.5",
+  "pandas": "2.2.3",
+  "scipy": "1.17.0",
+  "scikit-learn": "1.8.0",
+  "lightgbm": "4.6.0",
+  "joblib": "1.5.3",
+  "threadpoolctl": "3.6.0"
+ },
+ "counts": {
+  "study_fits_completed": 30,
+  "study_attempts": 30,
+  "control_fits_completed": 2,
+  "attempts_including_control": 32,
+  "attempt_cap": 36,
+  "retries": 0,
+  "lr_b_refit": false,
+  "ledger_units_complete": 30,
+  "attempts_jsonl_lines_study": 60,
+  "attempts_jsonl_lines_control": 4,
+  "fit_seconds_sum_study_auxiliary_not_a_preregistered_verdict": 604.958717,
+  "fit_all_wall_seconds_from_run_log_auxiliary_not_a_preregistered_verdict": 1247.4
+ },
+ "input_sha256": {
+  "design.json": "b68096864b797f8a5a432aeee3ec9373d0205018557529630004dbe3d8de862c",
+  "design_seal.json": "bed1872c25c617a513023718c610da13e752163d0d5569c4aab9fe5c70b45c07",
+  "ledger.json": "d0492dca37ba16a8900620b7b20c10a61fcbcd2eec55985f9c75fcf63a11e48c",
+  "attempts.jsonl": "8194e3ada8af6c91325bcc8ea2fee7ab9266834b67ea54fa966bbc188f566b0c",
+  "analysis.json": "7842dc22b7c08e828a502243507d34d75e7d4927f07b08123704748f6b0287d9",
+  "preflight.json": "e5398fa5318ad7afe83498854da8e187293e88767d434f2ca5177384cccf7350",
+  "control_check.json": "39b03bff3317e6b9a30e17abc92690fe078c49139d1db9d936995bcaca4b643a",
+  "control_check_ledger.json": "3b88ad0e0f353125f0fb42c05bf8e010b016eb20cfd28e49c22f8da4c50b4e57",
+  "control_check_attempts.jsonl": "224ba890a24ba2c4dc03a4263e0cf6fb92ab58c70d29c4264eddad6242101cae",
+  "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+  "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721",
+  "plan": "9b9edfed62f70af280b691934da83bfc1d78709627fd429287de1c1b2190255e"
+ },
+ "guard": {
+  "fit_all_guard_log_file": {
+   "checked": 10,
+   "refused": 0
+  },
+  "analysis_step_from_analysis_json": {
+   "checked": 13,
+   "refused": 0
+  },
+  "preflight": {
+   "checked": 9,
+   "refused": 0
+  },
+  "control_check": {
+   "checked": 11,
+   "refused": 0
+  },
+  "forbidden_component": "final_holdout",
+  "forbidden_names": [
+   "x_train.csv",
+   "modeling_ver2_raw.ipynb"
+  ]
+ },
+ "arms_definition": {
+  "B": "baseline OOF reused read-only (no new fit)",
+  "S0": "10 derived columns (6 numeric + 4 categorical combinations)",
+  "S1": "13 derived columns; region mean age includes age==995 rows (original)",
+  "S2": "13 derived columns; region mean age excludes age==995 rows (corrected)"
+ },
+ "rule": {
+  "mean_delta_min": 0.003,
+  "wins_min": 4,
+  "recall3_delta_min": 0.0,
+  "to1_delta_max": 0,
+  "worst_fold_floor": -0.003,
+  "boundary_epsilon": "1e-12 (rounding exception: raw value kept as text)",
+  "lower_tag_max_wins": 1,
+  "safety_3to1_relative": 0.1,
+  "safety_3to1_absolute": 30,
+  "subgroup_min_rows": 200
+ },
+ "cells": {
+  "LR/B": {
+   "label": "LR-C B",
+   "fold_macro_f1": [
+    0.689102,
+    0.688577,
+    0.689911,
+    0.690328,
+    0.686381
+   ],
+   "cv_mean": 0.68886,
+   "cv_sd_ddof1": 0.001545,
+   "pooled_macro_f1_auxiliary_not_a_preregistered_verdict": 0.688869,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.741937,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.67089,
+    0.745916,
+    0.751586
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.518981,
+    0.839647,
+    0.640067
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.585239,
+    0.790011,
+    0.691358
+   ],
+   "support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     10431,
+     9264,
+     404
+    ],
+    [
+     4662,
+     99588,
+     14357
+    ],
+    [
+     455,
+     24659,
+     44660
+    ]
+   ],
+   "recall3_pooled": 0.640067,
+   "correct3_pooled": 44660,
+   "error31_pooled": 455,
+   "rate31_pooled_auxiliary_not_a_preregistered_verdict": 0.006521,
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 24659,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.353412,
+   "error23_pooled_auxiliary_not_a_preregistered_verdict": 14357,
+   "error12_pooled_auxiliary_not_a_preregistered_verdict": 9264,
+   "error21_pooled_auxiliary_not_a_preregistered_verdict": 4662,
+   "error13_pooled_auxiliary_not_a_preregistered_verdict": 404,
+   "n_iter": [
+    591,
+    595,
+    566,
+    578,
+    584
+   ],
+   "converged": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "n_iter_source": "cited from the fixed fold_metrics.json of the local refit"
+  },
+  "LR/S0": {
+   "label": "LR-C S0",
+   "fold_macro_f1": [
+    0.690195,
+    0.689381,
+    0.690102,
+    0.689628,
+    0.687372
+   ],
+   "cv_mean": 0.689336,
+   "cv_sd_ddof1": 0.001148,
+   "pooled_macro_f1_auxiliary_not_a_preregistered_verdict": 0.689345,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.742158,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.6706,
+    0.746584,
+    0.750977
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.520225,
+    0.838812,
+    0.641786
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.585918,
+    0.790015,
+    0.692101
+   ],
+   "support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     10456,
+     9232,
+     411
+    ],
+    [
+     4680,
+     99489,
+     14438
+    ],
+    [
+     456,
+     24538,
+     44780
+    ]
+   ],
+   "recall3_pooled": 0.641786,
+   "correct3_pooled": 44780,
+   "error31_pooled": 456,
+   "rate31_pooled_auxiliary_not_a_preregistered_verdict": 0.006535,
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 24538,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.351678,
+   "error23_pooled_auxiliary_not_a_preregistered_verdict": 14438,
+   "error12_pooled_auxiliary_not_a_preregistered_verdict": 9232,
+   "error21_pooled_auxiliary_not_a_preregistered_verdict": 4680,
+   "error13_pooled_auxiliary_not_a_preregistered_verdict": 411,
+   "n_iter": [
+    671,
+    639,
+    723,
+    667,
+    712
+   ],
+   "converged": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "convergence_warning": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "fit_seconds_auxiliary_not_a_preregistered_verdict": [
+    26.997338,
+    21.607733,
+    24.676901,
+    22.36393,
+    22.933491
+   ],
+   "fit_seconds_sum_auxiliary_not_a_preregistered_verdict": 118.579393
+  },
+  "LR/S1": {
+   "label": "LR-C S1",
+   "fold_macro_f1": [
+    0.690003,
+    0.688735,
+    0.690441,
+    0.689953,
+    0.687606
+   ],
+   "cv_mean": 0.689347,
+   "cv_sd_ddof1": 0.001162,
+   "pooled_macro_f1_auxiliary_not_a_preregistered_verdict": 0.689356,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.742229,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.670602,
+    0.746635,
+    0.751107
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.520026,
+    0.838964,
+    0.641801
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.585792,
+    0.790111,
+    0.692165
+   ],
+   "support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     10452,
+     9236,
+     411
+    ],
+    [
+     4672,
+     99507,
+     14428
+    ],
+    [
+     462,
+     24531,
+     44781
+    ]
+   ],
+   "recall3_pooled": 0.641801,
+   "correct3_pooled": 44781,
+   "error31_pooled": 462,
+   "rate31_pooled_auxiliary_not_a_preregistered_verdict": 0.006621,
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 24531,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.351578,
+   "error23_pooled_auxiliary_not_a_preregistered_verdict": 14428,
+   "error12_pooled_auxiliary_not_a_preregistered_verdict": 9236,
+   "error21_pooled_auxiliary_not_a_preregistered_verdict": 4672,
+   "error13_pooled_auxiliary_not_a_preregistered_verdict": 411,
+   "n_iter": [
+    671,
+    713,
+    685,
+    702,
+    741
+   ],
+   "converged": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "convergence_warning": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "fit_seconds_auxiliary_not_a_preregistered_verdict": [
+    24.011853,
+    24.45344,
+    24.254134,
+    24.184261,
+    25.968047
+   ],
+   "fit_seconds_sum_auxiliary_not_a_preregistered_verdict": 122.871734
+  },
+  "LR/S2": {
+   "label": "LR-C S2",
+   "fold_macro_f1": [
+    0.690251,
+    0.690295,
+    0.690739,
+    0.689999,
+    0.687282
+   ],
+   "cv_mean": 0.689713,
+   "cv_sd_ddof1": 0.001385,
+   "pooled_macro_f1_auxiliary_not_a_preregistered_verdict": 0.689722,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.742335,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.670654,
+    0.746814,
+    0.751119
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.521568,
+    0.838838,
+    0.641887
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.58679,
+    0.790155,
+    0.69222
+   ],
+   "support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     10483,
+     9207,
+     409
+    ],
+    [
+     4684,
+     99492,
+     14431
+    ],
+    [
+     464,
+     24523,
+     44787
+    ]
+   ],
+   "recall3_pooled": 0.641887,
+   "correct3_pooled": 44787,
+   "error31_pooled": 464,
+   "rate31_pooled_auxiliary_not_a_preregistered_verdict": 0.00665,
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 24523,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.351463,
+   "error23_pooled_auxiliary_not_a_preregistered_verdict": 14431,
+   "error12_pooled_auxiliary_not_a_preregistered_verdict": 9207,
+   "error21_pooled_auxiliary_not_a_preregistered_verdict": 4684,
+   "error13_pooled_auxiliary_not_a_preregistered_verdict": 409,
+   "n_iter": [
+    683,
+    748,
+    697,
+    712,
+    711
+   ],
+   "converged": [
+    true,
+    true,
+    true,
+    true,
+    true
+   ],
+   "convergence_warning": [
+    false,
+    false,
+    false,
+    false,
+    false
+   ],
+   "fit_seconds_auxiliary_not_a_preregistered_verdict": [
+    23.924914,
+    28.216083,
+    28.241388,
+    24.640428,
+    24.968816
+   ],
+   "fit_seconds_sum_auxiliary_not_a_preregistered_verdict": 129.991629
+  },
+  "LGBMN/B": {
+   "label": "LGBM-N B",
+   "fold_macro_f1": [
+    0.701965,
+    0.70247,
+    0.700637,
+    0.696333,
+    0.695303
+   ],
+   "cv_mean": 0.699342,
+   "cv_sd_ddof1": 0.003306,
+   "pooled_macro_f1_auxiliary_not_a_preregistered_verdict": 0.699347,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.74645,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.671423,
+    0.752828,
+    0.753301
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.557242,
+    0.836637,
+    0.647648
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.609027,
+    0.792523,
+    0.69649
+   ],
+   "support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     11200,
+     8525,
+     374
+    ],
+    [
+     4951,
+     99231,
+     14425
+    ],
+    [
+     530,
+     24055,
+     45189
+    ]
+   ],
+   "recall3_pooled": 0.647648,
+   "correct3_pooled": 45189,
+   "error31_pooled": 530,
+   "rate31_pooled_auxiliary_not_a_preregistered_verdict": 0.007596,
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 24055,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.344756,
+   "error23_pooled_auxiliary_not_a_preregistered_verdict": 14425,
+   "error12_pooled_auxiliary_not_a_preregistered_verdict": 8525,
+   "error21_pooled_auxiliary_not_a_preregistered_verdict": 4951,
+   "error13_pooled_auxiliary_not_a_preregistered_verdict": 374
+  },
+  "LGBMN/S0": {
+   "label": "LGBM-N S0",
+   "fold_macro_f1": [
+    0.704525,
+    0.703227,
+    0.699763,
+    0.696863,
+    0.696675
+   ],
+   "cv_mean": 0.70021,
+   "cv_sd_ddof1": 0.003593,
+   "pooled_macro_f1_auxiliary_not_a_preregistered_verdict": 0.700217,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.747103,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.670421,
+    0.753546,
+    0.754409
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.559779,
+    0.836755,
+    0.648666
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.610124,
+    0.792974,
+    0.697553
+   ],
+   "support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     11251,
+     8472,
+     376
+    ],
+    [
+     5004,
+     99245,
+     14358
+    ],
+    [
+     527,
+     23987,
+     45260
+    ]
+   ],
+   "recall3_pooled": 0.648666,
+   "correct3_pooled": 45260,
+   "error31_pooled": 527,
+   "rate31_pooled_auxiliary_not_a_preregistered_verdict": 0.007553,
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 23987,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.343781,
+   "error23_pooled_auxiliary_not_a_preregistered_verdict": 14358,
+   "error12_pooled_auxiliary_not_a_preregistered_verdict": 8472,
+   "error21_pooled_auxiliary_not_a_preregistered_verdict": 5004,
+   "error13_pooled_auxiliary_not_a_preregistered_verdict": 376,
+   "fit_seconds_auxiliary_not_a_preregistered_verdict": [
+    15.016041,
+    15.200887,
+    14.8795,
+    15.215274,
+    15.853192
+   ],
+   "fit_seconds_sum_auxiliary_not_a_preregistered_verdict": 76.164894
+  },
+  "LGBMN/S1": {
+   "label": "LGBM-N S1",
+   "fold_macro_f1": [
+    0.704103,
+    0.704336,
+    0.699394,
+    0.697458,
+    0.696784
+   ],
+   "cv_mean": 0.700415,
+   "cv_sd_ddof1": 0.003604,
+   "pooled_macro_f1_auxiliary_not_a_preregistered_verdict": 0.700421,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.747247,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.669657,
+    0.753712,
+    0.754827
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.560774,
+    0.83678,
+    0.648766
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.610398,
+    0.793077,
+    0.697789
+   ],
+   "support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     11271,
+     8457,
+     371
+    ],
+    [
+     5027,
+     99248,
+     14332
+    ],
+    [
+     533,
+     23974,
+     45267
+    ]
+   ],
+   "recall3_pooled": 0.648766,
+   "correct3_pooled": 45267,
+   "error31_pooled": 533,
+   "rate31_pooled_auxiliary_not_a_preregistered_verdict": 0.007639,
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 23974,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.343595,
+   "error23_pooled_auxiliary_not_a_preregistered_verdict": 14332,
+   "error12_pooled_auxiliary_not_a_preregistered_verdict": 8457,
+   "error21_pooled_auxiliary_not_a_preregistered_verdict": 5027,
+   "error13_pooled_auxiliary_not_a_preregistered_verdict": 371,
+   "fit_seconds_auxiliary_not_a_preregistered_verdict": [
+    15.431102,
+    16.970556,
+    17.081484,
+    15.14906,
+    15.463908
+   ],
+   "fit_seconds_sum_auxiliary_not_a_preregistered_verdict": 80.09611
+  },
+  "LGBMN/S2": {
+   "label": "LGBM-N S2",
+   "fold_macro_f1": [
+    0.704715,
+    0.70287,
+    0.700272,
+    0.69627,
+    0.697927
+   ],
+   "cv_mean": 0.700411,
+   "cv_sd_ddof1": 0.00346,
+   "pooled_macro_f1_auxiliary_not_a_preregistered_verdict": 0.700416,
+   "accuracy_pooled_auxiliary_not_a_preregistered_verdict": 0.747429,
+   "class_precision_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.670463,
+    0.753713,
+    0.75515
+   ],
+   "class_recall_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.559481,
+    0.837252,
+    0.648881
+   ],
+   "class_f1_pooled_auxiliary_not_a_preregistered_verdict": [
+    0.609964,
+    0.79329,
+    0.697994
+   ],
+   "support": [
+    20099,
+    118607,
+    69774
+   ],
+   "confusion_pooled_rows_true_cols_pred_auxiliary_not_a_preregistered_verdict": [
+    [
+     11245,
+     8483,
+     371
+    ],
+    [
+     4994,
+     99304,
+     14309
+    ],
+    [
+     533,
+     23966,
+     45275
+    ]
+   ],
+   "recall3_pooled": 0.648881,
+   "correct3_pooled": 45275,
+   "error31_pooled": 533,
+   "rate31_pooled_auxiliary_not_a_preregistered_verdict": 0.007639,
+   "error32_pooled_auxiliary_not_a_preregistered_verdict": 23966,
+   "rate32_pooled_auxiliary_not_a_preregistered_verdict": 0.34348,
+   "error23_pooled_auxiliary_not_a_preregistered_verdict": 14309,
+   "error12_pooled_auxiliary_not_a_preregistered_verdict": 8483,
+   "error21_pooled_auxiliary_not_a_preregistered_verdict": 4994,
+   "error13_pooled_auxiliary_not_a_preregistered_verdict": 371,
+   "fit_seconds_auxiliary_not_a_preregistered_verdict": [
+    15.848361,
+    16.33582,
+    14.8711,
+    14.959142,
+    15.240533
+   ],
+   "fit_seconds_sum_auxiliary_not_a_preregistered_verdict": 77.254956
+  }
+ },
+ "judged_comparisons_vs_B": {
+  "LR/S0": {
+   "comparison": "S0 - B",
+   "model": "LR-C",
+   "fold_delta": [
+    0.001093,
+    0.000804,
+    0.000191,
+    -0.0007,
+    0.000991
+   ],
+   "mean_delta": 0.000476,
+   "delta_sd_ddof1": 0.000745,
+   "wins_of_5": 4,
+   "worst_fold_delta": -0.0007,
+   "delta_recall3_pooled": 0.00172,
+   "delta_correct3_pooled": 120,
+   "error31_treatment": 456,
+   "error31_baseline": 455,
+   "delta_error31": 1,
+   "delta_rate31_auxiliary_not_a_preregistered_verdict": 1.4e-05,
+   "conditions": {
+    "1_mean_delta_ge_0.003": false,
+    "2_wins_ge_4_of_5": true,
+    "3_recall3_delta_ge_0": true,
+    "4_error31_delta_le_0": false,
+    "5_worst_fold_delta_gt_minus_0.003": true
+   },
+   "unmet_conditions": [
+    1,
+    4
+   ],
+   "verdict": "NOT_ALL_MET",
+   "direction_tag": "NEUTRAL",
+   "convergence_caveat": false,
+   "candidate": false,
+   "safety_3to1_double_flag": false,
+   "boundary_adjacent_marks_auxiliary_not_a_preregistered_verdict": {
+    "near_by_condition": {
+     "1": false,
+     "2": true,
+     "3": false,
+     "4": true,
+     "5": false
+    },
+    "side_by_condition": {
+     "1": "미충족 쪽",
+     "2": "충족 쪽",
+     "3": "충족 쪽",
+     "4": "미충족 쪽",
+     "5": "충족 쪽"
+    }
+   },
+   "margins_to_thresholds_auxiliary_not_a_preregistered_verdict": {
+    "mean_delta_minus_0.003": -0.002524,
+    "wins_minus_4": 0,
+    "delta_correct3": 120,
+    "delta_error31": 1,
+    "worst_fold_delta_plus_0.003": 0.0023
+   },
+   "delta_error32_auxiliary_not_a_preregistered_verdict": -121,
+   "delta_error23_auxiliary_not_a_preregistered_verdict": 81,
+   "delta_error12_auxiliary_not_a_preregistered_verdict": -32,
+   "delta_error21_auxiliary_not_a_preregistered_verdict": 18,
+   "delta_error13_auxiliary_not_a_preregistered_verdict": 7,
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 1501,
+    "new_errors": 1455,
+    "prediction_agreement": 0.985389,
+    "error31_removed": 21,
+    "error31_new": 22,
+    "error31_common": 434,
+    "error32_removed": 553,
+    "error32_new": 432,
+    "error32_common": 24106
+   }
+  },
+  "LR/S1": {
+   "comparison": "S1 - B",
+   "model": "LR-C",
+   "fold_delta": [
+    0.000901,
+    0.000158,
+    0.000529,
+    -0.000376,
+    0.001225
+   ],
+   "mean_delta": 0.000488,
+   "delta_sd_ddof1": 0.000627,
+   "wins_of_5": 4,
+   "worst_fold_delta": -0.000376,
+   "delta_recall3_pooled": 0.001734,
+   "delta_correct3_pooled": 121,
+   "error31_treatment": 462,
+   "error31_baseline": 455,
+   "delta_error31": 7,
+   "delta_rate31_auxiliary_not_a_preregistered_verdict": 0.0001,
+   "conditions": {
+    "1_mean_delta_ge_0.003": false,
+    "2_wins_ge_4_of_5": true,
+    "3_recall3_delta_ge_0": true,
+    "4_error31_delta_le_0": false,
+    "5_worst_fold_delta_gt_minus_0.003": true
+   },
+   "unmet_conditions": [
+    1,
+    4
+   ],
+   "verdict": "NOT_ALL_MET",
+   "direction_tag": "NEUTRAL",
+   "convergence_caveat": false,
+   "candidate": false,
+   "safety_3to1_double_flag": false,
+   "boundary_adjacent_marks_auxiliary_not_a_preregistered_verdict": {
+    "near_by_condition": {
+     "1": false,
+     "2": true,
+     "3": false,
+     "4": true,
+     "5": false
+    },
+    "side_by_condition": {
+     "1": "미충족 쪽",
+     "2": "충족 쪽",
+     "3": "충족 쪽",
+     "4": "미충족 쪽",
+     "5": "충족 쪽"
+    }
+   },
+   "margins_to_thresholds_auxiliary_not_a_preregistered_verdict": {
+    "mean_delta_minus_0.003": -0.002512,
+    "wins_minus_4": 0,
+    "delta_correct3": 121,
+    "delta_error31": 7,
+    "worst_fold_delta_plus_0.003": 0.002624
+   },
+   "delta_error32_auxiliary_not_a_preregistered_verdict": -128,
+   "delta_error23_auxiliary_not_a_preregistered_verdict": 71,
+   "delta_error12_auxiliary_not_a_preregistered_verdict": -28,
+   "delta_error21_auxiliary_not_a_preregistered_verdict": 10,
+   "delta_error13_auxiliary_not_a_preregistered_verdict": 7,
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 1497,
+    "new_errors": 1436,
+    "prediction_agreement": 0.985461,
+    "error31_removed": 21,
+    "error31_new": 28,
+    "error31_common": 434,
+    "error32_removed": 548,
+    "error32_new": 420,
+    "error32_common": 24111
+   }
+  },
+  "LR/S2": {
+   "comparison": "S2 - B",
+   "model": "LR-C",
+   "fold_delta": [
+    0.001149,
+    0.001718,
+    0.000828,
+    -0.000329,
+    0.000901
+   ],
+   "mean_delta": 0.000853,
+   "delta_sd_ddof1": 0.000748,
+   "wins_of_5": 4,
+   "worst_fold_delta": -0.000329,
+   "delta_recall3_pooled": 0.00182,
+   "delta_correct3_pooled": 127,
+   "error31_treatment": 464,
+   "error31_baseline": 455,
+   "delta_error31": 9,
+   "delta_rate31_auxiliary_not_a_preregistered_verdict": 0.000129,
+   "conditions": {
+    "1_mean_delta_ge_0.003": false,
+    "2_wins_ge_4_of_5": true,
+    "3_recall3_delta_ge_0": true,
+    "4_error31_delta_le_0": false,
+    "5_worst_fold_delta_gt_minus_0.003": true
+   },
+   "unmet_conditions": [
+    1,
+    4
+   ],
+   "verdict": "NOT_ALL_MET",
+   "direction_tag": "NEUTRAL",
+   "convergence_caveat": false,
+   "candidate": false,
+   "safety_3to1_double_flag": false,
+   "boundary_adjacent_marks_auxiliary_not_a_preregistered_verdict": {
+    "near_by_condition": {
+     "1": false,
+     "2": true,
+     "3": false,
+     "4": true,
+     "5": false
+    },
+    "side_by_condition": {
+     "1": "미충족 쪽",
+     "2": "충족 쪽",
+     "3": "충족 쪽",
+     "4": "미충족 쪽",
+     "5": "충족 쪽"
+    }
+   },
+   "margins_to_thresholds_auxiliary_not_a_preregistered_verdict": {
+    "mean_delta_minus_0.003": -0.002147,
+    "wins_minus_4": 0,
+    "delta_correct3": 127,
+    "delta_error31": 9,
+    "worst_fold_delta_plus_0.003": 0.002671
+   },
+   "delta_error32_auxiliary_not_a_preregistered_verdict": -136,
+   "delta_error23_auxiliary_not_a_preregistered_verdict": 74,
+   "delta_error12_auxiliary_not_a_preregistered_verdict": -57,
+   "delta_error21_auxiliary_not_a_preregistered_verdict": 22,
+   "delta_error13_auxiliary_not_a_preregistered_verdict": 5,
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 1630,
+    "new_errors": 1547,
+    "prediction_agreement": 0.984277,
+    "error31_removed": 21,
+    "error31_new": 30,
+    "error31_common": 434,
+    "error32_removed": 598,
+    "error32_new": 462,
+    "error32_common": 24061
+   }
+  },
+  "LGBMN/S0": {
+   "comparison": "S0 - B",
+   "model": "LGBM-N",
+   "fold_delta": [
+    0.00256,
+    0.000757,
+    -0.000874,
+    0.00053,
+    0.001372
+   ],
+   "mean_delta": 0.000869,
+   "delta_sd_ddof1": 0.001253,
+   "wins_of_5": 4,
+   "worst_fold_delta": -0.000874,
+   "delta_recall3_pooled": 0.001018,
+   "delta_correct3_pooled": 71,
+   "error31_treatment": 527,
+   "error31_baseline": 530,
+   "delta_error31": -3,
+   "delta_rate31_auxiliary_not_a_preregistered_verdict": -4.3e-05,
+   "conditions": {
+    "1_mean_delta_ge_0.003": false,
+    "2_wins_ge_4_of_5": true,
+    "3_recall3_delta_ge_0": true,
+    "4_error31_delta_le_0": true,
+    "5_worst_fold_delta_gt_minus_0.003": true
+   },
+   "unmet_conditions": [
+    1
+   ],
+   "verdict": "NOT_ALL_MET",
+   "direction_tag": "NEUTRAL",
+   "convergence_caveat": false,
+   "candidate": false,
+   "safety_3to1_double_flag": false,
+   "boundary_adjacent_marks_auxiliary_not_a_preregistered_verdict": {
+    "near_by_condition": {
+     "1": false,
+     "2": true,
+     "3": false,
+     "4": true,
+     "5": false
+    },
+    "side_by_condition": {
+     "1": "미충족 쪽",
+     "2": "충족 쪽",
+     "3": "충족 쪽",
+     "4": "충족 쪽",
+     "5": "충족 쪽"
+    }
+   },
+   "margins_to_thresholds_auxiliary_not_a_preregistered_verdict": {
+    "mean_delta_minus_0.003": -0.002131,
+    "wins_minus_4": 0,
+    "delta_correct3": 71,
+    "delta_error31": -3,
+    "worst_fold_delta_plus_0.003": 0.002126
+   },
+   "delta_error32_auxiliary_not_a_preregistered_verdict": -68,
+   "delta_error23_auxiliary_not_a_preregistered_verdict": -67,
+   "delta_error12_auxiliary_not_a_preregistered_verdict": -53,
+   "delta_error21_auxiliary_not_a_preregistered_verdict": 53,
+   "delta_error13_auxiliary_not_a_preregistered_verdict": 2,
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 2698,
+    "new_errors": 2562,
+    "prediction_agreement": 0.973758,
+    "error31_removed": 75,
+    "error31_new": 72,
+    "error31_common": 455,
+    "error32_removed": 784,
+    "error32_new": 716,
+    "error32_common": 23271
+   }
+  },
+  "LGBMN/S1": {
+   "comparison": "S1 - B",
+   "model": "LGBM-N",
+   "fold_delta": [
+    0.002137,
+    0.001866,
+    -0.001243,
+    0.001125,
+    0.001481
+   ],
+   "mean_delta": 0.001073,
+   "delta_sd_ddof1": 0.001351,
+   "wins_of_5": 4,
+   "worst_fold_delta": -0.001243,
+   "delta_recall3_pooled": 0.001118,
+   "delta_correct3_pooled": 78,
+   "error31_treatment": 533,
+   "error31_baseline": 530,
+   "delta_error31": 3,
+   "delta_rate31_auxiliary_not_a_preregistered_verdict": 4.3e-05,
+   "conditions": {
+    "1_mean_delta_ge_0.003": false,
+    "2_wins_ge_4_of_5": true,
+    "3_recall3_delta_ge_0": true,
+    "4_error31_delta_le_0": false,
+    "5_worst_fold_delta_gt_minus_0.003": true
+   },
+   "unmet_conditions": [
+    1,
+    4
+   ],
+   "verdict": "NOT_ALL_MET",
+   "direction_tag": "NEUTRAL",
+   "convergence_caveat": false,
+   "candidate": false,
+   "safety_3to1_double_flag": false,
+   "boundary_adjacent_marks_auxiliary_not_a_preregistered_verdict": {
+    "near_by_condition": {
+     "1": false,
+     "2": true,
+     "3": false,
+     "4": true,
+     "5": false
+    },
+    "side_by_condition": {
+     "1": "미충족 쪽",
+     "2": "충족 쪽",
+     "3": "충족 쪽",
+     "4": "미충족 쪽",
+     "5": "충족 쪽"
+    }
+   },
+   "margins_to_thresholds_auxiliary_not_a_preregistered_verdict": {
+    "mean_delta_minus_0.003": -0.001927,
+    "wins_minus_4": 0,
+    "delta_correct3": 78,
+    "delta_error31": 3,
+    "worst_fold_delta_plus_0.003": 0.001757
+   },
+   "delta_error32_auxiliary_not_a_preregistered_verdict": -81,
+   "delta_error23_auxiliary_not_a_preregistered_verdict": -93,
+   "delta_error12_auxiliary_not_a_preregistered_verdict": -68,
+   "delta_error21_auxiliary_not_a_preregistered_verdict": 76,
+   "delta_error13_auxiliary_not_a_preregistered_verdict": -3,
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 2753,
+    "new_errors": 2587,
+    "prediction_agreement": 0.973355,
+    "error31_removed": 70,
+    "error31_new": 73,
+    "error31_common": 460,
+    "error32_removed": 809,
+    "error32_new": 728,
+    "error32_common": 23246
+   }
+  },
+  "LGBMN/S2": {
+   "comparison": "S2 - B",
+   "model": "LGBM-N",
+   "fold_delta": [
+    0.002749,
+    0.0004,
+    -0.000365,
+    -6.2e-05,
+    0.002625
+   ],
+   "mean_delta": 0.001069,
+   "delta_sd_ddof1": 0.001502,
+   "wins_of_5": 3,
+   "worst_fold_delta": -0.000365,
+   "delta_recall3_pooled": 0.001233,
+   "delta_correct3_pooled": 86,
+   "error31_treatment": 533,
+   "error31_baseline": 530,
+   "delta_error31": 3,
+   "delta_rate31_auxiliary_not_a_preregistered_verdict": 4.3e-05,
+   "conditions": {
+    "1_mean_delta_ge_0.003": false,
+    "2_wins_ge_4_of_5": false,
+    "3_recall3_delta_ge_0": true,
+    "4_error31_delta_le_0": false,
+    "5_worst_fold_delta_gt_minus_0.003": true
+   },
+   "unmet_conditions": [
+    1,
+    2,
+    4
+   ],
+   "verdict": "NOT_ALL_MET",
+   "direction_tag": "NEUTRAL",
+   "convergence_caveat": false,
+   "candidate": false,
+   "safety_3to1_double_flag": false,
+   "boundary_adjacent_marks_auxiliary_not_a_preregistered_verdict": {
+    "near_by_condition": {
+     "1": false,
+     "2": true,
+     "3": false,
+     "4": true,
+     "5": false
+    },
+    "side_by_condition": {
+     "1": "미충족 쪽",
+     "2": "미충족 쪽",
+     "3": "충족 쪽",
+     "4": "미충족 쪽",
+     "5": "충족 쪽"
+    }
+   },
+   "margins_to_thresholds_auxiliary_not_a_preregistered_verdict": {
+    "mean_delta_minus_0.003": -0.001931,
+    "wins_minus_4": -1,
+    "delta_correct3": 86,
+    "delta_error31": 3,
+    "worst_fold_delta_plus_0.003": 0.002635
+   },
+   "delta_error32_auxiliary_not_a_preregistered_verdict": -89,
+   "delta_error23_auxiliary_not_a_preregistered_verdict": -116,
+   "delta_error12_auxiliary_not_a_preregistered_verdict": -42,
+   "delta_error21_auxiliary_not_a_preregistered_verdict": 43,
+   "delta_error13_auxiliary_not_a_preregistered_verdict": -3,
+   "turnover_auxiliary_not_a_preregistered_verdict": {
+    "corrected_predictions": 2778,
+    "new_errors": 2574,
+    "prediction_agreement": 0.973268,
+    "error31_removed": 76,
+    "error31_new": 79,
+    "error31_common": 454,
+    "error32_removed": 831,
+    "error32_new": 742,
+    "error32_common": 23224
+   }
+  }
+ },
+ "family": {
+  "verdict_counts": {
+   "ALL_MET": 0,
+   "NOT_ALL_MET": 6
+  },
+  "all_met_by_model": {
+   "LR": [],
+   "LGBMN": []
+  },
+  "candidates_by_model": {
+   "LR": [],
+   "LGBMN": []
+  },
+  "model_dependent": false,
+  "multiple_comparison_rule": "6 comparisons reported as one family, no correction. ALL_MET is a candidate flag only; no adoption or promotion wording before the separate confirmation evaluation (T29).",
+  "n_folds_with_delta_ge_0.003": 0
+ },
+ "descriptive_comparisons_auxiliary_not_a_preregistered_verdict": {
+  "LR/S1-S0": {
+   "model": "LR-C",
+   "comparison": "S1 - S0",
+   "fold_delta": [
+    -0.000192,
+    -0.000646,
+    0.000338,
+    0.000324,
+    0.000234
+   ],
+   "mean_delta": 1.2e-05,
+   "delta_sd_ddof1": 0.000427,
+   "first_arm_larger_folds_of_5": 3,
+   "delta_recall3_pooled": 1.4e-05,
+   "delta_correct3_pooled": 1,
+   "delta_error31": 6,
+   "delta_error32": -7,
+   "turnover": {
+    "corrected_predictions": 358,
+    "new_errors": 343,
+    "prediction_agreement": 0.996537,
+    "error31_removed": 5,
+    "error31_new": 11,
+    "error31_common": 451,
+    "error32_removed": 109,
+    "error32_new": 102,
+    "error32_common": 24429
+   }
+  },
+  "LR/S2-S0": {
+   "model": "LR-C",
+   "comparison": "S2 - S0",
+   "fold_delta": [
+    5.6e-05,
+    0.000914,
+    0.000637,
+    0.000371,
+    -9e-05
+   ],
+   "mean_delta": 0.000377,
+   "delta_sd_ddof1": 0.000411,
+   "first_arm_larger_folds_of_5": 4,
+   "delta_recall3_pooled": 0.0001,
+   "delta_correct3_pooled": 7,
+   "delta_error31": 8,
+   "delta_error32": -15,
+   "turnover": {
+    "corrected_predictions": 540,
+    "new_errors": 503,
+    "prediction_agreement": 0.994844,
+    "error31_removed": 4,
+    "error31_new": 12,
+    "error31_common": 452,
+    "error32_removed": 175,
+    "error32_new": 160,
+    "error32_common": 24363
+   }
+  },
+  "LR/S2-S1": {
+   "model": "LR-C",
+   "comparison": "S2 - S1",
+   "fold_delta": [
+    0.000248,
+    0.001559,
+    0.000298,
+    4.6e-05,
+    -0.000324
+   ],
+   "mean_delta": 0.000366,
+   "delta_sd_ddof1": 0.000711,
+   "first_arm_larger_folds_of_5": 4,
+   "delta_recall3_pooled": 8.6e-05,
+   "delta_correct3_pooled": 6,
+   "delta_error31": 2,
+   "delta_error32": -8,
+   "turnover": {
+    "corrected_predictions": 508,
+    "new_errors": 486,
+    "prediction_agreement": 0.995055,
+    "error31_removed": 8,
+    "error31_new": 10,
+    "error31_common": 454,
+    "error32_removed": 171,
+    "error32_new": 163,
+    "error32_common": 24360
+   }
+  },
+  "LGBMN/S1-S0": {
+   "model": "LGBM-N",
+   "comparison": "S1 - S0",
+   "fold_delta": [
+    -0.000423,
+    0.001109,
+    -0.000369,
+    0.000595,
+    0.00011
+   ],
+   "mean_delta": 0.000204,
+   "delta_sd_ddof1": 0.000652,
+   "first_arm_larger_folds_of_5": 3,
+   "delta_recall3_pooled": 0.0001,
+   "delta_correct3_pooled": 7,
+   "delta_error31": 6,
+   "delta_error32": -13,
+   "turnover": {
+    "corrected_predictions": 986,
+    "new_errors": 956,
+    "prediction_agreement": 0.990306,
+    "error31_removed": 21,
+    "error31_new": 27,
+    "error31_common": 506,
+    "error32_removed": 335,
+    "error32_new": 322,
+    "error32_common": 23652
+   }
+  },
+  "LGBMN/S2-S0": {
+   "model": "LGBM-N",
+   "comparison": "S2 - S0",
+   "fold_delta": [
+    0.000189,
+    -0.000357,
+    0.000509,
+    -0.000592,
+    0.001253
+   ],
+   "mean_delta": 0.0002,
+   "delta_sd_ddof1": 0.000732,
+   "first_arm_larger_folds_of_5": 3,
+   "delta_recall3_pooled": 0.000215,
+   "delta_correct3_pooled": 15,
+   "delta_error31": 6,
+   "delta_error32": -21,
+   "turnover": {
+    "corrected_predictions": 1008,
+    "new_errors": 940,
+    "prediction_agreement": 0.990229,
+    "error31_removed": 28,
+    "error31_new": 34,
+    "error31_common": 499,
+    "error32_removed": 345,
+    "error32_new": 324,
+    "error32_common": 23642
+   }
+  },
+  "LGBMN/S2-S1": {
+   "model": "LGBM-N",
+   "comparison": "S2 - S1",
+   "fold_delta": [
+    0.000612,
+    -0.001466,
+    0.000878,
+    -0.001187,
+    0.001143
+   ],
+   "mean_delta": -4e-06,
+   "delta_sd_ddof1": 0.001226,
+   "first_arm_larger_folds_of_5": 3,
+   "delta_recall3_pooled": 0.000115,
+   "delta_correct3_pooled": 8,
+   "delta_error31": 0,
+   "delta_error32": -8,
+   "turnover": {
+    "corrected_predictions": 1000,
+    "new_errors": 962,
+    "prediction_agreement": 0.99021,
+    "error31_removed": 29,
+    "error31_new": 29,
+    "error31_common": 504,
+    "error32_removed": 338,
+    "error32_new": 330,
+    "error32_common": 23636
+   }
+  }
+ },
+ "region_age_diagnostics_auxiliary_not_a_preregistered_verdict": {
+  "region_counts_and_s1_s2_differences": {
+   "geo1": {
+    "unique_regions_all_rows": 31,
+    "training_regions_per_fold": [
+     31,
+     31,
+     31,
+     31,
+     31
+    ],
+    "regions_with_995_per_fold": [
+     23,
+     23,
+     23,
+     23,
+     23
+    ],
+    "regions_mixed_995_and_other_per_fold": [
+     23,
+     23,
+     23,
+     23,
+     23
+    ],
+    "regions_all_995_per_fold": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "rows_s1_ne_s2_share_train_per_fold": [
+     0.92058,
+     0.920484,
+     0.920286,
+     0.920778,
+     0.920688
+    ],
+    "rows_s1_ne_s2_share_valid_per_fold": [
+     0.920496,
+     0.92088,
+     0.921671,
+     0.919705,
+     0.920064
+    ],
+    "region_mean_age_max_s1_train_per_fold": [
+     83.47539,
+     72.738908,
+     87.459926,
+     78.485577,
+     75.661853
+    ],
+    "region_mean_age_max_s2_train_per_fold": [
+     38.253235,
+     38.581736,
+     38.377497,
+     38.474454,
+     37.958299
+    ],
+    "valid_unseen_region_rows_per_fold": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "valid_unseen_regions_per_fold": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "s1_valid_fallback_rows_per_fold": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "s2_valid_fallback_rows_per_fold": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "s2_valid_known_region_without_usable_age_rows_per_fold": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "s2_train_rows_replaced_in_all_995_regions_note": "not recorded during the run (plan 3.2 row 3 applies to training rows of regions whose training rows are all age==995)"
+   },
+   "geo2": {
+    "unique_regions_all_rows": 1408,
+    "training_regions_per_fold": [
+     1402,
+     1404,
+     1397,
+     1401,
+     1397
+    ],
+    "regions_with_995_per_fold": [
+     99,
+     95,
+     97,
+     91,
+     96
+    ],
+    "regions_mixed_995_and_other_per_fold": [
+     99,
+     95,
+     97,
+     91,
+     96
+    ],
+    "regions_all_995_per_fold": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "rows_s1_ne_s2_share_train_per_fold": [
+     0.146699,
+     0.134072,
+     0.137249,
+     0.130306,
+     0.143527
+    ],
+    "rows_s1_ne_s2_share_valid_per_fold": [
+     0.146753,
+     0.132986,
+     0.13903,
+     0.129293,
+     0.144402
+    ],
+    "region_mean_age_max_s1_train_per_fold": [
+     726.637931,
+     709.741379,
+     743.709677,
+     729.0,
+     764.411765
+    ],
+    "region_mean_age_max_s2_train_per_fold": [
+     100.0,
+     100.0,
+     100.0,
+     100.0,
+     72.857143
+    ],
+    "valid_unseen_region_rows_per_fold": [
+     8,
+     4,
+     15,
+     7,
+     13
+    ],
+    "valid_unseen_regions_per_fold": [
+     6,
+     4,
+     11,
+     7,
+     11
+    ],
+    "s1_valid_fallback_rows_per_fold": [
+     8,
+     4,
+     15,
+     7,
+     13
+    ],
+    "s2_valid_fallback_rows_per_fold": [
+     8,
+     4,
+     15,
+     7,
+     13
+    ],
+    "s2_valid_known_region_without_usable_age_rows_per_fold": [
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "s2_train_rows_replaced_in_all_995_regions_note": "not recorded during the run (plan 3.2 row 3 applies to training rows of regions whose training rows are all age==995)"
+   },
+   "geo3": {
+    "unique_regions_all_rows": 11353,
+    "training_regions_per_fold": [
+     11095,
+     11108,
+     11077,
+     11126,
+     11088
+    ],
+    "regions_with_995_per_fold": [
+     227,
+     230,
+     232,
+     225,
+     232
+    ],
+    "regions_mixed_995_and_other_per_fold": [
+     205,
+     211,
+     216,
+     207,
+     215
+    ],
+    "regions_all_995_per_fold": [
+     22,
+     19,
+     16,
+     18,
+     17
+    ],
+    "rows_s1_ne_s2_share_train_per_fold": [
+     0.026477,
+     0.026903,
+     0.026495,
+     0.026315,
+     0.027065
+    ],
+    "rows_s1_ne_s2_share_valid_per_fold": [
+     0.033241,
+     0.031778,
+     0.034488,
+     0.03161,
+     0.035783
+    ],
+    "region_mean_age_max_s1_train_per_fold": [
+     995.0,
+     995.0,
+     995.0,
+     995.0,
+     995.0
+    ],
+    "region_mean_age_max_s2_train_per_fold": [
+     200.0,
+     183.333333,
+     183.333333,
+     200.0,
+     175.0
+    ],
+    "valid_unseen_region_rows_per_fold": [
+     306,
+     287,
+     333,
+     267,
+     314
+    ],
+    "valid_unseen_regions_per_fold": [
+     258,
+     245,
+     276,
+     227,
+     265
+    ],
+    "s1_valid_fallback_rows_per_fold": [
+     306,
+     287,
+     333,
+     267,
+     314
+    ],
+    "s2_valid_fallback_rows_per_fold": [
+     336,
+     308,
+     344,
+     292,
+     331
+    ],
+    "s2_valid_known_region_without_usable_age_rows_per_fold": [
+     30,
+     21,
+     11,
+     25,
+     17
+    ],
+    "s2_train_rows_replaced_in_all_995_regions_note": "not recorded during the run (plan 3.2 row 3 applies to training rows of regions whose training rows are all age==995)"
+   }
+  },
+  "self_inclusion_fold_means": {
+   "S1": {
+    "geo1": {
+     "train": {
+      "correlation_fold_mean": 0.13,
+      "mean_abs_diff_fold_mean": 20.56029
+     },
+     "valid": {
+      "correlation_fold_mean": 0.127336,
+      "mean_abs_diff_fold_mean": 20.567318
+     },
+     "train_age_not995": {
+      "correlation_fold_mean": 0.243159,
+      "mean_abs_diff_fold_mean": 15.466538
+     },
+     "valid_age_not995": {
+      "correlation_fold_mean": 0.242306,
+      "mean_abs_diff_fold_mean": 15.471576
+     },
+     "train_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 959.425621
+     },
+     "valid_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 959.815491
+     }
+    },
+    "geo2": {
+     "train": {
+      "correlation_fold_mean": 0.421684,
+      "mean_abs_diff_fold_mean": 19.949148
+     },
+     "valid": {
+      "correlation_fold_mean": 0.407299,
+      "mean_abs_diff_fold_mean": 20.113116
+     },
+     "train_age_not995": {
+      "correlation_fold_mean": 0.200218,
+      "mean_abs_diff_fold_mean": 15.707442
+     },
+     "valid_age_not995": {
+      "correlation_fold_mean": 0.193515,
+      "mean_abs_diff_fold_mean": 15.840101
+     },
+     "train_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 801.799064
+     },
+     "valid_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 807.474361
+     }
+    },
+    "geo3": {
+     "train": {
+      "correlation_fold_mean": 0.658318,
+      "mean_abs_diff_fold_mean": 17.011926
+     },
+     "valid": {
+      "correlation_fold_mean": 0.58608,
+      "mean_abs_diff_fold_mean": 18.301161
+     },
+     "train_age_not995": {
+      "correlation_fold_mean": 0.219242,
+      "mean_abs_diff_fold_mean": 14.161295
+     },
+     "valid_age_not995": {
+      "correlation_fold_mean": 0.178313,
+      "mean_abs_diff_fold_mean": 15.190713
+     },
+     "train_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 542.488974
+     },
+     "valid_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 590.934018
+     }
+    },
+    "geo3_by_training_region_size": {
+     "1": {
+      "train_rows_fold_mean": 1191.6,
+      "valid_rows_fold_mean": 432.6,
+      "train_correlation_fold_mean": 1.0,
+      "valid_correlation_fold_mean": 0.265189,
+      "train_mean_abs_diff_fold_mean": 0.0,
+      "valid_mean_abs_diff_fold_mean": 24.264913
+     },
+     "2-4": {
+      "train_rows_fold_mean": 5977.6,
+      "valid_rows_fold_mean": 1693.2,
+      "train_correlation_fold_mean": 0.804887,
+      "valid_correlation_fold_mean": 0.636443,
+      "train_mean_abs_diff_fold_mean": 15.562786,
+      "valid_mean_abs_diff_fold_mean": 23.352371
+     },
+     "5-9": {
+      "train_rows_fold_mean": 14647.8,
+      "valid_rows_fold_mean": 3941.4,
+      "train_correlation_fold_mean": 0.782158,
+      "valid_correlation_fold_mean": 0.707431,
+      "train_mean_abs_diff_fold_mean": 17.303634,
+      "valid_mean_abs_diff_fold_mean": 19.982993
+     },
+     "10-24": {
+      "train_rows_fold_mean": 58510,
+      "valid_rows_fold_mean": 14561.4,
+      "train_correlation_fold_mean": 0.657521,
+      "valid_correlation_fold_mean": 0.590792,
+      "train_mean_abs_diff_fold_mean": 17.754461,
+      "valid_mean_abs_diff_fold_mean": 18.603177
+     },
+     "25-99": {
+      "train_rows_fold_mean": 75597,
+      "valid_rows_fold_mean": 18108.6,
+      "train_correlation_fold_mean": 0.594363,
+      "valid_correlation_fold_mean": 0.560796,
+      "train_mean_abs_diff_fold_mean": 16.884004,
+      "valid_mean_abs_diff_fold_mean": 17.319854
+     },
+     "100+": {
+      "train_rows_fold_mean": 10860,
+      "valid_rows_fold_mean": 2657.4,
+      "train_correlation_fold_mean": 0.39654,
+      "valid_correlation_fold_mean": 0.395273,
+      "train_mean_abs_diff_fold_mean": 16.164696,
+      "valid_mean_abs_diff_fold_mean": 16.26441
+     }
+    }
+   },
+   "S2": {
+    "geo1": {
+     "train": {
+      "correlation_fold_mean": 0.098728,
+      "mean_abs_diff_fold_mean": 18.426415
+     },
+     "valid": {
+      "correlation_fold_mean": 0.098448,
+      "mean_abs_diff_fold_mean": 18.429038
+     },
+     "train_age_not995": {
+      "correlation_fold_mean": 0.318192,
+      "mean_abs_diff_fold_mean": 13.250895
+     },
+     "valid_age_not995": {
+      "correlation_fold_mean": 0.317705,
+      "mean_abs_diff_fold_mean": 13.253478
+     },
+     "train_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 972.35684
+     },
+     "valid_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 972.389246
+     }
+    },
+    "geo2": {
+     "train": {
+      "correlation_fold_mean": 0.151463,
+      "mean_abs_diff_fold_mean": 17.62619
+     },
+     "valid": {
+      "correlation_fold_mean": 0.147278,
+      "mean_abs_diff_fold_mean": 17.730972
+     },
+     "train_age_not995": {
+      "correlation_fold_mean": 0.457697,
+      "mean_abs_diff_fold_mean": 12.460676
+     },
+     "valid_age_not995": {
+      "correlation_fold_mean": 0.443945,
+      "mean_abs_diff_fold_mean": 12.565672
+     },
+     "train_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 969.711791
+     },
+     "valid_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 969.814588
+     }
+    },
+    "geo3": {
+     "train": {
+      "correlation_fold_mean": 0.17321,
+      "mean_abs_diff_fold_mean": 16.621253
+     },
+     "valid": {
+      "correlation_fold_mean": 0.148909,
+      "mean_abs_diff_fold_mean": 17.494503
+     },
+     "train_age_not995": {
+      "correlation_fold_mean": 0.569753,
+      "mean_abs_diff_fold_mean": 11.448959
+     },
+     "valid_age_not995": {
+      "correlation_fold_mean": 0.478812,
+      "mean_abs_diff_fold_mean": 12.326837
+     },
+     "train_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 969.950343
+     },
+     "valid_age995": {
+      "correlation_fold_mean": null,
+      "mean_abs_diff_fold_mean": 970.063304
+     }
+    },
+    "geo3_by_training_region_size": {
+     "1": {
+      "train_rows_fold_mean": 1191.6,
+      "valid_rows_fold_mean": 432.6,
+      "train_correlation_fold_mean": 0.262083,
+      "valid_correlation_fold_mean": 0.083383,
+      "train_mean_abs_diff_fold_mean": 4.246066,
+      "valid_mean_abs_diff_fold_mean": 22.410828
+     },
+     "2-4": {
+      "train_rows_fold_mean": 5977.6,
+      "valid_rows_fold_mean": 1693.2,
+      "train_correlation_fold_mean": 0.160271,
+      "valid_correlation_fold_mean": 0.083689,
+      "train_mean_abs_diff_fold_mean": 18.492859,
+      "valid_mean_abs_diff_fold_mean": 24.247646
+     },
+     "5-9": {
+      "train_rows_fold_mean": 14647.8,
+      "valid_rows_fold_mean": 3941.4,
+      "train_correlation_fold_mean": 0.111203,
+      "valid_correlation_fold_mean": 0.072536,
+      "train_mean_abs_diff_fold_mean": 19.683,
+      "valid_mean_abs_diff_fold_mean": 21.364061
+     },
+     "10-24": {
+      "train_rows_fold_mean": 58510,
+      "valid_rows_fold_mean": 14561.4,
+      "train_correlation_fold_mean": 0.140754,
+      "valid_correlation_fold_mean": 0.114474,
+      "train_mean_abs_diff_fold_mean": 17.374637,
+      "valid_mean_abs_diff_fold_mean": 17.764835
+     },
+     "25-99": {
+      "train_rows_fold_mean": 75597,
+      "valid_rows_fold_mean": 18108.6,
+      "train_correlation_fold_mean": 0.218817,
+      "valid_correlation_fold_mean": 0.212542,
+      "train_mean_abs_diff_fold_mean": 15.907894,
+      "valid_mean_abs_diff_fold_mean": 16.170545
+     },
+     "100+": {
+      "train_rows_fold_mean": 10860,
+      "valid_rows_fold_mean": 2657.4,
+      "train_correlation_fold_mean": 0.113689,
+      "valid_correlation_fold_mean": 0.109937,
+      "train_mean_abs_diff_fold_mean": 13.693246,
+      "valid_mean_abs_diff_fold_mean": 13.796085
+     }
+    }
+   }
+  }
+ },
+ "lgbm_derived_gain_auxiliary_not_a_preregistered_verdict": {
+  "S0": {
+   "gain_share_derived_per_fold": [
+    0.180785,
+    0.182392,
+    0.178883,
+    0.181413,
+    0.180565
+   ],
+   "age_mean_share_within_derived_per_fold": null
+  },
+  "S1": {
+   "gain_share_derived_per_fold": [
+    0.1813,
+    0.183121,
+    0.179476,
+    0.182553,
+    0.181154
+   ],
+   "age_mean_share_within_derived_per_fold": [
+    0.005076,
+    0.004339,
+    0.004965,
+    0.005895,
+    0.00501
+   ]
+  },
+  "S2": {
+   "gain_share_derived_per_fold": [
+    0.181331,
+    0.183663,
+    0.179656,
+    0.182158,
+    0.181686
+   ],
+   "age_mean_share_within_derived_per_fold": [
+    0.005905,
+    0.005778,
+    0.006367,
+    0.005473,
+    0.006114
+   ]
+  }
+ },
+ "lgbm_trees": 900,
+ "lgbm_categorical_effective_parameters_auxiliary_not_a_preregistered_verdict": {
+  "max_cat_to_onehot": 4.0,
+  "cat_smooth": 10.0,
+  "cat_l2": 10.0,
+  "max_cat_threshold": 32.0,
+  "min_data_per_group": 100.0
+ },
+ "subgroups_pooled_oof_auxiliary_not_a_preregistered_verdict": {
+  "LR/B": {
+   "age995": {
+    "rows": 1125,
+    "correct": 844,
+    "class_support": [
+     147,
+     661,
+     317
+    ],
+    "macro_f1": 0.672912,
+    "accuracy": 0.750222,
+    "recall3": 0.630915,
+    "error31": 5,
+    "error32": 112
+   },
+   "age_not995": {
+    "rows": 207355,
+    "correct": 153835,
+    "class_support": [
+     19952,
+     117946,
+     69457
+    ],
+    "macro_f1": 0.688988,
+    "accuracy": 0.741892,
+    "recall3": 0.640108,
+    "error31": 450,
+    "error32": 24547
+   },
+   "geo1_26": {
+    "rows": 18038,
+    "correct": 12501,
+    "class_support": [
+     6419,
+     10087,
+     1532
+    ],
+    "macro_f1": 0.524059,
+    "accuracy": 0.693037,
+    "recall3": 0.08812,
+    "error31": 159,
+    "error32": 1238
+   },
+   "geo1_20": {
+    "rows": 13786,
+    "correct": 10150,
+    "class_support": [
+     2670,
+     9467,
+     1649
+    ],
+    "macro_f1": 0.498012,
+    "accuracy": 0.736254,
+    "recall3": 0.05943,
+    "error31": 80,
+    "error32": 1471
+   },
+   "geo1_13": {
+    "rows": 7754,
+    "correct": 5450,
+    "class_support": [
+     1540,
+     5084,
+     1130
+    ],
+    "macro_f1": 0.535832,
+    "accuracy": 0.702863,
+    "recall3": 0.19469,
+    "error31": 53,
+    "error32": 857
+   },
+   "geo_level_1_id_region_has_995_in_training": {
+    "rows": 191919,
+    "correct": 142601,
+    "class_support": [
+     18862,
+     107444,
+     65613
+    ],
+    "macro_f1": 0.693791,
+    "accuracy": 0.743027,
+    "recall3": 0.657004,
+    "error31": 414,
+    "error32": 22091
+   },
+   "geo_level_1_id_region_without_995_in_training": {
+    "rows": 16561,
+    "correct": 12078,
+    "class_support": [
+     1237,
+     11163,
+     4161
+    ],
+    "macro_f1": 0.591621,
+    "accuracy": 0.729304,
+    "recall3": 0.372987,
+    "error31": 41,
+    "error32": 2568
+   },
+   "geo_level_2_id_region_has_995_in_training": {
+    "rows": 28826,
+    "correct": 20803,
+    "class_support": [
+     5092,
+     16188,
+     7546
+    ],
+    "macro_f1": 0.694092,
+    "accuracy": 0.721675,
+    "recall3": 0.587861,
+    "error31": 69,
+    "error32": 3041
+   },
+   "geo_level_2_id_region_without_995_in_training": {
+    "rows": 179654,
+    "correct": 133876,
+    "class_support": [
+     15007,
+     102419,
+     62228
+    ],
+    "macro_f1": 0.68119,
+    "accuracy": 0.745188,
+    "recall3": 0.646397,
+    "error31": 386,
+    "error32": 21618
+   },
+   "geo_level_3_id_region_has_995_in_training": {
+    "rows": 5452,
+    "correct": 4084,
+    "class_support": [
+     890,
+     3128,
+     1434
+    ],
+    "macro_f1": 0.714029,
+    "accuracy": 0.749083,
+    "recall3": 0.633891,
+    "error31": 13,
+    "error32": 512
+   },
+   "geo_level_3_id_region_without_995_in_training": {
+    "rows": 203028,
+    "correct": 150595,
+    "class_support": [
+     19209,
+     115479,
+     68340
+    ],
+    "macro_f1": 0.687653,
+    "accuracy": 0.741745,
+    "recall3": 0.640196,
+    "error31": 442,
+    "error32": 24147
+   }
+  },
+  "LR/S0": {
+   "age995": {
+    "rows": 1125,
+    "correct": 843,
+    "class_support": [
+     147,
+     661,
+     317
+    ],
+    "macro_f1": 0.670123,
+    "accuracy": 0.749333,
+    "recall3": 0.630915,
+    "error31": 5,
+    "error32": 112
+   },
+   "age_not995": {
+    "rows": 207355,
+    "correct": 153882,
+    "class_support": [
+     19952,
+     117946,
+     69457
+    ],
+    "macro_f1": 0.689485,
+    "accuracy": 0.742119,
+    "recall3": 0.641836,
+    "error31": 451,
+    "error32": 24426
+   },
+   "geo1_26": {
+    "rows": 18038,
+    "correct": 12513,
+    "class_support": [
+     6419,
+     10087,
+     1532
+    ],
+    "macro_f1": 0.52752,
+    "accuracy": 0.693702,
+    "recall3": 0.094648,
+    "error31": 160,
+    "error32": 1227
+   },
+   "geo1_20": {
+    "rows": 13786,
+    "correct": 10141,
+    "class_support": [
+     2670,
+     9467,
+     1649
+    ],
+    "macro_f1": 0.499655,
+    "accuracy": 0.735601,
+    "recall3": 0.063069,
+    "error31": 79,
+    "error32": 1466
+   },
+   "geo1_13": {
+    "rows": 7754,
+    "correct": 5442,
+    "class_support": [
+     1540,
+     5084,
+     1130
+    ],
+    "macro_f1": 0.534258,
+    "accuracy": 0.701831,
+    "recall3": 0.193805,
+    "error31": 51,
+    "error32": 860
+   },
+   "geo_level_1_id_region_has_995_in_training": {
+    "rows": 191919,
+    "correct": 142645,
+    "class_support": [
+     18862,
+     107444,
+     65613
+    ],
+    "macro_f1": 0.694275,
+    "accuracy": 0.743256,
+    "recall3": 0.658528,
+    "error31": 413,
+    "error32": 21992
+   },
+   "geo_level_1_id_region_without_995_in_training": {
+    "rows": 16561,
+    "correct": 12080,
+    "class_support": [
+     1237,
+     11163,
+     4161
+    ],
+    "macro_f1": 0.592325,
+    "accuracy": 0.729425,
+    "recall3": 0.377794,
+    "error31": 43,
+    "error32": 2546
+   },
+   "geo_level_2_id_region_has_995_in_training": {
+    "rows": 28826,
+    "correct": 20834,
+    "class_support": [
+     5092,
+     16188,
+     7546
+    ],
+    "macro_f1": 0.695334,
+    "accuracy": 0.72275,
+    "recall3": 0.589451,
+    "error31": 70,
+    "error32": 3028
+   },
+   "geo_level_2_id_region_without_995_in_training": {
+    "rows": 179654,
+    "correct": 133891,
+    "class_support": [
+     15007,
+     102419,
+     62228
+    ],
+    "macro_f1": 0.681481,
+    "accuracy": 0.745271,
+    "recall3": 0.648133,
+    "error31": 386,
+    "error32": 21510
+   },
+   "geo_level_3_id_region_has_995_in_training": {
+    "rows": 5452,
+    "correct": 4094,
+    "class_support": [
+     890,
+     3128,
+     1434
+    ],
+    "macro_f1": 0.715834,
+    "accuracy": 0.750917,
+    "recall3": 0.633194,
+    "error31": 11,
+    "error32": 515
+   },
+   "geo_level_3_id_region_without_995_in_training": {
+    "rows": 203028,
+    "correct": 150631,
+    "class_support": [
+     19209,
+     115479,
+     68340
+    ],
+    "macro_f1": 0.688082,
+    "accuracy": 0.741922,
+    "recall3": 0.641967,
+    "error31": 445,
+    "error32": 24023
+   }
+  },
+  "LR/S1": {
+   "age995": {
+    "rows": 1125,
+    "correct": 841,
+    "class_support": [
+     147,
+     661,
+     317
+    ],
+    "macro_f1": 0.667157,
+    "accuracy": 0.747556,
+    "recall3": 0.630915,
+    "error31": 6,
+    "error32": 111
+   },
+   "age_not995": {
+    "rows": 207355,
+    "correct": 153899,
+    "class_support": [
+     19952,
+     117946,
+     69457
+    ],
+    "macro_f1": 0.689514,
+    "accuracy": 0.742201,
+    "recall3": 0.64185,
+    "error31": 456,
+    "error32": 24420
+   },
+   "geo1_26": {
+    "rows": 18038,
+    "correct": 12519,
+    "class_support": [
+     6419,
+     10087,
+     1532
+    ],
+    "macro_f1": 0.527345,
+    "accuracy": 0.694035,
+    "recall3": 0.093995,
+    "error31": 164,
+    "error32": 1224
+   },
+   "geo1_20": {
+    "rows": 13786,
+    "correct": 10140,
+    "class_support": [
+     2670,
+     9467,
+     1649
+    ],
+    "macro_f1": 0.498977,
+    "accuracy": 0.735529,
+    "recall3": 0.062462,
+    "error31": 78,
+    "error32": 1468
+   },
+   "geo1_13": {
+    "rows": 7754,
+    "correct": 5445,
+    "class_support": [
+     1540,
+     5084,
+     1130
+    ],
+    "macro_f1": 0.534897,
+    "accuracy": 0.702218,
+    "recall3": 0.193805,
+    "error31": 51,
+    "error32": 860
+   },
+   "geo_level_1_id_region_has_995_in_training": {
+    "rows": 191919,
+    "correct": 142657,
+    "class_support": [
+     18862,
+     107444,
+     65613
+    ],
+    "macro_f1": 0.694286,
+    "accuracy": 0.743319,
+    "recall3": 0.658421,
+    "error31": 418,
+    "error32": 21994
+   },
+   "geo_level_1_id_region_without_995_in_training": {
+    "rows": 16561,
+    "correct": 12083,
+    "class_support": [
+     1237,
+     11163,
+     4161
+    ],
+    "macro_f1": 0.592602,
+    "accuracy": 0.729606,
+    "recall3": 0.379716,
+    "error31": 44,
+    "error32": 2537
+   },
+   "geo_level_2_id_region_has_995_in_training": {
+    "rows": 28826,
+    "correct": 20840,
+    "class_support": [
+     5092,
+     16188,
+     7546
+    ],
+    "macro_f1": 0.695593,
+    "accuracy": 0.722958,
+    "recall3": 0.588921,
+    "error31": 71,
+    "error32": 3031
+   },
+   "geo_level_2_id_region_without_995_in_training": {
+    "rows": 179654,
+    "correct": 133900,
+    "class_support": [
+     15007,
+     102419,
+     62228
+    ],
+    "macro_f1": 0.681372,
+    "accuracy": 0.745322,
+    "recall3": 0.648213,
+    "error31": 391,
+    "error32": 21500
+   },
+   "geo_level_3_id_region_has_995_in_training": {
+    "rows": 5452,
+    "correct": 4093,
+    "class_support": [
+     890,
+     3128,
+     1434
+    ],
+    "macro_f1": 0.715636,
+    "accuracy": 0.750734,
+    "recall3": 0.630404,
+    "error31": 13,
+    "error32": 517
+   },
+   "geo_level_3_id_region_without_995_in_training": {
+    "rows": 203028,
+    "correct": 150647,
+    "class_support": [
+     19209,
+     115479,
+     68340
+    ],
+    "macro_f1": 0.688088,
+    "accuracy": 0.742001,
+    "recall3": 0.64204,
+    "error31": 449,
+    "error32": 24014
+   }
+  },
+  "LR/S2": {
+   "age995": {
+    "rows": 1125,
+    "correct": 849,
+    "class_support": [
+     147,
+     661,
+     317
+    ],
+    "macro_f1": 0.679666,
+    "accuracy": 0.754667,
+    "recall3": 0.637224,
+    "error31": 5,
+    "error32": 110
+   },
+   "age_not995": {
+    "rows": 207355,
+    "correct": 153913,
+    "class_support": [
+     19952,
+     117946,
+     69457
+    ],
+    "macro_f1": 0.689808,
+    "accuracy": 0.742268,
+    "recall3": 0.641908,
+    "error31": 459,
+    "error32": 24413
+   },
+   "geo1_26": {
+    "rows": 18038,
+    "correct": 12518,
+    "class_support": [
+     6419,
+     10087,
+     1532
+    ],
+    "macro_f1": 0.527645,
+    "accuracy": 0.693979,
+    "recall3": 0.094648,
+    "error31": 163,
+    "error32": 1224
+   },
+   "geo1_20": {
+    "rows": 13786,
+    "correct": 10142,
+    "class_support": [
+     2670,
+     9467,
+     1649
+    ],
+    "macro_f1": 0.499739,
+    "accuracy": 0.735674,
+    "recall3": 0.063069,
+    "error31": 78,
+    "error32": 1467
+   },
+   "geo1_13": {
+    "rows": 7754,
+    "correct": 5441,
+    "class_support": [
+     1540,
+     5084,
+     1130
+    ],
+    "macro_f1": 0.53427,
+    "accuracy": 0.701702,
+    "recall3": 0.19292,
+    "error31": 53,
+    "error32": 859
+   },
+   "geo_level_1_id_region_has_995_in_training": {
+    "rows": 191919,
+    "correct": 142674,
+    "class_support": [
+     18862,
+     107444,
+     65613
+    ],
+    "macro_f1": 0.694613,
+    "accuracy": 0.743407,
+    "recall3": 0.658376,
+    "error31": 420,
+    "error32": 21995
+   },
+   "geo_level_1_id_region_without_995_in_training": {
+    "rows": 16561,
+    "correct": 12088,
+    "class_support": [
+     1237,
+     11163,
+     4161
+    ],
+    "macro_f1": 0.593783,
+    "accuracy": 0.729908,
+    "recall3": 0.381879,
+    "error31": 44,
+    "error32": 2528
+   },
+   "geo_level_2_id_region_has_995_in_training": {
+    "rows": 28826,
+    "correct": 20855,
+    "class_support": [
+     5092,
+     16188,
+     7546
+    ],
+    "macro_f1": 0.696284,
+    "accuracy": 0.723479,
+    "recall3": 0.589981,
+    "error31": 71,
+    "error32": 3023
+   },
+   "geo_level_2_id_region_without_995_in_training": {
+    "rows": 179654,
+    "correct": 133907,
+    "class_support": [
+     15007,
+     102419,
+     62228
+    ],
+    "macro_f1": 0.6817,
+    "accuracy": 0.745361,
+    "recall3": 0.648181,
+    "error31": 393,
+    "error32": 21500
+   },
+   "geo_level_3_id_region_has_995_in_training": {
+    "rows": 5452,
+    "correct": 4093,
+    "class_support": [
+     890,
+     3128,
+     1434
+    ],
+    "macro_f1": 0.71607,
+    "accuracy": 0.750734,
+    "recall3": 0.633194,
+    "error31": 11,
+    "error32": 515
+   },
+   "geo_level_3_id_region_without_995_in_training": {
+    "rows": 203028,
+    "correct": 150669,
+    "class_support": [
+     19209,
+     115479,
+     68340
+    ],
+    "macro_f1": 0.688456,
+    "accuracy": 0.742109,
+    "recall3": 0.642069,
+    "error31": 453,
+    "error32": 24008
+   }
+  },
+  "LGBMN/B": {
+   "age995": {
+    "rows": 1125,
+    "correct": 842,
+    "class_support": [
+     147,
+     661,
+     317
+    ],
+    "macro_f1": 0.66132,
+    "accuracy": 0.748444,
+    "recall3": 0.618297,
+    "error31": 8,
+    "error32": 113
+   },
+   "age_not995": {
+    "rows": 207355,
+    "correct": 154778,
+    "class_support": [
+     19952,
+     117946,
+     69457
+    ],
+    "macro_f1": 0.699603,
+    "accuracy": 0.74644,
+    "recall3": 0.647782,
+    "error31": 522,
+    "error32": 23942
+   },
+   "geo1_26": {
+    "rows": 18038,
+    "correct": 12805,
+    "class_support": [
+     6419,
+     10087,
+     1532
+    ],
+    "macro_f1": 0.55643,
+    "accuracy": 0.70989,
+    "recall3": 0.132507,
+    "error31": 171,
+    "error32": 1158
+   },
+   "geo1_20": {
+    "rows": 13786,
+    "correct": 10244,
+    "class_support": [
+     2670,
+     9467,
+     1649
+    ],
+    "macro_f1": 0.535854,
+    "accuracy": 0.743073,
+    "recall3": 0.111583,
+    "error31": 83,
+    "error32": 1382
+   },
+   "geo1_13": {
+    "rows": 7754,
+    "correct": 5469,
+    "class_support": [
+     1540,
+     5084,
+     1130
+    ],
+    "macro_f1": 0.552142,
+    "accuracy": 0.705313,
+    "recall3": 0.218584,
+    "error31": 49,
+    "error32": 834
+   },
+   "geo_level_1_id_region_has_995_in_training": {
+    "rows": 191919,
+    "correct": 143460,
+    "class_support": [
+     18862,
+     107444,
+     65613
+    ],
+    "macro_f1": 0.704429,
+    "accuracy": 0.747503,
+    "recall3": 0.662994,
+    "error31": 482,
+    "error32": 21630
+   },
+   "geo_level_1_id_region_without_995_in_training": {
+    "rows": 16561,
+    "correct": 12160,
+    "class_support": [
+     1237,
+     11163,
+     4161
+    ],
+    "macro_f1": 0.601266,
+    "accuracy": 0.734255,
+    "recall3": 0.405672,
+    "error31": 48,
+    "error32": 2425
+   },
+   "geo_level_2_id_region_has_995_in_training": {
+    "rows": 28826,
+    "correct": 21184,
+    "class_support": [
+     5092,
+     16188,
+     7546
+    ],
+    "macro_f1": 0.711454,
+    "accuracy": 0.734892,
+    "recall3": 0.597005,
+    "error31": 75,
+    "error32": 2966
+   },
+   "geo_level_2_id_region_without_995_in_training": {
+    "rows": 179654,
+    "correct": 134436,
+    "class_support": [
+     15007,
+     102419,
+     62228
+    ],
+    "macro_f1": 0.690058,
+    "accuracy": 0.748305,
+    "recall3": 0.653789,
+    "error31": 455,
+    "error32": 21089
+   },
+   "geo_level_3_id_region_has_995_in_training": {
+    "rows": 5452,
+    "correct": 4124,
+    "class_support": [
+     890,
+     3128,
+     1434
+    ],
+    "macro_f1": 0.722019,
+    "accuracy": 0.75642,
+    "recall3": 0.627615,
+    "error31": 16,
+    "error32": 518
+   },
+   "geo_level_3_id_region_without_995_in_training": {
+    "rows": 203028,
+    "correct": 151496,
+    "class_support": [
+     19209,
+     115479,
+     68340
+    ],
+    "macro_f1": 0.698289,
+    "accuracy": 0.746183,
+    "recall3": 0.648068,
+    "error31": 514,
+    "error32": 23537
+   }
+  },
+  "LGBMN/S0": {
+   "age995": {
+    "rows": 1125,
+    "correct": 843,
+    "class_support": [
+     147,
+     661,
+     317
+    ],
+    "macro_f1": 0.662981,
+    "accuracy": 0.749333,
+    "recall3": 0.618297,
+    "error31": 7,
+    "error32": 114
+   },
+   "age_not995": {
+    "rows": 207355,
+    "correct": 154913,
+    "class_support": [
+     19952,
+     117946,
+     69457
+    ],
+    "macro_f1": 0.700462,
+    "accuracy": 0.747091,
+    "recall3": 0.648804,
+    "error31": 520,
+    "error32": 23873
+   },
+   "geo1_26": {
+    "rows": 18038,
+    "correct": 12795,
+    "class_support": [
+     6419,
+     10087,
+     1532
+    ],
+    "macro_f1": 0.554572,
+    "accuracy": 0.709336,
+    "recall3": 0.12859,
+    "error31": 179,
+    "error32": 1156
+   },
+   "geo1_20": {
+    "rows": 13786,
+    "correct": 10254,
+    "class_support": [
+     2670,
+     9467,
+     1649
+    ],
+    "macro_f1": 0.539249,
+    "accuracy": 0.743798,
+    "recall3": 0.11886,
+    "error31": 80,
+    "error32": 1373
+   },
+   "geo1_13": {
+    "rows": 7754,
+    "correct": 5451,
+    "class_support": [
+     1540,
+     5084,
+     1130
+    ],
+    "macro_f1": 0.548033,
+    "accuracy": 0.702992,
+    "recall3": 0.215044,
+    "error31": 43,
+    "error32": 844
+   },
+   "geo_level_1_id_region_has_995_in_training": {
+    "rows": 191919,
+    "correct": 143568,
+    "class_support": [
+     18862,
+     107444,
+     65613
+    ],
+    "macro_f1": 0.705135,
+    "accuracy": 0.748066,
+    "recall3": 0.663878,
+    "error31": 472,
+    "error32": 21582
+   },
+   "geo_level_1_id_region_without_995_in_training": {
+    "rows": 16561,
+    "correct": 12188,
+    "class_support": [
+     1237,
+     11163,
+     4161
+    ],
+    "macro_f1": 0.605102,
+    "accuracy": 0.735946,
+    "recall3": 0.408796,
+    "error31": 55,
+    "error32": 2405
+   },
+   "geo_level_2_id_region_has_995_in_training": {
+    "rows": 28826,
+    "correct": 21226,
+    "class_support": [
+     5092,
+     16188,
+     7546
+    ],
+    "macro_f1": 0.713201,
+    "accuracy": 0.736349,
+    "recall3": 0.59886,
+    "error31": 76,
+    "error32": 2951
+   },
+   "geo_level_2_id_region_without_995_in_training": {
+    "rows": 179654,
+    "correct": 134530,
+    "class_support": [
+     15007,
+     102419,
+     62228
+    ],
+    "macro_f1": 0.690697,
+    "accuracy": 0.748828,
+    "recall3": 0.654705,
+    "error31": 451,
+    "error32": 21036
+   },
+   "geo_level_3_id_region_has_995_in_training": {
+    "rows": 5452,
+    "correct": 4141,
+    "class_support": [
+     890,
+     3128,
+     1434
+    ],
+    "macro_f1": 0.725658,
+    "accuracy": 0.759538,
+    "recall3": 0.62901,
+    "error31": 14,
+    "error32": 518
+   },
+   "geo_level_3_id_region_without_995_in_training": {
+    "rows": 203028,
+    "correct": 151615,
+    "class_support": [
+     19209,
+     115479,
+     68340
+    ],
+    "macro_f1": 0.69906,
+    "accuracy": 0.746769,
+    "recall3": 0.649078,
+    "error31": 513,
+    "error32": 23469
+   }
+  },
+  "LGBMN/S1": {
+   "age995": {
+    "rows": 1125,
+    "correct": 844,
+    "class_support": [
+     147,
+     661,
+     317
+    ],
+    "macro_f1": 0.665068,
+    "accuracy": 0.750222,
+    "recall3": 0.618297,
+    "error31": 8,
+    "error32": 113
+   },
+   "age_not995": {
+    "rows": 207355,
+    "correct": 154942,
+    "class_support": [
+     19952,
+     117946,
+     69457
+    ],
+    "macro_f1": 0.700654,
+    "accuracy": 0.747231,
+    "recall3": 0.648905,
+    "error31": 525,
+    "error32": 23861
+   },
+   "geo1_26": {
+    "rows": 18038,
+    "correct": 12808,
+    "class_support": [
+     6419,
+     10087,
+     1532
+    ],
+    "macro_f1": 0.555997,
+    "accuracy": 0.710057,
+    "recall3": 0.130548,
+    "error31": 178,
+    "error32": 1154
+   },
+   "geo1_20": {
+    "rows": 13786,
+    "correct": 10256,
+    "class_support": [
+     2670,
+     9467,
+     1649
+    ],
+    "macro_f1": 0.537039,
+    "accuracy": 0.743943,
+    "recall3": 0.112189,
+    "error31": 78,
+    "error32": 1386
+   },
+   "geo1_13": {
+    "rows": 7754,
+    "correct": 5448,
+    "class_support": [
+     1540,
+     5084,
+     1130
+    ],
+    "macro_f1": 0.548562,
+    "accuracy": 0.702605,
+    "recall3": 0.218584,
+    "error31": 46,
+    "error32": 837
+   },
+   "geo_level_1_id_region_has_995_in_training": {
+    "rows": 191919,
+    "correct": 143600,
+    "class_support": [
+     18862,
+     107444,
+     65613
+    ],
+    "macro_f1": 0.705352,
+    "accuracy": 0.748232,
+    "recall3": 0.663847,
+    "error31": 479,
+    "error32": 21577
+   },
+   "geo_level_1_id_region_without_995_in_training": {
+    "rows": 16561,
+    "correct": 12186,
+    "class_support": [
+     1237,
+     11163,
+     4161
+    ],
+    "macro_f1": 0.605389,
+    "accuracy": 0.735825,
+    "recall3": 0.410959,
+    "error31": 54,
+    "error32": 2397
+   },
+   "geo_level_2_id_region_has_995_in_training": {
+    "rows": 28826,
+    "correct": 21219,
+    "class_support": [
+     5092,
+     16188,
+     7546
+    ],
+    "macro_f1": 0.712967,
+    "accuracy": 0.736106,
+    "recall3": 0.598595,
+    "error31": 75,
+    "error32": 2954
+   },
+   "geo_level_2_id_region_without_995_in_training": {
+    "rows": 179654,
+    "correct": 134567,
+    "class_support": [
+     15007,
+     102419,
+     62228
+    ],
+    "macro_f1": 0.691013,
+    "accuracy": 0.749034,
+    "recall3": 0.65485,
+    "error31": 458,
+    "error32": 21020
+   },
+   "geo_level_3_id_region_has_995_in_training": {
+    "rows": 5452,
+    "correct": 4138,
+    "class_support": [
+     890,
+     3128,
+     1434
+    ],
+    "macro_f1": 0.72504,
+    "accuracy": 0.758988,
+    "recall3": 0.628312,
+    "error31": 16,
+    "error32": 517
+   },
+   "geo_level_3_id_region_without_995_in_training": {
+    "rows": 203028,
+    "correct": 151648,
+    "class_support": [
+     19209,
+     115479,
+     68340
+    ],
+    "macro_f1": 0.699292,
+    "accuracy": 0.746931,
+    "recall3": 0.649195,
+    "error31": 517,
+    "error32": 23457
+   }
+  },
+  "LGBMN/S2": {
+   "age995": {
+    "rows": 1125,
+    "correct": 842,
+    "class_support": [
+     147,
+     661,
+     317
+    ],
+    "macro_f1": 0.660879,
+    "accuracy": 0.748444,
+    "recall3": 0.618297,
+    "error31": 8,
+    "error32": 113
+   },
+   "age_not995": {
+    "rows": 207355,
+    "correct": 154982,
+    "class_support": [
+     19952,
+     117946,
+     69457
+    ],
+    "macro_f1": 0.700675,
+    "accuracy": 0.747424,
+    "recall3": 0.64902,
+    "error31": 525,
+    "error32": 23853
+   },
+   "geo1_26": {
+    "rows": 18038,
+    "correct": 12807,
+    "class_support": [
+     6419,
+     10087,
+     1532
+    ],
+    "macro_f1": 0.554059,
+    "accuracy": 0.710001,
+    "recall3": 0.126632,
+    "error31": 175,
+    "error32": 1163
+   },
+   "geo1_20": {
+    "rows": 13786,
+    "correct": 10251,
+    "class_support": [
+     2670,
+     9467,
+     1649
+    ],
+    "macro_f1": 0.538419,
+    "accuracy": 0.74358,
+    "recall3": 0.116434,
+    "error31": 82,
+    "error32": 1375
+   },
+   "geo1_13": {
+    "rows": 7754,
+    "correct": 5453,
+    "class_support": [
+     1540,
+     5084,
+     1130
+    ],
+    "macro_f1": 0.548026,
+    "accuracy": 0.70325,
+    "recall3": 0.215044,
+    "error31": 46,
+    "error32": 841
+   },
+   "geo_level_1_id_region_has_995_in_training": {
+    "rows": 191919,
+    "correct": 143629,
+    "class_support": [
+     18862,
+     107444,
+     65613
+    ],
+    "macro_f1": 0.705402,
+    "accuracy": 0.748383,
+    "recall3": 0.663908,
+    "error31": 476,
+    "error32": 21576
+   },
+   "geo_level_1_id_region_without_995_in_training": {
+    "rows": 16561,
+    "correct": 12195,
+    "class_support": [
+     1237,
+     11163,
+     4161
+    ],
+    "macro_f1": 0.604296,
+    "accuracy": 0.736369,
+    "recall3": 0.41192,
+    "error31": 57,
+    "error32": 2390
+   },
+   "geo_level_2_id_region_has_995_in_training": {
+    "rows": 28826,
+    "correct": 21233,
+    "class_support": [
+     5092,
+     16188,
+     7546
+    ],
+    "macro_f1": 0.713348,
+    "accuracy": 0.736592,
+    "recall3": 0.598463,
+    "error31": 75,
+    "error32": 2955
+   },
+   "geo_level_2_id_region_without_995_in_training": {
+    "rows": 179654,
+    "correct": 134591,
+    "class_support": [
+     15007,
+     102419,
+     62228
+    ],
+    "macro_f1": 0.690916,
+    "accuracy": 0.749168,
+    "recall3": 0.654995,
+    "error31": 458,
+    "error32": 21011
+   },
+   "geo_level_3_id_region_has_995_in_training": {
+    "rows": 5452,
+    "correct": 4132,
+    "class_support": [
+     890,
+     3128,
+     1434
+    ],
+    "macro_f1": 0.723272,
+    "accuracy": 0.757887,
+    "recall3": 0.626918,
+    "error31": 15,
+    "error32": 520
+   },
+   "geo_level_3_id_region_without_995_in_training": {
+    "rows": 203028,
+    "correct": 151692,
+    "class_support": [
+     19209,
+     115479,
+     68340
+    ],
+    "macro_f1": 0.699359,
+    "accuracy": 0.747148,
+    "recall3": 0.649342,
+    "error31": 518,
+    "error32": 23446
+   }
+  }
+ },
+ "control_check": {
+  "LGBM-N": {
+   "status": "PASS",
+   "rows": 41696,
+   "probability_max_abs_diff": 0.0,
+   "probability_atol": "1e-09 (rounding exception: kept as text)",
+   "bit_identical": true,
+   "labels_identical": true,
+   "label_mismatch_rows": 0,
+   "label_mismatch_on_exact_top2_ties": 0,
+   "unexplained_label_mismatch_rows": 0,
+   "top2_tie_rows": 0,
+   "new_macro_f1": 0.701965,
+   "reference_macro_f1": 0.701965,
+   "fold": 0,
+   "attempts": 1
+  },
+  "LR-C": {
+   "status": "PASS",
+   "rows": 41696,
+   "probability_max_abs_diff": 0.0,
+   "probability_atol": "1e-09 (rounding exception: kept as text)",
+   "bit_identical": true,
+   "labels_identical": true,
+   "label_mismatch_rows": 0,
+   "label_mismatch_on_exact_top2_ties": 0,
+   "unexplained_label_mismatch_rows": 0,
+   "top2_tie_rows": 0,
+   "new_macro_f1": 0.689102,
+   "reference_macro_f1": 0.689102,
+   "fold": 0,
+   "attempts": 1
+  },
+  "lr_b_refit_required": false,
+  "control_fits_completed": 2,
+  "counted_as_study_fit": false
+ },
+ "preflight": {
+  "status": "PASS",
+  "classifiers_fitted": 0,
+  "area_percentage_zero_rows": 0,
+  "unique_regions_all_rows": {
+   "geo1": 31,
+   "geo2": 1408,
+   "geo3": 11353
+  },
+  "geo_keys_all_digit_strings": {
+   "geo1": true,
+   "geo2": true,
+   "geo3": true
+  },
+  "separator_clash": {
+   "foundation_type": false,
+   "roof_type": false,
+   "ground_floor_type": false,
+   "other_floor_type": false,
+   "land_surface_condition": false
+  },
+  "vocabulary_sizes": {
+   "foundation_roof": 14,
+   "ground_other_floor": 20,
+   "foundation_ground": 25,
+   "surface_condition": 15
+  },
+  "vocabulary_total": 74,
+  "valid_unseen_combination_rows_all_arms_folds": 0,
+  "raw_derived_numeric_ranges_all_rows": {
+   "height_area_ratio": {
+    "min": 0.032787,
+    "max": 16.0,
+    "mean": 0.814843
+   },
+   "height_per_floor": {
+    "min": 0.285714,
+    "max": 32.0,
+    "mean": 2.618793
+   },
+   "material_count": {
+    "min": 1.0,
+    "max": 8.0,
+    "mean": 1.460375
+   },
+   "secondary_use_count": {
+    "min": 0.0,
+    "max": 2.0,
+    "mean": 0.113886
+   },
+   "concrete_count": {
+    "min": 0.0,
+    "max": 4.0,
+    "mean": 0.151976
+   },
+   "mud_count": {
+    "min": 0.0,
+    "max": 3.0,
+    "mean": 0.918932
+   }
+  },
+  "fold0_matrices": {
+   "LR/S0": {
+    "train_shape": [
+     166784,
+     12674
+    ],
+    "valid_shape": [
+     41696,
+     12674
+    ],
+    "dtype": "float32",
+    "container": "csr",
+    "nnz": 4618863,
+    "base_columns": 12594,
+    "derived_columns": 80
+   },
+   "LR/S1": {
+    "train_shape": [
+     166784,
+     12677
+    ],
+    "valid_shape": [
+     41696,
+     12677
+    ],
+    "dtype": "float32",
+    "container": "csr",
+    "nnz": 5119215,
+    "base_columns": 12594,
+    "derived_columns": 83
+   },
+   "LR/S2": {
+    "train_shape": [
+     166784,
+     12677
+    ],
+    "valid_shape": [
+     41696,
+     12677
+    ],
+    "dtype": "float32",
+    "container": "csr",
+    "nnz": 5119215,
+    "base_columns": 12594,
+    "derived_columns": 83
+   },
+   "LR/BASE": {
+    "train_shape": [
+     166784,
+     12594
+    ],
+    "valid_shape": [
+     41696,
+     12594
+    ],
+    "dtype": "float32",
+    "container": "csr"
+   },
+   "LGBMN/S0": {
+    "train_shape": [
+     166784,
+     49
+    ],
+    "valid_shape": [
+     41696,
+     49
+    ],
+    "dtype": "float32",
+    "container": "dense",
+    "nnz": null,
+    "base_columns": 39,
+    "derived_columns": 10
+   },
+   "LGBMN/S1": {
+    "train_shape": [
+     166784,
+     52
+    ],
+    "valid_shape": [
+     41696,
+     52
+    ],
+    "dtype": "float32",
+    "container": "dense",
+    "nnz": null,
+    "base_columns": 39,
+    "derived_columns": 13
+   },
+   "LGBMN/S2": {
+    "train_shape": [
+     166784,
+     52
+    ],
+    "valid_shape": [
+     41696,
+     52
+    ],
+    "dtype": "float32",
+    "container": "dense",
+    "nnz": null,
+    "base_columns": 39,
+    "derived_columns": 13
+   },
+   "LGBMN/BASE": {
+    "train_shape": [
+     166784,
+     39
+    ],
+    "valid_shape": [
+     41696,
+     39
+    ],
+    "dtype": "float32",
+    "container": "dense"
+   }
+  },
+  "fold0_prefix_equals_independent_base": true,
+  "fold0_independent_reference_max_diff_scientific_notation_text": {
+   "LR/S0": {
+    "train": "3.443e-06",
+    "valid": "2.233e-06"
+   },
+   "LR/S1": {
+    "train": "3.443e-06",
+    "valid": "2.233e-06"
+   },
+   "LR/S2": {
+    "train": "3.443e-06",
+    "valid": "2.233e-06"
+   },
+   "LGBMN/S0": {
+    "train": "5.298e-08",
+    "valid": "5.215e-08"
+   },
+   "LGBMN/S1": {
+    "train": "5.775e-08",
+    "valid": "5.775e-08"
+   },
+   "LGBMN/S2": {
+    "train": "5.775e-08",
+    "valid": "5.775e-08"
+   }
+  },
+  "references": {
+   "LGBMN_B": {
+    "sha256": "263680540b07a5cc4fe84dd294ff90ae0da7c9c7b2886f0df733edf9465f9558",
+    "cv_mean": 0.699342,
+    "error31": 530,
+    "error32_auxiliary_not_a_preregistered_verdict": 24055,
+    "fold_macro_f1_max_diff_vs_metrics": 0.0
+   },
+   "LR_B_local_refit": {
+    "sha256": "0601965653000c121cdb22f36b8089a7837b1be2c088931aca6f0b0f9b71e425",
+    "cv_mean": 0.68886,
+    "error31": 455,
+    "error32_auxiliary_not_a_preregistered_verdict": 24659,
+    "fold_macro_f1_max_diff_vs_metrics": 0.0
+   },
+   "LR_original_environment_citation_only": {
+    "sha256": "de43f9974e536b3a9c5ebac35b984ed886ba2d5426d59dda989ca12f366a2cbc",
+    "cv_mean": 0.688687,
+    "error31": 452,
+    "error32_auxiliary_not_a_preregistered_verdict": 24681
+   }
+  }
+ },
+ "notes": [
+  "층화 seed 42 5-Fold 하나의 기술 판정이며 p-value·신뢰구간·인과·일반화 주장이 아니다.",
+  "ALL_MET은 후보 표시일 뿐이다. 별도 확인 평가(T29) 전에는 채택·승격·\"개선 확인\" 문구를 쓰지 않는다.",
+  "변수별 기여는 분해하지 않았다(묶음 평가). S0 대비 S1/S2 차이는 지역 평균 연령 3열 전체의 효과이며 지역 지문·자기 포함 평균이 섞일 수 있다.",
+  "LGBM-N과 LR-C의 범주 표현이 달라 모델 간 순위를 비교하지 않는다.",
+  "CONVERGENCE_CAVEAT가 붙은 LR 비교의 ALL_MET은 후보로도 쓰지 않는다.",
+  "B는 같은 Fold를 이미 많이 쓴 선택 통계의 기준선이며 독립 성능이 아니다."
+ ],
+ "limitations": [
+  "팀원 파이프라인의 재현이 아니다. 같은 이름·같은 식의 파생변수를 우리 Fold 안에서 만든 것이다. 팀원은 `x_train.csv`(전체의 70%) 안에서 지역 평균을 계산했고, 우리는 개발 자료 208,480행의 학습 Fold(80%)에서 계산한다. 모델·하이퍼파라미터도 기준선 그대로라 팀원 성능과 비교할 수 없다.",
+  "seed 42 층화 Fold의 반복 노출. 이 5개 Fold로 이미 수십 개 설정을 비교했다. 선택 통계이며 독립 성능이 아니다. 시드가 하나뿐이다(LGBM-N은 행·열 샘플링이 없어 시드에 따른 변동이 작을 것으로 보이나 미확인).",
+  "묶음 비교의 해석 범위. 13개(또는 S0의 10개)를 함께 바꿨으므로 변수별 분해, 과거 실험에서 본 변수별 차이의 합산을 주장하지 않는다. S0로 지역 평균 연령 3열과 나머지 10열은 나뉘지만 각 덩어리 안의 분해는 없다. S1·S2의 차이도 지역 평균 연령 3열 전체의 차이이며 995 보정 하나의 순수한 차이라고 단정하지 않는다.",
+  "지역 지문·암기 가능성. 지역 평균 연령은 지역을 거의 식별한다. 층화 CV는 같은 지역이 학습·검증에 모두 나오므로 성적이 높게 나오더라도 \"연령 문맥\"의 증거가 아니라 지역 암기일 수 있다. S0와의 비교가 이를 간접적으로 나누지만 지역 암기 자체를 분리하지는 못한다. 미관측 지역 일반화(geo2/geo1 Group)는 이 판정의 범위 밖이며 새로 측정하지 않았다(필요하면 별도 심화 설계).",
+  "자기 포함 평균의 학습·검증 분포 차이(계획서 §3.2). 정의를 바꾸지 않았으므로 소규모 지역에서 학습 Fold 쪽이 과대할 수 있다. S2는 995 행과 비995 행의 자기 포함 규칙이 다르다. 실행 뒤 측정: geo3 학습 행 상관이 검증 행 상관보다 큼(§5.3).",
+  "LGBM-N의 새 범주 4열은 native만 시험했다(원핫 미실행). 범주 조합을 추가한 비교와 범주 표현 방식을 바꾼 비교가 분리되지 않는다.",
+  "하이퍼파라미터 미조정. 입력이 바뀌어도 기준선 값 그대로다. 각 팔의 최적 성능이 아니다.",
+  "LR 기준선의 증거 수준. B는 같은 venv의 로컬 재적합이지만 대조는 Fold 0 하나다. 원 환경 산출물(0.688687)과 다른 값(0.688860)이 B이므로 \"이후 연구의 LR-C 기준선 0.688687\"과의 숫자 연결은 인용 열로만 한다.",
+  "모델 간 순위 비교 불가(LGBM과 LR의 범주 표현·학습 방식이 다름). 모델 계열 간 우열을 말하지 않는다.",
+  "다중 비교 6개와 약한 조건 2(귀무 확률 0.19)로 위양성이 가능하다. `ALL_MET`은 후보 표시일 뿐이다. 이번 결과에는 `ALL_MET`이 없다.",
+  "설계자가 확인하지 못한 것(계획서 §12-11)과 실행 뒤 상태. (a) `area_percentage==0` 여부: 0건으로 확인. (b) 지역 수·소규모 지역 비율·995가 섞인 지역 비율: 수치를 §5.1·§6.3에 기록(소규모 지역 비율은 구간별 행 수로 §5.3에 기록). (c) 파생 열 실제 값 범위: §6.3에 기록. (d) S1/S2 평균이 다른 행 비율: §5.1에 기록. (e) Fold별 지역 미관측 건수: §5.2에 기록(S2의 전부-995 지역 대체는 미관측 건수에 들지 않아 따로 기록했고, 그 지역 학습 행의 대체 행 수는 기록되지 않았다). (f) LGBM 범주 4열의 모델 내부 분할 양상: 이득 비중과 실효 범주 파라미터만 기록했고 분할 양상 자체는 확인하지 못했다. (g) 파생 열 추가 후 LR 수렴 여부·반복 수: 모든 Fold 수렴, 반복 수는 §2.4. (h) 모든 시간 추정: §5.6에 실측 기록. (i) LGBM-N·이 실험에서의 짝지은 ΔF1 SD: §3.1에 기록(LR-C 0.000627~0.000748, LGBM-N 0.001253~0.001502). (j) T33 구현 코드와 이 설계 코드의 충돌 가능성: 확인하지 못했다. (k) 컨트롤 타워가 검증한 `x_train.csv` 계산식: 이 보고서가 재검증하지 않았다. (l) 단일 열 키 기준이 팀원 파일 정의와 같은지: 컨트롤 타워 검증식에 의존하며 확인하지 못했다.",
+  "임계값(Δ ≥ +0.003, 4/5, ΔR3 ≥ 0, 3→1 Δ ≤ 0, 최악 Fold Δ > −0.003)은 저장소 관례에서 가져온 제안값이다. LR-C에서는 조건 2가 조건 1과 사실상 겹치고 조건 5는 거의 구속력이 없다(짝지은 Δ의 SD가 작음). 어느 판정도 유의성·일반화 주장이 아니며 인과 해석을 하지 않는다.",
+  "풀링 3→1 건수는 수백 건 규모이고 이번 비교의 3→1 차이는 −3~+9건의 한 자릿수라 소음일 수 있다(계획서가 적은 수십 건 변동보다도 작다). 3→1 허용 상한은 오류 비용 판단이라 이 실험에서 정하지 않았다(T29 사용자 결정 항목).",
+  "층화 분할은 같은 지역이 학습·검증에 함께 나온다. 처음 보는 지역에서의 일반화(geo2/geo1 Group)는 이 실험에서 평가하지 않았다.",
+  "경계 근접 표시(§3.2)의 기준(ΔF1 0.001, 한 Fold, 30건)은 결과를 확인한 뒤 보고서 작성자가 정한 보조 표시이며 사전등록 규칙이 아니다.",
+  "S2의 지역 평균 대체는 학습 Fold에 없는 지역뿐 아니라 학습 Fold에서 행이 전부 995인 지역(학습·검증 행 모두)에도 적용되나, 학습 행 쪽의 대체 행 수는 기록되지 않았다(§5.2).",
+  "지진 강도·지반 조건은 반영되지 않았고 인과·안전 판정이 아니다. 홀드아웃은 접근하지 않았고 이 결과는 새 독립 성능이 아니다.",
+  "독립 감사(PASS_T34)는 학습 행렬이 저장돼 있지 않아 LR은 저장 계수의 기울기, LightGBM은 leaf_count 합과 재구성 학습 Macro F1로 학습 입력을 간접 증명했다. 이 공개 보고서의 독립 검토(PASS_WITH_DEFECTS, high 0 / medium 2 / low 7)의 지적은 이 판에 모두 반영했다."
+ ],
+ "reproduction": "현재 실행 명령의 진입점은 docs/RESEARCH_STATUS.md. 출력 폴더가 있으면 prepare가 거부하므로 재생성은 새 실험 ID와 새 비공개 출력 경로가 필요함."
+}
