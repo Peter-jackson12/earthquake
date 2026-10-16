@@ -1,0 +1,50 @@
+{
+  "study_id": "T37_required_models_tuning_v1",
+  "title": "Limited nested-CV tuning of the four required models (LR, DT, sklearn GBC, RF), no weighting or sampling",
+  "plan": {"path": "docs/T37_REQUIRED_MODELS_TUNING_PLAN.md", "sha256": "243c079e7b25c1d5f0caaf5018aaba7cdf15e5416b3b1b4820ce157dcdd90cf6",
+           "approval": "2026-10-16 user: 'as proposed. nested CV, weighting off, the four models' candidates as listed, imbalance supplement later'"},
+  "n_folds": 5,
+  "models": ["LR", "DT", "GBC", "RF"],
+  "split": {"scheme": "stratified", "manifest": "split_manifest.csv", "manifest_sha256": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721", "development_sha256": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1", "train_rows_per_fold": 166784, "valid_rows_per_fold": 41696},
+  "inner": {"n_splits": 3, "shuffle": true, "random_state": 42, "splitter": "StratifiedKFold", "rows": "outer training fold in building_id order"},
+  "preprocessing": "preprocess.make_model_pipeline v1.0.1 (scale_numeric for LR only), fitted on the training rows of each fit",
+  "class_weighting": null,
+  "sampling": null,
+  "fixed_params": {
+    "LR": {"solver": "lbfgs", "max_iter": 1500, "tol": 0.0001, "random_state": 42},
+    "DT": {"random_state": 42},
+    "GBC": {"learning_rate": 0.1, "max_features": null, "random_state": 42},
+    "RF": {"n_estimators": 100, "max_depth": 20, "random_state": 42, "n_jobs": 4}
+  },
+  "candidates": {
+    "LR": {"LR0": {"C": 1.0}, "LR1": {"C": 0.03}, "LR2": {"C": 0.1}, "LR3": {"C": 0.3}, "LR4": {"C": 3.0}, "LR5": {"C": 10.0}},
+    "DT": {"DT0": {"max_depth": 12, "min_samples_leaf": 5}, "DT1": {"max_depth": 8, "min_samples_leaf": 5}, "DT2": {"max_depth": 8, "min_samples_leaf": 20}, "DT3": {"max_depth": 8, "min_samples_leaf": 50}, "DT4": {"max_depth": 12, "min_samples_leaf": 20}, "DT5": {"max_depth": 12, "min_samples_leaf": 50}, "DT6": {"max_depth": 16, "min_samples_leaf": 5}, "DT7": {"max_depth": 16, "min_samples_leaf": 20}, "DT8": {"max_depth": 16, "min_samples_leaf": 50}},
+    "GBC": {"GBC0": {"n_estimators": 100, "max_depth": 3}, "GBC1": {"n_estimators": 300, "max_depth": 3}, "GBC2": {"n_estimators": 100, "max_depth": 5}, "GBC3": {"n_estimators": 300, "max_depth": 5}},
+    "RF": {"RF0": {"max_features": 0.1, "min_samples_leaf": 2}, "RF1": {"max_features": 0.1, "min_samples_leaf": 1}, "RF2": {"max_features": 0.1, "min_samples_leaf": 5}, "RF3": {"max_features": 0.2, "min_samples_leaf": 1}, "RF4": {"max_features": 0.2, "min_samples_leaf": 2}, "RF5": {"max_features": 0.2, "min_samples_leaf": 5}, "RF6": {"max_features": 0.3, "min_samples_leaf": 1}, "RF7": {"max_features": 0.3, "min_samples_leaf": 2}, "RF8": {"max_features": 0.3, "min_samples_leaf": 5}}
+  },
+  "selection": {"metric": "pooled inner Macro F1 over the 3 inner validation folds, labels [1,2,3]", "tie_break": "registered candidate order (baseline first)"},
+  "decision_rule": "argmax of predict_proba, labels 1/2/3; no threshold, no calibration",
+  "baselines": {
+    "LR": {"label": "LR C=1 unweighted, local reproduction (personal_none)", "path": "20261014_01/runs/personal_none/lr/oof_predictions.csv.gz", "sha256": "171db272dab314e14f360fd267f8d8939f9d14d0f0d69ed9342a2a83288fd8a4", "cv_mean": 0.683787},
+    "DT": {"label": "DT depth 12 leaf 5 (baseline_initial)", "path": "20261014_01/runs/baseline_initial/dt/oof_predictions.csv.gz", "sha256": "0f9b57c0853d8418929428cf294bf5e8fbb71dc63df4fbe0dfeefc9faaf0712f", "cv_mean": 0.594238},
+    "GBC": {"label": "GBC 100 stages depth 3 max_features None (feature_budget)", "path": "20261014_01/runs/feature_budget/gbc/oof_predictions.csv.gz", "sha256": "ff9d764e2cb8e5faebaffa1fc118a529d989ef5e99aea653f18d444ca8d99477", "cv_mean": 0.612109},
+    "RF": {"label": "RF 100 trees depth 20 leaf 2 max_features 0.1 (feature_budget)", "path": "20261014_01/runs/feature_budget/rf/oof_predictions.csv.gz", "sha256": "b99e35c4210cc80ecb8dc0ca06a6574bc57cf4c50ebd247027b8adf7019ceb60", "cv_mean": 0.628992}
+  },
+  "control": {"tree_probability_atol": 1e-9, "lr_probability_atol": 1e-6, "lr_min_prediction_agreement": 0.9999, "fold": 0},
+  "budget": {"inner_fits": 420, "max_outer_refits": 20, "planned_fits_max": 440, "max_fits": 460, "max_recovered_units": 10, "max_attempts_per_unit": 2, "automatic_retries": 0, "control_fits": 4},
+  "threads": {"rf_n_jobs": 4, "other_models_threads": 1, "outer_parallel_jobs": 1},
+  "min_free_disk_gb_at_prepare": 50,
+  "checkpoint": {"reload_probability_atol": 1e-12, "model_format": "joblib (compress=3) of the fitted sklearn Pipeline", "csv_float_format": "%.17g", "backup_dir": "backup", "resume_skips_completed": true},
+  "rules": {
+    "J1": {"mean_delta": 0.003, "fold_wins_min": 4, "advantage": "IMPROVED_DESCRIPTIVE", "disadvantage": "WORSENED_DESCRIPTIVE", "otherwise": "NOT_MET", "delta": "tuned outer fold Macro F1 minus baseline fold Macro F1 on the same fold"},
+    "J2": "safety indicators (pooled Recall3, 3->1, 3->2) of tuned vs baseline per model, no verdict",
+    "J3": "per model and outer fold: selected candidate, pooled inner Macro F1 of all candidates, selected inner minus outer; record only"
+  },
+  "labels": [1, 2, 3],
+  "std_ddof": 1,
+  "error_rate_denominator": "actual_grade3_support",
+  "environment": {"python": "3.13.5", "numpy": "2.3.5", "pandas": "2.2.3", "scipy": "1.17.0", "scikit-learn": "1.8.0", "joblib": "1.5.3", "threadpoolctl": "3.6.0"},
+  "holdout_access": false,
+  "automatic_model_replacement": false,
+  "threshold_or_decision_rule_change": false
+}
