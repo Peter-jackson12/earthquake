@@ -2,7 +2,7 @@
   "study_id": "T35_ey_pipeline_v2_benchmark_v1",
   "report_version": "ey_pipeline_v2_benchmark_20261016",
   "created_for": "reports/EY_PIPELINE_V2_BENCHMARK_20261016.md",
-  "status": "audit PASS_T35",
+  "status": "audit PASS_T35 - independent review of the public report reflected",
   "design_sha256": "2455a0cc7284f073865b5fbf926620a003138d05fbbaf8d1cbe023777b86ee97",
   "plan_sha256": "b5335509486b4bb1e51889a041802b203d341cbed0b305dc27fda026a1b02c78",
   "code_commit": "79b9b1fd7121814e30e4983cbe1a7c1e07f3cc28",
