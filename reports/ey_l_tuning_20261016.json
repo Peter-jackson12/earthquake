@@ -1,0 +1,896 @@
+{
+  "study_id": "T36_ey_l_nested_tuning_v1",
+  "report_version": "ey_l_tuning_20261016",
+  "created_for": "reports/EY_L_TUNING_20261016.md",
+  "status": "audit PASS_T36 - independent review of the public report reflected",
+  "design_sha256": "9081d7776b1c9dbf05b054a50a6464c88075d0e1d54e07d90a5ff0c75e88776d",
+  "plan_sha256": "51e96148541546c6b7a1024997bdf96735078117df67fdc563a21ec656a3a030",
+  "code_commit": "5fc0849b2f7287d041a61b7a3a5838bd68056121",
+  "holdout_accessed": false,
+  "scheme": "outer: strat (Stratified 5-Fold, seed 42, split_manifest.csv SHA 7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721); inner: StratifiedKFold(3, shuffle, seed 42) inside each outer training fold",
+  "guide_line": "과제 가이드 CV·튜닝 항목을 심화 모델(LightGBM)에 적용. 네 필수 모델 튜닝 항목을 대체하지 않는다. 주 평가(층화 5-Fold) 결과를 내고 판정 분할은 바깥 층화 5-Fold 하나, 선택은 안쪽 3-Fold만.",
+  "rounding": "부동소수 소수 6자리 반올림, SD ddof=1, 건수 정수.",
+  "audit": {
+    "status": "PASS_T36",
+    "result_file_sha256": "76db6b9f650a6883febfb9ab7e4f64b5ba20572f42a17a5c6d55e70788a7473d",
+    "checks_run": 10,
+    "checks_passed": 10,
+    "issues": 0,
+    "warnings": 0,
+    "new_classifier_fits": 0,
+    "pickle_or_joblib_deserializations": 0,
+    "runner_imports": 0,
+    "holdout_paths_touched": 0,
+    "paths_read": 755,
+    "audit_tool_sha256": "67d37da85593ce8b3cee010744dd5b529f65aca8e8867fd5fae8b73fb4962802",
+    "independent_core_sha256": "ecbb32e96b51315b860416201c45d407f3bb542e76cd1639384608eb2d24c448",
+    "self_check": "합성 65개 OK(현재 코어로 재실행 확인)",
+    "tool_author": "학습 담당과 다른 worker(독립 구현), 실행은 메인"
+  },
+  "unit_tests": "봉인 커밋 5fc0849에서 전체 discover 1,201개 OK·실패 0·skip 33, tests.test_ey_l_tuning 14개 통과",
+  "counts": {
+    "units_complete": 95,
+    "units_total": 95,
+    "fits_started": 93,
+    "inner_fits": 90,
+    "outer_refits": 3,
+    "planned_fits_max": 95,
+    "max_fits": 105,
+    "recovered_units": 0,
+    "fit_seconds_sum": 2634.998956,
+    "inner_fit_seconds_by_candidate": {
+      "C0": 270.019173,
+      "C1": 211.469917,
+      "C2": 396.174585,
+      "C3": 412.022695,
+      "C4": 536.035323,
+      "C5": 751.448162
+    },
+    "automatic_retries": 0,
+    "attempts_jsonl_lines": 213,
+    "fit_all_stage_wall_seconds": 3901.3
+  },
+  "candidates": {
+    "C0": {
+      "num_leaves": 127,
+      "n_estimators": 800
+    },
+    "C1": {
+      "num_leaves": 63,
+      "n_estimators": 800
+    },
+    "C2": {
+      "num_leaves": 255,
+      "n_estimators": 800
+    },
+    "C3": {
+      "num_leaves": 63,
+      "n_estimators": 1600
+    },
+    "C4": {
+      "num_leaves": 127,
+      "n_estimators": 1600
+    },
+    "C5": {
+      "num_leaves": 255,
+      "n_estimators": 1600
+    }
+  },
+  "rules": {
+    "J1": {
+      "mean_delta": 0.003,
+      "fold_wins_min": 4,
+      "advantage": "IMPROVED_DESCRIPTIVE",
+      "disadvantage": "WORSENED_DESCRIPTIVE",
+      "otherwise": "NOT_MET",
+      "delta": "tuned outer fold Macro F1 minus T35 L fold Macro F1 on the same fold"
+    },
+    "J2": "safety indicators (pooled Recall3, 3->1, 3->2 counts and rates) of tuned vs T35 L, no verdict",
+    "J3": "per outer fold: selected candidate, pooled inner Macro F1 of all 6 candidates, selected inner minus outer; record only"
+  },
+  "tuned": {
+    "cv_mean": 0.707102,
+    "cv_std": 0.003215,
+    "fold_macro_f1": [
+      0.710621,
+      0.71006,
+      0.706896,
+      0.703454,
+      0.704481
+    ],
+    "fold_grade3_recall": [
+      0.694088,
+      0.693063,
+      0.690505,
+      0.679183,
+      0.686922
+    ],
+    "accuracy": 0.739611,
+    "recall3": 0.688752,
+    "error31": 938,
+    "error32": 20779,
+    "rate31": 0.013443,
+    "rate32": 0.297804,
+    "pred_share": [
+      0.113109,
+      0.570016,
+      0.316875
+    ],
+    "fold_class_precision": [
+      [
+        0.581546,
+        0.780274,
+        0.733177
+      ],
+      [
+        0.584408,
+        0.780452,
+        0.730052
+      ],
+      [
+        0.601972,
+        0.774341,
+        0.727685
+      ],
+      [
+        0.579666,
+        0.77289,
+        0.723567
+      ],
+      [
+        0.605203,
+        0.772442,
+        0.722763
+      ]
+    ],
+    "fold_class_recall": [
+      [
+        0.715103,
+        0.774387,
+        0.694088
+      ],
+      [
+        0.710448,
+        0.775188,
+        0.693063
+      ],
+      [
+        0.668159,
+        0.783188,
+        0.690505
+      ],
+      [
+        0.707711,
+        0.771848,
+        0.679183
+      ],
+      [
+        0.659701,
+        0.783188,
+        0.686922
+      ]
+    ],
+    "fold_class_f1": [
+      [
+        0.641446,
+        0.777319,
+        0.713097
+      ],
+      [
+        0.641293,
+        0.777811,
+        0.711077
+      ],
+      [
+        0.633341,
+        0.77874,
+        0.708608
+      ],
+      [
+        0.637321,
+        0.772369,
+        0.700673
+      ],
+      [
+        0.631278,
+        0.777778,
+        0.704387
+      ]
+    ],
+    "fold_confusion": [
+      [
+        [
+          2874,
+          1084,
+          61
+        ],
+        [
+          1888,
+          18370,
+          3464
+        ],
+        [
+          180,
+          4089,
+          9686
+        ]
+      ],
+      [
+        [
+          2856,
+          1091,
+          73
+        ],
+        [
+          1830,
+          18389,
+          3503
+        ],
+        [
+          201,
+          4082,
+          9671
+        ]
+      ],
+      [
+        [
+          2686,
+          1261,
+          73
+        ],
+        [
+          1610,
+          18578,
+          3533
+        ],
+        [
+          166,
+          4153,
+          9636
+        ]
+      ],
+      [
+        [
+          2845,
+          1113,
+          62
+        ],
+        [
+          1853,
+          18309,
+          3559
+        ],
+        [
+          210,
+          4267,
+          9478
+        ]
+      ],
+      [
+        [
+          2652,
+          1285,
+          83
+        ],
+        [
+          1549,
+          18578,
+          3594
+        ],
+        [
+          181,
+          4188,
+          9586
+        ]
+      ]
+    ],
+    "pooled": {
+      "macro_f1": 0.707141,
+      "accuracy": 0.739611,
+      "precision": [
+        0.590009,
+        0.776055,
+        0.727453
+      ],
+      "recall": [
+        0.692223,
+        0.77756,
+        0.688752
+      ],
+      "f1": [
+        0.637042,
+        0.776806,
+        0.707574
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          13913,
+          5834,
+          352
+        ],
+        [
+          8730,
+          92224,
+          17653
+        ],
+        [
+          938,
+          20779,
+          48057
+        ]
+      ]
+    },
+    "profiles": {
+      "age995": {
+        "n": 1125,
+        "macro_f1": 0.651488,
+        "recall": [
+          0.482993,
+          0.818457,
+          0.621451
+        ],
+        "rate31": 0.031546,
+        "error31": 10
+      },
+      "geo1_26": {
+        "n": 18038,
+        "macro_f1": 0.546544,
+        "recall": [
+          0.836579,
+          0.678695,
+          0.133159
+        ],
+        "rate31": 0.201697,
+        "error31": 309
+      },
+      "geo1_20": {
+        "n": 13786,
+        "macro_f1": 0.538285,
+        "recall": [
+          0.693633,
+          0.850005,
+          0.103093
+        ],
+        "rate31": 0.081868,
+        "error31": 135
+      },
+      "geo1_13": {
+        "n": 7754,
+        "macro_f1": 0.560719,
+        "recall": [
+          0.657792,
+          0.806058,
+          0.220354
+        ],
+        "rate31": 0.089381,
+        "error31": 101
+      }
+    }
+  },
+  "baseline_T35_L": {
+    "cv_mean": 0.707055,
+    "cv_std": 0.001894,
+    "fold_macro_f1": [
+      0.70845,
+      0.709283,
+      0.706896,
+      0.706166,
+      0.704481
+    ],
+    "fold_grade3_recall": [
+      0.699606,
+      0.690411,
+      0.690505,
+      0.675815,
+      0.686922
+    ],
+    "accuracy": 0.740963,
+    "recall3": 0.688652,
+    "error31": 854,
+    "error32": 20870,
+    "rate31": 0.01224,
+    "rate32": 0.299109,
+    "pred_share": [
+      0.107502,
+      0.575859,
+      0.316639
+    ],
+    "fold_class_precision": [
+      [
+        0.59507,
+        0.77789,
+        0.730654
+      ],
+      [
+        0.602918,
+        0.776229,
+        0.729241
+      ],
+      [
+        0.601972,
+        0.774341,
+        0.727685
+      ],
+      [
+        0.604532,
+        0.769744,
+        0.729107
+      ],
+      [
+        0.605203,
+        0.772442,
+        0.722763
+      ]
+    ],
+    "fold_class_recall": [
+      [
+        0.672804,
+        0.78012,
+        0.699606
+      ],
+      [
+        0.678358,
+        0.784082,
+        0.690411
+      ],
+      [
+        0.668159,
+        0.783188,
+        0.690505
+      ],
+      [
+        0.676866,
+        0.787235,
+        0.675815
+      ],
+      [
+        0.659701,
+        0.783188,
+        0.686922
+      ]
+    ],
+    "fold_class_f1": [
+      [
+        0.631554,
+        0.779003,
+        0.714793
+      ],
+      [
+        0.638417,
+        0.780136,
+        0.709295
+      ],
+      [
+        0.633341,
+        0.77874,
+        0.708608
+      ],
+      [
+        0.638657,
+        0.778391,
+        0.70145
+      ],
+      [
+        0.631278,
+        0.777778,
+        0.704387
+      ]
+    ],
+    "fold_confusion": [
+      [
+        [
+          2704,
+          1251,
+          64
+        ],
+        [
+          1681,
+          18506,
+          3535
+        ],
+        [
+          159,
+          4033,
+          9763
+        ]
+      ],
+      [
+        [
+          2727,
+          1217,
+          76
+        ],
+        [
+          1621,
+          18600,
+          3501
+        ],
+        [
+          175,
+          4145,
+          9634
+        ]
+      ],
+      [
+        [
+          2686,
+          1261,
+          73
+        ],
+        [
+          1610,
+          18578,
+          3533
+        ],
+        [
+          166,
+          4153,
+          9636
+        ]
+      ],
+      [
+        [
+          2721,
+          1235,
+          64
+        ],
+        [
+          1607,
+          18674,
+          3440
+        ],
+        [
+          173,
+          4351,
+          9431
+        ]
+      ],
+      [
+        [
+          2652,
+          1285,
+          83
+        ],
+        [
+          1549,
+          18578,
+          3594
+        ],
+        [
+          181,
+          4188,
+          9586
+        ]
+      ]
+    ],
+    "pooled": {
+      "macro_f1": 0.707065,
+      "accuracy": 0.740963,
+      "precision": [
+        0.60191,
+        0.774112,
+        0.727887
+      ],
+      "recall": [
+        0.671178,
+        0.783563,
+        0.688652
+      ],
+      "f1": [
+        0.634659,
+        0.778809,
+        0.707726
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          13490,
+          6249,
+          360
+        ],
+        [
+          8068,
+          92936,
+          17603
+        ],
+        [
+          854,
+          20870,
+          48050
+        ]
+      ]
+    },
+    "profiles": {
+      "age995": {
+        "n": 1125,
+        "macro_f1": 0.646268,
+        "recall": [
+          0.44898,
+          0.824508,
+          0.621451
+        ],
+        "rate31": 0.022082,
+        "error31": 7
+      },
+      "geo1_26": {
+        "n": 18038,
+        "macro_f1": 0.554784,
+        "recall": [
+          0.816327,
+          0.698325,
+          0.146214
+        ],
+        "rate31": 0.184073,
+        "error31": 282
+      },
+      "geo1_20": {
+        "n": 13786,
+        "macro_f1": 0.537522,
+        "recall": [
+          0.668914,
+          0.856449,
+          0.106125
+        ],
+        "rate31": 0.075804,
+        "error31": 125
+      },
+      "geo1_13": {
+        "n": 7754,
+        "macro_f1": 0.558337,
+        "recall": [
+          0.635065,
+          0.812943,
+          0.220354
+        ],
+        "rate31": 0.088496,
+        "error31": 100
+      }
+    },
+    "oof_sha256": "0ea83e83edf697e9440dbf3230675ff180afda8774f7410ee496ab362604fabc"
+  },
+  "tuned_oof_sha256": "a25df813c631f753c0f3cd72622d543dea824ce4839776bfc46bef1ee0474510",
+  "J1": {
+    "label": "NOT_MET",
+    "mean_delta": 4.7e-05,
+    "fold_delta": [
+      0.002171,
+      0.000777,
+      0.0,
+      -0.002712,
+      0.0
+    ],
+    "fold_wins": 2,
+    "fold_losses": 1
+  },
+  "J2_safety_no_verdict": {
+    "recall3": {
+      "tuned": 0.688752,
+      "baseline": 0.688652,
+      "delta": 0.0001
+    },
+    "error31": {
+      "tuned": 938,
+      "baseline": 854,
+      "delta": 84
+    },
+    "error32": {
+      "tuned": 20779,
+      "baseline": 20870,
+      "delta": -91
+    },
+    "rate31": {
+      "tuned": 0.013443,
+      "baseline": 0.01224
+    },
+    "rate32": {
+      "tuned": 0.297804,
+      "baseline": 0.299109
+    }
+  },
+  "same_row_baseline_to_tuned_auxiliary": {
+    "prediction_agreement": 0.974146,
+    "corrected_predictions": 2459,
+    "new_errors": 2741,
+    "error31_removed": 33,
+    "error31_new": 117,
+    "error31_common": 821,
+    "error32_removed": 838,
+    "error32_new": 747
+  },
+  "J3_selection": [
+    {
+      "outer_fold": 0,
+      "selected": "C1",
+      "params": {
+        "num_leaves": 63,
+        "n_estimators": 800
+      },
+      "pooled_inner_macro_f1": {
+        "C0": 0.699132,
+        "C1": 0.700118,
+        "C2": 0.696649,
+        "C3": 0.698758,
+        "C4": 0.695812,
+        "C5": 0.691287
+      },
+      "inner_rank": [
+        "C1",
+        "C0",
+        "C3",
+        "C2",
+        "C4",
+        "C5"
+      ],
+      "selected_inner_minus_outer": -0.010503,
+      "selected_inner_minus_C0_inner": 0.000986,
+      "reused_baseline": false
+    },
+    {
+      "outer_fold": 1,
+      "selected": "C1",
+      "params": {
+        "num_leaves": 63,
+        "n_estimators": 800
+      },
+      "pooled_inner_macro_f1": {
+        "C0": 0.699239,
+        "C1": 0.701146,
+        "C2": 0.695791,
+        "C3": 0.700137,
+        "C4": 0.695733,
+        "C5": 0.690851
+      },
+      "inner_rank": [
+        "C1",
+        "C3",
+        "C0",
+        "C2",
+        "C4",
+        "C5"
+      ],
+      "selected_inner_minus_outer": -0.008915,
+      "selected_inner_minus_C0_inner": 0.001907,
+      "reused_baseline": false
+    },
+    {
+      "outer_fold": 2,
+      "selected": "C0",
+      "params": {
+        "num_leaves": 127,
+        "n_estimators": 800
+      },
+      "pooled_inner_macro_f1": {
+        "C0": 0.703326,
+        "C1": 0.703135,
+        "C2": 0.699436,
+        "C3": 0.701931,
+        "C4": 0.699023,
+        "C5": 0.694539
+      },
+      "inner_rank": [
+        "C0",
+        "C1",
+        "C3",
+        "C2",
+        "C4",
+        "C5"
+      ],
+      "selected_inner_minus_outer": -0.00357,
+      "selected_inner_minus_C0_inner": 0.0,
+      "reused_baseline": true
+    },
+    {
+      "outer_fold": 3,
+      "selected": "C1",
+      "params": {
+        "num_leaves": 63,
+        "n_estimators": 800
+      },
+      "pooled_inner_macro_f1": {
+        "C0": 0.701504,
+        "C1": 0.701717,
+        "C2": 0.697026,
+        "C3": 0.699842,
+        "C4": 0.696999,
+        "C5": 0.692118
+      },
+      "inner_rank": [
+        "C1",
+        "C0",
+        "C3",
+        "C2",
+        "C4",
+        "C5"
+      ],
+      "selected_inner_minus_outer": -0.001737,
+      "selected_inner_minus_C0_inner": 0.000214,
+      "reused_baseline": false
+    },
+    {
+      "outer_fold": 4,
+      "selected": "C0",
+      "params": {
+        "num_leaves": 127,
+        "n_estimators": 800
+      },
+      "pooled_inner_macro_f1": {
+        "C0": 0.700715,
+        "C1": 0.700561,
+        "C2": 0.696872,
+        "C3": 0.699894,
+        "C4": 0.696363,
+        "C5": 0.691811
+      },
+      "inner_rank": [
+        "C0",
+        "C1",
+        "C3",
+        "C2",
+        "C4",
+        "C5"
+      ],
+      "selected_inner_minus_outer": -0.003766,
+      "selected_inner_minus_C0_inner": 0.0,
+      "reused_baseline": true
+    }
+  ],
+  "selection_frequency": {
+    "C0": 2,
+    "C1": 3,
+    "C2": 0,
+    "C3": 0,
+    "C4": 0,
+    "C5": 0
+  },
+  "matrix_columns": {
+    "outer": [
+      174,
+      174,
+      174,
+      174,
+      173
+    ],
+    "inner_range": [
+      171,
+      174
+    ],
+    "note": "안쪽 학습 행에 없는 희귀 범주는 열이 만들어지지 않음(계획대로)"
+  },
+  "input_sha256": {
+    "design.json": "9081d7776b1c9dbf05b054a50a6464c88075d0e1d54e07d90a5ff0c75e88776d",
+    "design_seal.json": "ea544089ea344783a2bf98e385e30f8f18d2d6f4aef86933e9f4677e0976b6f1",
+    "ledger.json": "2cbd43fe04f6ef7c4bbcf483d0cb26dd78ff1d1550bc7e7f9ae9662fbcc7dd91",
+    "attempts.jsonl": "86ce8e242add34c3306820cf8260d54e2030a3461514289ad918768d3132f8c6",
+    "preflight.json": "255b133558efb61d70db60e11c66f8b80e96a85f121182ac34943f71864543ca",
+    "analysis.json": "4a679abe620e3c24db9513d20f0c2172fa53db59199c4949b4882ffa9ac30f60"
+  },
+  "judgments": {
+    "J1": "NOT_MET",
+    "J2": "판정 없음",
+    "J3": "기록만"
+  },
+  "not_claimed": [
+    "최적 하이퍼파라미터",
+    "설정 채택",
+    "최종 모델 교체",
+    "독립 성능",
+    "유의성",
+    "인과 효과"
+  ],
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit-learn": "1.8.0",
+    "lightgbm": "4.6.0"
+  }
+}
