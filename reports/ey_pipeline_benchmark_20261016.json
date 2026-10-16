@@ -1,0 +1,974 @@
+{
+  "study_id": "T33_ey_pipeline_benchmark_v1",
+  "report_version": "ey_pipeline_benchmark_20261016",
+  "created_for": "reports/EY_PIPELINE_BENCHMARK_20261016.md",
+  "status": "audit PASS_T33 - independent review of the public report reflected",
+  "design_sha256": "b55b4a109505aafbb5cd494d7930ae32ed20774cd9e818022e735b85e2716274",
+  "plan_sha256": "4f09d934a9c35776deb902e3f9eb4d9cf27b57a99941b1347f043bfc89427ce2",
+  "code_commit": "9922c71494be21e169e72496b99c1d0ef18d28ce",
+  "holdout_accessed": false,
+  "scheme": "strat (Stratified 5-Fold, seed 42, split_manifest.csv SHA 7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721)",
+  "guide_line": "팀원 파이프라인 재현 벤치마크. 공통 가이드의 팀원 결과 비교·통합과 주제 가이드 심화 성격에 해당하며 필수 네 모델·불균형 처리 필수 항목을 대체하지 않는다. 주 평가(개발 Stratified 5-Fold seed 42) 결과를 낸다. 판정 분할=층화 seed 42 5-Fold 하나뿐.",
+  "rounding": "부동소수 값은 소수 6자리 반올림. 원자료 전체 자릿수는 비공개 analysis.json에 있다. 표시된 Δ와 평균의 합이 반올림 때문에 1e-6 단위로 어긋날 수 있다. 건수는 정수.",
+  "delta_definition": "Δ = T33 팔 Fold Macro F1 - 비교군 Fold Macro F1(같은 Fold). SD는 ddof=1.",
+  "audit": {
+    "status": "PASS_T33",
+    "result_file_sha256": "b94706127bfddd18a15b8cefc56eac04c0fe18a2202fb46db4959e6c781467aa",
+    "checks_run": 188,
+    "issues": 0,
+    "warnings": 0,
+    "new_classifier_fits": 0,
+    "joblib_deserializations": 0,
+    "repository_runner_imports": 0,
+    "holdout_paths_touched": 0,
+    "analysis_recomputed_match": true,
+    "analysis_json_sha256_at_audit": "03f6551a74aa47490b5bc78aff380ceff59e2fc757a1bf728ac6788770edb693"
+  },
+  "notebook": {
+    "private_copy_sha256": "480d63cd6adc3f68f70142ff159d229654db5d17a27d3af093baa38b831ac07b",
+    "cell_25_source_sha256": "8cb408a043469b3f4e4911e4040c82fef129bcec83869f115f5dc10270510f7e",
+    "note": "SHA만 표기한다. 원본 노트북 코드와 셀 소스는 인용하지 않는다."
+  },
+  "unit_tests": "tests.test_ey_pipeline_benchmark 46개 통과·skip 0, 전체 discover 1,155개 OK·skip 33",
+  "counts": {
+    "completed_fits": 20,
+    "planned_fits": 20,
+    "max_fits": 24,
+    "extra_fits": 0,
+    "recovered_units": 0,
+    "automatic_retries": 0,
+    "units_complete": 10,
+    "units_total": 10,
+    "attempts_jsonl_lines": 45,
+    "fit_seconds_sum": 550.737504,
+    "feature_build_seconds_sum_shared_by_both_arms": 11.939175
+  },
+  "input_sha256": {
+    "design.json": "b55b4a109505aafbb5cd494d7930ae32ed20774cd9e818022e735b85e2716274",
+    "design_seal.json": "98f43f3a675eba8b39a4858ae0746dbfc1b68ddb8a247bb41f85114b4745336f",
+    "ledger.json": "5a9c4a3e036d560f8a4f02d6d69863eeb725ae47ed2c706e844ad3182506fc87",
+    "attempts.jsonl": "5e61efc3c4adf9dff2a89471cefcbf2db3a3efb0da9d5cd700546b98bace3e2f",
+    "analysis.json": "03f6551a74aa47490b5bc78aff380ceff59e2fc757a1bf728ac6788770edb693",
+    "preflight.json": "1e98201fbd8a43327b72ad3818b86c45c23b7e2b2d842453380a075c86aaee11",
+    "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+    "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721",
+    "design_seal_binds_design": "b55b4a109505aafbb5cd494d7930ae32ed20774cd9e818022e735b85e2716274",
+    "E1_oof": "aa6becb4ddd6468282d757bbac55f64452f74b501e3d87bdeaba87a3fb71236d",
+    "E2_oof": "34296118e7edc73b6550958bdb4eb579c8d7cd0aa40bfff5581ca02b81c081a7"
+  },
+  "arms": {
+    "E1": {
+      "label": "E1 충실 재현",
+      "fold_macro_f1": [
+        0.710263,
+        0.710276,
+        0.704807,
+        0.704511,
+        0.706569
+      ],
+      "cv_mean": 0.707285,
+      "cv_sd_ddof1": 0.002835,
+      "pooled_macro_f1": 0.707288,
+      "accuracy_pooled": 0.743462,
+      "class_precision_pooled": [
+        0.618688,
+        0.766081,
+        0.740796
+      ],
+      "class_recall_pooled": [
+        0.652918,
+        0.80362,
+        0.667283
+      ],
+      "class_f1_pooled": [
+        0.635343,
+        0.784402,
+        0.70212
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion_pooled_rows_true_cols_pred": [
+        [
+          13123,
+          6671,
+          305
+        ],
+        [
+          7306,
+          95315,
+          15986
+        ],
+        [
+          782,
+          22433,
+          46559
+        ]
+      ],
+      "recall3_pooled": 0.667283,
+      "fold_recall3": [
+        0.673665,
+        0.669055,
+        0.666356,
+        0.659835,
+        0.667503
+      ],
+      "error31": 782,
+      "error32": 22433,
+      "rate31": 0.011208,
+      "rate32": 0.321509,
+      "pred_share_1_2_3": [
+        0.101741,
+        0.596791,
+        0.301468
+      ],
+      "n_trees": [
+        1624,
+        1799,
+        1679,
+        1900,
+        2000
+      ],
+      "es_hit_round_cap": [
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "internal_validation_macro_f1_auxiliary_not_a_preregistered_verdict": [
+        0.703808,
+        0.702142,
+        0.710067,
+        0.70151,
+        0.70551
+      ],
+      "internal_minus_outer_auxiliary_not_a_preregistered_verdict": [
+        -0.006455,
+        -0.008133,
+        0.00526,
+        -0.003001,
+        -0.001059
+      ],
+      "mean_internal_validation_macro_f1_auxiliary_not_a_preregistered_verdict": 0.704607,
+      "recall3_error31_error32_note": "D2 안전 지표, 판정 없음",
+      "es_fit_seconds_sum": 129.271576,
+      "refit_seconds_sum": 140.769101
+    },
+    "E2": {
+      "label": "E2 ES 분리판",
+      "fold_macro_f1": [
+        0.709877,
+        0.709717,
+        0.704551,
+        0.703895,
+        0.706121
+      ],
+      "cv_mean": 0.706832,
+      "cv_sd_ddof1": 0.002825,
+      "pooled_macro_f1": 0.706836,
+      "accuracy_pooled": 0.743227,
+      "class_precision_pooled": [
+        0.618798,
+        0.765721,
+        0.740523
+      ],
+      "class_recall_pooled": [
+        0.650878,
+        0.803772,
+        0.66691
+      ],
+      "class_f1_pooled": [
+        0.634433,
+        0.784285,
+        0.701792
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion_pooled_rows_true_cols_pred": [
+        [
+          13082,
+          6706,
+          311
+        ],
+        [
+          7280,
+          95333,
+          15994
+        ],
+        [
+          779,
+          22462,
+          46533
+        ]
+      ],
+      "recall3_pooled": 0.66691,
+      "fold_recall3": [
+        0.673164,
+        0.667766,
+        0.666356,
+        0.660193,
+        0.667073
+      ],
+      "error31": 779,
+      "error32": 22462,
+      "rate31": 0.011165,
+      "rate32": 0.321925,
+      "pred_share_1_2_3": [
+        0.101405,
+        0.597184,
+        0.30141
+      ],
+      "n_trees": [
+        1779,
+        1582,
+        1952,
+        2000,
+        1891
+      ],
+      "es_hit_round_cap": [
+        false,
+        false,
+        true,
+        true,
+        false
+      ],
+      "internal_validation_macro_f1_auxiliary_not_a_preregistered_verdict": [
+        0.702205,
+        0.704049,
+        0.705592,
+        0.703744,
+        0.701861
+      ],
+      "internal_minus_outer_auxiliary_not_a_preregistered_verdict": [
+        -0.007672,
+        -0.005668,
+        0.001041,
+        -0.00015,
+        -0.004259
+      ],
+      "mean_internal_validation_macro_f1_auxiliary_not_a_preregistered_verdict": 0.70349,
+      "recall3_error31_error32_note": "D2 안전 지표, 판정 없음",
+      "es_fit_seconds_sum": 138.111255,
+      "refit_seconds_sum": 142.585573
+    }
+  },
+  "comparators": {
+    "T8_N": {
+      "label": "T8 LGBM-N",
+      "judged": true,
+      "fold_macro_f1": [
+        0.701965,
+        0.70247,
+        0.700637,
+        0.696333,
+        0.695303
+      ],
+      "cv_mean": 0.699342,
+      "cv_sd_ddof1": 0.003306,
+      "pooled_macro_f1": 0.699347,
+      "accuracy_pooled": 0.74645,
+      "class_precision_pooled": [
+        0.671423,
+        0.752828,
+        0.753301
+      ],
+      "class_recall_pooled": [
+        0.557242,
+        0.836637,
+        0.647648
+      ],
+      "class_f1_pooled": [
+        0.609027,
+        0.792523,
+        0.69649
+      ],
+      "recall3_pooled": 0.647648,
+      "error31": 530,
+      "error32": 24055,
+      "rate31": 0.007596,
+      "rate32": 0.344756,
+      "pred_share_1_2_3": [
+        0.080012,
+        0.632248,
+        0.28774
+      ]
+    },
+    "T14": {
+      "label": "T14 RF+TE+ROS",
+      "judged": true,
+      "fold_macro_f1": [
+        0.700261,
+        0.701455,
+        0.700451,
+        0.701229,
+        0.698739
+      ],
+      "cv_mean": 0.700427,
+      "cv_sd_ddof1": 0.00107,
+      "pooled_macro_f1": 0.700441,
+      "accuracy_pooled": 0.739884,
+      "class_precision_pooled": [
+        0.619365,
+        0.763867,
+        0.731187
+      ],
+      "class_recall_pooled": [
+        0.618687,
+        0.799759,
+        0.673016
+      ],
+      "class_f1_pooled": [
+        0.619026,
+        0.781401,
+        0.700896
+      ],
+      "recall3_pooled": 0.673016,
+      "error31": 744,
+      "error32": 22071,
+      "rate31": 0.010663,
+      "rate32": 0.316321,
+      "pred_share_1_2_3": [
+        0.096302,
+        0.595645,
+        0.308054
+      ]
+    },
+    "LR_C": {
+      "label": "LR-C (연구 기준선)",
+      "judged": true,
+      "fold_macro_f1": [
+        0.688738,
+        0.688484,
+        0.689925,
+        0.690007,
+        0.686283
+      ],
+      "cv_mean": 0.688687,
+      "cv_sd_ddof1": 0.001508,
+      "pooled_macro_f1": 0.688695,
+      "accuracy_pooled": 0.741831,
+      "class_precision_pooled": [
+        0.670591,
+        0.745782,
+        0.751595
+      ],
+      "class_recall_pooled": [
+        0.518683,
+        0.839672,
+        0.639794
+      ],
+      "class_f1_pooled": [
+        0.584935,
+        0.789947,
+        0.691203
+      ],
+      "recall3_pooled": 0.639794,
+      "error31": 452,
+      "error32": 24681,
+      "rate31": 0.006478,
+      "rate32": 0.353728,
+      "pred_share_1_2_3": [
+        0.074568,
+        0.640536,
+        0.284895
+      ]
+    },
+    "T0": {
+      "label": "T0 LR C=1 (= T1 A 재현 OOF)",
+      "judged": true,
+      "fold_macro_f1": [
+        0.684343,
+        0.684471,
+        0.684343,
+        0.683252,
+        0.681977
+      ],
+      "cv_mean": 0.683677,
+      "cv_sd_ddof1": 0.001071,
+      "pooled_macro_f1": 0.68368,
+      "accuracy_pooled": 0.739495,
+      "class_precision_pooled": [
+        0.66092,
+        0.743647,
+        0.750489
+      ],
+      "class_recall_pooled": [
+        0.505448,
+        0.83861,
+        0.638433
+      ],
+      "class_f1_pooled": [
+        0.572822,
+        0.788279,
+        0.68994
+      ],
+      "recall3_pooled": 0.638433,
+      "error31": 467,
+      "error32": 24761,
+      "rate31": 0.006693,
+      "rate32": 0.354874,
+      "pred_share_1_2_3": [
+        0.073729,
+        0.641563,
+        0.284708
+      ]
+    },
+    "LGBM_O": {
+      "label": "LGBM-O 원핫 (참고용)",
+      "judged": false,
+      "fold_macro_f1": [
+        0.672168,
+        0.667943,
+        0.673716,
+        0.668082,
+        0.667326
+      ],
+      "cv_mean": 0.669847,
+      "cv_sd_ddof1": 0.002892,
+      "pooled_macro_f1": 0.669862,
+      "accuracy_pooled": 0.732636,
+      "class_precision_pooled": [
+        0.690657,
+        0.724821,
+        0.763632
+      ],
+      "class_recall_pooled": [
+        0.465993,
+        0.861686,
+        0.590077
+      ],
+      "class_f1_pooled": [
+        0.556506,
+        0.78735,
+        0.665729
+      ],
+      "recall3_pooled": 0.590077,
+      "error31": 303,
+      "error32": 28299,
+      "rate31": 0.004343,
+      "rate32": 0.405581,
+      "pred_share_1_2_3": [
+        0.065047,
+        0.676338,
+        0.258615
+      ]
+    }
+  },
+  "comparisons": {
+    "E1": {
+      "T8_N": {
+        "d1_label": "ADVANTAGE_DESCRIPTIVE",
+        "mean_delta": 0.007944,
+        "fold_delta": [
+          0.008297,
+          0.007805,
+          0.00417,
+          0.008179,
+          0.011266
+        ],
+        "delta_sd_ddof1": 0.002524,
+        "fold_wins": 5,
+        "fold_losses": 0,
+        "recall3_delta": 0.019635,
+        "error31_delta": 252,
+        "error32_delta": -1622,
+        "turnover_auxiliary_not_a_preregistered_verdict": {
+          "prediction_agreement": 0.901923,
+          "corrected_predictions": 9580,
+          "new_errors": 10203
+        }
+      },
+      "T14": {
+        "d1_label": "ADVANTAGE_DESCRIPTIVE",
+        "mean_delta": 0.006858,
+        "fold_delta": [
+          0.010002,
+          0.008821,
+          0.004356,
+          0.003282,
+          0.00783
+        ],
+        "delta_sd_ddof1": 0.002904,
+        "fold_wins": 5,
+        "fold_losses": 0,
+        "recall3_delta": -0.005733,
+        "error31_delta": 38,
+        "error32_delta": 362,
+        "turnover_auxiliary_not_a_preregistered_verdict": {
+          "prediction_agreement": 0.893505,
+          "corrected_predictions": 11135,
+          "new_errors": 10389
+        }
+      },
+      "LR_C": {
+        "d1_label": "ADVANTAGE_DESCRIPTIVE",
+        "mean_delta": 0.018598,
+        "fold_delta": [
+          0.021525,
+          0.021792,
+          0.014882,
+          0.014504,
+          0.020286
+        ],
+        "delta_sd_ddof1": 0.003612,
+        "fold_wins": 5,
+        "fold_losses": 0,
+        "recall3_delta": 0.027489,
+        "error31_delta": 330,
+        "error32_delta": -2248,
+        "turnover_auxiliary_not_a_preregistered_verdict": {
+          "prediction_agreement": 0.908135,
+          "corrected_predictions": 9415,
+          "new_errors": 9075
+        }
+      },
+      "T0": {
+        "d1_label": "ADVANTAGE_DESCRIPTIVE",
+        "mean_delta": 0.023608,
+        "fold_delta": [
+          0.02592,
+          0.025805,
+          0.020464,
+          0.021259,
+          0.024592
+        ],
+        "delta_sd_ddof1": 0.002576,
+        "fold_wins": 5,
+        "fold_losses": 0,
+        "recall3_delta": 0.02885,
+        "error31_delta": 315,
+        "error32_delta": -2328,
+        "turnover_auxiliary_not_a_preregistered_verdict": {
+          "prediction_agreement": 0.901381,
+          "corrected_predictions": 10331,
+          "new_errors": 9504
+        }
+      },
+      "LGBM_O": {
+        "d1_label": "REFERENCE_ONLY",
+        "mean_delta": 0.037438,
+        "fold_delta": [
+          0.038095,
+          0.042333,
+          0.031091,
+          0.036429,
+          0.039243
+        ],
+        "delta_sd_ddof1": 0.004152,
+        "fold_wins": 5,
+        "fold_losses": 0,
+        "recall3_delta": 0.077206,
+        "error31_delta": 479,
+        "error32_delta": -5866,
+        "turnover_auxiliary_not_a_preregistered_verdict": {
+          "prediction_agreement": 0.877859,
+          "corrected_predictions": 13507,
+          "new_errors": 11250
+        }
+      }
+    },
+    "E2": {
+      "T8_N": {
+        "d1_label": "ADVANTAGE_DESCRIPTIVE",
+        "mean_delta": 0.00749,
+        "fold_delta": [
+          0.007912,
+          0.007247,
+          0.003914,
+          0.007562,
+          0.010818
+        ],
+        "delta_sd_ddof1": 0.002455,
+        "fold_wins": 5,
+        "fold_losses": 0,
+        "recall3_delta": 0.019262,
+        "error31_delta": 249,
+        "error32_delta": -1593,
+        "turnover_auxiliary_not_a_preregistered_verdict": {
+          "prediction_agreement": 0.902087,
+          "corrected_predictions": 9539,
+          "new_errors": 10211
+        }
+      },
+      "T14": {
+        "d1_label": "ADVANTAGE_DESCRIPTIVE",
+        "mean_delta": 0.006405,
+        "fold_delta": [
+          0.009616,
+          0.008262,
+          0.0041,
+          0.002666,
+          0.007381
+        ],
+        "delta_sd_ddof1": 0.002916,
+        "fold_wins": 5,
+        "fold_losses": 0,
+        "recall3_delta": -0.006105,
+        "error31_delta": 35,
+        "error32_delta": 391,
+        "turnover_auxiliary_not_a_preregistered_verdict": {
+          "prediction_agreement": 0.893932,
+          "corrected_predictions": 11063,
+          "new_errors": 10366
+        }
+      },
+      "LR_C": {
+        "d1_label": "ADVANTAGE_DESCRIPTIVE",
+        "mean_delta": 0.018145,
+        "fold_delta": [
+          0.021139,
+          0.021233,
+          0.014626,
+          0.013888,
+          0.019837
+        ],
+        "delta_sd_ddof1": 0.003601,
+        "fold_wins": 5,
+        "fold_losses": 0,
+        "recall3_delta": 0.027116,
+        "error31_delta": 327,
+        "error32_delta": -2219,
+        "turnover_auxiliary_not_a_preregistered_verdict": {
+          "prediction_agreement": 0.908327,
+          "corrected_predictions": 9368,
+          "new_errors": 9077
+        }
+      },
+      "T0": {
+        "d1_label": "ADVANTAGE_DESCRIPTIVE",
+        "mean_delta": 0.023155,
+        "fold_delta": [
+          0.025534,
+          0.025246,
+          0.020209,
+          0.020643,
+          0.024144
+        ],
+        "delta_sd_ddof1": 0.00255,
+        "fold_wins": 5,
+        "fold_losses": 0,
+        "recall3_delta": 0.028478,
+        "error31_delta": 312,
+        "error32_delta": -2299,
+        "turnover_auxiliary_not_a_preregistered_verdict": {
+          "prediction_agreement": 0.901453,
+          "corrected_predictions": 10295,
+          "new_errors": 9517
+        }
+      },
+      "LGBM_O": {
+        "d1_label": "REFERENCE_ONLY",
+        "mean_delta": 0.036985,
+        "fold_delta": [
+          0.037709,
+          0.041774,
+          0.030836,
+          0.035813,
+          0.038795
+        ],
+        "delta_sd_ddof1": 0.00406,
+        "fold_wins": 5,
+        "fold_losses": 0,
+        "recall3_delta": 0.076834,
+        "error31_delta": 476,
+        "error32_delta": -5837,
+        "turnover_auxiliary_not_a_preregistered_verdict": {
+          "prediction_agreement": 0.878031,
+          "corrected_predictions": 13461,
+          "new_errors": 11253
+        }
+      }
+    }
+  },
+  "es_protocol_e1_vs_e2": {
+    "d3_label": "ES_PROTOCOL_EFFECT_SMALL",
+    "mean_delta_e1_minus_e2": 0.000453,
+    "fold_delta_e1_minus_e2": [
+      0.000386,
+      0.000559,
+      0.000255,
+      0.000617,
+      0.000449
+    ],
+    "max_abs_fold_delta": 0.000617,
+    "folds_e1_higher": 5,
+    "n_trees_ratio_e2_over_e1": [
+      1.095443,
+      0.879377,
+      1.162597,
+      1.052632,
+      0.9455
+    ],
+    "folds_with_equal_n_trees": 0,
+    "auxiliary_not_a_preregistered_verdict": {
+      "mean_internal_validation_macro_f1_e1_minus_e2": 0.001117,
+      "mean_internal_minus_outer": {
+        "E1": -0.002678,
+        "E2": -0.003342
+      },
+      "folds_with_negative_internal_minus_outer": {
+        "E1": 4,
+        "E2": 4
+      },
+      "internal_minus_outer_e1_minus_e2_by_fold": [
+        0.001217,
+        -0.002465,
+        0.004219,
+        -0.002851,
+        0.0032
+      ]
+    },
+    "refit_matrix_identical_folds": 5,
+    "audit_common_prefix_probability_max_abs_diff_by_fold": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "audit_common_prefix_bit_identical_folds": 5,
+    "arm_parameters_and_class_counts_identical_except_n_estimators_folds": 5,
+    "inner_split_ids_identical_folds": 5,
+    "attribution_note": "ES 프로토콜 세 요소의 합이며 단일 원인으로 귀속하지 않는다."
+  },
+  "label_probe_fold0_auxiliary_not_a_preregistered_verdict": {
+    "passes": true,
+    "inner_val_labels_changed_share": 0.552418,
+    "A_order_train_part": {
+      "rows_changed_share": 1.0,
+      "cells_changed_share": 0.244585,
+      "columns_changed": 20
+    },
+    "B_order_train_part": {
+      "rows_changed_share": 0.0,
+      "cells_changed_share": 0.0
+    },
+    "B_order_inner_val": {
+      "rows_changed_share": 0.0,
+      "cells_changed_share": 0.0
+    },
+    "A_order_outer_valid_under_outer_label_shuffle": {
+      "rows_changed_share": 0.0,
+      "cells_changed_share": 0.0
+    },
+    "note": "바깥 검증 행 특징은 구조상 평가 프레임의 라벨 열을 버리고 계산하므로 바깥 라벨 변화에 불변이다. 탐침은 이를 확인한 것이다."
+  },
+  "preflight": {
+    "status": "PASS",
+    "classifiers_fitted": 0,
+    "original_function_check_A_order": "PASS",
+    "original_function_check_B_order": "PASS",
+    "columns": 75,
+    "inner_split_fold0": {
+      "tr": 133427,
+      "val": 33357,
+      "matches_registered": true
+    },
+    "synthetic_probe_fits_outside_budget": 1,
+    "caveat": "notebook function objects (AST extract of the private copy) run in the frozen environment; equality of two implementations here does not prove equality in the notebook environment"
+  },
+  "notebook_reference_not_comparable": {
+    "reported_single_split_test_macro_f1": 0.7143,
+    "reported_xgboost_75_baseline_test_macro_f1": 0.7028,
+    "reported_test_recall_by_grade_1_2_3": [
+      0.6764,
+      0.8043,
+      0.674
+    ],
+    "e1_cv_mean_minus_reported": -0.007015,
+    "e2_cv_mean_minus_reported": -0.007468,
+    "e1_cv_mean_minus_xgboost_baseline": 0.004485,
+    "e2_cv_mean_minus_xgboost_baseline": 0.004032,
+    "d4_label_reference_not_a_verdict": "MODERATE",
+    "abs_gap_e1": 0.007015,
+    "comparability": "직접 비교 불가: 전체 260,601행의 단일 80/20 분할 테스트 대 개발 208,480행의 5-Fold CV. 행 구성·학습 크기·라이브러리가 다르고 셀 25의 execution_count가 null이라 보고값은 노트북에 저장된 값으로만 쓴다."
+  },
+  "subgroup_profiles_auxiliary_not_a_preregistered_verdict": {
+    "E1": {
+      "age995": {
+        "n": 1125,
+        "macro_f1": 0.663557,
+        "recall3": 0.611987,
+        "rate31": 0.018927,
+        "error31": 6
+      },
+      "geo1_26": {
+        "n": 18038,
+        "macro_f1": 0.547814,
+        "recall3": 0.117493,
+        "rate31": 0.17624,
+        "error31": 270
+      },
+      "geo1_20": {
+        "n": 13786,
+        "macro_f1": 0.527126,
+        "recall3": 0.070346,
+        "rate31": 0.070346,
+        "error31": 116
+      },
+      "geo1_13": {
+        "n": 7754,
+        "macro_f1": 0.549731,
+        "recall3": 0.184956,
+        "rate31": 0.075221,
+        "error31": 85
+      }
+    },
+    "E2": {
+      "age995": {
+        "n": 1125,
+        "macro_f1": 0.668066,
+        "recall3": 0.615142,
+        "rate31": 0.015773,
+        "error31": 5
+      },
+      "geo1_26": {
+        "n": 18038,
+        "macro_f1": 0.54778,
+        "recall3": 0.116841,
+        "rate31": 0.174935,
+        "error31": 268
+      },
+      "geo1_20": {
+        "n": 13786,
+        "macro_f1": 0.528122,
+        "recall3": 0.072771,
+        "rate31": 0.069739,
+        "error31": 115
+      },
+      "geo1_13": {
+        "n": 7754,
+        "macro_f1": 0.547211,
+        "recall3": 0.181416,
+        "rate31": 0.076106,
+        "error31": 86
+      }
+    },
+    "T14": {
+      "age995": {
+        "n": 1125,
+        "macro_f1": 0.660322,
+        "recall3": 0.652997,
+        "rate31": 0.012618,
+        "error31": 4
+      },
+      "geo1_26": {
+        "n": 18038,
+        "macro_f1": 0.54793,
+        "recall3": 0.139034,
+        "rate31": 0.171671,
+        "error31": 263
+      },
+      "geo1_20": {
+        "n": 13786,
+        "macro_f1": 0.529563,
+        "recall3": 0.103699,
+        "rate31": 0.073984,
+        "error31": 122
+      },
+      "geo1_13": {
+        "n": 7754,
+        "macro_f1": 0.556362,
+        "recall3": 0.239823,
+        "rate31": 0.068142,
+        "error31": 77
+      }
+    },
+    "T8_N": {
+      "age995": {
+        "n": 1125,
+        "macro_f1": 0.66132,
+        "recall3": 0.618297,
+        "rate31": 0.025237,
+        "error31": 8
+      },
+      "geo1_26": {
+        "n": 18038,
+        "macro_f1": 0.55643,
+        "recall3": 0.132507,
+        "rate31": 0.111619,
+        "error31": 171
+      },
+      "geo1_20": {
+        "n": 13786,
+        "macro_f1": 0.535854,
+        "recall3": 0.111583,
+        "rate31": 0.050334,
+        "error31": 83
+      },
+      "geo1_13": {
+        "n": 7754,
+        "macro_f1": 0.552142,
+        "recall3": 0.218584,
+        "rate31": 0.043363,
+        "error31": 49
+      }
+    }
+  },
+  "judgments": {
+    "D1": {
+      "E1": {
+        "T8_N": "ADVANTAGE_DESCRIPTIVE",
+        "T14": "ADVANTAGE_DESCRIPTIVE",
+        "LR_C": "ADVANTAGE_DESCRIPTIVE",
+        "T0": "ADVANTAGE_DESCRIPTIVE",
+        "LGBM_O": "REFERENCE_ONLY"
+      },
+      "E2": {
+        "T8_N": "ADVANTAGE_DESCRIPTIVE",
+        "T14": "ADVANTAGE_DESCRIPTIVE",
+        "LR_C": "ADVANTAGE_DESCRIPTIVE",
+        "T0": "ADVANTAGE_DESCRIPTIVE",
+        "LGBM_O": "REFERENCE_ONLY"
+      }
+    },
+    "D2": "판정 없이 병기(Recall3, 3→1, 3→2)",
+    "D3": "ES_PROTOCOL_EFFECT_SMALL",
+    "D4_reference_only": "MODERATE",
+    "representative_line": "E2 (E1과 E2를 병기)"
+  },
+  "limitations": [
+    "층화 seed 42 5-Fold 하나의 기술 판정이다. 단일 seed이고 LightGBM 난수 변동 폭은 측정하지 않았다.",
+    "Fold 5개는 독립 표본이 아니다. p-value, 신뢰구간, 인과 효과를 주장하지 않으며 Fold SD를 유의성으로 읽지 않는다.",
+    "노트북의 LightGBM 설정 하나를 고정했고 재탐색하지 않았다. 설정 선택 단계의 라벨 혼입 가능성이 결과에 주는 영향은 측정하지 않았다.",
+    "노트북 설정은 전체 260,601행의 무작위 80/20 분할에서 골라졌다. 그 행들이 우리 Fold 검증 행과 과거 홀드아웃 행에 겹쳤을 가능성이 높으나 구성원 일치는 확인하지 않았다(홀드아웃 접근 금지). 이 점수는 선택 통계이며 독립 성능이 아니다.",
+    "비교군(T8·T14·LR-C·T0)과는 전처리·변수·모델·범주 처리·가중치·튜닝이 여러 요소에서 다르다. 한 요소 비교가 아니며 어느 요소가 차이를 만들었는지 분리하지 못했다.",
+    "비교군 일부는 같은 Fold에서 여러 설정을 비교해 고른 최고값이다(T14는 T30 보고 기준 고유 설정 56개 중 최고). 같은 Fold를 반복 사용한 선택 통계다.",
+    "E1·E2의 early stopping fit 중 일부가 2000라운드 상한까지 진행됐다(E1 1/5, E2 2/5). 해당 Fold의 n_trees는 상한에 걸린 값이라 재탐색 없이 그대로 두었다.",
+    "E1과 E2의 차이는 ES 프로토콜 세 요소(tr 특징에 val 라벨 혼입, val 특징 생성 방식, 지역 표 기준 행 수)의 합이며 단일 원인으로 귀속하지 못한다.",
+    "라이브러리가 노트북 실행 환경(더 새로운 LightGBM·Python·pandas로 추정)과 다르다. 함수 대조는 동결 환경 안에서 두 구현의 일치만 보증한다.",
+    "층화 분할은 같은 지역이 학습·검증에 함께 나온다. 처음 보는 지역에서의 일반화(geo2/geo1 Group)는 이 실험에서 평가하지 않았다.",
+    "지역 ID는 재현을 위해 정수 수치로 입력했다. 코드 크기에 의미가 있다는 해석을 하지 않는다.",
+    "노트북에 `best_iteration_` 기록이 없어 트리 수를 Fold마다 새로 정했고 노트북의 트리 수와 대조하지 못했다.",
+    "팀원 설계의 잔여 구조적 성질(OOF 단계의 전역 대체 비율, 표 최소 개수 기준의 규모 차이, 원시 age 995 전달)을 수정 없이 그대로 재현했다. 판단하지 않고 기록만 한다.",
+    "특징 구성 B(E2의 ES 단계) 계산 시간은 보고하지 않았고 특징 구성 A 시간만 보고한다.",
+    "3→1 같은 중대 오류는 Macro F1에 반영되지 않는다. 허용 상한은 정하지 않았다(T29 사용자 결정 항목).",
+    "지진 강도·지반 조건은 반영되지 않았고 인과·안전 판정이 아니다.",
+    "홀드아웃은 접근하지 않았고 이 결과는 새 독립 성능이 아니다. 확인 평가(T29)는 미승인이다."
+  ],
+  "not_claimed": [
+    "최종 모델 선정",
+    "채택·권고",
+    "팔 또는 팀원 작업물의 우열 평가",
+    "재현 성공/실패 판정",
+    "독립 성능",
+    "인과 효과",
+    "유의성"
+  ],
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit-learn": "1.8.0",
+    "lightgbm": "4.6.0",
+    "joblib": "1.5.3",
+    "threadpoolctl": "3.6.0"
+  }
+}

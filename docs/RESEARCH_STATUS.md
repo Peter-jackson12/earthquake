@@ -39,10 +39,10 @@ T26 평균Macro F1은0.524335로 T25 원핫0.568221 대비Δ−0.043886, LGBM-O0
 | A2 층화 종합 (2026-10-16, 주 평가) | 신규 학습0, 감사 집계만 사용, 독립 재계산 검토 지적 반영 | [보고](../reports/STRATIFIED_SUMMARY_20261016.md). 층화 seed 42 5-Fold 결과가 있는 설정 전체와 층화 결과 없는 실험 목록. |
 | T29 최종 평가 설계 | **설계 초안만**, 미승인·미구현·미실행 | [초안](T29_FINAL_EVALUATION_DESIGN_DRAFT.md). 노출된 홀드아웃 대체 방안과 후보 동결·결정 규칙. |
 | T30 RF 요인 층화 분리 (주 평가) | **완료**: 41/41 fit·재시도0·독립 감사 PASS_T30·공개 보고 검토 반영 | [보고](../reports/RF_FACTORS_STRAT_20261016.md). T14 RF+TE+ROS(0.700427) 대비 NO_ROS −0.009197, DROP_GEO23_TE −0.015322, DROP_TE_ALL −0.026573, ONEHOT −0.022921 모두 CHANGE_WORSENS, AGE_C −0.000609 NEGLIGIBLE. 확인 평가는 T29 미승인. |
-| T31 지역 코드 표현 OH/NAT/NUM 층화 비교 | 봉인(`9d7deeb7…`, 커밋 `d71bf5f`)·**학습 중**(단독, 계산량 측정) | [계획](T31_GEO_CODE_ENCODING_PLAN.md). 감사 스크립트 미작성. |
-| T32 표집 목표 시나리오 층화 비교 | 118/118 fit(연구110+대조8)·finalize 완료, **독립 감사 대기** | [계획](T32_SAMPLING_TARGET_SCENARIOS_PLAN.md). 감사 스크립트 준비 완료(T31 종료 후 실행). 결과는 감사 PASS 전 미보고. |
-| T33 EY 노트북 파이프라인 층화 재현 | 20/20 fit·finalize 완료, **독립 감사 대기** | [계획](T33_EY_PIPELINE_BENCHMARK_PLAN.md). 팀원 노트북은 비공개 사본만 사용. 감사 스크립트 작성 중. 결과는 감사 PASS 전 미보고. |
-| T34 파생변수 13개 묶음 층화 비교 | preflight·control-check(LGBM-N·LR-C 1e-9 PASS)·봉인(`b6809686…`) 완료, **학습 대기**(T31 종료 후) | [계획](T34_DERIVED_BUNDLE_STRATIFIED_PLAN.md). 32 fit·상한 36. |
+| T31 지역 코드 표현 OH/NAT/NUM 층화 비교 | 55/55 fit·재시도0·finalize 완료, **독립 감사 대기**(감사 스크립트 작성 중) | [계획](T31_GEO_CODE_ENCODING_PLAN.md). 계산량 측정 14 fit에 noisy 표시(외부 고아 프로세스·보조 작업). 결과는 감사 PASS 전 미보고. |
+| T32 표집 목표 시나리오 층화 비교 (주 평가) | **완료**: 118/118 fit·독립 감사 PASS_T32·공개 보고 검토 반영 | [보고](../reports/SAMPLING_TARGETS_20261016.md). 26칸 등급 A1·B6·C1 6·C2 4·C3 8·D1. 유일한 A는 LR R-DOWN P25(ΔF1 +0.005272, 3→1 +186). 1등급 상향 셀에서 3→1 증가. |
+| T33 EY 노트북 파이프라인 층화 재현 (주 평가) | **완료**: 20/20 fit·독립 감사 PASS_T33·공개 보고 검토 반영 | [보고](../reports/EY_PIPELINE_BENCHMARK_20261016.md). E1 0.707285·E2 0.706832, T14(0.700427)·T8 N(0.699342) 대비 5/5 Fold 우위(D1 ADVANTAGE_DESCRIPTIVE). 3→1은 782로 T8(530)보다 많음. 확인 평가는 T29 미승인. |
+| T34 파생변수 13개 묶음 층화 비교 | 연구 30 + 대조 2 fit·finalize 완료, **독립 감사 대기** | [계획](T34_DERIVED_BUNDLE_STRATIFIED_PLAN.md). 감사 스크립트 작성 중. 결과는 감사 PASS 전 미보고. |
 
 T24 전체 회귀는 **734개 실행·실패0·스킵33(99.673초)**이며 전용 피처14/실행기24를 포함한다. 로그는 `local_reproduction/session_20261015_control/t24_full_tests_20261015.log`, 구현 영수증은 `local_reproduction/T24_20261015_geo_context/runner_implementation_validation_v1.json`이다. 별도 독립 합성17개 PASS·당시 감사 준비 영수증이며 `t24_audit/preparation_receipt_v1.json` SHA는 `9e1b0dd0646ab3277669a246ab53f190dfc80af130091b93a0c8688ff1e147d6`이다. 이후 실제 감사 PASS_T24·native20모델 최대 확률차0과 공개 검토481항목을 별도로 확인했다. 기존 T21/T22/T23 봉인 소스는 각각49개 모두 불변이며 T24 소스도 기존42개+신규7개로 결속한다.
 
@@ -173,6 +173,6 @@ T22/T23 실제 감사는 각각 `t22_audit/t22_audit_result_v1.json`의 PASS_T22
 
 ## 다음 진입점
 
-- **현재 진입점**: 상단 "평가 기준" 절과 [층화 종합](../reports/STRATIFIED_SUMMARY_20261016.md)을 먼저 확인한다. 기존 실험을 재시작하지 않으며 T30~T34의 상태는 상단 실행 상태 표를 따른다. 실행 순서는 T31(단독) → T32 감사 → T34 학습 → T31·T33·T34 감사다. T29 확인 평가는 별도 사용자 결정이다.
+- **현재 진입점**: 상단 "평가 기준" 절과 [층화 종합](../reports/STRATIFIED_SUMMARY_20261016.md)을 먼저 확인한다. 기존 실험을 재시작하지 않으며 T30~T34의 상태는 상단 실행 상태 표를 따른다. T30·T32·T33은 감사·공개 보고 완료, T31·T34는 학습 완료·감사 대기다. T29 확인 평가는 별도 사용자 결정이다.
 - **과거 설계 열람**: [G1~G5 계획](../experiments/age995/interactions/PLAN.md), [T4 인계 기록](HANDOFF_MODEL_FAMILY_COMPARISON_20261014.md)은 당시 기록이다. 이미 실행한 절차를 재시작하는 지시가 아니다.
 - **프로젝트 필수 과제**: [과제 가이드](PROJECT_GUIDE_KO.md)와 팀 합의의 최신본을 확인. XGBoost/LightGBM은 필수 `sklearn GradientBoostingClassifier`를 대체하지 않는다.
