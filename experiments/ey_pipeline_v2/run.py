@@ -122,6 +122,20 @@ def checked_proba(model, X):
     return p
 
 
+def jsonable_params(params):
+    """Model parameters for the fold record: plain scalars kept, non-finite floats (XGBoost `missing=nan`) and other
+    objects written as text so the strict JSON writer (allow_nan=False) accepts them."""
+    out = {}
+    for k, v in params.items():
+        if isinstance(v, float) and not np.isfinite(v):
+            out[k] = str(v)
+        elif isinstance(v, (int, float, str, bool, type(None))):
+            out[k] = v
+        else:
+            out[k] = str(v)
+    return out
+
+
 def fit_model(c, arm, X, y0, w):
     model = make_model(c, arm)
     with threadpool_limits(limits=c['threads']['model_n_jobs']), warnings.catch_warnings(record=True) as caught:
@@ -316,8 +330,7 @@ def fit_unit(ctx, arm, f):
                   matrices=dict(train_matrix_sha256=m['train_sha'], valid_matrix_sha256=m['valid_sha'],
                                 columns=int(m['train'].shape[1]), diagnostics=m['diagnostics']),
                   fit_seconds=seconds,
-                  effective_parameters={k2: (v if isinstance(v, (int, float, str, bool, type(None))) else str(v))
-                                        for k2, v in model.get_params().items()},
+                  effective_parameters=jsonable_params(model.get_params()),
                   reload_probability_max_abs_diff=reload_diff, csv_round_trip_exact=True, warnings=fit_warnings,
                   finished_at_utc=now())
     write(d/f'fold_{f}.json', record)

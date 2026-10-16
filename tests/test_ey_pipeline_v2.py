@@ -502,6 +502,16 @@ class RunnerContractTests(unittest.TestCase):
         self.assertEqual(d1_label([.70] * 5, [.71] * 5, rule)['label'], 'XGB_AHEAD_DESCRIPTIVE')
         self.assertEqual(d1_label([.7015] * 5, [.70] * 5, rule)['label'], 'SIMILAR')
 
+    def test_fold_record_parameters_are_strict_json(self):
+        """Regression (T35 fix 1): XGBoost get_params() holds missing=nan, which the strict JSON writer refused."""
+        import json
+        from xgboost import XGBClassifier
+        params = self.R.jsonable_params(XGBClassifier(**self.R.config()['xgb_params']).get_params())
+        self.assertEqual(params['missing'], 'nan')
+        self.assertEqual(params['n_estimators'], 800)
+        json.dumps(params, allow_nan=False)
+        self.assertEqual(self.R.jsonable_params({'a': float('inf'), 'b': [1]}), {'a': 'inf', 'b': '[1]'})
+
     def test_holdout_path_refused(self):
         with self.assertRaises(ValueError):
             self.R.require_not_holdout('C:/x/earthquake/data/final_holdout/test.csv')
