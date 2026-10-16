@@ -1,0 +1,58 @@
+{
+  "study_id": "T36_ey_l_nested_tuning_v1",
+  "title": "Limited nested-CV tuning of the T35 L pipeline (EY revised notebook, final LightGBM setting)",
+  "plan": {
+    "path": "docs/T36_EY_L_NESTED_TUNING_PLAN.md",
+    "sha256": "51e96148541546c6b7a1024997bdf96735078117df67fdc563a21ec656a3a030",
+    "approval": "2026-10-16 user approved the proposal as offered: L only, 6 candidates (num_leaves x n_estimators), 3->1 reported without verdict, before tuning the four required models"
+  },
+  "n_folds": 5,
+  "split": {"scheme": "stratified", "manifest": "split_manifest.csv", "manifest_sha256": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721", "development_sha256": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1", "train_rows_per_fold": 166784, "valid_rows_per_fold": 41696},
+  "inner": {"n_splits": 3, "shuffle": true, "random_state": 42, "splitter": "StratifiedKFold", "rows": "outer training fold in building_id order"},
+  "features": "experiments/ey_pipeline_v2/features.py (sealed T35 module, import only); rebuilt inside every inner fold",
+  "weights": {"strength": 0.5},
+  "fixed_lgbm_params": {"random_state": 42, "n_jobs": 4, "deterministic": true, "verbose": -1, "learning_rate": 0.05, "min_child_samples": 50, "subsample": 0.8, "subsample_freq": 1, "colsample_bytree": 0.5},
+  "candidates": {
+    "C0": {"num_leaves": 127, "n_estimators": 800},
+    "C1": {"num_leaves": 63, "n_estimators": 800},
+    "C2": {"num_leaves": 255, "n_estimators": 800},
+    "C3": {"num_leaves": 63, "n_estimators": 1600},
+    "C4": {"num_leaves": 127, "n_estimators": 1600},
+    "C5": {"num_leaves": 255, "n_estimators": 1600}
+  },
+  "candidate_order": ["C0", "C1", "C2", "C3", "C4", "C5"],
+  "baseline_candidate": "C0",
+  "selection": {"metric": "pooled inner Macro F1 over the 3 inner validation folds, labels [1,2,3]", "tie_break": "candidate_order (C0 first)"},
+  "decision_rule": "argmax of predict_proba, labels 1/2/3; no threshold, no calibration",
+  "budget": {"inner_fits": 90, "max_outer_refits": 5, "planned_fits_max": 95, "max_fits": 105, "max_recovered_units": 5, "max_attempts_per_unit": 2, "automatic_retries": 0},
+  "threads": {"model_n_jobs": 4, "outer_parallel_jobs": 1, "feature_building_threads": 1},
+  "min_free_disk_gb_at_prepare": 50,
+  "checkpoint": {"reload_probability_atol": 1e-12, "csv_float_format": "%.17g", "csv_read": "float_precision='round_trip' exact", "backup_dir": "backup", "resume_skips_completed": true},
+  "baseline": {
+    "label": "T35 L (EY revised notebook final LightGBM = C0)",
+    "run_dir": "T35_20261016_ey_pipeline_v2/run_v2",
+    "oof_sha256": "0ea83e83edf697e9440dbf3230675ff180afda8774f7410ee496ab362604fabc",
+    "cv_mean": 0.7070552864936703,
+    "fold_pred_sha256": {"0": "b3c4c77ab8a887f383fe5b401207acdfd1683ec44620ad9c6958c64be4f665f2", "1": "5c2e6d549e50337de9ee031c9f44e41f4a6ee87692e201c5c70e36fe5578cca2", "2": "fdfd15f04c398986f92eafe1940fc8a5ce399a6357401e8e8b86c2a5fedf2c45", "3": "b6e63fcfa0e4a7dd3e1b953f0a2691898d35bf1025334c97d97891243233ecf6", "4": "e88d8f4886014709f69222bc1c879016f94cb48c55ef6f7e69bad9c4ce2b00af"},
+    "fold_matrix_sha256": {
+      "0": {"train": "0c46dacbbda4207cbef3f404d1c8fc8e80c40139db8f5b85c94d2a702397a610", "valid": "f2ec9ccf7f2d03e9fdbcc7ed9fcc0b56f7c06b5719b64aabff5f0de630977980"},
+      "1": {"train": "36cab4723904a524a9203a54bfc55befefa0f2543edcfe01d7f0c7fe1ee558aa", "valid": "6e7ad4c6db75fbd5bf23b06042acc3480b0d3c62230149e1bb3c9689f7523443"},
+      "2": {"train": "43edee2ecb6c1550e848f91940c68d05ac9128d98c0379919d8db12a8386ee89", "valid": "cd087f12bccb135ab27300c34cb0eacb10f5be431d12fdd476f0f29629ed6638"},
+      "3": {"train": "b0720eb5b405fc6cf1ce4ba8bbae42327792e96d693ec41d3b7d458a52314ee0", "valid": "c9e1f14ac074cfa3a0be5bbb703bd8a59e76e2adcf3fe56b10d47791f90660ef"},
+      "4": {"train": "f0178788fecd180b86ec90acfb3a2b77d106172d6ec59bdc3e2d045e74670375", "valid": "e4ce3bd37b58d729a6ebf6996d38562f046600617e2a542daaed64eca0e13eff"}
+    }
+  },
+  "rules": {
+    "J1": {"mean_delta": 0.003, "fold_wins_min": 4, "advantage": "IMPROVED_DESCRIPTIVE", "disadvantage": "WORSENED_DESCRIPTIVE", "otherwise": "NOT_MET", "delta": "tuned outer fold Macro F1 minus T35 L fold Macro F1 on the same fold"},
+    "J2": "safety indicators (pooled Recall3, 3->1, 3->2 counts and rates) of tuned vs T35 L, no verdict",
+    "J3": "per outer fold: selected candidate, pooled inner Macro F1 of all 6 candidates, selected inner minus outer; record only"
+  },
+  "profiles": {"age995_group": "raw age == 995", "geo1_regions": [26, 20, 13]},
+  "labels": [1, 2, 3],
+  "std_ddof": 1,
+  "error_rate_denominator": "actual_grade3_support",
+  "environment": {"python": "3.13.5", "numpy": "2.3.5", "pandas": "2.2.3", "scipy": "1.17.0", "scikit-learn": "1.8.0", "lightgbm": "4.6.0", "xgboost": "3.1.3", "joblib": "1.5.3", "threadpoolctl": "3.6.0"},
+  "holdout_access": false,
+  "automatic_model_replacement": false,
+  "threshold_or_decision_rule_change": false
+}
