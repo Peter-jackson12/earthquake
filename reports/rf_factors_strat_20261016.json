@@ -1,0 +1,1104 @@
+{
+  "study_id": "T30_rf_factors_stratified_v1",
+  "report_version": "rf_factors_strat_20261016",
+  "created_for": "reports/RF_FACTORS_STRAT_20261016.md",
+  "design_sha256": "af15e048ed17c6c916d5287299d08c147849c2ef19ebc384bf0981ae44d3f930",
+  "code_commit": "7f3de959490b02838e1477a553122bb4f4f7dcd7",
+  "holdout_accessed": false,
+  "scheme": "strat (Stratified 5-Fold, seed 42, split_manifest.csv SHA 7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721)",
+  "guide_line": "과제 주제 가이드 심화 항목(요인 분리). 주 평가(개발 Stratified 5-Fold seed 42) 결과를 낸다. 판정 분할=층화 seed 42 5-Fold 하나뿐.",
+  "rounding": "부동소수 값은 소수 6자리 반올림. 원자료 전체 자릿수는 analysis.json(비공개)에 있다. 표시된 Δ와 평균의 합이 반올림 때문에 1e-6 단위로 어긋날 수 있다. 건수는 정수.",
+  "delta_definition": "Δ = 팔 Fold Macro F1 - 기준 Fold Macro F1(같은 Fold). CW_NO_ROS는 NO_ROS 대비. SD는 ddof=1.",
+  "counts": {
+    "fits": 41,
+    "attempts": 41,
+    "retries": 0,
+    "completed_fold_fits_by_group": {
+      "C0": 1,
+      "N1": 5,
+      "N2": 5,
+      "tier1_arms": 20,
+      "tier3_arms": 10
+    }
+  },
+  "audit": {
+    "status": "PASS_T30",
+    "checks_run": 483,
+    "issues": 0,
+    "warnings": 0,
+    "new_classifier_fits": 0,
+    "repository_runner_imports": 0,
+    "holdout_paths_touched": 0,
+    "analysis_recomputed_match": true,
+    "ledger": {
+      "complete": 41,
+      "attempts": 41,
+      "retries": 0,
+      "retried_keys": []
+    },
+    "audit_result_sha256": "3a87821d32714d69e86a3a51988c3a86b60e8414635f84997b8da8e2a5b45774",
+    "audit_internal_sha256": "dc4806c42e5cbe7dd7da8b357f8989df6d2d8b3e6fa27b342c4f094f8556925c",
+    "at_utc": "2026-10-16T04:40:05.183982+00:00",
+    "boundary": "층화 seed 42 5-Fold 하나에서 RF 파이프라인 요소 한 가지씩을 바꾼 기술 판정의 재계산 검증이다. 새로운 독립 성능이나 최종 모델 채택 증명이 아니며 홀드아웃은 접근하지 않았다. 학습 행렬은 저장돼 있지 않으므로 독립 재구성 행렬과 저장 트리의 리프 계수 일치로 간접 증명한다."
+  },
+  "finished_at_utc": "2026-10-16T04:29:35.954825+00:00",
+  "input_sha256": {
+    "analysis.json": {
+      "path": "local_reproduction/T30_20261016_rf_factors_stratified/run/analysis.json",
+      "sha256": "128f77a950a60d66f499270557143929cae7ffc2423818953186ac039c39a71b"
+    },
+    "design.json": {
+      "path": "local_reproduction/T30_20261016_rf_factors_stratified/run/design.json",
+      "sha256": "af15e048ed17c6c916d5287299d08c147849c2ef19ebc384bf0981ae44d3f930"
+    },
+    "design_seal.json": {
+      "path": "local_reproduction/T30_20261016_rf_factors_stratified/run/design_seal.json",
+      "sha256": "6d4a7685e2227af6e418aca2dbfdca77554f8888c48ab80cb3be0d6ddd572dea"
+    },
+    "ledger.json": {
+      "path": "local_reproduction/T30_20261016_rf_factors_stratified/run/ledger.json",
+      "sha256": "409c0bf0602950bea3d4dbe62e2869d61e904eb8461e23a756247b06490b2d50"
+    },
+    "c0_gate.json": {
+      "path": "local_reproduction/T30_20261016_rf_factors_stratified/run/c0_gate.json",
+      "sha256": "64b0d94ed9397759edede0fdde39e815990e5aba0301d31e5d9ffdeec3c30212"
+    },
+    "t30_audit_result_v1.json": {
+      "path": "local_reproduction/session_20261016_claude/t30_audit/t30_audit_result_v1.json",
+      "sha256": "3a87821d32714d69e86a3a51988c3a86b60e8414635f84997b8da8e2a5b45774"
+    },
+    "T30_RF_FACTORS_STRATIFIED_PLAN.md": {
+      "path": "docs/T30_RF_FACTORS_STRATIFIED_PLAN.md",
+      "sha256": "ed077defc6ca2570b7101c5be69b759907af6080f56db0b1e88dbe5f53100b59"
+    }
+  },
+  "rule": {
+    "mean_delta_min": 0.003,
+    "same_sign_folds_min": 4,
+    "recall3_delta": 0.01,
+    "to1_relative": 0.1,
+    "to1_min_abs_count": 10,
+    "noise_annotation": {
+      "max_abs_mean_delta": 0.0015,
+      "max_abs_fold_delta": 0.003
+    },
+    "boundary_epsilon": 1e-12
+  },
+  "baseline": {
+    "arm": "T14_RF_TE_ROS_A",
+    "oof_sha256": "69a74d410da08bf06c9da35211e3fe6f1e424bd4afbc72c4de2d2d3c21c09969",
+    "fold_macro_f1": [
+      0.700261,
+      0.701455,
+      0.700451,
+      0.701229,
+      0.698739
+    ],
+    "fold_macro_f1_mean": 0.700427,
+    "fold_macro_f1_sd_ddof1": 0.00107,
+    "pooled": {
+      "macro_f1": 0.700441,
+      "accuracy": 0.739884,
+      "precision": [
+        0.619365,
+        0.763867,
+        0.731187
+      ],
+      "recall": [
+        0.618687,
+        0.799759,
+        0.673016
+      ],
+      "f1": [
+        0.619026,
+        0.781401,
+        0.700896
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          12435,
+          7252,
+          412
+        ],
+        [
+          6898,
+          94857,
+          16852
+        ],
+        [
+          744,
+          22071,
+          46959
+        ]
+      ],
+      "recall3": 0.673016,
+      "error31": 744,
+      "error32": 22071,
+      "rate31": 0.010663,
+      "rate32": 0.316321,
+      "pred_share": [
+        0.096302,
+        0.595645,
+        0.308054
+      ]
+    },
+    "error31": 744,
+    "refits": "C0 게이트 Fold 0 한 번 외 없음"
+  },
+  "c0_gate": {
+    "status": "PASS",
+    "rows": 41696,
+    "max_abs_prob_diff": 0.0,
+    "bit_identical": true,
+    "label_mismatches": 0,
+    "label_mismatches_allowed_exact_ties": 0,
+    "top2_tie_rows": 249,
+    "c0_macro_f1": 0.700261,
+    "baseline_fold0_macro_f1": 0.700261,
+    "c0_pred_sha256": "f82ccb4d64a42403319863231759350d42ce4c678ba5094c3c52ec9e26784a95",
+    "baseline_oof_sha256": "69a74d410da08bf06c9da35211e3fe6f1e424bd4afbc72c4de2d2d3c21c09969",
+    "rule": {
+      "arm": "C0_BASE_REFIT",
+      "fold": 0,
+      "max_abs_prob_diff": 1e-12,
+      "float_precision": "round_trip",
+      "tie_rule": "a label mismatch is tolerated only on a row whose probabilities are bit-identical and whose top-2 probabilities tie exactly"
+    },
+    "created_at_utc": "2026-10-16T03:08:45.582968+00:00"
+  },
+  "arms": {
+    "NO_ROS": {
+      "change": "ROS 끔(샘플링만 변경)",
+      "contrast_with": "T14_RF_TE_ROS_A",
+      "label": "CHANGE_WORSENS",
+      "flags": [
+        "RECALL3_DOWN",
+        "TO1_DOWN"
+      ],
+      "tradeoff": false,
+      "fold_macro_f1": [
+        0.695436,
+        0.694316,
+        0.69059,
+        0.689543,
+        0.686269
+      ],
+      "reference_fold_macro_f1": [
+        0.700261,
+        0.701455,
+        0.700451,
+        0.701229,
+        0.698739
+      ],
+      "fold_macro_f1_mean": 0.691231,
+      "fold_macro_f1_sd_ddof1": 0.003711,
+      "fold_delta": [
+        -0.004826,
+        -0.007139,
+        -0.009861,
+        -0.011687,
+        -0.01247
+      ],
+      "mean_delta": -0.009197,
+      "delta_sd_ddof1": 0.00319,
+      "positive_folds": 0,
+      "negative_folds": 5,
+      "aux_folds_outside_noise_range": 5,
+      "aux_folds_outside_noise_range_note": "보조 지표, 사전등록 판정 아님. N1/N2 Fold Δ 10개의 최소~최대 범위 밖에 놓인 Fold 수이며 검정이 아니다.",
+      "pooled": {
+        "macro_f1": 0.691242,
+        "accuracy": 0.7448,
+        "precision": [
+          0.689494,
+          0.745209,
+          0.75802
+        ],
+        "recall": [
+          0.513956,
+          0.848137,
+          0.635638
+        ],
+        "f1": [
+          0.588923,
+          0.793348,
+          0.691456
+        ],
+        "support": [
+          20099,
+          118607,
+          69774
+        ],
+        "confusion": [
+          [
+            10330,
+            9417,
+            352
+          ],
+          [
+            4206,
+            100595,
+            13806
+          ],
+          [
+            446,
+            24977,
+            44351
+          ]
+        ],
+        "recall3": 0.635638,
+        "error31": 446,
+        "error32": 24977,
+        "rate31": 0.006392,
+        "rate32": 0.35797,
+        "pred_share": [
+          0.071863,
+          0.647491,
+          0.280646
+        ]
+      },
+      "pooled_macro_f1_delta_vs_contrast": -0.009199,
+      "recall3_delta": -0.037378,
+      "error31_delta": -298,
+      "error32_delta": 2906,
+      "error31_reference_count": 744,
+      "turnover": {
+        "corrected_predictions": 8004,
+        "new_errors": 6979,
+        "prediction_agreement": 0.925705,
+        "error31_removed": 317,
+        "error31_new": 19,
+        "error31_common": 427,
+        "error32_removed": 953,
+        "error32_new": 3859,
+        "error32_common": 21118
+      },
+      "model_columns": [
+        77,
+        77,
+        77,
+        77,
+        77
+      ],
+      "fit_seconds_sum": 39.731957,
+      "importance_block_mean": {
+        "raw_geo": 0.078841,
+        "te": 0.468871,
+        "cnt": 0.078856,
+        "onehot_geo": 0.0,
+        "other": 0.373433
+      },
+      "importance_note": "RF 불순도 중요도의 지역 블록 합(5 Fold 평균). 인과 해석 금지.",
+      "oof_sha256": "b056edccc91e9dd9fd64dd49e29bbfb0cfbbd286d2d2d5d02918c4f075c003fe"
+    },
+    "DROP_GEO23_TE": {
+      "change": "geo2·geo3 TE 4열 제거",
+      "contrast_with": "T14_RF_TE_ROS_A",
+      "label": "CHANGE_WORSENS",
+      "flags": [],
+      "tradeoff": false,
+      "fold_macro_f1": [
+        0.688847,
+        0.685668,
+        0.686936,
+        0.68457,
+        0.679502
+      ],
+      "reference_fold_macro_f1": [
+        0.700261,
+        0.701455,
+        0.700451,
+        0.701229,
+        0.698739
+      ],
+      "fold_macro_f1_mean": 0.685105,
+      "fold_macro_f1_sd_ddof1": 0.003512,
+      "fold_delta": [
+        -0.011414,
+        -0.015787,
+        -0.013515,
+        -0.016659,
+        -0.019237
+      ],
+      "mean_delta": -0.015322,
+      "delta_sd_ddof1": 0.002994,
+      "positive_folds": 0,
+      "negative_folds": 5,
+      "aux_folds_outside_noise_range": 5,
+      "aux_folds_outside_noise_range_note": "보조 지표, 사전등록 판정 아님. N1/N2 Fold Δ 10개의 최소~최대 범위 밖에 놓인 Fold 수이며 검정이 아니다.",
+      "pooled": {
+        "macro_f1": 0.685115,
+        "accuracy": 0.725907,
+        "precision": [
+          0.59665,
+          0.756034,
+          0.709547
+        ],
+        "recall": [
+          0.600776,
+          0.780957,
+          0.668372
+        ],
+        "f1": [
+          0.598706,
+          0.768293,
+          0.688345
+        ],
+        "support": [
+          20099,
+          118607,
+          69774
+        ],
+        "confusion": [
+          [
+            12075,
+            7528,
+            496
+          ],
+          [
+            7386,
+            92627,
+            18594
+          ],
+          [
+            777,
+            22362,
+            46635
+          ]
+        ],
+        "recall3": 0.668372,
+        "error31": 777,
+        "error32": 22362,
+        "rate31": 0.011136,
+        "rate32": 0.320492,
+        "pred_share": [
+          0.097074,
+          0.587668,
+          0.315258
+        ]
+      },
+      "pooled_macro_f1_delta_vs_contrast": -0.015327,
+      "recall3_delta": -0.004644,
+      "error31_delta": 33,
+      "error32_delta": 291,
+      "error31_reference_count": 744,
+      "turnover": {
+        "corrected_predictions": 9125,
+        "new_errors": 12039,
+        "prediction_agreement": 0.894848,
+        "error31_removed": 224,
+        "error31_new": 257,
+        "error31_common": 520,
+        "error32_removed": 3437,
+        "error32_new": 3728,
+        "error32_common": 18634
+      },
+      "model_columns": [
+        73,
+        73,
+        73,
+        73,
+        73
+      ],
+      "fit_seconds_sum": 53.336921,
+      "importance_block_mean": {
+        "raw_geo": 0.14693,
+        "te": 0.207217,
+        "cnt": 0.15039,
+        "onehot_geo": 0.0,
+        "other": 0.495464
+      },
+      "importance_note": "RF 불순도 중요도의 지역 블록 합(5 Fold 평균). 인과 해석 금지.",
+      "oof_sha256": "0da52c83d27b87a4fbc217b13839626824fa26b71de25317d3ae445b7dfb7717"
+    },
+    "AGE_C": {
+      "change": "age 995를 학습 Fold 비995 중앙값으로 대체 + age_is_995 표시",
+      "contrast_with": "T14_RF_TE_ROS_A",
+      "label": "NEGLIGIBLE",
+      "flags": [],
+      "tradeoff": false,
+      "fold_macro_f1": [
+        0.701436,
+        0.70093,
+        0.698712,
+        0.700841,
+        0.697172
+      ],
+      "reference_fold_macro_f1": [
+        0.700261,
+        0.701455,
+        0.700451,
+        0.701229,
+        0.698739
+      ],
+      "fold_macro_f1_mean": 0.699818,
+      "fold_macro_f1_sd_ddof1": 0.001812,
+      "fold_delta": [
+        0.001175,
+        -0.000525,
+        -0.001739,
+        -0.000388,
+        -0.001567
+      ],
+      "mean_delta": -0.000609,
+      "delta_sd_ddof1": 0.001166,
+      "positive_folds": 1,
+      "negative_folds": 4,
+      "aux_folds_outside_noise_range": 0,
+      "aux_folds_outside_noise_range_note": "보조 지표, 사전등록 판정 아님. N1/N2 Fold Δ 10개의 최소~최대 범위 밖에 놓인 Fold 수이며 검정이 아니다.",
+      "pooled": {
+        "macro_f1": 0.699829,
+        "accuracy": 0.739342,
+        "precision": [
+          0.619795,
+          0.763337,
+          0.730182
+        ],
+        "recall": [
+          0.616896,
+          0.799346,
+          0.672614
+        ],
+        "f1": [
+          0.618342,
+          0.780927,
+          0.700217
+        ],
+        "support": [
+          20099,
+          118607,
+          69774
+        ],
+        "confusion": [
+          [
+            12399,
+            7283,
+            417
+          ],
+          [
+            6874,
+            94808,
+            16925
+          ],
+          [
+            732,
+            22111,
+            46931
+          ]
+        ],
+        "recall3": 0.672614,
+        "error31": 732,
+        "error32": 22111,
+        "rate31": 0.010491,
+        "rate32": 0.316895,
+        "pred_share": [
+          0.095956,
+          0.59575,
+          0.308293
+        ]
+      },
+      "pooled_macro_f1_delta_vs_contrast": -0.000613,
+      "recall3_delta": -0.000401,
+      "error31_delta": -12,
+      "error32_delta": 40,
+      "error31_reference_count": 744,
+      "turnover": {
+        "corrected_predictions": 5332,
+        "new_errors": 5445,
+        "prediction_agreement": 0.946561,
+        "error31_removed": 119,
+        "error31_new": 107,
+        "error31_common": 625,
+        "error32_removed": 1869,
+        "error32_new": 1909,
+        "error32_common": 20202
+      },
+      "model_columns": [
+        78,
+        78,
+        78,
+        78,
+        78
+      ],
+      "fit_seconds_sum": 57.552381,
+      "importance_block_mean": {
+        "raw_geo": 0.070366,
+        "te": 0.469178,
+        "cnt": 0.072344,
+        "onehot_geo": 0.0,
+        "other": 0.388111
+      },
+      "importance_note": "RF 불순도 중요도의 지역 블록 합(5 Fold 평균). 인과 해석 금지.",
+      "oof_sha256": "72d6ee388a461641d6b43914b0d08dad07ca4046e3efa35ad3af070b8815581c"
+    },
+    "DROP_TE_ALL": {
+      "change": "geo TE 6열 모두 제거(raw geo·빈도 유지)",
+      "contrast_with": "T14_RF_TE_ROS_A",
+      "label": "CHANGE_WORSENS",
+      "flags": [
+        "RECALL3_DOWN",
+        "TO1_UP"
+      ],
+      "tradeoff": false,
+      "fold_macro_f1": [
+        0.675074,
+        0.674631,
+        0.677304,
+        0.673157,
+        0.669103
+      ],
+      "reference_fold_macro_f1": [
+        0.700261,
+        0.701455,
+        0.700451,
+        0.701229,
+        0.698739
+      ],
+      "fold_macro_f1_mean": 0.673854,
+      "fold_macro_f1_sd_ddof1": 0.003044,
+      "fold_delta": [
+        -0.025188,
+        -0.026824,
+        -0.023147,
+        -0.028072,
+        -0.029636
+      ],
+      "mean_delta": -0.026573,
+      "delta_sd_ddof1": 0.002517,
+      "positive_folds": 0,
+      "negative_folds": 5,
+      "aux_folds_outside_noise_range": 5,
+      "aux_folds_outside_noise_range_note": "보조 지표, 사전등록 판정 아님. N1/N2 Fold Δ 10개의 최소~최대 범위 밖에 놓인 Fold 수이며 검정이 아니다.",
+      "pooled": {
+        "macro_f1": 0.673861,
+        "accuracy": 0.715177,
+        "precision": [
+          0.580651,
+          0.749368,
+          0.694073
+        ],
+        "recall": [
+          0.590676,
+          0.767678,
+          0.661794
+        ],
+        "f1": [
+          0.585621,
+          0.758413,
+          0.677549
+        ],
+        "support": [
+          20099,
+          118607,
+          69774
+        ],
+        "confusion": [
+          [
+            11872,
+            7695,
+            532
+          ],
+          [
+            7734,
+            91052,
+            19821
+          ],
+          [
+            840,
+            22758,
+            46176
+          ]
+        ],
+        "recall3": 0.661794,
+        "error31": 840,
+        "error32": 22758,
+        "rate31": 0.012039,
+        "rate32": 0.326167,
+        "pred_share": [
+          0.098072,
+          0.582814,
+          0.319115
+        ]
+      },
+      "pooled_macro_f1_delta_vs_contrast": -0.02658,
+      "recall3_delta": -0.011222,
+      "error31_delta": 96,
+      "error32_delta": 687,
+      "error31_reference_count": 744,
+      "turnover": {
+        "corrected_predictions": 10503,
+        "new_errors": 15654,
+        "prediction_agreement": 0.87005,
+        "error31_removed": 253,
+        "error31_new": 349,
+        "error31_common": 491,
+        "error32_removed": 4148,
+        "error32_new": 4835,
+        "error32_common": 17923
+      },
+      "model_columns": [
+        71,
+        71,
+        71,
+        71,
+        71
+      ],
+      "fit_seconds_sum": 52.988135,
+      "importance_block_mean": {
+        "raw_geo": 0.204426,
+        "te": 0.0,
+        "cnt": 0.220412,
+        "onehot_geo": 0.0,
+        "other": 0.575162
+      },
+      "importance_note": "RF 불순도 중요도의 지역 블록 합(5 Fold 평균). 인과 해석 금지.",
+      "oof_sha256": "5389f85cc5d270e31b76d08f96142c5d6d37bcc7e3083cbd60581aa6b3cf18d2"
+    },
+    "ONEHOT": {
+      "change": "geo TE 6열을 geo1/2/3 one-hot으로 대체",
+      "contrast_with": "T14_RF_TE_ROS_A",
+      "label": "CHANGE_WORSENS",
+      "flags": [
+        "TO1_UP"
+      ],
+      "tradeoff": false,
+      "fold_macro_f1": [
+        0.682019,
+        0.675491,
+        0.679596,
+        0.676907,
+        0.67352
+      ],
+      "reference_fold_macro_f1": [
+        0.700261,
+        0.701455,
+        0.700451,
+        0.701229,
+        0.698739
+      ],
+      "fold_macro_f1_mean": 0.677507,
+      "fold_macro_f1_sd_ddof1": 0.003356,
+      "fold_delta": [
+        -0.018242,
+        -0.025964,
+        -0.020855,
+        -0.024322,
+        -0.025219
+      ],
+      "mean_delta": -0.022921,
+      "delta_sd_ddof1": 0.003266,
+      "positive_folds": 0,
+      "negative_folds": 5,
+      "aux_folds_outside_noise_range": 5,
+      "aux_folds_outside_noise_range_note": "보조 지표, 사전등록 판정 아님. N1/N2 Fold Δ 10개의 최소~최대 범위 밖에 놓인 Fold 수이며 검정이 아니다.",
+      "pooled": {
+        "macro_f1": 0.677513,
+        "accuracy": 0.716625,
+        "precision": [
+          0.573466,
+          0.755579,
+          0.69321
+        ],
+        "recall": [
+          0.612269,
+          0.761076,
+          0.671124
+        ],
+        "f1": [
+          0.592233,
+          0.758318,
+          0.681988
+        ],
+        "support": [
+          20099,
+          118607,
+          69774
+        ],
+        "confusion": [
+          [
+            12306,
+            7197,
+            596
+          ],
+          [
+            8210,
+            90269,
+            20128
+          ],
+          [
+            943,
+            22004,
+            46827
+          ]
+        ],
+        "recall3": 0.671124,
+        "error31": 943,
+        "error32": 22004,
+        "rate31": 0.013515,
+        "rate32": 0.315361,
+        "pred_share": [
+          0.102931,
+          0.573053,
+          0.324017
+        ]
+      },
+      "pooled_macro_f1_delta_vs_contrast": -0.022928,
+      "recall3_delta": -0.001892,
+      "error31_delta": 199,
+      "error32_delta": -67,
+      "error31_reference_count": 744,
+      "turnover": {
+        "corrected_predictions": 10208,
+        "new_errors": 15057,
+        "prediction_agreement": 0.87442,
+        "error31_removed": 202,
+        "error31_new": 401,
+        "error31_common": 542,
+        "error32_removed": 4234,
+        "error32_new": 4167,
+        "error32_common": 17837
+      },
+      "model_columns": [
+        12599,
+        12614,
+        12576,
+        12629,
+        12587
+      ],
+      "fit_seconds_sum": 3879.722197,
+      "importance_block_mean": {
+        "raw_geo": 0.072803,
+        "te": 0.0,
+        "cnt": 0.086431,
+        "onehot_geo": 0.348607,
+        "other": 0.492159
+      },
+      "importance_note": "RF 불순도 중요도의 지역 블록 합(5 Fold 평균). 인과 해석 금지.",
+      "oof_sha256": "67919242e33178494a19a7ef55ba2cfe6cf4f23e2b69bf6ee83e522d64aa008a"
+    }
+  },
+  "cw_no_ros_vs_no_ros": {
+    "change": "NO_ROS에서 RF class_weight=balanced만 추가(NO_ROS 대비 한 요소)",
+    "contrast_with": "NO_ROS",
+    "label": "NEGLIGIBLE",
+    "flags": [
+      "TO1_DOWN"
+    ],
+    "tradeoff": false,
+    "fold_macro_f1": [
+      0.693481,
+      0.689598,
+      0.690752,
+      0.68835,
+      0.682169
+    ],
+    "reference_fold_macro_f1": [
+      0.695436,
+      0.694316,
+      0.69059,
+      0.689543,
+      0.686269
+    ],
+    "fold_macro_f1_mean": 0.68887,
+    "fold_macro_f1_sd_ddof1": 0.004198,
+    "fold_delta": [
+      -0.001954,
+      -0.004718,
+      0.000162,
+      -0.001193,
+      -0.004099
+    ],
+    "mean_delta": -0.00236,
+    "delta_sd_ddof1": 0.002029,
+    "positive_folds": 1,
+    "negative_folds": 4,
+    "aux_folds_outside_noise_range": 2,
+    "aux_folds_outside_noise_range_note": "보조 지표, 사전등록 판정 아님. N1/N2 Fold Δ 10개의 최소~최대 범위 밖에 놓인 Fold 수이며 검정이 아니다.",
+    "pooled": {
+      "macro_f1": 0.688894,
+      "accuracy": 0.744604,
+      "precision": [
+        0.699833,
+        0.74193,
+        0.762126
+      ],
+      "recall": [
+        0.500423,
+        0.854157,
+        0.628716
+      ],
+      "f1": [
+        0.583563,
+        0.794098,
+        0.689023
+      ],
+      "support": [
+        20099,
+        118607,
+        69774
+      ],
+      "confusion": [
+        [
+          10058,
+          9725,
+          316
+        ],
+        [
+          3922,
+          101309,
+          13376
+        ],
+        [
+          392,
+          25514,
+          43868
+        ]
+      ],
+      "recall3": 0.628716,
+      "error31": 392,
+      "error32": 25514,
+      "rate31": 0.005618,
+      "rate32": 0.365666,
+      "pred_share": [
+        0.068937,
+        0.654969,
+        0.276094
+      ]
+    },
+    "pooled_macro_f1_delta_vs_contrast": -0.002348,
+    "recall3_delta": -0.006922,
+    "error31_delta": -54,
+    "error32_delta": 537,
+    "error31_reference_count": 446,
+    "turnover": {
+      "corrected_predictions": 5296,
+      "new_errors": 5337,
+      "prediction_agreement": 0.947559,
+      "error31_removed": 119,
+      "error31_new": 65,
+      "error31_common": 327,
+      "error32_removed": 1668,
+      "error32_new": 2205,
+      "error32_common": 23309
+    },
+    "model_columns": [
+      77,
+      77,
+      77,
+      77,
+      77
+    ],
+    "fit_seconds_sum": 37.297022,
+    "importance_block_mean": {
+      "raw_geo": 0.071079,
+      "te": 0.470607,
+      "cnt": 0.07584,
+      "onehot_geo": 0.0,
+      "other": 0.382474
+    },
+    "importance_note": "RF 불순도 중요도의 지역 블록 합(5 Fold 평균). 인과 해석 금지.",
+    "oof_sha256": "166090a2b8a193d83506b1fc8e3f2c18d1560007027b7126125c91d52a088f18",
+    "error31_reference_count_note": "3->1 reference count is the NO_ROS count, not the baseline 744",
+    "vs_baseline_reference_only": {
+      "mean_delta": -0.011557,
+      "delta_sd_ddof1": 0.003648,
+      "fold_delta": [
+        -0.00678,
+        -0.011857,
+        -0.009699,
+        -0.012879,
+        -0.01657
+      ],
+      "positive_folds": 0,
+      "negative_folds": 5,
+      "recall3_delta": -0.0443,
+      "error31_delta": -352,
+      "error32_delta": 3443,
+      "label_reference_only": "CHANGE_WORSENS",
+      "flags_reference_only": [
+        "RECALL3_DOWN",
+        "TO1_DOWN"
+      ],
+      "note": "기준 대비 값은 참고용이다. 두 요소(ROS 제거, 가중치 추가)가 함께 달라 단일 요인 판정에 쓰지 않는다."
+    }
+  },
+  "noise": {
+    "method": "기준 파이프라인에서 RF random_state만 0 -> 1, 2로 변경한 5-Fold 재학습(ROS·내부 TE Fold 시드는 고정)",
+    "arms": {
+      "N1_RS1": {
+        "fold_macro_f1": [
+          0.702427,
+          0.701711,
+          0.698149,
+          0.701238,
+          0.699592
+        ],
+        "fold_macro_f1_mean": 0.700623,
+        "fold_delta": [
+          0.002166,
+          0.000256,
+          -0.002303,
+          9e-06,
+          0.000853
+        ],
+        "mean_delta": 0.000196,
+        "delta_sd_ddof1": 0.001627,
+        "positive_folds": 4,
+        "negative_folds": 1,
+        "pooled_macro_f1": 0.700633,
+        "recall3_delta": 0.000473,
+        "error31": 742,
+        "error31_delta": -2,
+        "error32_delta": -31,
+        "oof_sha256": "8db90c86e5e049b5b5c0ece56dfc0c4568b132608280bc5b2ee6017a67ef603e"
+      },
+      "N2_RS2": {
+        "fold_macro_f1": [
+          0.702969,
+          0.702188,
+          0.697848,
+          0.699799,
+          0.697477
+        ],
+        "fold_macro_f1_mean": 0.700056,
+        "fold_delta": [
+          0.002708,
+          0.000733,
+          -0.002603,
+          -0.00143,
+          -0.001262
+        ],
+        "mean_delta": -0.000371,
+        "delta_sd_ddof1": 0.002097,
+        "positive_folds": 2,
+        "negative_folds": 3,
+        "pooled_macro_f1": 0.700069,
+        "recall3_delta": -0.000158,
+        "error31": 746,
+        "error31_delta": 2,
+        "error32_delta": 9,
+        "oof_sha256": "76ea2516ad6e5f693d23dc86db42514190b6a028b2ff7c4f94f910c82a1be89b"
+      }
+    },
+    "signed_mean_delta": {
+      "N1_RS1": 0.000196,
+      "N2_RS2": -0.000371
+    },
+    "max_abs_mean_delta": 0.000371,
+    "max_abs_fold_delta": 0.002708,
+    "fold_delta_range": [
+      -0.002603,
+      0.002708
+    ],
+    "annotation_rule": {
+      "max_abs_mean_delta_ge": 0.0015,
+      "max_abs_fold_delta_ge": 0.003
+    },
+    "annotation_triggered": false,
+    "lower_bound_note": "RF random_state만 바꾼 잡음의 하한이다. 승자 편향 보정에 쓰지 않는다.",
+    "private_only_items": "ROS 후 클래스 건수(stats.fit_class_counts), fit_rows, Fold별 RF 불순도 중요도는 비공개 analysis.json에만 둔다. 공개 JSON에는 요약만 싣는다.",
+    "outside_range_note": "모든 팔의 Fold Δ를 N1/N2 Fold Δ 범위 밖에 있는지 센 보조 기술 지표다. 사전등록 판정이 아니며 p-value·신뢰구간이 아니다. 잡음은 기준 파이프라인에서만 측정했다."
+  },
+  "geo2_direction": {
+    "ONEHOT": {
+      "strat_mean_delta": -0.022921,
+      "strat_label": "CHANGE_WORSENS",
+      "geo2_mean_delta": 0.012231,
+      "geo2_positive_folds": "13/20",
+      "geo2_recall3_delta": -0.09802,
+      "strat_recall3_delta": -0.001892,
+      "same_sign": false
+    },
+    "NO_ROS": {
+      "strat_mean_delta": -0.009197,
+      "strat_label": "CHANGE_WORSENS",
+      "geo2_mean_delta": -0.000182,
+      "geo2_positive_folds": "10/20",
+      "geo2_recall3_delta": -0.018392,
+      "strat_recall3_delta": -0.037378,
+      "same_sign": true
+    },
+    "DROP_GEO23_TE": {
+      "strat_mean_delta": -0.015322,
+      "strat_label": "CHANGE_WORSENS",
+      "geo2_mean_delta": -0.005238,
+      "geo2_positive_folds": "4/20",
+      "geo2_recall3_delta": 0.015941,
+      "strat_recall3_delta": -0.004644,
+      "same_sign": true
+    },
+    "AGE_C": {
+      "strat_mean_delta": -0.000609,
+      "strat_label": "NEGLIGIBLE",
+      "geo2_mean_delta": -0.002799,
+      "geo2_positive_folds": "7/20",
+      "geo2_recall3_delta": 0.005772,
+      "strat_recall3_delta": -0.000401,
+      "same_sign": true
+    }
+  },
+  "reference_tables": {
+    "T0_RF_best_strat": {
+      "macro_f1_mean": 0.658667,
+      "macro_f1_sd": 0.000974,
+      "accuracy": 0.685932,
+      "recall3": 0.679866,
+      "error31": 1516,
+      "error32": 20821,
+      "note": "descriptive reference only; several factors differ from T14 (preprocessing, class_weight vs ROS, max_features, max_depth); not used in any T30 judgment"
+    },
+    "T16_geo2_group_20_folds": {
+      "ONEHOT": {
+        "mean_delta": 0.012231,
+        "positive_folds": 13,
+        "of": 20,
+        "recall3_delta": -0.09802
+      },
+      "NO_ROS": {
+        "mean_delta": -0.000182,
+        "positive_folds": 10,
+        "of": 20,
+        "recall3_delta": -0.018392
+      },
+      "DROP_GEO23_TE": {
+        "mean_delta": -0.005238,
+        "positive_folds": 4,
+        "of": 20,
+        "recall3_delta": 0.015941
+      },
+      "AGE_C": {
+        "mean_delta": -0.002799,
+        "positive_folds": 7,
+        "of": 20,
+        "recall3_delta": 0.005772
+      },
+      "note": "citation only (reports/RF_FACTORS_20261015.md); not used in any T30 judgment"
+    }
+  },
+  "to1_reference_counts": {
+    "baseline": 744,
+    "NO_ROS": 446
+  },
+  "notes": [
+    "층화 seed 42 5-Fold 하나의 기술 판정이다. 최고 팔 선정·팔 간 우열·효과 합산·승격은 사전등록 밖.",
+    "기준 0.700427은 56개 설정 중 최고값(선택 통계)이다. 승자 편향 보정을 하지 않는다.",
+    "Fold는 독립 표본이 아니며 p-value·신뢰구간·인과 효과를 주장하지 않는다.",
+    "N1/N2는 RF random_state만 바꾸므로 잡음의 하한이다(ROS·내부 TE Fold 시드는 고정)."
+  ],
+  "limitations": [
+    "층화 seed 42 5-Fold 하나의 기술 판정이다. 최고 팔 선정, 팔 간 우열, 효과 합산, 최종 모델 승격은 사전등록 밖이다.",
+    "기준 0.700427은 서로 다른 고유 설정 56개 중 최고값(선택 통계)이다. 승자 편향을 보정하지 않았다.",
+    "Fold는 독립 표본이 아니며 p-value·신뢰구간·인과 효과를 주장하지 않는다.",
+    "N1/N2는 RF random_state만 바꾸므로 잡음의 하한이다. ROS·내부 TE Fold 시드 변동은 측정하지 않았다.",
+    "단일 RF random_state(0), 단일 층화 seed(42). 팔별 난수 변동 폭은 측정하지 않았다.",
+    "문자 8열 pd.Categorical 어휘가 개발 전체에서 오는 점은 모든 팔·기준에 같은 한계로 남는다(라벨 무관 스키마).",
+    "ONEHOT은 TE 블록 대체 효과이며 열 수 변화가 max_features=sqrt 후보 수를 함께 바꾼다. AGE_C는 대체값과 표시 변수 한 묶음이다. 요인 간 상호작용은 측정하지 않았다.",
+    "CW_NO_ROS는 기준 대비 두 요소가 달라 NO_ROS 대비로만 읽는다.",
+    "학습 행렬은 저장하지 않아 학습 호출의 적합성은 봉인 소스·원장·저장 모델 재추론 일치와 독립 재구성에 의존한다.",
+    "홀드아웃은 접근하지 않았고 이 결과는 새 독립 성능이 아니다. 확인 평가(T29)는 미승인이다."
+  ]
+}
