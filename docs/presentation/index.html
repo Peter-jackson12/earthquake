@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- 팀 검토용 발표자료. 수치는 reports/stratified_ranking_20261016.json, wide_tuning_20261017.json 등 감사된 집계에서 옮겼다. -->
+<title>층화 5-Fold 결과 검토</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* 레이아웃: 세로로 이어지는 16:9 슬라이드 판, 숫자는 고정폭 서체, 3등급(심한 피해)만 붉은 계열로 표시 */
+:root{
+  --bg:#eef1f4; --panel:#ffffff; --fg:#17212b; --muted:#5a6878; --line:#d3dae2;
+  --accent:#2c5b88; --accent-soft:#dbe6f1; --sev:#b2432e; --sev-soft:#f4dfd9; --ok:#3d7a57;
+  --font-body:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#11161c; --panel:#18202a; --fg:#e4e9ef; --muted:#97a5b4; --line:#2c3846;
+  --accent:#7fb0df; --accent-soft:#1f3347; --sev:#e58a74; --sev-soft:#3a241f; --ok:#7cc29a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161c; --panel:#18202a; --fg:#e4e9ef; --muted:#97a5b4; --line:#2c3846;
+  --accent:#7fb0df; --accent-soft:#1f3347; --sev:#e58a74; --sev-soft:#3a241f; --ok:#7cc29a; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.6;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px}
+.deck{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.slide{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:clamp(20px,4vw,48px);
+  min-height:min(56.25vw,620px);display:flex;flex-direction:column;gap:18px;scroll-margin-top:16px;min-width:0}
+.slide:focus{outline:2px solid var(--accent);outline-offset:3px}
+.meta{display:flex;justify-content:space-between;gap:12px;font-size:12px;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+h1,h2{margin:0;text-wrap:balance;line-height:1.25}
+h1{font-size:clamp(28px,4.4vw,46px);font-weight:700}
+h2{font-size:clamp(22px,3vw,32px);font-weight:700}
+p{margin:0;max-width:68ch}
+.lead{font-size:clamp(17px,1.8vw,20px);color:var(--muted)}
+.tag{align-self:flex-start;display:inline-block;font-size:13px;font-weight:500;padding:2px 10px;border-radius:99px;background:var(--sev-soft);color:var(--sev)}
+.tag.blue{background:var(--accent-soft);color:var(--accent)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.cols>*{min-width:0}
+ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.num{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.sev{color:var(--sev);font-weight:500}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.05em;color:var(--muted);font-weight:500;white-space:nowrap}
+td.r,th.r{text-align:right}
+tr.grp td{background:var(--accent-soft)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.fact{border-top:2px solid var(--accent);padding-top:8px}
+.fact b{display:block;font-family:var(--font-mono);font-size:22px;font-weight:500}
+.fact span{font-size:14px;color:var(--muted)}
+.note{font-size:14px;color:var(--muted)}
+svg text{fill:var(--fg);font-family:var(--font-body);font-size:12px;font-variant-numeric:tabular-nums}
+svg .muted{fill:var(--muted)}
+.foot{margin-top:auto;font-size:13px;color:var(--muted)}
+.box{border:1px solid var(--line);border-radius:4px;padding:14px 16px}
+.box h3{margin:0 0 6px;font-size:16px}
+.hint{text-align:center;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+
+<main class="deck" id="deck">
+
+<section class="slide" tabindex="-1" id="s1">
+  <div class="meta"><span>네팔 지진 피해 등급 분류 · 팀 프로젝트</span><span>1 / 9</span></div>
+  <div style="margin-top:auto;display:flex;flex-direction:column;gap:16px">
+    <span class="tag">팀 검토용 · 최종안 아님</span>
+    <h1>층화 5-Fold 비교와 튜닝 결과 검토</h1>
+    <p class="lead">T35~T38과 A3 순위 비교를 한 자리에 모았습니다. 모든 수치는 독립 감사를 마친 <span class="num">reports/</span> 집계 JSON에서 가져왔습니다. 팀 최종 모델과 최종 평가 방법은 아직 정하지 않았습니다.</p>
+  </div>
+  <p class="foot">2026-10-18 · Peter 개인 연구(<span class="num">peter</span> 브랜치) · 공식 개인 최종 모델은 T0 LR C=1 유지</p>
+</section>
+
+<section class="slide" tabindex="-1" id="s2">
+  <div class="meta"><span>평가 기준</span><span>2 / 9</span></div>
+  <h2>모든 모델을 같은 층화 5-Fold로 비교했습니다</h2>
+  <div class="facts">
+    <div class="fact"><b>208,480</b><span>개발 데이터 건물 수 (홀드아웃 미사용)</span></div>
+    <div class="fact"><b>5-Fold · seed 42</b><span>Stratified, split_manifest.csv 고정</span></div>
+    <div class="fact"><b>Macro F1</b><span>주지표, labels 1·2·3 Fold 평균</span></div>
+    <div class="fact"><b class="sev">3→1 오류</b><span>실제 3등급을 1등급으로 예측한 건수</span></div>
+  </div>
+  <div class="cols">
+    <div><p>등급별 건수는 1등급 <span class="num">20,099</span>, 2등급 <span class="num">118,607</span>, 3등급 <span class="num">69,774</span>입니다. 1등급이 적어 Accuracy 대신 Macro F1을 씁니다.</p></div>
+    <div><p>과제 가이드의 "층화 분할, 모든 모델에 같은 분할" 요구에 따른 주 평가입니다. 지역 Group 분할(geo2)은 심화 분석이라 이 순위에 섞지 않았습니다.</p></div>
+  </div>
+  <p class="foot">근거: reports/STRATIFIED_RANKING_20261016.md (A3), docs/RESEARCH_STATUS.md "평가 기준"</p>
+</section>
+
+<section class="slide" tabindex="-1" id="s3">
+  <div class="meta"><span>순위표</span><span>3 / 9</span></div>
+  <h2>은영님 파이프라인이 0.707로 가장 높았습니다</h2>
+  <div class="scroll"><svg id="rank" role="img" aria-label="설정별 층화 CV Macro F1 막대 그래프" width="100%" viewBox="0 0 860 330"></svg></div>
+  <p class="note">막대: 5개 Fold 평균 Macro F1. 가로축은 0.64에서 시작합니다. 파란색은 은영님 파이프라인 4종, 회색은 그 밖의 설정입니다.</p>
+  <p class="foot">근거: stratified_ranking_20261016.json (A3, 8개 설정), wide_tuning_20261017.json (T38 튜닝 3개)</p>
+</section>
+
+<section class="slide" tabindex="-1" id="s4">
+  <div class="meta"><span>순위표 상세</span><span>4 / 9</span></div>
+  <h2>상위 묶음 안의 차이는 0.0005 이내입니다</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>설정</th><th class="r">Macro F1</th><th class="r">Fold SD</th><th class="r">3등급 Recall</th><th class="r">3→1 오류</th></tr></thead>
+    <tbody id="rank-table"></tbody>
+  </table></div>
+  <p class="note">A3의 묶음 구분: 묶음이 다른 모든 쌍에서 위 묶음이 5개 Fold 모두 높았습니다(검정 아님). 묶음 안의 순서는 구별하지 않습니다.</p>
+</section>
+
+<section class="slide" tabindex="-1" id="s5">
+  <div class="meta"><span>튜닝 방법</span><span>5 / 9</span></div>
+  <h2>그리드 서치 + 중첩 CV로 후보를 골랐습니다</h2>
+  <div class="cols">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <p>바깥 층화 5-Fold의 검증 Fold는 성능 측정에만 썼습니다. 후보 선택은 각 바깥 학습 Fold 안의 층화 3-Fold로만 했습니다. 가중치와 재표집은 껐습니다.</p>
+      <div class="scroll"><svg id="nested" role="img" aria-label="중첩 교차검증 구조도" width="100%" viewBox="0 0 420 190"></svg></div>
+    </div>
+    <div class="box">
+      <h3>T38 후보 범위</h3>
+      <ul>
+        <li>DT: max_depth 16·20·24·32·제한 없음 × min_samples_leaf 5·20·50·100 (20개)</li>
+        <li>RF: max_features 0.3·0.45·0.6·0.8 × max_depth 20·30 (8개), 트리 100개</li>
+        <li>GBC: n_estimators 300·600 × max_depth 5·7 (4개), 학습률 0.1</li>
+      </ul>
+      <p class="note" style="margin-top:8px">학습 횟수: T37 436회, T38 465회 (안쪽 선택 + 바깥 재학습)</p>
+    </div>
+  </div>
+  <p class="foot">근거: required_models_tuning_20261017.json (T37), wide_tuning_20261017.json (T38), ey_l_tuning_20261016.json (T36)</p>
+</section>
+
+<section class="slide" tabindex="-1" id="s6">
+  <div class="meta"><span>튜닝 경과</span><span>6 / 9</span></div>
+  <h2>DT·RF·GBC는 올랐고, LR과 은영님 LightGBM은 그대로였습니다</h2>
+  <div class="scroll"><table>
+    <thead><tr><th>모델</th><th class="r">기본값 (A2)</th><th class="r">T37 1차</th><th class="r">T38 확장</th><th>선택 결과</th></tr></thead>
+    <tbody>
+      <tr><td>GBC</td><td class="r num">0.612109</td><td class="r num">0.662003</td><td class="r num">0.682123</td><td>600단계·깊이 7, 5/5 Fold 같은 후보 (범위 경계)</td></tr>
+      <tr><td>RF</td><td class="r num">0.628992</td><td class="r num">0.646608</td><td class="r num">0.669293</td><td>깊이 30 (범위 경계), max_features 0.3~0.6</td></tr>
+      <tr><td>DT</td><td class="r num">0.594238</td><td class="r num">0.623402</td><td class="r num">0.650145</td><td>깊이 제한 없음·잎 20 4회, 깊이 32·잎 5 1회</td></tr>
+      <tr><td>LR</td><td class="r num">—</td><td class="r num">0.683760</td><td class="r num">—</td><td>C=1이 4회 선택, 변화 없음 (Δ −0.000027)</td></tr>
+      <tr><td>은영님 LightGBM (T36)</td><td class="r num">0.707055</td><td class="r num" colspan="2">0.707102</td><td>Δ +0.000047, 차이 없음. 노트북 설정 유지</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">T38 판정: DT +0.026743, RF +0.022684, GBC +0.020120 (T37 대비, 모두 5/5 Fold 개선). GBC·RF·DT는 다시 후보 범위 끝에서 선택돼, 범위를 더 넓히면 값이 달라질 수 있습니다.</p>
+</section>
+
+<section class="slide" tabindex="-1" id="s7">
+  <div class="meta"><span>심한 피해 과소예측</span><span>7 / 9</span></div>
+  <h2>Macro F1이 오를수록 3→1 오류도 늘었습니다</h2>
+  <div class="cols">
+    <div class="scroll"><svg id="scatter" role="img" aria-label="Macro F1과 3→1 오류 건수 산점도" width="100%" viewBox="0 0 440 300"></svg></div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <p>실제 3등급(<span class="num">69,774</span>건) 중 1등급으로 예측된 건수입니다.</p>
+      <ul>
+        <li>은영님 파이프라인 <span class="num sev">779~1,002</span>건 대 LR-C <span class="num">452</span>건, T0 <span class="num">467</span>건</li>
+        <li>DT 튜닝: <span class="num">165 → 282 → 552</span>건 (기본 → T37 → T38)</li>
+        <li>GBC 튜닝: <span class="num">220 → 271 → 367</span>건, RF: <span class="num">187 → 238 → 293</span>건</li>
+        <li>T36 튜닝 LightGBM: <span class="num">854 → 938</span>건</li>
+      </ul>
+      <p class="note">3→1 허용 상한은 정하지 않았습니다. 팀 최종 모델을 고를 때 함께 정해야 할 항목입니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" tabindex="-1" id="s8">
+  <div class="meta"><span>한계</span><span>8 / 9</span></div>
+  <h2>이 순위를 해석할 때 지켜야 할 점</h2>
+  <div class="cols">
+    <div class="box"><h3>선택 통계입니다</h3><p>같은 5개 Fold를 여러 실험에서 반복해 썼습니다. 순위는 독립 성능이 아니며, 최종 성능은 별도 평가 설계(T29 초안, 미승인)가 필요합니다.</p></div>
+    <div class="box"><h3>노트북 0.7131과 비교할 수 없습니다</h3><p>노트북 값은 전체 260,601행의 단일 무작위 분할 점수입니다. 이 자료는 개발 208,480행의 5-Fold 평균이라 데이터 범위와 분할이 다릅니다. T35 L 평균과의 거리는 0.006045입니다.</p></div>
+    <div class="box"><h3>지역 일반화는 평가하지 않았습니다</h3><p>층화 분할에서는 같은 지역이 학습과 검증에 함께 들어갑니다. 상위 설정은 지역 통계를 쓰며, T14는 geo2 Group 분할에서 LR-C보다 낮았습니다(A2). 처음 보는 지역에서는 순위가 다를 수 있습니다.</p></div>
+    <div class="box"><h3>튜닝 범위 경계</h3><p>GBC·RF·DT는 T38에서도 후보 범위 끝이 선택됐습니다. 범위를 더 넓힌 실험은 하지 않았습니다.</p></div>
+  </div>
+</section>
+
+<section class="slide" tabindex="-1" id="s9">
+  <div class="meta"><span>남은 결정</span><span>9 / 9</span></div>
+  <h2>팀이 함께 정할 일</h2>
+  <div class="cols">
+    <div class="box"><h3>최종 평가 방법</h3><p>개인 홀드아웃은 이미 한 번 사용됐습니다. 새 확인 평가 방식(T29 초안)을 검토해야 합니다.</p></div>
+    <div class="box"><h3>팀 최종 모델</h3><p>후보: 은영님 파이프라인, T14 RF+TE+ROS, T8 LightGBM, LR. Macro F1과 3→1 허용 상한을 함께 봐야 합니다.</p></div>
+    <div class="box"><h3>제출 정리</h3><p>main의 README·Streamlit 대시보드·Notion을 마감(10-19 23:59) 전에 맞춥니다.</p></div>
+  </div>
+  <div class="box">
+    <h3>근거 보고서 (저장소 reports/)</h3>
+    <p class="num" style="font-size:13px;max-width:none">STRATIFIED_RANKING_20261016.md · EY_PIPELINE_V2_BENCHMARK_20261016.md · EY_PIPELINE_BENCHMARK_20261016.md · EY_L_TUNING_20261016.md · REQUIRED_MODELS_TUNING_20261017.md · WIDE_TUNING_20261017.md · STRATIFIED_SUMMARY_20261016.md</p>
+  </div>
+</section>
+
+<p class="hint">← → 또는 PageUp/PageDown 키로 슬라이드를 넘길 수 있습니다.</p>
+</main>
+
+<script>
+// 값은 reports/stratified_ranking_20261016.json (A3)과 reports/wide_tuning_20261017.json (T38)에서 그대로 옮겼다.
+const ROWS=[
+  {k:'T33 E1',name:'EY 파이프라인 구판 재현 (T33 E1)',f1:0.707285,sd:0.002835,r3:0.667283,e31:782,ey:true,grp:'A'},
+  {k:'T35 X',name:'EY 파이프라인 XGBoost (T35 X)',f1:0.707206,sd:0.002223,r3:0.689211,e31:1002,ey:true,grp:'A'},
+  {k:'T35 L',name:'EY 파이프라인 LightGBM (T35 L)',f1:0.707055,sd:0.001894,r3:0.688652,e31:854,ey:true,grp:'A'},
+  {k:'T33 E2',name:'EY 파이프라인 구판 ES 분리 (T33 E2)',f1:0.706832,sd:0.002825,r3:0.666910,e31:779,ey:true,grp:'A'},
+  {k:'T14',name:'RF+TE+ROS (T14)',f1:0.700427,sd:0.001070,r3:0.673016,e31:744,grp:'B'},
+  {k:'T8 N',name:'LightGBM native (T8 N)',f1:0.699342,sd:0.003306,r3:0.647648,e31:530,grp:'B'},
+  {k:'LR-C',name:'LR-C 연구 기준선',f1:0.688687,sd:0.001508,r3:0.639794,e31:452,grp:'C'},
+  {k:'T0',name:'LR C=1 · 공식 개인 최종 (T0)',f1:0.683677,sd:0.001071,r3:0.638433,e31:467,grp:'D'},
+  {k:'GBC',name:'GBC 튜닝 (T38)',f1:0.682123,sd:0.002717,r3:0.608765,e31:367,grp:'T38'},
+  {k:'RF',name:'RF 튜닝 (T38)',f1:0.669293,sd:0.003876,r3:0.590822,e31:293,grp:'T38'},
+  {k:'DT',name:'DT 튜닝 (T38)',f1:0.650145,sd:0.004366,r3:0.592126,e31:552,grp:'T38'},
+];
+const NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent,text){const e=document.createElementNS(NS,tag);for(const a in attrs)e.setAttribute(a,attrs[a]);if(text!=null)e.textContent=text;parent.appendChild(e);return e}
+const fmt=(v,d=6)=>v.toFixed(d), int=v=>v.toLocaleString('ko-KR');
+
+// 순위 막대
+(function(){
+  const s=document.getElementById('rank'), L=250, R=790, top=10, h=26, lo=0.64, hi=0.71;
+  const x=v=>L+(v-lo)/(hi-lo)*(R-L);
+  for(let t=0.64;t<=0.7101;t+=0.01){const xx=x(t);el('line',{x1:xx,x2:xx,y1:top,y2:top+ROWS.length*h,stroke:'var(--line)'},s);el('text',{x:xx,y:top+ROWS.length*h+18,'text-anchor':'middle',class:'muted'},s,t.toFixed(2))}
+  ROWS.forEach((r,i)=>{const y=top+i*h;
+    el('text',{x:L-10,y:y+17,'text-anchor':'end'},s,r.name);
+    el('rect',{x:L,y:y+5,width:x(r.f1)-L,height:h-10,fill:r.ey?'var(--accent)':'var(--muted)',opacity:r.ey?1:.55},s);
+    el('text',{x:x(r.f1)+6,y:y+17},s,fmt(r.f1));});
+})();
+
+// 상세 표
+(function(){
+  const tb=document.getElementById('rank-table'); let prev=null;
+  const label={A:'묶음 A · 은영님 파이프라인',B:'묶음 B',C:'묶음 C',D:'묶음 D',T38:'T38 튜닝 (A3 묶음 밖, 참고)'};
+  ROWS.forEach(r=>{
+    if(r.grp!==prev){const tr=tb.insertRow();tr.className='grp';const td=tr.insertCell();td.colSpan=5;td.textContent=label[r.grp];prev=r.grp}
+    const tr=tb.insertRow();
+    [[r.name,''],[fmt(r.f1),'r num'],[fmt(r.sd),'r num'],[fmt(r.r3),'r num'],[int(r.e31),'r num']].forEach(([v,c])=>{const td=tr.insertCell();td.textContent=v;td.className=c});
+  });
+})();
+
+// 중첩 CV 구조
+(function(){
+  const s=document.getElementById('nested');
+  el('text',{x:0,y:14,class:'muted'},s,'바깥 층화 5-Fold (성능 측정)');
+  for(let i=0;i<5;i++){el('rect',{x:i*84,y:24,width:80,height:30,fill:i===0?'var(--sev-soft)':'var(--accent-soft)',stroke:'var(--line)'},s);
+    el('text',{x:i*84+40,y:44,'text-anchor':'middle'},s,i===0?'검증':'학습')}
+  el('path',{d:'M 84 58 L 84 84 M 416 58 L 416 84',stroke:'var(--muted)',fill:'none'},s);
+  el('text',{x:84,y:102,class:'muted'},s,'바깥 학습 부분 안의 층화 3-Fold (후보 선택)');
+  for(let i=0;i<3;i++){el('rect',{x:84+i*111,y:112,width:107,height:30,fill:'var(--panel)',stroke:'var(--accent)'},s);
+    el('text',{x:84+i*111+53,y:132,'text-anchor':'middle'},s,'안쪽 '+(i+1))}
+  el('text',{x:84,y:172,class:'muted'},s,'최고 후보로 바깥 학습 전체 재학습 → 검증');
+})();
+
+// F1 대 3→1 산점도
+(function(){
+  const s=document.getElementById('scatter'), L=56, R=420, T=14, B=250, x0=0.64, x1=0.71, y0=0, y1=1100;
+  const x=v=>L+(v-x0)/(x1-x0)*(R-L), y=v=>B-(v-y0)/(y1-y0)*(B-T);
+  for(let t=0;t<=1000;t+=250){el('line',{x1:L,x2:R,y1:y(t),y2:y(t),stroke:'var(--line)'},s);el('text',{x:L-8,y:y(t)+4,'text-anchor':'end',class:'muted'},s,int(t))}
+  for(let t=0.64;t<=0.7101;t+=0.02){el('text',{x:x(t),y:B+18,'text-anchor':'middle',class:'muted'},s,t.toFixed(2))}
+  el('text',{x:(L+R)/2,y:B+38,'text-anchor':'middle',class:'muted'},s,'층화 CV Macro F1');
+  el('text',{x:L,y:T-2,class:'muted'},s,'3→1 오류 (건)');
+  ROWS.forEach(r=>{el('circle',{cx:x(r.f1),cy:y(r.e31),r:5,fill:r.ey?'var(--sev)':'var(--accent)'},s)});
+  [['DT',8,4],['RF',8,4],['GBC',8,4],['LR-C',8,12],['T0',8,-6],['T8 N',-36,4],['T14',-32,-4]].forEach(([k,dx,dy])=>{const r=ROWS.find(z=>z.k===k);el('text',{x:x(r.f1)+dx,y:y(r.e31)+dy},s,k)});
+  el('text',{x:x(0.7069)-8,y:y(1002)-10,'text-anchor':'end'},s,'은영님 파이프라인 4종');
+})();
+
+// 키보드 이동
+(function(){
+  const slides=[...document.querySelectorAll('.slide')];
+  document.addEventListener('keydown',e=>{
+    if(!['ArrowRight','ArrowLeft','PageDown','PageUp'].includes(e.key))return;
+    const mid=window.innerHeight/3;
+    let cur=slides.findIndex(sl=>sl.getBoundingClientRect().bottom>mid); if(cur<0)cur=slides.length-1;
+    const next=Math.max(0,Math.min(slides.length-1,cur+((e.key==='ArrowRight'||e.key==='PageDown')?1:-1)));
+    e.preventDefault(); slides[next].scrollIntoView({block:'start'}); slides[next].focus({preventScroll:true});
+  });
+})();
+</script>
+</body>
+</html>

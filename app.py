@@ -3,7 +3,7 @@ from __future__ import annotations
 import pandas as pd
 import altair as alt
 import streamlit as st
-from dashboard_data import load_bundle, model_table, error_stats, region_table
+from dashboard_data import load_bundle, model_table, error_stats, region_table, load_stratified
 
 st.set_page_config(page_title='Earthquake · 실험 검증',layout='wide')
 try:
@@ -14,7 +14,7 @@ except (OSError,ValueError,KeyError) as exc:
 models=model_table(bundle)
 st.title('네팔 지진 피해 등급 · 분석과 검증')
 st.caption('Peter 개인 분석 | 개발 208,480건 · 홀드아웃 52,121건 | 고정 층화 5-Fold | ' + ('개인 최종 평가 완료 · 팀 선정 별도' if bundle.get('holdout_result') else '최종 평가 미실행'))
-page=st.sidebar.radio('보기',['실험 비교','개발 데이터 EDA','오류 분석','개인 최종 평가','검증·진행 상태'],key='view')
+page=st.sidebar.radio('보기',['실험 비교','층화 순위 (팀 검토용)','개발 데이터 EDA','오류 분석','개인 최종 평가','검증·진행 상태'],key='view')
 st.sidebar.caption('집계 전용 화면입니다. 원본·행별 예측·모델·홀드아웃 파일을 읽지 않습니다.')
 
 if page=='실험 비교':
@@ -46,6 +46,25 @@ if page=='실험 비교':
         st.download_button('현재 비교표 CSV',selected.drop(columns=['lower','upper']).to_csv(index=False).encode('utf-8-sig'),
                             'earthquake_comparison_summary.csv','text/csv')
         st.info('과거 8개 설정은 집계 재계산 수준입니다. 후속·튜닝 설정의 행별 OOF 검증과 구분해 표시했습니다.')
+
+elif page=='층화 순위 (팀 검토용)':
+    st.subheader('층화 5-Fold 비교 · 팀 검토용 (최종안 아님)')
+    try:
+        ranking=load_stratified()
+    except (OSError,ValueError,KeyError) as exc:
+        st.error(f'층화 집계 파일을 읽을 수 없습니다: {exc}')
+        st.stop()
+    st.caption('개발 208,480건 · Stratified 5-Fold seed 42 · 주지표 Macro F1(labels 1,2,3). 감사된 집계(A3, T38)만 읽습니다.')
+    chart=alt.Chart(ranking).mark_bar().encode(
+        y=alt.Y('설정:N',sort='-x',title=None),
+        x=alt.X('층화 CV Macro F1:Q',scale=alt.Scale(domain=[0.6,0.72])),
+        tooltip=['설정',alt.Tooltip('층화 CV Macro F1:Q',format='.6f'),alt.Tooltip('3→1 오류:Q',format=',d')])
+    st.altair_chart(chart.properties(height=360),width='stretch')
+    st.dataframe(ranking,hide_index=True,width='stretch')
+    st.write('DT·RF·GBC는 그리드 서치 + 중첩 CV(바깥 층화 5-Fold, 각 바깥 학습 Fold 안의 층화 3-Fold로만 선택, 가중치 끔)로 튜닝했습니다(T37→T38).')
+    st.warning('후보·검토 중입니다. 같은 Fold를 반복 사용한 선택 통계이며 독립 성능이 아닙니다. '
+               'Macro F1이 높을수록 3→1 오류가 늘어나는 경향이 있습니다. 노트북 보고값 0.7131과는 분할·데이터 범위가 달라 직접 비교할 수 없고, '
+               '지역 일반화(geo2 Group)에서는 순위가 다를 수 있습니다. 팀 최종 모델과 최종 평가 방법(T29)은 미정이며 공식 개인 최종 모델은 T0 LR C=1입니다.')
 
 elif page=='개발 데이터 EDA':
     st.subheader('피해 분포와 관측 연관성')

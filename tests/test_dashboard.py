@@ -9,7 +9,7 @@ from unittest.mock import patch
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from dashboard_data import load_bundle,validate_bundle,model_table,error_stats,region_table
+from dashboard_data import load_bundle,validate_bundle,model_table,error_stats,region_table,load_stratified
 
 class AggregateTests(unittest.TestCase):
     @classmethod
@@ -66,6 +66,25 @@ class AggregateTests(unittest.TestCase):
         b=copy.deepcopy(self.bundle);b['holdout_result']={'f1':.7}
         with self.assertRaises(ValueError):validate_bundle(b)
 
+class StratifiedRankingTests(unittest.TestCase):
+    def test_audited_values(self):
+        t=load_stratified().set_index('설정')
+        self.assertEqual(len(t),11)
+        self.assertEqual(t.index[0],'EY 파이프라인 구판 재현 (T33 E1)')
+        self.assertAlmostEqual(t.loc['RF+TE+ROS (T14)','층화 CV Macro F1'],0.700427)
+        self.assertAlmostEqual(t.loc['GBC 튜닝 (T38, 600단계·깊이 7)','층화 CV Macro F1'],0.682123)
+        self.assertEqual(t.loc['DT 튜닝 (T38, 깊이 제한 없음·잎 20)','3→1 오류'],552)
+        self.assertEqual(t.loc['LR C=1 · 공식 개인 최종 모델 (T0)','3→1 오류'],467)
+    def test_corrupted_mean_rejected(self):
+        import json,shutil,tempfile
+        with tempfile.TemporaryDirectory() as d:
+            for name in ['stratified_ranking_20261016.json','wide_tuning_20261017.json']:
+                shutil.copy(ROOT/'reports'/name,Path(d)/name)
+            path=Path(d)/'stratified_ranking_20261016.json'
+            data=json.loads(path.read_text(encoding='utf-8'));data['settings']['T14']['cv_mean']+=.01
+            path.write_text(json.dumps(data),encoding='utf-8')
+            with self.assertRaises(ValueError): load_stratified(Path(d))
+
 class PersonalFinalAggregateTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls): cls.bundle=load_bundle()
@@ -100,7 +119,7 @@ class AppTests(unittest.TestCase):
         return at
     def test_all_views_render(self):
         at=self.app()
-        for view in ['실험 비교','개발 데이터 EDA','오류 분석','개인 최종 평가','검증·진행 상태']:
+        for view in ['실험 비교','층화 순위 (팀 검토용)','개발 데이터 EDA','오류 분석','개인 최종 평가','검증·진행 상태']:
             at.sidebar.radio[0].set_value(view).run()
             self.assertEqual(len(at.exception),0,view)
     def test_empty_model_filter(self):

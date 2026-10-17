@@ -173,3 +173,45 @@ def region_table(bundle: dict, experiment: str, model: str) -> pd.DataFrame:
                                           out=np.full(len(data),np.nan),where=data.grade3_count.to_numpy()!=0)
     data['grade3_recall']=1-data.rate_3_to_1-data.rate_3_to_2
     return data.sort_values('rate_3_to_1',ascending=False,na_position='last')
+
+
+STRATIFIED_FILES = ('stratified_ranking_20261016.json','wide_tuning_20261017.json')
+STRATIFIED_ROWS = [  # (source file index, key, display label, report)
+    (0,'T35_X','EY 파이프라인 XGBoost (T35 X)','EY_PIPELINE_V2_BENCHMARK_20261016.md'),
+    (0,'T33_E1','EY 파이프라인 구판 재현 (T33 E1)','EY_PIPELINE_BENCHMARK_20261016.md'),
+    (0,'T35_L','EY 파이프라인 LightGBM (T35 L)','EY_PIPELINE_V2_BENCHMARK_20261016.md'),
+    (0,'T33_E2','EY 파이프라인 구판 ES 분리 (T33 E2)','EY_PIPELINE_BENCHMARK_20261016.md'),
+    (0,'T14','RF+TE+ROS (T14)','STRATIFIED_RANKING_20261016.md'),
+    (0,'T8_N','LightGBM native categorical (T8 N)','STRATIFIED_RANKING_20261016.md'),
+    (0,'LR_C','LR-C 연구 기준선','STRATIFIED_RANKING_20261016.md'),
+    (0,'T0','LR C=1 · 공식 개인 최종 모델 (T0)','STRATIFIED_RANKING_20261016.md'),
+    (1,'GBC','GBC 튜닝 (T38, 600단계·깊이 7)','WIDE_TUNING_20261017.md'),
+    (1,'RF','RF 튜닝 (T38, 깊이 30)','WIDE_TUNING_20261017.md'),
+    (1,'DT','DT 튜닝 (T38, 깊이 제한 없음·잎 20)','WIDE_TUNING_20261017.md'),
+]
+
+
+def load_stratified(directory: Path = REPORTS) -> pd.DataFrame:
+    """Audited stratified 5-Fold aggregates (A3 + T38) for team review; no ranking is a final selection."""
+    directory=Path(directory)
+    sources=[json.loads((directory/name).read_text(encoding='utf-8')) for name in STRATIFIED_FILES]
+    if any(s.get('holdout_accessed') is not False for s in sources):
+        raise ValueError('Stratified aggregates must not touch the holdout')
+    rows=[]
+    for index,key,label,report in STRATIFIED_ROWS:
+        if index==0:
+            s=sources[0]['settings'][key]; folds=s['fold_macro_f1']; cm=s['confusion']
+            mean,std,err31,recall3=s['cv_mean'],s['cv_std'],s['err31'],s['recall3']
+        else:
+            t=sources[1]['models'][key]['tuned']; folds=t['fold_macro_f1']; cm=t['pooled']['confusion']
+            mean,std,err31,recall3=t['cv_mean'],t['cv_std'],t['error31'],t['recall3']
+        stats=error_stats({'matrix':cm})
+        scores=np.asarray(folds,dtype=float)
+        if scores.shape!=(5,) or abs(scores.mean()-mean)>1e-6 or abs(scores.std(ddof=1)-std)>1e-6:  # folds are rounded to 6 dp
+            raise ValueError(f'Fold scores disagree with the CV mean: {key}')
+        if stats['support'].tolist()!=[20099,118607,69774] or stats['error_3_to_1']!=err31 \
+                or abs(stats['recall'][2]-recall3)>1e-6:
+            raise ValueError(f'Confusion counts disagree with reported errors: {key}')
+        rows.append({'설정':label,'층화 CV Macro F1':mean,'Fold SD':std,'3등급 Recall':recall3,
+                     '3→1 오류':err31,'3→1 비율':stats['rate_3_to_1'],'근거 보고서':report})
+    return pd.DataFrame(rows).sort_values('층화 CV Macro F1',ascending=False,kind='stable').reset_index(drop=True)

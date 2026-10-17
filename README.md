@@ -4,6 +4,24 @@
 개발 CV Macro F1 **0.683677**, 개인 홀드아웃 Macro F1 **0.686771**, Accuracy **74.24%**.
 19개 고유 설정 비교 후 후보를 동결하고 52,121건을 한 번 평가했다. 개인 결과이며 팀 최종 선정/제출 완료가 아니다.
 
+## 층화 5-Fold 비교 — 팀 검토용 (2026-10-18, 최종안 아님)
+
+주 평가 기준(개발 208,480건, Stratified 5-Fold seed 42, Macro F1 labels 1·2·3)으로 감사를 마친 결과만 모았다. **후보·검토 중**이며 팀 최종 모델과 최종 평가 방법([T29 초안](docs/T29_FINAL_EVALUATION_DESIGN_DRAFT.md))은 아직 정하지 않았다. 공식 개인 최종 모델은 위 T0 LR C=1로 유지한다. 발표자료: [docs/presentation/index.html](docs/presentation/index.html), 대시보드의 "층화 순위 (팀 검토용)" 화면.
+
+| 순 | 설정 | Fold 평균 Macro F1 | 3→1 오류 | 근거 |
+|---:|---|---:|---:|---|
+| 1 | 은영님(EY) 파이프라인 — T35 LightGBM / XGBoost, T33 구판 재현 2종 | 0.706832~0.707285 | 779~1,002 | [T35](reports/EY_PIPELINE_V2_BENCHMARK_20261016.md), [T33](reports/EY_PIPELINE_BENCHMARK_20261016.md), [A3](reports/STRATIFIED_RANKING_20261016.md) |
+| 2 | T14 RF+TE+ROS | 0.700427 | 744 | [A3](reports/STRATIFIED_RANKING_20261016.md) |
+| 3 | T8 LightGBM native categorical | 0.699342 | 530 | [A3](reports/STRATIFIED_RANKING_20261016.md) |
+| 4 | LR C=1 (공식 개인 최종 T0) | 0.683677 | 467 | [A3](reports/STRATIFIED_RANKING_20261016.md) |
+| 5 | GBC 튜닝 (T38, 600단계·깊이 7) | 0.682123 | 367 | [T38](reports/WIDE_TUNING_20261017.md) |
+| 6 | RF 튜닝 (T38, 깊이 30) | 0.669293 | 293 | [T38](reports/WIDE_TUNING_20261017.md) |
+| 7 | DT 튜닝 (T38, 깊이 제한 없음·잎 20) | 0.650145 | 552 | [T38](reports/WIDE_TUNING_20261017.md) |
+
+- 튜닝 방법: 그리드 서치 + 중첩 CV. 바깥은 층화 5-Fold, 각 바깥 학습 Fold 안의 층화 3-Fold로만 후보를 골랐고 가중치·재표집은 껐다([T36](reports/EY_L_TUNING_20261016.md) EY LightGBM 0.707055→0.707102 차이 없음, [T37](reports/REQUIRED_MODELS_TUNING_20261017.md) 필수 4모델 1차, [T38](reports/WIDE_TUNING_20261017.md) 범위 확장). GBC·RF·DT의 선택은 여전히 후보 범위 경계에 있었다.
+- 3→1 오류(실제 3등급을 1등급으로 예측)는 Macro F1이 높은 설정과 튜닝된 설정에서 늘었다. 예: DT 282(T37)→552(T38), EY 파이프라인 779~1,002 대 LR-C 452.
+- 같은 Fold를 반복 사용한 선택 통계이며 독립 성능이 아니다. EY 노트북의 보고값 0.7131은 단일 분할·전체 데이터 기준이라 직접 비교할 수 없다. 층화 분할은 지역 일반화를 평가하지 않으며, geo2 Group 분할에서는 순위가 다를 수 있다(T14는 geo2에서 LR-C보다 낮음, [A2](reports/STRATIFIED_SUMMARY_20261016.md)).
+
 ## 팀 문제 정의와 개인 연구의 관계
 
 2026-10-13 팀 배경·목적 논의에서 동의한 방향은 2015년 네팔 지진의 관측 피해 등급을 분류하고, 주요 건물 특성의 연관성·클래스 불균형·심한 피해의 과소예측을 함께 분석하는 것입니다. 향후 점검·내진 보강 우선순위 검토에 참고할 기초 근거를 탐색합니다. 공통 분할, 오류 비용·허용 기준, 팀 최종 모델과 역할의 확정은 별도입니다.
@@ -58,6 +76,16 @@ Macro F1과 함께 3→1·3→2 건수와 비율 및 3등급 Recall을 보고합
 | T28 | 3→1 비용 결정 규칙(설계 초안) | 미승인·미구현·미실행, [초안](docs/T28_GRADE3_SAFETY_PLAN_DRAFT.md) |
 | A2 | 층화 5-Fold 결과 종합(**주 평가 기준**, 2026-10-16) | 신규 학습 0·독립 검토 PASS, [보고](reports/STRATIFIED_SUMMARY_20261016.md) |
 | T29 | 새 최종 평가 설계(확인 CV) | 미승인·미구현·미실행, [초안](docs/T29_FINAL_EVALUATION_DESIGN_DRAFT.md) |
+| T30 | RF 요인 층화 분리 | 41회 학습·독립 감사 완료, T14 대비 4개 변경 악화·AGE_C 차이 미미, [결과](reports/RF_FACTORS_STRAT_20261016.md) |
+| T31 | 지역 코드 표현(원핫·native·수치) 층화 비교 | 55회 학습·독립 감사 완료, [결과](reports/GEO_CODE_ENCODING_20261016.md) |
+| T32 | 표집 목표 시나리오 층화 비교 | 118회 학습·독립 감사 완료, [결과](reports/SAMPLING_TARGETS_20261016.md) |
+| T33 | EY 노트북 파이프라인(구판) 층화 재현 | 20회 학습·독립 감사 완료, E1 0.707285·E2 0.706832, [결과](reports/EY_PIPELINE_BENCHMARK_20261016.md) |
+| T34 | 파생변수 13개 묶음 층화 비교 | 32회 학습·독립 감사 완료, 6개 비교 모두 기준 미충족, [결과](reports/DERIVED_BUNDLE_20261016.md) |
+| T35 | EY 새 노트북 파이프라인 층화 재현 | 10회 학습·독립 감사 완료, LightGBM 0.707055·XGBoost 0.707206, [결과](reports/EY_PIPELINE_V2_BENCHMARK_20261016.md) |
+| A3 | 층화 순위 비교(감사된 OOF 8개 재계산) | 신규 학습 0·독립 검토 반영, 선택 아님, [보고](reports/STRATIFIED_RANKING_20261016.md) |
+| T36 | T35 LightGBM 중첩 CV 튜닝 | 93회 학습·독립 감사 완료, Δ+0.000047 차이 없음, [결과](reports/EY_L_TUNING_20261016.md) |
+| T37 | 필수 4모델(LR·DT·RF·GBC) 중첩 CV 튜닝 | 436회 학습·독립 감사 완료, LR 변화 없음·DT·RF·GBC 개선, [결과](reports/REQUIRED_MODELS_TUNING_20261017.md) |
+| T38 | DT·RF·GBC 범위 확장 중첩 CV 튜닝 | 465회 학습·독립 감사 완료, DT 0.650145·RF 0.669293·GBC 0.682123, [결과](reports/WIDE_TUNING_20261017.md) |
 
 ## 결과 보기 — 데이터나 모델 파일 없이 실행
 
@@ -68,7 +96,7 @@ python -m pip install -r requirements-dashboard.txt
 python -m streamlit run app.py
 ```
 
-실험 비교 / 개발 EDA / 오류 분석 / 개인 최종 평가 / 검증·진행 상태를 제공한다.
+실험 비교 / 층화 순위(팀 검토용) / 개발 EDA / 오류 분석 / 개인 최종 평가 / 검증·진행 상태를 제공한다.
 `reports/PERSONAL_FINAL_REPORT_20261013.md`에 처리 정책, 실패한 개선, 최종 등급별 결과와 한계를 기록했다.
 
 ## 비공개 예측 모델 사용
