@@ -215,3 +215,29 @@ def load_stratified(directory: Path = REPORTS) -> pd.DataFrame:
         rows.append({'설정':label,'층화 CV Macro F1':mean,'Fold SD':std,'3등급 Recall':recall3,
                      '3→1 오류':err31,'3→1 비율':stats['rate_3_to_1'],'근거 보고서':report})
     return pd.DataFrame(rows).sort_values('층화 CV Macro F1',ascending=False,kind='stable').reset_index(drop=True)
+
+
+def load_tuning(directory: Path = REPORTS) -> pd.DataFrame:
+    """Nested-CV tuning progress (T36~T38) from audited aggregates: baseline -> T37 -> T38 Fold-mean Macro F1."""
+    directory=Path(directory)
+    read=lambda name: json.loads((directory/name).read_text(encoding='utf-8'))
+    wide,req,eyl=read('wide_tuning_20261017.json'),read('required_models_tuning_20261017.json'),read('ey_l_tuning_20261016.json')
+    if any(s.get('holdout_accessed') is not False for s in (wide,req,eyl)):
+        raise ValueError('Tuning aggregates must not touch the holdout')
+    def checked(rec,key):
+        scores=np.asarray(rec['fold_macro_f1'],dtype=float)
+        if scores.shape!=(5,) or abs(scores.mean()-rec['cv_mean'])>1e-6:  # folds are rounded to 6 dp
+            raise ValueError(f'Fold scores disagree with the CV mean: {key}')
+        return rec['cv_mean']
+    rows=[]
+    for model in ['GBC','RF','DT']:
+        m=wide['models'][model]
+        rows.append({'모델':model,'기본값':checked(m['reference_A2'],model+' A2'),'1차 튜닝':checked(m['reference_T37'],model+' T37'),
+                     '범위 확장 (T38)':checked(m['tuned'],model+' T38'),'3→1 기본값':m['reference_A2']['error31'],
+                     '3→1 1차':m['reference_T37']['error31'],'3→1 확장':m['tuned']['error31'],'판정':'T38 '+m['J1']['label']})
+    lr=req['models']['LR']
+    rows.append({'모델':'LR','기본값':checked(lr['baseline'],'LR base'),'1차 튜닝':checked(lr['tuned'],'LR T37'),'범위 확장 (T38)':None,
+                 '3→1 기본값':lr['baseline']['error31'],'3→1 1차':lr['tuned']['error31'],'3→1 확장':None,'판정':'T37 '+lr['J1']['label']})
+    rows.append({'모델':'은영님 LightGBM (T36)','기본값':checked(eyl['baseline_T35_L'],'T35 L'),'1차 튜닝':checked(eyl['tuned'],'T36'),'범위 확장 (T38)':None,
+                 '3→1 기본값':eyl['baseline_T35_L']['error31'],'3→1 1차':eyl['tuned']['error31'],'3→1 확장':None,'판정':'T36 '+eyl['J1']['label']})
+    return pd.DataFrame(rows)

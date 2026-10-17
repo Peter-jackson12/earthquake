@@ -6,7 +6,7 @@
 
 ## 층화 5-Fold 비교 — 팀 검토용 (2026-10-18, 최종안 아님)
 
-주 평가 기준(개발 208,480건, Stratified 5-Fold seed 42, Macro F1 labels 1·2·3)으로 감사를 마친 결과만 모았다. **후보·검토 중**이며 팀 최종 모델과 최종 평가 방법([T29 초안](docs/T29_FINAL_EVALUATION_DESIGN_DRAFT.md))은 아직 정하지 않았다. 공식 개인 최종 모델은 위 T0 LR C=1로 유지한다. 발표자료: [docs/presentation/index.html](docs/presentation/index.html), 대시보드의 "층화 순위 (팀 검토용)" 화면.
+주 평가 기준(개발 208,480건, Stratified 5-Fold seed 42, Macro F1 labels 1·2·3)으로 감사를 마친 결과만 모았다. **후보·검토 중**이며 팀 최종 모델과 최종 평가 방법([T29 초안](docs/T29_FINAL_EVALUATION_DESIGN_DRAFT.md))은 아직 정하지 않았다. 공식 개인 최종 모델은 위 T0 LR C=1로 유지한다. 발표는 대시보드 첫 화면 "발표"(슬라이드 10장, 이전/다음 버튼)로 진행하며, 같은 내용의 예비 HTML은 [docs/presentation/index.html](docs/presentation/index.html)이다(파일을 내려받아 브라우저로 연다).
 
 | 순 | 설정 | Fold 평균 Macro F1 | 3→1 오류 | 근거 |
 |---:|---|---:|---:|---|
@@ -96,7 +96,7 @@ python -m pip install -r requirements-dashboard.txt
 python -m streamlit run app.py
 ```
 
-실험 비교 / 층화 순위(팀 검토용) / 개발 EDA / 오류 분석 / 개인 최종 평가 / 검증·진행 상태를 제공한다.
+발표 / 실험 비교 / 층화 순위(팀 검토용) / 개발 EDA / 오류 분석 / 개인 최종 평가 / 검증·진행 상태를 제공한다.
 `reports/PERSONAL_FINAL_REPORT_20261013.md`에 처리 정책, 실패한 개선, 최종 등급별 결과와 한계를 기록했다.
 
 ## 비공개 예측 모델 사용

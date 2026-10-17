@@ -9,7 +9,7 @@ from unittest.mock import patch
 import numpy as np
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
-from dashboard_data import load_bundle,validate_bundle,model_table,error_stats,region_table,load_stratified
+from dashboard_data import load_bundle,validate_bundle,model_table,error_stats,region_table,load_stratified,load_tuning
 
 class AggregateTests(unittest.TestCase):
     @classmethod
@@ -75,6 +75,12 @@ class StratifiedRankingTests(unittest.TestCase):
         self.assertAlmostEqual(t.loc['GBC 튜닝 (T38, 600단계·깊이 7)','층화 CV Macro F1'],0.682123)
         self.assertEqual(t.loc['DT 튜닝 (T38, 깊이 제한 없음·잎 20)','3→1 오류'],552)
         self.assertEqual(t.loc['LR C=1 · 공식 개인 최종 모델 (T0)','3→1 오류'],467)
+    def test_tuning_progress(self):
+        t=load_tuning().set_index('모델')
+        self.assertAlmostEqual(t.loc['GBC','범위 확장 (T38)'],0.682123)
+        self.assertAlmostEqual(t.loc['DT','기본값'],0.594238)
+        self.assertEqual(int(t.loc['DT','3→1 확장']),552)
+        self.assertAlmostEqual(t.loc['은영님 LightGBM (T36)','1차 튜닝'],0.707102)
     def test_corrupted_mean_rejected(self):
         import json,shutil,tempfile
         with tempfile.TemporaryDirectory() as d:
@@ -119,11 +125,23 @@ class AppTests(unittest.TestCase):
         return at
     def test_all_views_render(self):
         at=self.app()
-        for view in ['실험 비교','층화 순위 (팀 검토용)','개발 데이터 EDA','오류 분석','개인 최종 평가','검증·진행 상태']:
+        for view in ['발표','실험 비교','층화 순위 (팀 검토용)','개발 데이터 EDA','오류 분석','개인 최종 평가','검증·진행 상태']:
             at.sidebar.radio[0].set_value(view).run()
             self.assertEqual(len(at.exception),0,view)
+    def test_presentation_slides(self):
+        at=self.app()
+        self.assertEqual(at.sidebar.radio[0].value,'발표')
+        from presentation import SLIDES
+        for i in range(len(SLIDES)):
+            at.selectbox(key='slide').set_value(i).run()
+            self.assertEqual(len(at.exception),0,SLIDES[i][0])
+        at.selectbox(key='slide').set_value(0).run()
+        at.button(key='slide_next').click().run()
+        self.assertEqual(at.selectbox(key='slide').value,1)
+        at.button(key='slide_prev').click().run()
+        self.assertEqual(at.selectbox(key='slide').value,0)
     def test_empty_model_filter(self):
-        at=self.app();at.multiselect(key='families').set_value([]).run()
+        at=self.app();at.sidebar.radio[0].set_value('실험 비교').run();at.multiselect(key='families').set_value([]).run()
         self.assertEqual(len(at.exception),0)
         self.assertIn('선택',at.info[0].value)
     def test_age_boundaries_display(self):

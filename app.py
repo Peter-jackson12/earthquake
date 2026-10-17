@@ -4,6 +4,7 @@ import pandas as pd
 import altair as alt
 import streamlit as st
 from dashboard_data import load_bundle, model_table, error_stats, region_table, load_stratified
+import presentation
 
 st.set_page_config(page_title='Earthquake · 실험 검증',layout='wide')
 try:
@@ -14,10 +15,13 @@ except (OSError,ValueError,KeyError) as exc:
 models=model_table(bundle)
 st.title('네팔 지진 피해 등급 · 분석과 검증')
 st.caption('Peter 개인 분석 | 개발 208,480건 · 홀드아웃 52,121건 | 고정 층화 5-Fold | ' + ('개인 최종 평가 완료 · 팀 선정 별도' if bundle.get('holdout_result') else '최종 평가 미실행'))
-page=st.sidebar.radio('보기',['실험 비교','층화 순위 (팀 검토용)','개발 데이터 EDA','오류 분석','개인 최종 평가','검증·진행 상태'],key='view')
+page=st.sidebar.radio('보기',['발표','실험 비교','층화 순위 (팀 검토용)','개발 데이터 EDA','오류 분석','개인 최종 평가','검증·진행 상태'],key='view')
 st.sidebar.caption('집계 전용 화면입니다. 원본·행별 예측·모델·홀드아웃 파일을 읽지 않습니다.')
 
-if page=='실험 비교':
+if page=='발표':
+    presentation.render(bundle)
+
+elif page=='실험 비교':
     chosen=st.multiselect('모델 계열',options=['dummy','lr','dt','rf','gbc'],
                           default=['lr','dt','rf','gbc'],key='families')
     selected=models.loc[models.model.isin(chosen)].copy()
