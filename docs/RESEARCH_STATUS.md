@@ -47,6 +47,7 @@ T26 평균Macro F1은0.524335로 T25 원핫0.568221 대비Δ−0.043886, LGBM-O0
 | T35 EY 새 노트북 파이프라인 층화 재현 (주 평가) | **완료**: 10/10 fit(v1 중단본 2회 시작 별도·수정 1 재봉인)·독립 감사 PASS_T35·공개 보고 검토 반영 | [보고](../reports/EY_PIPELINE_V2_BENCHMARK_20261016.md). L(LightGBM) 0.707055·X(XGBoost) 0.707206, T14·T8 N·LR-C·T0 대비 5/5 Fold 우위(D1 ADVANTAGE_DESCRIPTIVE), T33 E1·E2와 INDISTINGUISHABLE, L 대 X SIMILAR. Recall3 0.6887/0.6892로 높으나 3→1은 854/1,002로 모든 비교군보다 많음. 확인 평가는 T29 미승인. |
 | T36 T35 L 제한 중첩 CV 튜닝 (주 평가, 심화 튜닝) | **완료**: 93 fit(안쪽 90 + 바깥 재학습 3)·독립 감사 PASS_T36·공개 보고 검토 반영 | [보고](../reports/EY_L_TUNING_20261016.md). 잎 63/127/255 × 트리 800/1600, 안쪽 선택 C1 3회·C0 2회. 튜닝 0.707102 대 T35 L 0.707055(Δ +0.000047), J1 NOT_MET. 3→1 854→938. 필수 네 모델 튜닝은 별도로 남음. |
 | T37 필수 네 모델 제한 중첩 CV 튜닝 (주 평가, 가이드 필수 CV·튜닝) | **완료**: 436 fit(안쪽 420 + 바깥 재학습 16)·독립 감사 PASS_T37·공개 보고 검토 반영 | [보고](../reports/REQUIRED_MODELS_TUNING_20261017.md). 가중치 끔. J1: LR NOT_MET(Δ −0.000027), DT +0.029165·GBC +0.049894·RF +0.017617 IMPROVED(5/5). DT·GBC·RF 선택은 범위 경계. 3→1 네 모델 모두 증가. |
+| T38 DT·RF·GBC 범위 확장 중첩 CV 튜닝 (주 평가, T37 후속) | **완료**: 465 fit(안쪽 450 + 바깥 15)·독립 감사 PASS_T38·공개 보고 검토 반영 | [보고](../reports/WIDE_TUNING_20261017.md). 가중치 끔. T37 대비 DT +0.026743(0.650145)·RF +0.022684(0.669293)·GBC +0.020120(0.682123), 모두 IMPROVED 5/5. GBC (600,7)·RF 깊이 30·DT 깊이는 다시 경계. 3→1 DT 282→552 등 증가. |
 
 T24 전체 회귀는 **734개 실행·실패0·스킵33(99.673초)**이며 전용 피처14/실행기24를 포함한다. 로그는 `local_reproduction/session_20261015_control/t24_full_tests_20261015.log`, 구현 영수증은 `local_reproduction/T24_20261015_geo_context/runner_implementation_validation_v1.json`이다. 별도 독립 합성17개 PASS·당시 감사 준비 영수증이며 `t24_audit/preparation_receipt_v1.json` SHA는 `9e1b0dd0646ab3277669a246ab53f190dfc80af130091b93a0c8688ff1e147d6`이다. 이후 실제 감사 PASS_T24·native20모델 최대 확률차0과 공개 검토481항목을 별도로 확인했다. 기존 T21/T22/T23 봉인 소스는 각각49개 모두 불변이며 T24 소스도 기존42개+신규7개로 결속한다.
 
@@ -177,6 +178,6 @@ T22/T23 실제 감사는 각각 `t22_audit/t22_audit_result_v1.json`의 PASS_T22
 
 ## 다음 진입점
 
-- **현재 진입점**: 상단 "평가 기준" 절과 [층화 종합](../reports/STRATIFIED_SUMMARY_20261016.md)을 먼저 확인한다. 기존 실험을 재시작하지 않으며 T30~T37의 상태는 상단 실행 상태 표를 따른다. T30~T37은 모두 학습·독립 감사·공개 보고 완료다. T29 확인 평가는 별도 사용자 결정이다.
+- **현재 진입점**: 상단 "평가 기준" 절과 [층화 종합](../reports/STRATIFIED_SUMMARY_20261016.md)을 먼저 확인한다. 기존 실험을 재시작하지 않으며 T30~T38의 상태는 상단 실행 상태 표를 따른다. T30~T38은 모두 학습·독립 감사·공개 보고 완료다. T29 확인 평가는 별도 사용자 결정이다.
 - **과거 설계 열람**: [G1~G5 계획](../experiments/age995/interactions/PLAN.md), [T4 인계 기록](HANDOFF_MODEL_FAMILY_COMPARISON_20261014.md)은 당시 기록이다. 이미 실행한 절차를 재시작하는 지시가 아니다.
 - **프로젝트 필수 과제**: [과제 가이드](PROJECT_GUIDE_KO.md)와 팀 합의의 최신본을 확인. XGBoost/LightGBM은 필수 `sklearn GradientBoostingClassifier`를 대체하지 않는다.
