@@ -1,8 +1,8 @@
 # 네팔 지진 건물 피해 예측 분류 모델   
 
-지역별 피해 패턴과 건물 구조의 조합을 피처로 표현하고, 같은 피처 93개로 네 모델을 각각 학습한 뒤 예측 확률을 같은 비중으로 평균하는 soft voting을 적용하였다.    
+지역별 피해 패턴과 건물 구조의 조합을 피처로 표현하고, 같은 피처 92개로 네 모델을 각각 학습한 뒤 예측 확률을 같은 비중으로 평균하는 soft voting을 적용하였다.    
 
-2~3개 모델 조합 10가지를 검증 데이터로만 비교해 *HGB + LightGBM*을 선택하였고, 조합과 트리 수를 고정한 뒤 학습·검증 85%로 재학습하여 테스트  데이터 기준 *Macro F1 0.7158, Recall 0.7296, Accuracy 0.7473*을 나타내었다.
+2~3개 모델 조합 10가지를 검증 데이터로만 비교해 *HGB + LightGBM*을 선택하였고, 조합과 트리 수를 고정한 뒤 학습·검증 85%로 재학습하여 테스트 데이터 기준 *Macro F1 0.7158, Recall 0.7259, Accuracy 0.7473*을 나타내었다.
 
 ---
 
@@ -26,7 +26,7 @@
 
 분석 단위는 건물 한 동이고, 타깃은 원 데이터의 `damage_grade`(1·2·3)이다.  
   
-표본이 적은 등급도 균형 있게 평가하기 위해 등급별 F1에 같은 비중을 두는 `Macro F1`, `Recall`을 주 지표로 사용한다.
+표본이 적은 등급도 균형 있게 평가하기 위해 등급별 F1에 같은 비중을 두는 `Macro F1`, `Recall`을 주 지표와 보조 지표로 사용한다.
 
 | 평가 지표 | 사용 목적 |
 |---|---|
@@ -195,7 +195,7 @@ uv sync
 |---|---|
 | 1 데이터 | nepal_building_damage.csv를 같은 폴더에 두고 위에서부터 차례로 실행 |
 | 2 분할 | random_state=42 층화 분할로 70 / 15 / 15 복원 |
-| 3 피처 | make_features로 93개 열 생성 · 타깃 인코딩은 학습 내부 5폴드 OOF |
+| 3 피처 | make_features로 92개 열 생성 · 타깃 인코딩은 학습 내부 5폴드 OOF |
 | 4 학습 | class_weight {1.9, 1.0, 1.3}로 네 모델 학습 · 조기 종료로 트리 수 결정 |
 | 5 선택 | 검증 데이터에서 10개 조합 비교 후 Macro F1 1위 조합 선택 |
 | 6 재학습 | 학습+검증 85%로 선택 모델만 트리 수를 고정해 재학습 |
@@ -271,7 +271,7 @@ uv run streamlit run app.py
 
 **[Target Distribution]**
 
-<img src="team_materials/sy_proect1_ML/result/01_종속변수%20비율.png" width="500">
+<img src="./result/01_종속변수%20비율.png" width="500">
 
 - 타깃변수의 클래스 중 grade2가 50%를 차지하여 전체 정확도만 높이는 방향으로 학습하면,   
 1등급이 거의 예측하지 못하는 오류가 발생할 가능성이 있다.
@@ -298,17 +298,17 @@ uv run streamlit run app.py
 
 **[이상치 파악]**
 
-<img src="team_materials/sy_proect1_ML/result/02_이상치파악.png" width="1000">
+<img src="./result/02_이상치파악.png" width="1000">
 
 - 이상치 판단 중에 특이점으로 건물의 연식 컬럼명인 `age` : **995**라는 혼자 범위가 큰 데이터가 존재한다.
 
 - 그 외의 컬럼은 모두 정상적인 수치로 간주하였다.
 
-**[건축 사용 자재 수]** <img src="team_materials/sy_proect1_ML/result/03_건축자재수.png" width="800" heigh="400">
+**[건축 사용 자재 수]** <img src="./result/03_건축자재수.png" width="800" heigh="400">
 -  건축에 사용한 자재 중 머드_모르타르를 사용한 수가 가장 많았다.
 
 **[3등급 위험분류_건축자재]**
-<img src="team_materials/sy_proect1_ML/result/04_부가적사용개수.png" width="800" heigh="400">
+<img src="./result/04_부가적사용개수.png" width="800" heigh="400">
 
 - 2차적 사용용도로 사용한 건물 중 농업용도로 사용한 건물이 가장 많았으며, 호텔이 그 뒤를 이었다. 
 
@@ -383,7 +383,7 @@ uv run streamlit run app.py
 | `g1/g2/g3_material_low_rate`<br>`g1/g2/g3_material_high_rate` | 지역×재료 그룹별 1등급, 3등급 비율 | float |
 | `g2/g3_material_high_gap`<br>`g2/g3_material_low_gap` | 지역×재료 피해율 - 같은 재료 전체 피해율 | float |
 
-**결과:** 변수 93개, **검증 Macro F1 기본 0.7067 -> 종속변수 등급별 가중치 조정 후 0.7184**
+**결과:** 변수 92개, **검증 Macro F1 기본 0.7067 -> 종속변수 등급별 가중치 조정 후 0.7184**
 
 트리 386개로 가장 빨리 수렴하여 검증 데이터의 성능은 Macro F1 0.7184 (Accuracy 0.7467)로 세 실험 중에 가장 높은 성능을 보였다.    
 따라서 **실험 3에 사용한 변수들을 최종 변수로 가정하였다.**
@@ -431,14 +431,6 @@ uv run streamlit run app.py
 
 - 따라서 본 프로젝트에서는 클래스 가중치(Class Weight)를 적용하여 데이터 수가 적은 클래스에 상대적으로 높은 가중치를 부여하였다. 이를 통해 모델이 다수 클래스뿐만 아니라 소수 클래스의 특성도 충분히 학습할 수 있도록 하였다.
 
-**처리 전후 비교**
-
-| 실험 | 변수 수 | 가중치 미조정 F1 | 가중치 조정 후 F1 | 최적 가중치 (1/2/3) |
-|---|---|---|---|---|
-| ① 기존 파생변수 | 54 | 0.7084 | 0.7182 | 1.7 / 1.0 / 1.5 |
-| ① ② + 추가 변수 | 61 | 0.7085 | 0.7178 | 1.8 / 1.0 / 1.5 |
-| ② ③ + 지역 정보 | 93 | 0.7067 | 0.7184 | 1.8 / 1.0 / 1.3 |
-
 
 ### 7.3 모델 비교 및 성능 개선
 
@@ -455,7 +447,7 @@ uv run streamlit run app.py
 
 **설정한 가중치로 랜덤서치 진행 - 하이퍼파라미터 튜닝 결과**
 
-- 실험 ③ (변수 93개)의 LightGBM 모델에 대해 하이퍼파라미터를 랜덤서치로 튜닝을 진행했다. 
+- 실험 ③ (변수 92개)의 LightGBM 모델에 대해 하이퍼파라미터를 랜덤서치로 튜닝을 진행했다. 
 
 - 하이퍼파라미터 선택은 검증 데이터로만 진행하였다.
 
@@ -481,7 +473,7 @@ uv run streamlit run app.py
 | 트리 수 | 최대 3,000, 조기 종료 100 | 386 | 526 |
 | 가중치 (1/2/3등급) | 1등급 0.8~2.4, 3등급 0.7~2.0 | 1.8 / 1.0 / 1.3 | 1.9 / 1.0 / 1.3 |
 
-**결과:** 30번의 시도 중에 시도 5가 선택되었다. **검증 Macro F1 0.7184 -> 0.7207 (+0.0023)**.
+**결과:** 30번의 시도 중에 시도 5가 선택되었다. **검증 Macro F1 0.7184 -> 0.7207 (+0.0023)**
 
 *2) 탐색 결과 상위 10개 (검증 데이터)*
 
@@ -532,7 +524,7 @@ uv run streamlit run app.py
 
 **실험 ③ Soft Voting**
 
-- 실험 ③(변수 93개)으로 LightGBM / XGBoost / HGB / ExtraTrees 4개 모델을 학습하고, 2~3개씩 묶어 예측 확률을 같은 비중으로 평균(soft voting)했다. 
+- 실험 ③(변수 92개)으로 LightGBM / XGBoost / HGB / ExtraTrees 4개 모델을 학습하고, 2~3개씩 묶어 예측 확률을 같은 비중으로 평균(soft voting)했다. 
 
 - 등급 불균형은 class_weight(1.9 / 1.0 / 1.3)를 네 모델에 sample_weight로 똑같이 적용하였다. 
 
@@ -658,7 +650,7 @@ uv run streamlit run app.py
 **최종모델 Confusion Matrix**
 
 **[Confusion Matrix] Result**   
-<img src="team_materials/sy_proect1_ML/result/06_최종모델_혼동행렬.png" width="400" heigh="200">
+<img src="./result/06_최종모델_혼동행렬.png" width="400" heigh="200">
 
 
 
@@ -681,11 +673,22 @@ uv run streamlit run app.py
 
 <br>
 
+
+**[베이스라인과 최종모델 혼동행렬 비교]**
+
+<!-- 베이스라인과 최종모델 혼동행렬 비교 -->
+<p align="center">
+  <img src="./result/06_베이스라인_혼동행렬.png" width="49%">
+  <img src="./result/06_최종모델_혼동행렬.png" width="40%">
+</p>
+
+
+
 > **학습곡선 ① 트리 수에 따른 손실**
 
 **[Learning Curve]** "트리 수에 따른 학습/검증 logloss"
 
-<img src="team_materials/sy_proect1_ML/result/07_학습곡선_트리수.png">
+<img src="./result/07_학습곡선_트리수.png">
 
 
 - LightGBM과 HGB 모두 트리 수가 약 150개 이후부터 검증 손실이 거의 감소하지 않는 모습을 보인다.
@@ -700,7 +703,7 @@ uv run streamlit run app.py
 
 **[Learning Curve by Data Size]** "학습 데이터 양에 따른 학습/검증 Macro F1 (HGB + LightGBM)*"
 
-<img src="team_materials/sy_proect1_ML/result/08_학습곡선_학습데이터수변화.png">
+<img src="./result/08_학습곡선_학습데이터수변화.png">
 
 
 
@@ -722,7 +725,7 @@ uv run streamlit run app.py
 
 **[LightGBM Feature Importance]**
 
-<img src="team_materials/sy_proect1_ML/result/09_lgbm_피처중요도.png">
+<img src="./result/09_lgbm_피처중요도.png">
 
 
 | 순위 | 변수 | LightGBM gain 비율 (%) |
@@ -742,7 +745,7 @@ uv run streamlit run app.py
 
 > **2. Soft voting(HGB + LightGBM) 전체의 permutation importance** 
 
-<img src="team_materials/sy_proect1_ML/result/10_최종모델_피처중요도.png">
+<img src="./result/10_최종모델_피처중요도.png">
 
 
 
@@ -764,7 +767,7 @@ uv run streamlit run app.py
 
 - 두 방법 모두 지역×재료 그룹별 피해 등급 비율(g3/g2_material_low/high_rate)이 1~4위를 차지한다. 
 
-- permutation importance가 0 이하인 변수가 93개 중 31개이다. 
+- permutation importance가 0 이하인 변수가 92개 중 31개이다. 
 - 따라서 이 변수들은 빼도 성능이 거의 변하지 않을 가능성이 높아, 변수 정리가 가능하다고 판단된다.
 
 
