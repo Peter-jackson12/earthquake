@@ -1,0 +1,3 @@
+﻿comparison,mean_diff,std_diff,folds_better
+LGBM_grade3 - LGBM_raw,0.006996467271347751,0.0013659470963198804,5
+LGBM_grade3 - LGBM_grade3,0.0,0.0,0

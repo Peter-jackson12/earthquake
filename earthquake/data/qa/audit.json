@@ -1,0 +1,41 @@
+{
+  "rows": 260601,
+  "columns": 40,
+  "input_features": 38,
+  "missing_cells": 0,
+  "duplicate_ids": 0,
+  "duplicate_full_rows": 0,
+  "deleted_rows": 0,
+  "imputed_cells": 0,
+  "feature_duplicates_beyond_first": 16191,
+  "feature_groups_with_multiple_labels": 3825,
+  "age_995_rows": 1390,
+  "age_0_rows": 26041,
+  "zero_families_rows": 20862,
+  "invalid_binary_cells": 0,
+  "geo3_multiple_geo2_parents": 0,
+  "geo2_multiple_geo1_parents": 0,
+  "secondary_use_contradictions": 0,
+  "target_counts": {
+    "1": 25124,
+    "2": 148259,
+    "3": 87218
+  },
+  "geographic_cardinality": {
+    "geo_level_1_id": 31,
+    "geo_level_2_id": 1414,
+    "geo_level_3_id": 11595
+  },
+  "predictive_model_trained": false,
+  "holdout_policy": "Only source integrity checks, stratification and file separation. Not used to fit preprocessing, select models or compute model scores.",
+  "development_rows": 208480,
+  "holdout_rows": 52121,
+  "source_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+  "split_seed": 42,
+  "n_folds": 5,
+  "sort_before_split": "building_id",
+  "split_id_overlap": 0,
+  "reordered_source_split_reproducible": true,
+  "development_csv_value_roundtrip_checked": true,
+  "fold_preprocessing_validation": "5/5 PASS"
+}

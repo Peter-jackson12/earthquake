@@ -1,0 +1,30 @@
+# 실제 실행 환경: Python 3.14.7 (Windows-11)
+# 아래 버전은 outputs/*/environment.json 과 data/qa/environment.json 에
+# 기록된 실행 당시 값과 일치한다. 결과를 재현하려면 이 버전을 쓴다.
+
+# --- 결과 재현에 필요한 핵심 (environment.json 기록값, 정확히 고정) ---
+numpy==2.5.4
+pandas==3.0.6
+scipy==1.18.1
+scikit-learn==1.9.1
+lightgbm==4.7.0
+imbalanced-learn==0.14.2
+joblib==1.6.0
+threadpoolctl==3.6.0
+
+# --- 노트북 실행에 필요 (environment.json 에 버전 기록이 없어 하한만 지정)
+#     실제 사용 버전으로 고정하려면 작업 PC에서 `pip freeze` 값으로 교체 ---
+matplotlib>=3.11.2
+seaborn>=0.13.2
+xgboost>=3.4.1
+openpyxl>=3.1.5
+ipykernel>=7.4.0
+
+# --- 아래 3개는 코드에서 import 하지만 어떤 설정 파일에도 없었다.
+#     해당 노트북을 유지할지 결정한 뒤 버전을 고정하거나 import 를 제거한다.
+#     catboost  : big_test/exp3_softvoting.ipynb 등 3곳
+#     shap      : 1곳
+#     statsmodels: t_project_1_1 쪽 노트북 2곳
+# catboost
+# shap
+# statsmodels

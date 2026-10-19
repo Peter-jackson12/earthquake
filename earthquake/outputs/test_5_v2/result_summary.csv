@@ -1,0 +1,10 @@
+﻿항목,값
+Dummy 5-fold CV Macro F1,0.24174404157162677
+Logistic 5-fold CV Macro F1,0.6693884051666188
+RandomForest 5-fold CV Macro F1 (geo 숫자 입력),0.61489712553708
+LGBM_raw 5-fold CV Macro F1,0.6986022031849829
+후보 LGBM_grade3 5-fold CV Macro F1,0.7055986704563306
+후보 - LGBM_raw (fold별 짝지은 차이 평균),0.006996467271347751
+LGBM_raw 처음 보는 geo2 Macro F1,0.5421109002386894
+후보 LGBM_grade3 처음 보는 geo2 Macro F1,0.5741216212264758
+검증 행 중 학습 fold와 입력이 같은 비율,0.07988296239447429

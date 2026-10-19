@@ -1,0 +1,14 @@
+{
+  "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+  "final_holdout/features.csv": "c854183dbdfbac9c17c84458b61cefb22e0e35b6de48f195253a6a45ec2eb911",
+  "final_holdout/labels_DO_NOT_USE_FOR_TUNING.csv": "5e198fb0802218bd68246d5ca2890488dd1c4f7d761dd2bbab4d29a3e0c14453",
+  "final_holdout/README.txt": "4b5370ff52f6dfbb512fc82f9fe57215e4c7898f62c80cdabeb406cdee75f16d",
+  "qa/audit.json": "db3a23cff1f46e84c18820698fa3a48fcee39ade422391eecf34c606957abed4",
+  "qa/class_distribution.csv": "efe054c3e06862bb915020846e3e83fae8a711dab07838b8e7ca8af2af1053ce",
+  "qa/development_feature_profile.csv": "d2bd64564224b65229c41a5166c167d2b3db1802de28cb79fddf9cd9323ff9a8",
+  "qa/environment.json": "5e1bce3421779caec0da621fb010665ab4e1031d6fc5551961df57125ebf0a83",
+  "qa/fold_class_counts.csv": "af668c277d6a7b66495782e972810eedca31745f68a8568fc41771ac7c2a5758",
+  "qa/fold_preprocessing_validation.json": "d7bbdd3b754849dec5ebc2313f3e12d1499cc94b5fedca006f628651e0c8f974",
+  "schema.json": "cfb84c03100ef092d07575e6cf87f6a51763dde45fc4d2d355a145fbed5791e0",
+  "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+}

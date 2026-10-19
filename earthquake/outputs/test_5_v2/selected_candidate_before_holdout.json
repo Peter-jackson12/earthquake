@@ -1,0 +1,34 @@
+{
+  "status": "candidate_pending_user_confirmation",
+  "holdout_evaluated": false,
+  "selected": {
+    "name": "LGBM_grade3",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "grade3"
+  },
+  "selection_rule": "highest mean 5-fold macro F1 on frozen development folds",
+  "cv_mean_macro_f1": 0.7055986704563306,
+  "cv_std_macro_f1": 0.0040467085360730475,
+  "diff_vs_lgbm_raw": 0.006996467271347751,
+  "unseen_geo2_macro_f1": 0.5741216212264758,
+  "environment": {
+    "python": "3.14.7",
+    "packages": {
+      "pandas": "3.0.6",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1",
+      "lightgbm": "4.7.0",
+      "imbalanced-learn": "0.14.2"
+    },
+    "preprocessing_version": "1.0.1",
+    "source_sha256": "87abd2bc2b05d3e687bd176959967fd38334fff607e6afeb2d20d0d899c13e97",
+    "data_files_sha256": {
+      "development.csv": "8ef0302a90fc66a49f20fdaefc8e7302ef4bbd3ca2b8b7b741a52f0503ce31b1",
+      "split_manifest.csv": "7673dbeb136e9a916c67a3b19928b3fbc621ae627a5667a677a1ca6eae838721"
+    },
+    "split_seed": 42,
+    "model_seed": 20261016
+  }
+}

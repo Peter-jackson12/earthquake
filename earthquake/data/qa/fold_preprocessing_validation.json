@@ -1,0 +1,172 @@
+[
+  {
+    "fold": 0,
+    "train": {
+      "rows": 166784,
+      "columns": 12593,
+      "nnz": 2920131,
+      "dtype": "float32",
+      "format": "csr",
+      "storage_mib": 22.915,
+      "dense_float32_gib_estimate": 7.824
+    },
+    "validation": {
+      "rows": 41696,
+      "columns": 12593,
+      "nnz": 729214,
+      "dtype": "float32",
+      "format": "csr",
+      "storage_mib": 5.723,
+      "dense_float32_gib_estimate": 1.956
+    },
+    "unseen_validation_categories": {
+      "geo_level_2_id": {
+        "rows": 8,
+        "categories": 6
+      },
+      "geo_level_3_id": {
+        "rows": 306,
+        "categories": 258
+      }
+    },
+    "train_only_vocabulary_checked": true,
+    "feature_name_count": 12593,
+    "status": "PASS"
+  },
+  {
+    "fold": 1,
+    "train": {
+      "rows": 166784,
+      "columns": 12608,
+      "nnz": 2919502,
+      "dtype": "float32",
+      "format": "csr",
+      "storage_mib": 22.91,
+      "dense_float32_gib_estimate": 7.834
+    },
+    "validation": {
+      "rows": 41696,
+      "columns": 12608,
+      "nnz": 729866,
+      "dtype": "float32",
+      "format": "csr",
+      "storage_mib": 5.727,
+      "dense_float32_gib_estimate": 1.958
+    },
+    "unseen_validation_categories": {
+      "geo_level_2_id": {
+        "rows": 4,
+        "categories": 4
+      },
+      "geo_level_3_id": {
+        "rows": 287,
+        "categories": 245
+      }
+    },
+    "train_only_vocabulary_checked": true,
+    "feature_name_count": 12608,
+    "status": "PASS"
+  },
+  {
+    "fold": 2,
+    "train": {
+      "rows": 166784,
+      "columns": 12570,
+      "nnz": 2919696,
+      "dtype": "float32",
+      "format": "csr",
+      "storage_mib": 22.912,
+      "dense_float32_gib_estimate": 7.81
+    },
+    "validation": {
+      "rows": 41696,
+      "columns": 12570,
+      "nnz": 729615,
+      "dtype": "float32",
+      "format": "csr",
+      "storage_mib": 5.726,
+      "dense_float32_gib_estimate": 1.952
+    },
+    "unseen_validation_categories": {
+      "geo_level_2_id": {
+        "rows": 15,
+        "categories": 11
+      },
+      "geo_level_3_id": {
+        "rows": 333,
+        "categories": 276
+      }
+    },
+    "train_only_vocabulary_checked": true,
+    "feature_name_count": 12570,
+    "status": "PASS"
+  },
+  {
+    "fold": 3,
+    "train": {
+      "rows": 166784,
+      "columns": 12623,
+      "nnz": 2919575,
+      "dtype": "float32",
+      "format": "csr",
+      "storage_mib": 22.911,
+      "dense_float32_gib_estimate": 7.843
+    },
+    "validation": {
+      "rows": 41696,
+      "columns": 12623,
+      "nnz": 729810,
+      "dtype": "float32",
+      "format": "csr",
+      "storage_mib": 5.727,
+      "dense_float32_gib_estimate": 1.961
+    },
+    "unseen_validation_categories": {
+      "geo_level_2_id": {
+        "rows": 7,
+        "categories": 7
+      },
+      "geo_level_3_id": {
+        "rows": 267,
+        "categories": 227
+      }
+    },
+    "train_only_vocabulary_checked": true,
+    "feature_name_count": 12623,
+    "status": "PASS"
+  },
+  {
+    "fold": 4,
+    "train": {
+      "rows": 166784,
+      "columns": 12581,
+      "nnz": 2919732,
+      "dtype": "float32",
+      "format": "csr",
+      "storage_mib": 22.912,
+      "dense_float32_gib_estimate": 7.817
+    },
+    "validation": {
+      "rows": 41696,
+      "columns": 12581,
+      "nnz": 729600,
+      "dtype": "float32",
+      "format": "csr",
+      "storage_mib": 5.725,
+      "dense_float32_gib_estimate": 1.954
+    },
+    "unseen_validation_categories": {
+      "geo_level_2_id": {
+        "rows": 13,
+        "categories": 11
+      },
+      "geo_level_3_id": {
+        "rows": 314,
+        "categories": 265
+      }
+    },
+    "train_only_vocabulary_checked": true,
+    "feature_name_count": 12581,
+    "status": "PASS"
+  }
+]

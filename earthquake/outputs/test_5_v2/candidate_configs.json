@@ -1,0 +1,183 @@
+[
+  {
+    "name": "Dummy",
+    "kind": "dummy",
+    "features": "raw",
+    "method": "none"
+  },
+  {
+    "name": "Logistic",
+    "kind": "logistic",
+    "features": "raw",
+    "method": "none"
+  },
+  {
+    "name": "RandomForest",
+    "kind": "forest",
+    "features": "raw",
+    "method": "none"
+  },
+  {
+    "name": "LGBM_raw",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "none"
+  },
+  {
+    "name": "LGBM_basic",
+    "kind": "lgbm",
+    "features": "basic",
+    "method": "none"
+  },
+  {
+    "name": "LGBM_geo",
+    "kind": "lgbm",
+    "features": "geo",
+    "method": "none"
+  },
+  {
+    "name": "LGBM_joint5",
+    "kind": "lgbm",
+    "features": "joint5",
+    "method": "none"
+  },
+  {
+    "name": "LGBM_struct",
+    "kind": "lgbm",
+    "features": "struct",
+    "method": "none"
+  },
+  {
+    "name": "LGBM_balanced",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "balanced"
+  },
+  {
+    "name": "LGBM_grade3",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "grade3"
+  },
+  {
+    "name": "LGBM_under_partial",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "under_partial"
+  },
+  {
+    "name": "LGBM_under_partial_balanced",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "under_partial_balanced"
+  },
+  {
+    "name": "LGBM_under_full",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "under_full"
+  },
+  {
+    "name": "LGBM_over_full",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "over_full"
+  },
+  {
+    "name": "LGBM_rare_region",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "rare_region"
+  },
+  {
+    "name": "LGBM_tuned_1",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "grade3",
+    "params": {
+      "n_estimators": 400,
+      "num_leaves": 31,
+      "learning_rate": 0.05,
+      "min_child_samples": 30,
+      "reg_lambda": 1.0
+    }
+  },
+  {
+    "name": "LGBM_tuned_2",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "grade3",
+    "params": {
+      "n_estimators": 400,
+      "num_leaves": 63,
+      "learning_rate": 0.05,
+      "min_child_samples": 30,
+      "reg_lambda": 1.0
+    }
+  },
+  {
+    "name": "LGBM_tuned_3",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "grade3",
+    "params": {
+      "n_estimators": 900,
+      "num_leaves": 31,
+      "learning_rate": 0.05,
+      "min_child_samples": 30,
+      "reg_lambda": 1.0
+    }
+  },
+  {
+    "name": "LGBM_tuned_4",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "grade3",
+    "params": {
+      "n_estimators": 900,
+      "num_leaves": 63,
+      "learning_rate": 0.05,
+      "min_child_samples": 30,
+      "reg_lambda": 1.0
+    }
+  },
+  {
+    "name": "LGBM_tuned_5",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "grade3",
+    "params": {
+      "n_estimators": 1500,
+      "num_leaves": 31,
+      "learning_rate": 0.05,
+      "min_child_samples": 30,
+      "reg_lambda": 1.0
+    }
+  },
+  {
+    "name": "LGBM_tuned_6",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "grade3",
+    "params": {
+      "n_estimators": 1500,
+      "num_leaves": 63,
+      "learning_rate": 0.05,
+      "min_child_samples": 30,
+      "reg_lambda": 1.0
+    }
+  },
+  {
+    "name": "LGBM_tuned_1_no_method",
+    "kind": "lgbm",
+    "features": "raw",
+    "method": "none",
+    "params": {
+      "n_estimators": 400,
+      "num_leaves": 31,
+      "learning_rate": 0.05,
+      "min_child_samples": 30,
+      "reg_lambda": 1.0
+    }
+  }
+]
